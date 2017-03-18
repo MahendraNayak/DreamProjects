@@ -5,15 +5,37 @@ buildscript{
     // Setting up the Build version for all the libraries that are used in the project
     ext.springVersion = '4.2.4.RELEASE'
     ext.springSecurity = '4.0.4.RELEASE'
+    ext.springWSVersion = '2.2.4.RELEASE'
     ext.servletJstlVersion = '1.2'
     ext.servletApiVersion = '3.0.1'
     ext.servletJspVersion = '2.1'
     ext.hbVersion = '4.3.10.Final'
     ext.hbValidatorVersion = '5.1.3.Final'
+    ext.tilesVersion = '2.2.2'
+    ext.comLangVersion = '3:3.3.2'
+    ext.slf4jVersion = '1.7.20'
 
+    if (project.hasProperty("userProps") && "$userProps") {
+        if (!"$userProps".contains(".properties")) {
+            userProps = userProps + ".properties"
+        }
+        ext.uProps = new Properties()
+        println "Reading properties from $userProps"
+        file("$userProps").withInputStream {
+            uProps.load(it);
+        }
+        println "Printing all user properties --------"
+        uProps.each { prop ->
+            println "User Property key: " + prop.key + " value: " + prop.value
+        }
+    } else {
+        throw new GradleException("local.property is missing!, please specify -PuserProps=<filename>")
+    }
+    
     buildDir = 'dist/build'
 }
 
+def tomcatHome = uProps.get('tomcat.home')
 
 task wrapper(type: Wrapper) {
   gradleVersion = '3.1'
@@ -32,5 +54,54 @@ repositories {
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
     // added dependency for spring web
+    compile "org.springframework:spring-context-support:$springVersion"
+    compile "org.springframework.ws:spring-ws-core:$springWSVersion"
     compile "org.springframework:spring-web:$springVersion"
+    compile "org.springframework:spring-webmvc:$springVersion"
+
+    compile "org.apache.commons:commons-lang$comLangVersion"
+
+    compile "javax.servlet:jstl:$servletJstlVersion"
+    providedCompile("javax.servlet:javax.servlet-api:$servletApiVersion")
+    providedCompile("javax.servlet.jsp:jsp-api:$servletJspVersion")
+
+    // org slf4j dependnecy
+    compile "org.slf4j:slf4j-api:$slf4jVersion"
+    compile "org.slf4j:jcl-over-slf4j:$slf4jVersion"
+    compile "org.slf4j:slf4j-log4j12:$slf4jVersion"
+
+    //apache tiles dependency
+    compile "org.apache.tiles:tiles-template:$tilesVersion"
+    compile "org.apache.tiles:tiles-api:$tilesVersion"
+    compile "org.apache.tiles:tiles-servlet:$tilesVersion"
+    compile "org.apache.tiles:tiles-jsp:$tilesVersion"
+    compile "org.apache.tiles:tiles-core:$tilesVersion"
+    compile "org.apache.tiles:tiles-extras:$tilesVersion"
+}
+
+war {
+    manifest {
+        attributes 'Implementation-Title': 'Litrum WebServer component',
+                'Implementation-Version': "$version",
+                'Built-By': System.getProperty('user.name'),
+                'Built-Date': new Date(),
+                'Built-JDK': System.getProperty('java.version'),
+                'Built-Gradle': gradle.gradleVersion
+    }
+    webInf {
+        from 'src/main/webContent/WEB-INF'
+    }
+    from('src/main/webContent') { include('styles/*', 'JS/*', 'images/**') }
+}.archiveName("LitrumWebServer.war")
+task deployToLocalTomcat(dependsOn: [war]) {
+    description = "Task helps to deploy the server app to Local Tomcat"
+    doFirst() {
+        println "deleting LitrumWebServer folder from $tomcatHome/webapps"
+        delete("$tomcatHome/webapps/LitrumWebServer/")
+    }
+    doLast() {
+        println "Unwarring $buildDir/libs/LitrumWebServer.war"
+        ant.unwar(src: "$buildDir/libs/LitrumWebServer.war", dest: "$tomcatHome/webapps/LitrumWebServer")
+        println "done"
+    }
 }
