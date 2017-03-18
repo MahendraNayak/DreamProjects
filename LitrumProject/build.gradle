@@ -31,4 +31,6 @@ repositories {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
+    // added dependency for spring web
+    compile "org.springframework:spring-web:$springVersion"
 }
