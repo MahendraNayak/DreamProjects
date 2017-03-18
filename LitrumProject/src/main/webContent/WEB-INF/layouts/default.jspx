@@ -12,8 +12,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=8"/>
 
     <!-- here we are loading all static recourece like css and javascript-->
-      <link rel="stylesheet" type="text/css" href="/static/styles/custom.css">
-       <script src="/static/JS/custom.js" type="text/javascript">
+      <link rel="stylesheet" type="text/css" href="resources/styles/custom.css">
+       <script src="resources/JS/custom.js" type="text/javascript">
 
         <spring:message code="application_name" var="app_name"/>
         <title>
