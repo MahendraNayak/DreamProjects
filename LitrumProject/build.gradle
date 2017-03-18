@@ -1,6 +1,6 @@
 version '1.0-SNAPSHOT'
 
-buildscript{
+buildscript {
     // Anything setup in the buildscript is available to all sub modules.
     // Setting up the Build version for all the libraries that are used in the project
     ext.springVersion = '4.2.4.RELEASE'
@@ -11,35 +11,29 @@ buildscript{
     ext.servletJspVersion = '2.1'
     ext.hbVersion = '4.3.10.Final'
     ext.hbValidatorVersion = '5.1.3.Final'
-    ext.tilesVersion = '2.2.2'
+    ext.tilesVersion = '3.0.5'
     ext.comLangVersion = '3:3.3.2'
     ext.slf4jVersion = '1.7.20'
 
-    if (project.hasProperty("userProps") && "$userProps") {
-        if (!"$userProps".contains(".properties")) {
-            userProps = userProps + ".properties"
-        }
-        ext.uProps = new Properties()
-        println "Reading properties from $userProps"
-        file("$userProps").withInputStream {
-            uProps.load(it);
-        }
-        println "Printing all user properties --------"
-        uProps.each { prop ->
-            println "User Property key: " + prop.key + " value: " + prop.value
-        }
-    } else {
-        throw new GradleException("local.property is missing!, please specify -PuserProps=<filename>")
+    def userProps = "gradle.properties"
+    ext.uProps = new Properties()
+    println "Reading properties from $userProps"
+    file("$userProps").withInputStream {
+        uProps.load(it);
     }
-    
+    println "Printing all user properties --------"
+    uProps.each { prop ->
+        println "User Property key: " + prop.key + " value: " + prop.value
+    }
+
     buildDir = 'dist/build'
 }
 
 def tomcatHome = uProps.get('tomcat.home')
 
 task wrapper(type: Wrapper) {
-  gradleVersion = '3.1'
-  distributionUrl = "https://services.gradle.org/distributions/gradle-$gradleVersion-all.zip"
+    gradleVersion = '3.1'
+    distributionUrl = "https://services.gradle.org/distributions/gradle-$gradleVersion-all.zip"
 }
 
 apply plugin: 'java'

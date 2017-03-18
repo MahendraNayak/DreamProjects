@@ -3,10 +3,8 @@ package com.litrum.webproject.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.*;
+import org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler;
 import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 
@@ -24,7 +22,7 @@ public class SpringServletConfig extends WebMvcConfigurerAdapter{
     @Bean
     public TilesConfigurer tilesConfigurer(){
         TilesConfigurer tilesConfigurer = new TilesConfigurer();
-        tilesConfigurer.setDefinitions(new String[] {"WEB-INF/layouts/views.xml", "/WEB-INF/views/**/views.xml"});
+        tilesConfigurer.setDefinitions("WEB-INF/layouts/layout.xml", "/WEB-INF/views/**/views.xml");
         tilesConfigurer.setCheckRefresh(true);
         return tilesConfigurer;
     }
@@ -43,6 +41,12 @@ public class SpringServletConfig extends WebMvcConfigurerAdapter{
      */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/static/**", "/resources/**").addResourceLocations("/", "/resources");
+        registry.addResourceHandler("/static/**", "/resources/**").addResourceLocations("/");
+    }
+
+    @Override
+    public void configureDefaultServletHandling(
+            DefaultServletHandlerConfigurer configurer) {
+        configurer.enable();
     }
 }
