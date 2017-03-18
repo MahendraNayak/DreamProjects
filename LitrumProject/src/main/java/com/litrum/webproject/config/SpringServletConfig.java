@@ -3,6 +3,7 @@ package com.litrum.webproject.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler;
 import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
@@ -48,5 +49,13 @@ public class SpringServletConfig extends WebMvcConfigurerAdapter{
     public void configureDefaultServletHandling(
             DefaultServletHandlerConfigurer configurer) {
         configurer.enable();
+    }
+
+    @Bean
+    public ResourceBundleMessageSource messageSource() {
+        ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+        messageSource.setBasenames("WEB-INF/i18n/application", "WEB-INF/i18n/messages");
+        messageSource.setFallbackToSystemLocale(false);
+        return messageSource;
     }
 }
