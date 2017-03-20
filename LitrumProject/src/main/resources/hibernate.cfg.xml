@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <!-- Database connection settings -->
+        <property name="connection.driver_class">@hibernate.connection.driver_class@</property>
+        <property name="connection.url">@hibernate.connection.database.url@</property>
+        <property name="connection.username">@hibernate.connection.database.username@</property>
+        <property name="connection.password">@hibernate.connection.database.password@</property>
+        <!-- JDBC connection pool (use the built-in) -->
+        <property name="connection.pool_size">1</property>
+        <!-- SQL dialect -->
+        <property name="dialect">@hibernate.dialect@</property>
+
+        <!-- Mapping Classes -->
+        <mapping class="com.litrum.webproject.model.PersistentObject"/>
+        <mapping class="com.litrum.webproject.model.EndUserRegistration"/>
+        <mapping class="com.litrum.webproject.model.CompanyDetails"/>
+        <mapping class="com.litrum.webproject.model.CompanyType"/>
+        <mapping class="com.litrum.webproject.model.ServiceOffered"/>
+        <mapping class="com.litrum.webproject.model.EndUserRole"/>
+
+    </session-factory>
+</hibernate-configuration>
