@@ -18,4 +18,11 @@ public class RegistrationController {
         uiModel.addAttribute("form", registerForm);
         return "register";
     }
+
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String loginPage(Model uiModel){
+        RegisterForm registerForm = new RegisterForm();
+        uiModel.addAttribute("form", registerForm);
+        return "login";
+    }
 }
