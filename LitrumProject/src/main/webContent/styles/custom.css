@@ -19,3 +19,13 @@
    height:60px;   /* Height of the footer */
    background-image:url('../images/footerLogo.jpg');
 }
+
+ul#stepForm, ul#stepForm li {
+margin: 0;
+padding: 0;
+}
+ul#stepForm li {
+list-style: none outside none;
+}
+label{margin-top: 10px;}
+.help-inline-error{color:red;}
