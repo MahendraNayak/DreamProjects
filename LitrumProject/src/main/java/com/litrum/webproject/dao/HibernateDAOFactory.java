@@ -12,8 +12,7 @@ public class HibernateDAOFactory extends DAOFactory {
 
     private static final Logger logger = LoggerFactory.getLogger(HibernateDAOFactory.class);
 
-    //TODO need to enable this annotation after data source configuration.
-   //@Autowired
+   @Autowired
     private SessionFactory sessionFactory;
 
     private GenericDAOHibernate instantiateDAO(Class daoClass) {

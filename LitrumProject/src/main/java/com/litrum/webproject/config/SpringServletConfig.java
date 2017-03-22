@@ -1,11 +1,12 @@
 package com.litrum.webproject.config;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
+import com.litrum.webproject.dao.DAOFactory;
+import com.litrum.webproject.dao.HibernateDAOFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.*;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler;
@@ -20,7 +21,11 @@ import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 @EnableWebMvc
 @ComponentScan(basePackages = "com.litrum.webproject.controller")
 @PropertySource("classpath:litrumProject.properties")
+@Import(com.litrum.webproject.config.DataSourceConfig.class)
 public class SpringServletConfig extends WebMvcConfigurerAdapter{
+
+    @Autowired
+    LocalSessionFactoryBean sessionFactory;
 
     @Bean
     public ViewResolver getViewResolver(){
@@ -56,5 +61,12 @@ public class SpringServletConfig extends WebMvcConfigurerAdapter{
     @Bean
     public static PropertySourcesPlaceholderConfigurer propertyConfigInDev() {
         return new PropertySourcesPlaceholderConfigurer();
+    }
+
+    @Bean
+    public HibernateDAOFactory daoFactory(){
+        HibernateDAOFactory daoFactory = new HibernateDAOFactory();
+        daoFactory.setSessionFactory(sessionFactory.getObject());
+        return daoFactory;
     }
 }
