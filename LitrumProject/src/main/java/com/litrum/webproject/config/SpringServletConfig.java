@@ -3,6 +3,8 @@ package com.litrum.webproject.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.*;
@@ -17,6 +19,7 @@ import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "com.litrum.webproject.controller")
+@PropertySource("classpath:litrumProject.properties")
 public class SpringServletConfig extends WebMvcConfigurerAdapter{
 
     @Bean
@@ -47,5 +50,11 @@ public class SpringServletConfig extends WebMvcConfigurerAdapter{
         messageSource.setBasenames("WEB-INF/i18n/application", "WEB-INF/i18n/messages");
         messageSource.setFallbackToSystemLocale(false);
         return messageSource;
+    }
+
+    //property place holder configurer
+    @Bean
+    public static PropertySourcesPlaceholderConfigurer propertyConfigInDev() {
+        return new PropertySourcesPlaceholderConfigurer();
     }
 }
