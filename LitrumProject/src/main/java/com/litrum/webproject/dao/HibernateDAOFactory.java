@@ -21,11 +21,8 @@ public class HibernateDAOFactory extends DAOFactory {
             GenericDAOHibernate daoInstance = (GenericDAOHibernate) daoClass.newInstance();
             daoInstance.setSession(getSessionFactory().getCurrentSession()); // set session factory
             return daoInstance;
-        } catch (InstantiationException ex) {
+        } catch (InstantiationException | IllegalAccessException ex) {
             logger.error("Can not instantiate DAO: " + daoClass, ex);
-            return null;
-        } catch (IllegalAccessException e) {
-            logger.error("Can not instantiate DAO: " + daoClass, e);
             return null;
         }
     }
