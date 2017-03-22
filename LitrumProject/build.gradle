@@ -53,6 +53,7 @@ configurations {
 
 dependencies {
     compile "org.springframework:spring-context-support:$springVersion"
+    compile "org.springframework:spring-orm:$springVersion"
     compile "org.springframework:spring-web:$springVersion"
     compile "org.springframework:spring-webmvc:$springVersion"
     compile "org.apache.commons:commons-lang$comLangVersion"
