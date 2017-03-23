@@ -1,5 +1,6 @@
 package com.litrum.webproject.dao;
 
+import com.litrum.webproject.model.CompanyType;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +13,7 @@ public class HibernateDAOFactory extends DAOFactory {
 
     private static final Logger logger = LoggerFactory.getLogger(HibernateDAOFactory.class);
 
-   @Autowired
+    @Autowired
     private SessionFactory sessionFactory;
 
     private GenericDAOHibernate instantiateDAO(Class daoClass) {
@@ -36,8 +37,28 @@ public class HibernateDAOFactory extends DAOFactory {
         this.sessionFactory = sessionFactory;
     }
 
-//create instance of dao class and also provides session.
+    //create instance of dao class and also provides session.
     public EndUserRegistrationDAO getEndUserRegistrationDAO() {
         return (EndUserRegistrationDAO) instantiateDAO(EndUserRegistrationDAOHibernate.class);
+    }
+
+    @Override
+    public CompanyTypeDAO getCompanyTypeDAO() {
+        return (CompanyTypeDAO) instantiateDAO(CompanyTypeDAOHibernate.class);
+    }
+
+    @Override
+    public EndUserRoleDAO getEndUserRoleDAO() {
+        return (EndUserRoleDAO) instantiateDAO(EndUserRoleDAOHibernate.class);
+    }
+
+    @Override
+    public ServiceOfferedDAO getServiceOfferedDAO() {
+        return (ServiceOfferedDAO) instantiateDAO(ServiceOfferedDAOHibernate.class);
+    }
+
+    @Override
+    public CompanyDetailsDAO getCompanyDetailsDAO() {
+        return (CompanyDetailsDAO) instantiateDAO(CompanyDetailsDAOHibernate.class);
     }
 }

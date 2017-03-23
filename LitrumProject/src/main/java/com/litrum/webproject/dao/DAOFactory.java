@@ -3,7 +3,7 @@ package com.litrum.webproject.dao;
 /**
  * Created by Pc on 21/03/2017.
  */
-public abstract  class DAOFactory {
+public abstract class DAOFactory {
 
     @SuppressWarnings("rawtypes")
     public static DAOFactory instance(Class factory) {
@@ -19,5 +19,13 @@ public abstract  class DAOFactory {
 
     // Add your DAO interfaces here
     public abstract EndUserRegistrationDAO getEndUserRegistrationDAO();
+
+    public abstract CompanyTypeDAO getCompanyTypeDAO();
+
+    public abstract EndUserRoleDAO getEndUserRoleDAO();
+
+    public abstract ServiceOfferedDAO getServiceOfferedDAO();
+
+    public abstract CompanyDetailsDAO getCompanyDetailsDAO();
 
 }

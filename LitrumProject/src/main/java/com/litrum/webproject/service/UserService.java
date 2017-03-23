@@ -10,5 +10,5 @@ public interface UserService {
     /**
      * this API is added for creating end user registration records.
      */
-    void endUserRegister(RegisterForm registerForm);
+    void createEndUser(RegisterForm registerForm) throws Exception;
 }
