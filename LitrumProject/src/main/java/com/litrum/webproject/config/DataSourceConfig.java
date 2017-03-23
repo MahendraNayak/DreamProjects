@@ -1,6 +1,8 @@
 package com.litrum.webproject.config;
 
+import com.litrum.webproject.dao.HibernateDAOFactory;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
+import org.hibernate.SessionFactory;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -68,5 +70,12 @@ public class DataSourceConfig {
         HibernateTransactionManager transactionManager = new HibernateTransactionManager();
         transactionManager.setSessionFactory(sessionFactory().getObject());
         return transactionManager;
+    }
+
+    @Bean
+    public HibernateDAOFactory daoFactory() throws PropertyVetoException {
+        HibernateDAOFactory daoFactory = new HibernateDAOFactory();
+        daoFactory.setSessionFactory(sessionFactory().getObject());
+        return daoFactory;
     }
 }

@@ -14,7 +14,7 @@ import java.lang.reflect.ParameterizedType;
  * Created by Pc on 21/03/2017.
  */
 @Repository
-public class GenericDAOHibernate<T, ID extends Serializable>
+public abstract class GenericDAOHibernate<T, ID extends Serializable>
         implements GenericeDAO<T, ID> {
 
     private static final Logger logger = LoggerFactory.getLogger(GenericDAOHibernate.class);

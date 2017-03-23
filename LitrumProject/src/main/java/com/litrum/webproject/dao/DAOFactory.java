@@ -5,6 +5,18 @@ package com.litrum.webproject.dao;
  */
 public abstract  class DAOFactory {
 
+    @SuppressWarnings("rawtypes")
+    public static DAOFactory instance(Class factory) {
+        try {
+            //logger.debug("Creating concrete DAO factory: {}", factory);
+            return (DAOFactory) factory.newInstance();
+        } catch (InstantiationException | IllegalAccessException e) {
+            // logger.error("Can not instantiate factory: {} ", factory, e);
+            return null;
+        }
+    }
+
+
     // Add your DAO interfaces here
     public abstract EndUserRegistrationDAO getEndUserRegistrationDAO();
 

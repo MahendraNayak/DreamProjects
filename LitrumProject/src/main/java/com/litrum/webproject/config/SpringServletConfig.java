@@ -19,13 +19,10 @@ import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
  */
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "com.litrum.webproject.controller")
+@ComponentScan(basePackages = "com.litrum.webproject")
 @PropertySource("classpath:litrumProject.properties")
 @Import(com.litrum.webproject.config.DataSourceConfig.class)
 public class SpringServletConfig extends WebMvcConfigurerAdapter{
-
-    @Autowired
-    LocalSessionFactoryBean sessionFactory;
 
     @Bean
     public ViewResolver getViewResolver(){
@@ -63,10 +60,4 @@ public class SpringServletConfig extends WebMvcConfigurerAdapter{
         return new PropertySourcesPlaceholderConfigurer();
     }
 
-    @Bean
-    public HibernateDAOFactory daoFactory(){
-        HibernateDAOFactory daoFactory = new HibernateDAOFactory();
-        daoFactory.setSessionFactory(sessionFactory.getObject());
-        return daoFactory;
-    }
 }
