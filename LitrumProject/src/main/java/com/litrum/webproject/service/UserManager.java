@@ -22,7 +22,7 @@ public class UserManager implements UserService {
         return daoFactory;
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     public void endUserRegister(RegisterForm registerForm) {
         if (null != registerForm) {
             //here we are creating end user registration records.
@@ -34,7 +34,7 @@ public class UserManager implements UserService {
             endUserRegister.setMobileNumber(registerForm.getMobileNumber());
             endUserRegister.setEmailId(registerForm.getEmailId());
             // persist the end user registration record into database.
-            //daoFactory.getEndUserRegistrationDAO().makePersistent(endUserRegister);
+            daoFactory.getEndUserRegistrationDAO().makePersistent(endUserRegister);
             //TODO need to create company details also.
         }
     }
