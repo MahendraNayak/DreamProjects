@@ -68,6 +68,10 @@ public class UserManager implements UserService {
             endUserRegister.setEmailId(registerForm.getEmailId());
             endUserRegister.setCompanyCity(companyCity);
             endUserRegister.setCompanyName(registerForm.getCompanyName());
+            endUserRegister.setServiceOffered(serviceOffered);
+            endUserRegister.setCompanyType(companyType);
+            endUserRegister.setEndUserRole(endUserRole);
+            endUserRegister.setUserLoginRole(LitrumProjectConstants.ROLE_END_USER);
             // persist the end user registration record into database.
             daoFactory.getEndUserRegistrationDAO().makePersistent(endUserRegister);
             logger.debug("End user details created successfully.");
