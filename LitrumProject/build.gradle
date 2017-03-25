@@ -57,6 +57,8 @@ dependencies {
     compile "org.springframework:spring-web:$springVersion"
     compile "org.springframework:spring-webmvc:$springVersion"
     compile "org.apache.commons:commons-lang$comLangVersion"
+    compile "org.springframework.security:spring-security-web:$springSecurity"
+    compile "org.springframework.security:spring-security-config:$springSecurity"
 
     compile "javax.servlet:jstl:$servletJstlVersion"
     providedCompile("javax.servlet:javax.servlet-api:$servletApiVersion")
