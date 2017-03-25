@@ -60,15 +60,6 @@ public class UserManager implements UserService {
             daoFactory.getEndUserRegistrationDAO().makePersistent(endUserRegister);
             logger.debug("End user details created successfully.");
 
-            // create company details record for the end user.
-            CompanyDetails companyDetails = new CompanyDetails();
-            companyDetails.setCompanyCity(registerForm.getCompanyCity());
-            companyDetails.setCompanyType(companyType);
-            companyDetails.setEndUserRole(endUserRole);
-            companyDetails.setServiceOffered(serviceOffered);
-            companyDetails.setEngUser(endUserRegister);
-            daoFactory.getCompanyDetailsDAO().makePersistent(companyDetails);
-            logger.debug("Successfully created comapny details for end user:[{}]", endUserRegister.getUserName());
         } else {
             logger.debug("Empty register form value passed, hence can't create end user.");
         }
