@@ -16,6 +16,7 @@ public class RegisterForm {
     private String password;
     private String mobileNumber;
     private String emailId;
+    private String companyName;
     private String companyCity;
     private String serviceOffered;
     private String companyType;
@@ -102,15 +103,22 @@ public class RegisterForm {
         this.endUserRole = endUserRole;
     }
 
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .append("firstName", firstName)
                 .append("lastName", lastName)
-                .append("userName", userName)
-                .append("password", password)
                 .append("mobileNumber", mobileNumber)
                 .append("emailId", emailId)
+                .append("companyName", companyName)
                 .append("companyCity", companyCity)
                 .append("serviceOffered", serviceOffered)
                 .append("companyType", companyType)
