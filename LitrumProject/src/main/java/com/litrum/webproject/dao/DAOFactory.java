@@ -26,4 +26,8 @@ public abstract class DAOFactory {
 
     public abstract ServiceOfferedDAO getServiceOfferedDAO();
 
+    public abstract CompanyCItyDAO getCompanyCItyDAO();
+
+    public abstract AdminUserRoleDAO getAdminUserRoleDAO();
+
 }

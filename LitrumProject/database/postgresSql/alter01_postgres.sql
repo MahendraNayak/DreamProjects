@@ -60,6 +60,15 @@
         primary key (id)
     );
 
+    create table admin_user_role (
+        id int8 not null,
+        role_name varchar(255) not null,
+        primary key (id)
+    );
+
+    alter table admin_user_role
+        add constraint UK_role_name  unique (role_name);
+
     alter table sub_main_category
         add constraint FK_sub_main_category
         foreign key (main_category_id)

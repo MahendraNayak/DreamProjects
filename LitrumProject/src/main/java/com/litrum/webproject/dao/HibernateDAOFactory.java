@@ -57,4 +57,13 @@ public class HibernateDAOFactory extends DAOFactory {
         return (ServiceOfferedDAO) instantiateDAO(ServiceOfferedDAOHibernate.class);
     }
 
+    @Override
+    public CompanyCItyDAO getCompanyCItyDAO() {
+        return (CompanyCItyDAO) instantiateDAO(CompanyCityDAOHibernate.class);
+    }
+
+    @Override
+    public AdminUserRoleDAO getAdminUserRoleDAO() {
+        return (AdminUserRoleDAO) instantiateDAO(AdminUserRoleDAOHibernate.class);
+    }
 }
