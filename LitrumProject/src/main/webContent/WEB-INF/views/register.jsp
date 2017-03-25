@@ -145,7 +145,7 @@
                               <option>Select Company Type</option>
                               <option>CO_CT 1</option>
                               <option>SM_CT 1</option>
-                              <option>SM_CT 1</option>
+                              <option>SM_CT 2</option>
                               <option>DD_CT 1</option>
                             </select>
                           </div>
@@ -155,8 +155,8 @@
                          <div class="col-lg-6">
                             <select class="form-control" name="endUserRole" id="endUserRole">
                               <option>Select Role</option>
-                              <option>SM_CT3_UR1</option>
-                              <option>CO_CT2_UR1</option>
+                              <option>SM_CT1_UR1</option>
+                              <option>CO_CT1_UR1</option>
                               <option>DD_CT1_UR2</option>
                               <option>DD_CT1_UR1</option>
                             </select>
@@ -166,7 +166,7 @@
                         <div class="form-group">
                           <div class="col-lg-10 col-lg-offset-2">
                             <button class="btn btn-warning back3" type="button"><span class="fa fa-arrow-left"></span> Back</button>
-                            <button type="submit" value="Submit" class="btn btn-success" id="submit"/>
+                            <button type="submit" value="Submit" class="btn btn-success">Submit</button>
                           </div>
                         </div>
                       </fieldset>
