@@ -7,4 +7,5 @@ import com.litrum.webproject.model.CompanyDetails;
  */
 public interface CompanyDetailsDAO extends GenericeDAO<CompanyDetails, Long> {
 
+    CompanyDetails findByEndUserId(Long endUserId);
 }
