@@ -37,18 +37,6 @@ public class RegistrationController {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String register(@ModelAttribute("registerForm") RegisterForm registerForm, BindingResult bindingResult, Model uiModel) {
         logger.info("registering end user!");
-        if (StringUtils.isEmpty(registerForm.getUserName())) {
-            bindingResult.rejectValue("userName", messageSource.getMessage("err.enter.username", null, null),
-                    "please enter userName");
-        }
-        if (StringUtils.isEmpty(registerForm.getPassword())) {
-            bindingResult.rejectValue("passWord", messageSource.getMessage("err.enter.password", null, null),
-                    "please enter passWord");
-        }
-        if (bindingResult.hasErrors()) {
-            logger.error("invalid value passed from form.");
-            return "register";
-        }
         try {
             userService.createEndUser(registerForm);
             uiModel.addAttribute("successMessage", "End User register successfully.");
