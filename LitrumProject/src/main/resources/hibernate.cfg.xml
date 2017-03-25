@@ -21,6 +21,9 @@
         <mapping class="com.litrum.webproject.model.CompanyType"/>
         <mapping class="com.litrum.webproject.model.ServiceOffered"/>
         <mapping class="com.litrum.webproject.model.EndUserRole"/>
+        <mapping class="com.litrum.webproject.model.MainCategory"/>
+        <mapping class="com.litrum.webproject.model.SubMainCategory"/>
+        <mapping class="com.litrum.webproject.model.SubSubMainCategory"/>
 
     </session-factory>
 </hibernate-configuration>
