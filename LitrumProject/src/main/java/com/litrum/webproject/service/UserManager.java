@@ -1,5 +1,6 @@
 package com.litrum.webproject.service;
 
+import com.litrum.webproject.Utils.LitrumProjectConstants;
 import com.litrum.webproject.dao.DAOFactory;
 import com.litrum.webproject.form.RegisterForm;
 import com.litrum.webproject.model.*;
@@ -8,6 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 
 /**
@@ -72,5 +75,31 @@ public class UserManager implements UserService {
         } else {
             logger.debug("Empty register form value passed, hence can't create end user.");
         }
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<ServiceOffered> getAllServiceOffered() {
+        return daoFactory.getServiceOfferedDAO().findAll();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<CompanyType> findByServiceOfferedId(Long serviceOffereId) {
+        if (null == serviceOffereId) {
+            logger.error("Invalid param passed serviceOfferefId:[{}]", serviceOffereId);
+            throw new IllegalArgumentException("invlid param passed");
+        }
+        return daoFactory.getCompanyTypeDAO().fidByServiceOfferedId(serviceOffereId);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<EndUserRole> findByCompanyTypeId(Long companyTypeId) {
+        if (null == companyTypeId) {
+            logger.error("Invalid param passed companyTypeId:[{}]", companyTypeId);
+            throw new IllegalArgumentException("invlid param passed");
+        }
+        return daoFactory.getEndUserRoleDAO().findByCompanyTypeId(companyTypeId);
     }
 }

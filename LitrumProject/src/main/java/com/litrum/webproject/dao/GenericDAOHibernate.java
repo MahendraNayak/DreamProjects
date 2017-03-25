@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
+import java.util.List;
 
 /**
  * Created by Pc on 21/03/2017.
@@ -67,6 +68,11 @@ public abstract class GenericDAOHibernate<T, ID extends Serializable>
         return countByCriteria();
     }
 
+    @SuppressWarnings("unchecked")
+    public List<T> findAll() {
+        Criteria crit = getSession().createCriteria(getPersistentClass());
+        return crit.list();
+    }
 
     @SuppressWarnings("unchecked")
     public T makePersistent(T entity) {
