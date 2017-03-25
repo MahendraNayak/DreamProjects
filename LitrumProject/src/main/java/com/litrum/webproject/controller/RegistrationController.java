@@ -1,6 +1,9 @@
 package com.litrum.webproject.controller;
 
 import com.litrum.webproject.form.RegisterForm;
+import com.litrum.webproject.model.CompanyType;
+import com.litrum.webproject.model.EndUserRole;
+import com.litrum.webproject.model.ServiceOffered;
 import com.litrum.webproject.service.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -10,9 +13,9 @@ import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * Created by Pc on 18/03/2017.
@@ -53,5 +56,32 @@ public class RegistrationController {
         RegisterForm registerForm = new RegisterForm();
         uiModel.addAttribute("form", registerForm);
         return "login";
+    }
+
+    @RequestMapping(value = "/serviceOffered", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    List<ServiceOffered> serviceOfferedList() {
+        logger.info("Inside service offered method");
+        List<ServiceOffered> serviceOfferedList = userService.getAllServiceOffered();
+        return serviceOfferedList;
+    }
+
+    @RequestMapping(value = "/companyType/{id}")
+    public
+    @ResponseBody
+    List<CompanyType> companyTypeList(@PathVariable("id") Long serviceOfferedId) {
+        logger.info("Inside company type method");
+        List<CompanyType> companyTypeList = userService.findByServiceOfferedId(serviceOfferedId);
+        return companyTypeList;
+    }
+
+    @RequestMapping(value = "/endUserRole/{id}")
+    public
+    @ResponseBody
+    List<EndUserRole> endUserRoleList(@PathVariable("id") Long companyTypeId) {
+        logger.info("Inside endUser role method");
+        List<EndUserRole> endUserRoleList = userService.findByCompanyTypeId(companyTypeId);
+        return endUserRoleList;
     }
 }
