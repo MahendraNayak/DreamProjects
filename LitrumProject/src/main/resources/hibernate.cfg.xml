@@ -17,13 +17,13 @@
         <!-- Mapping Classes -->
         <mapping class="com.litrum.webproject.model.PersistentObject"/>
         <mapping class="com.litrum.webproject.model.EndUserRegistration"/>
-        <mapping class="com.litrum.webproject.model.CompanyDetails"/>
         <mapping class="com.litrum.webproject.model.CompanyType"/>
         <mapping class="com.litrum.webproject.model.ServiceOffered"/>
         <mapping class="com.litrum.webproject.model.EndUserRole"/>
         <mapping class="com.litrum.webproject.model.MainCategory"/>
         <mapping class="com.litrum.webproject.model.SubMainCategory"/>
         <mapping class="com.litrum.webproject.model.SubSubMainCategory"/>
+        <mapping class="com.litrum.webproject.model.CompanyCity"/>
 
     </session-factory>
 </hibernate-configuration>

@@ -51,13 +51,13 @@ public class DataSourceConfig {
         sessionFactory.setHibernateProperties(getHibernateProperty());
         sessionFactory.setAnnotatedClasses(com.litrum.webproject.model.PersistentObject.class,
                 com.litrum.webproject.model.EndUserRegistration.class,
-                com.litrum.webproject.model.CompanyDetails.class,
                 com.litrum.webproject.model.ServiceOffered.class,
                 com.litrum.webproject.model.CompanyType.class,
                 com.litrum.webproject.model.EndUserRole.class,
                 com.litrum.webproject.model.MainCategory.class,
                 com.litrum.webproject.model.SubMainCategory.class,
-                com.litrum.webproject.model.SubSubMainCategory.class);
+                com.litrum.webproject.model.SubSubMainCategory.class,
+                com.litrum.webproject.model.CompanyCity.class);
         sessionFactory.setDataSource(serverDataSource());
         return sessionFactory;
     }

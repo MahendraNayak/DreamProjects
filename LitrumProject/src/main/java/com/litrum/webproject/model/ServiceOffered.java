@@ -15,7 +15,7 @@ public class ServiceOffered extends PersistentObject {
 
     private String name;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = false, unique = true)
     public String getName() {
         return name;
     }

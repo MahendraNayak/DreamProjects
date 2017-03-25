@@ -2,9 +2,7 @@ package com.litrum.webproject.model;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by Pc on 19/03/2017.
@@ -19,6 +17,8 @@ public class EndUserRegistration extends PersistentObject {
     private String password;
     private String mobileNumber;
     private String emailId;
+    private String companyName;
+    private CompanyCity companyCity;
 
     @Column(name = "first_name")
     public String getFirstName() {
@@ -74,6 +74,25 @@ public class EndUserRegistration extends PersistentObject {
         this.emailId = emailId;
     }
 
+    @Column(name = "company_name")
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = CompanyCity.class)
+    @JoinColumn(name = "company_city_id", nullable = false)
+    public CompanyCity getCompanyCity() {
+        return companyCity;
+    }
+
+    public void setCompanyCity(CompanyCity companyCity) {
+        this.companyCity = companyCity;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -81,6 +100,8 @@ public class EndUserRegistration extends PersistentObject {
                 .append("lastName", lastName)
                 .append("mobileNumber", mobileNumber)
                 .append("emailId", emailId)
+                .append("companyName", companyName)
+                .append("companyCity", companyCity)
                 .toString();
     }
 
