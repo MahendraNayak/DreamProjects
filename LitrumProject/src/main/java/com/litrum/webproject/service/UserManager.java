@@ -27,6 +27,14 @@ public class UserManager implements UserService {
     @Transactional
     public void createEndUser(RegisterForm registerForm) throws Exception {
         if (null != registerForm) {
+
+            //get service offered and set to comapany object.
+            ServiceOffered serviceOffered = daoFactory.getServiceOfferedDAO().findServiceOfferedByName(registerForm.getServiceOffered());
+            if (null == serviceOffered) {
+                logger.error("service offered by company not found with name:[{}]", registerForm.getServiceOffered());
+                throw new Exception("End user role not found");
+            }
+
             // get company type and set to comany details object
             CompanyType companyType = daoFactory.getCompanyTypeDAO().findByCompanyType(registerForm.getCompanyType());
             if (null == companyType) {
@@ -41,13 +49,12 @@ public class UserManager implements UserService {
                 throw new Exception("End user role not found");
             }
 
-            //get service offered and set to comapany object.
-            ServiceOffered serviceOffered = daoFactory.getServiceOfferedDAO().findServiceOfferedByName(registerForm.getServiceOffered());
-            if (null == serviceOffered) {
-                logger.error("service offered by company not found with name:[{}]", registerForm.getServiceOffered());
-                throw new Exception("End user role not found");
+            //get the company city for the current user.
+            CompanyCity companyCity = daoFactory.getCompanyCItyDAO().findByCityName(registerForm.getCompanyCity());
+            if (null == companyCity) {
+                logger.error("End user role not found with roleName:[{}]", registerForm.getEndUserRole());
+                throw new Exception("Company city not found not found");
             }
-
             //here we are creating end user registration records.
             EndUserRegistration endUserRegister = new EndUserRegistration();
             endUserRegister.setFirstName(registerForm.getFirstName());
@@ -56,6 +63,8 @@ public class UserManager implements UserService {
             endUserRegister.setPassword(registerForm.getPassword());
             endUserRegister.setMobileNumber(registerForm.getMobileNumber());
             endUserRegister.setEmailId(registerForm.getEmailId());
+            endUserRegister.setCompanyCity(companyCity);
+            endUserRegister.setCompanyName(registerForm.getCompanyName());
             // persist the end user registration record into database.
             daoFactory.getEndUserRegistrationDAO().makePersistent(endUserRegister);
             logger.debug("End user details created successfully.");
