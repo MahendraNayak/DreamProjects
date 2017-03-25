@@ -4,8 +4,10 @@
 <link rel="stylesheet" href="./styles/jquery.ui.1.10.0.ie.css" type="text/css"></link>
 <link rel="stylesheet" href="./styles/jquery-ui-1.9.2.custom.css" type="text/css"></link>
 <link rel="stylesheet" href="./styles/jquery-ui-1.10.0.custom.css" type="text/css"></link>
-<ink rel="stylesheet" href="./styles/bootstrap.css" type="text/css"></link>
-<link rel="stylesheet" href="./styles/bootstrap.min.css" type="text/css"></link>
+<ink rel="stylesheet" href="./styles/bootstrap_3.3.4.css" type="text/css"></link>
+<link rel="stylesheet" href="./styles/bootstrap.min_3.3.4.css" type="text/css"></link>
+<ink rel="stylesheet" href="./styles/bootstrap-theme_3.3.4.css" type="text/css"></link>
+<link rel="stylesheet" href="./styles/bootstrap-theme.min_3.3.4.css" type="text/css"></link>
 <link rel="stylesheet" href="./styles/bootstrap-grid.css" type="text/css"></link>
 <link rel="stylesheet" href="./styles/bootstrap-grid.min.css" type="text/css"></link>
 <link rel="stylesheet" href="./styles/bootstrap-reboot.css" type="text/css"></link>
@@ -26,8 +28,8 @@
 <script language="JavaScript" type="text/JavaScript" src="./JS/transition.js"></script>
 <script language="JavaScript" type="text/JavaScript" src="./JS/custom.js"></script>
 
-<script language="JavaScript" type="text/JavaScript" src="./JS/bootstrap.js"></script>
-<script language="JavaScript" type="text/JavaScript" src="./JS/bootstrap.min.js"></script>
+<script language="JavaScript" type="text/JavaScript" src="./JS/bootstrap_3.3.4.js"></script>
+<script language="JavaScript" type="text/JavaScript" src="./JS/bootstrap.min_3.3.4.js"></script>
 <script language="JavaScript" type="text/JavaScript" src="./JS/custom.js"></script>
 </head>
 <body>
