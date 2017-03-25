@@ -51,17 +51,17 @@
                         <legend>Step 1 of 3</legend>
                         <div class="form-group">
                           <div class="col-lg-6">
-                            <input type="text" placeholder="First Name" id="fname" name="fname" class="form-control" autocomplete="off">
+                            <input type="text" placeholder="First Name" id="firstName" name="firstName" class="form-control" autocomplete="off">
                           </div>
                         </div>
                         <div class="form-group">
                           <div class="col-lg-6">
-                            <input type="text" placeholder="Last Name" id="lname" name="lname" class="form-control" autocomplete="off">
+                            <input type="text" placeholder="Last Name" id="lastName" name="lastName" class="form-control" autocomplete="off">
                           </div>
                         </div>
                         <div class="form-group">
                           <div class="col-lg-6">
-                            <input type="text" placeholder="User Name" id="uname" name="uname" class="form-control" autocomplete="off">
+                            <input type="text" placeholder="User Name" id="userName" name="userName" class="form-control" autocomplete="off">
                           </div>
                         </div>
                         <div class="clearfix" style="height: 10px;clear: both;"></div>
@@ -77,25 +77,25 @@
                         <legend>Step 2 of 3</legend>
                         <div class="form-group">
                           <div class="col-lg-6">
-                            <input type="password" placeholder="Your Password" id="upass1" name="upass1" class="form-control" autocomplete="off">
+                            <input type="password" placeholder="Your Password" id="password" name="password" class="form-control" autocomplete="off">
                           </div>
                         </div>
                         <div class="clearfix" style="height: 10px;clear: both;"></div>
                         <div class="form-group">
                           <div class="col-lg-6">
-                            <input type="password" placeholder="Confirm Password" id="upass2" name="upass2" class="form-control" autocomplete="off">
+                            <input type="password" placeholder="Confirm Password" id="password1" name="password1" class="form-control" autocomplete="off">
                           </div>
                         </div>
                         <div class="clearfix" style="height: 10px;clear: both;"></div>
                         <div class="form-group">
                           <div class="col-lg-6">
-                            <input type="text" placeholder="Your Email" id="uemail" name="uemail" class="form-control" autocomplete="off">
+                            <input type="text" placeholder="Your Email" id="emailId" name="emailId" class="form-control" autocomplete="off">
                           </div>
                         </div>
                         <div class="clearfix" style="height: 10px;clear: both;"></div>
                         <div class="form-group">
                           <div class="col-lg-6">
-                            <input type="text" placeholder="Mobile Number" id="mobNo" name="mobNo" class="form-control" autocomplete="off">
+                            <input type="text" placeholder="Mobile Number" id="mobileNumber" name="mobileNumber" class="form-control" autocomplete="off">
                           </div>
                         </div>
                         <div class="clearfix" style="height: 10px;clear: both;"></div>
@@ -114,13 +114,13 @@
                         <legend>Step 3 of 3</legend>
                         <div class="form-group">
                           <div class="col-lg-6">
-                            <input type="text" placeholder="Company Name" id="compName" name="compName" class="form-control" autocomplete="off">
+                            <input type="text" placeholder="Company Name" id="companyName" name="companyName" class="form-control" autocomplete="off">
                           </div>
                         </div>
                     <div class="clearfix" style="height: 10px;clear: both;"></div>
                     <div class="form-group">
                        <div class="col-lg-6">
-                          <select class="form-control" id="currCity">
+                          <select class="form-control" name="companyCity" id="companyCity">
                             <option>Select Current City</option>
                             <option>Mumbai</option>
                             <option>Pune</option>
@@ -130,7 +130,7 @@
                     <div class="clearfix" style="height: 10px;clear: both;"></div>
                     <div class="form-group">
                        <div class="col-lg-6">
-                          <select class="form-control" id="currCity">
+                          <select class="form-control" name="serviceOffered" id="serviceOffered">
                             <option>Select Service Offered</option>
                             <option>DD</option>
                             <option>CO</option>
@@ -141,22 +141,24 @@
                         <div class="clearfix" style="height: 10px;clear: both;"></div>
                       <div class="form-group">
                          <div class="col-lg-6">
-                            <select class="form-control" id="currCity">
+                            <select class="form-control" name="companyType" id="companyType">
                               <option>Select Company Type</option>
-                              <option>DGC</option>
-                              <option>CSC</option>
-                              <option>SGC</option>
+                              <option>CO_CT 1</option>
+                              <option>SM_CT 1</option>
+                              <option>SM_CT 1</option>
+                              <option>DD_CT 1</option>
                             </select>
                           </div>
                        </div>
                         <div class="clearfix" style="height: 10px;clear: both;"></div>
                         <div class="form-group">
                          <div class="col-lg-6">
-                            <select class="form-control" id="currCity">
+                            <select class="form-control" name="endUserRole" id="endUserRole">
                               <option>Select Role</option>
-                              <option>DGU</option>
-                              <option>CGU</option>
-                              <option>SGU</option>
+                              <option>SM_CT3_UR1</option>
+                              <option>CO_CT2_UR1</option>
+                              <option>DD_CT1_UR2</option>
+                              <option>DD_CT1_UR1</option>
                             </select>
                           </div>
                        </div>
@@ -164,7 +166,7 @@
                         <div class="form-group">
                           <div class="col-lg-10 col-lg-offset-2">
                             <button class="btn btn-warning back3" type="button"><span class="fa fa-arrow-left"></span> Back</button>
-                            <input type="button" class="btn btn-primary open3" value="Submit"/>
+                            <button type="submit" value="Submit" class="btn btn-success" id="submit"/>
                           </div>
                         </div>
                       </fieldset>
