@@ -57,8 +57,4 @@ public class HibernateDAOFactory extends DAOFactory {
         return (ServiceOfferedDAO) instantiateDAO(ServiceOfferedDAOHibernate.class);
     }
 
-    @Override
-    public CompanyDetailsDAO getCompanyDetailsDAO() {
-        return (CompanyDetailsDAO) instantiateDAO(CompanyDetailsDAOHibernate.class);
-    }
 }

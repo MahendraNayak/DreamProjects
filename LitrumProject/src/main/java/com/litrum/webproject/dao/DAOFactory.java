@@ -26,6 +26,4 @@ public abstract class DAOFactory {
 
     public abstract ServiceOfferedDAO getServiceOfferedDAO();
 
-    public abstract CompanyDetailsDAO getCompanyDetailsDAO();
-
 }
