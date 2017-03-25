@@ -7,6 +7,7 @@ buildscript {
     ext.servletJstlVersion = '1.2'
     ext.servletApiVersion = '3.0.1'
     ext.servletJspVersion = '2.1'
+    ext.dataBindVersion = '2.2.3'
     ext.hbVersion = '4.3.10.Final'
     ext.hbValidatorVersion = '5.1.3.Final'
     ext.comLangVersion = '3:3.3.2'
@@ -63,6 +64,9 @@ dependencies {
     compile "javax.servlet:jstl:$servletJstlVersion"
     providedCompile("javax.servlet:javax.servlet-api:$servletApiVersion")
     providedCompile("javax.servlet.jsp:jsp-api:$servletJspVersion")
+
+    //dependency for data conversion.
+    compile "com.fasterxml.jackson.core:jackson-databind:$dataBindVersion"
 
     // org slf4j dependnecy
     compile "org.slf4j:slf4j-api:$slf4jVersion"

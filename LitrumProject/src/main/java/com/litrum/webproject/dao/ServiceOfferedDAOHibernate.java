@@ -13,7 +13,7 @@ public class ServiceOfferedDAOHibernate extends GenericDAOHibernate<ServiceOffer
     @Override
     public ServiceOffered findServiceOfferedByName(String name) {
         Criteria criteria = getSession().createCriteria(getPersistentClass());
-        criteria.add(Restrictions.eq("nane", name));
+        criteria.add(Restrictions.eq("name", name));
         return (ServiceOffered) criteria.uniqueResult();
     }
 }
