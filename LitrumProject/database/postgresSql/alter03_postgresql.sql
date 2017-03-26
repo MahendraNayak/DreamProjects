@@ -1,0 +1,1 @@
+alter table admin_user_role add column user_login_role varchar(255) not null;
