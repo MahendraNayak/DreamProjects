@@ -21,7 +21,7 @@
     </appender>
 
     <appender name="LOG_FILE" class="org.apache.log4j.DailyRollingFileAppender">
-        <param name="File" value="../logs/litrumWebProject-all-logs.log"/>
+        <param name="File" value="../logs/litrumprojectLogs//litrumWebProject-all-logs.log"/>
         <param name="DatePattern" value="'.'yyyy-MM-dd-HH"/>
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="%d %-5p [app=litrumWebProject] [%t] %c - %m%n"/>
