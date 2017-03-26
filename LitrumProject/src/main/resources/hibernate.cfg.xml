@@ -25,6 +25,7 @@
         <mapping class="com.litrum.webproject.model.SubSubMainCategory"/>
         <mapping class="com.litrum.webproject.model.CompanyCity"/>
         <mapping class="com.litrum.webproject.model.AdminUserRole"/>
+        <mapping class="com.litrum.webproject.model.AdminUserRegistration"/>
 
     </session-factory>
 </hibernate-configuration>

@@ -58,7 +58,8 @@ public class DataSourceConfig {
                 com.litrum.webproject.model.SubMainCategory.class,
                 com.litrum.webproject.model.SubSubMainCategory.class,
                 com.litrum.webproject.model.CompanyCity.class,
-                com.litrum.webproject.model.AdminUserRole.class);
+                com.litrum.webproject.model.AdminUserRole.class,
+                com.litrum.webproject.model.AdminUserRegistration.class);
         sessionFactory.setDataSource(serverDataSource());
         return sessionFactory;
     }
