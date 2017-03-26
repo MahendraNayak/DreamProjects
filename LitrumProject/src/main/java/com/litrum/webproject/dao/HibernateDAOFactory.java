@@ -66,4 +66,19 @@ public class HibernateDAOFactory extends DAOFactory {
     public AdminUserRoleDAO getAdminUserRoleDAO() {
         return (AdminUserRoleDAO) instantiateDAO(AdminUserRoleDAOHibernate.class);
     }
+
+    @Override
+    public MainCategoryDAO getMainCategoryDAO() {
+        return (MainCategoryDAO) instantiateDAO(MainCategoryDAOHibernate.class);
+    }
+
+    @Override
+    public SubMainCategoryDAO getSubMainCategoryDAO() {
+        return (SubMainCategoryDAO) instantiateDAO(SubMainCategoryDAOHibernate.class);
+    }
+
+    @Override
+    public SubSubMainCategoryDAO getSubSubMainCategoryDAO() {
+        return (SubSubMainCategoryDAO) instantiateDAO(SubSubMainCategoryDAOHibernate.class);
+    }
 }

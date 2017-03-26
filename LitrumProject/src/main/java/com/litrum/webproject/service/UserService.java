@@ -1,9 +1,8 @@
 package com.litrum.webproject.service;
 
+import com.litrum.webproject.form.CategoriesForm;
 import com.litrum.webproject.form.RegisterForm;
-import com.litrum.webproject.model.CompanyType;
-import com.litrum.webproject.model.EndUserRole;
-import com.litrum.webproject.model.ServiceOffered;
+import com.litrum.webproject.model.*;
 
 import java.util.List;
 
@@ -23,4 +22,15 @@ public interface UserService {
 
     List<EndUserRole> findByCompanyTypeId(Long companyTypeId);
 
+    void createMainCategory(CategoriesForm categoriesForm) throws Exception;
+
+    void createSubMainCategory(CategoriesForm categoriesForm) throws Exception;
+
+    void createSubSubMainCategory(CategoriesForm categoriesForm) throws Exception;
+
+    List<MainCategory> getAllMainCategoryList();
+
+    List<SubMainCategory> findByMainCategoryId(CategoriesForm categoriesForm) throws Exception;
+
+    List<SubSubMainCategory> findBySubMainCategoryId(CategoriesForm categoriesForm) throws Exception;
 }

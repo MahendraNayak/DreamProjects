@@ -1,12 +1,21 @@
 package com.litrum.webproject.controller;
 
+import com.litrum.webproject.form.CategoriesForm;
+import com.litrum.webproject.model.MainCategory;
+import com.litrum.webproject.model.SubMainCategory;
+import com.litrum.webproject.model.SubSubMainCategory;
+import com.litrum.webproject.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import sun.nio.cs.ext.MacDingbat;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 /**
  * Created by Pc on 25/03/2017.
@@ -15,6 +24,9 @@ import sun.nio.cs.ext.MacDingbat;
 public class AdminController {
 
     private static Logger logger = LoggerFactory.getLogger(AdminController.class);
+
+    @Autowired
+    private UserService userService;
 
     @RequestMapping(value = "/adminPannelHome", method = RequestMethod.GET)
     public String adminDashboard(Model uiModel) {
@@ -51,5 +63,69 @@ public class AdminController {
         return "adminPannelComType";
     }
 
+    @RequestMapping(value = "/create/mainCategory")
+    public
+    @ResponseBody
+    List<MainCategory> createAndListMainCategory(@ModelAttribute("categories") CategoriesForm categoriesForm) {
+        logger.debug("Inside create main category method.");
+        try {
+            userService.createMainCategory(categoriesForm);
+            logger.debug("Main Category created successfully.");
+            List<MainCategory> mainCategoryList = userService.getAllMainCategoryList();
+            return mainCategoryList;
+        } catch (Exception e) {
+            logger.error("Exception while create/list main category{}", e.getMessage());
+        }
+        return null;
+    }
 
+    @RequestMapping(value = "/create/subMainCategory")
+    public void createSubMainCategory(@ModelAttribute("categories") CategoriesForm categoriesForm) {
+        logger.debug("Inside Create sub main category method");
+        try {
+            userService.createSubMainCategory(categoriesForm);
+            logger.debug("Sub Main Category created successfully");
+        } catch (Exception e) {
+            logger.error("Exception while creating sub main category{}", e.getMessage());
+        }
+    }
+
+    @RequestMapping(value = "/create/subSubMainCategory")
+    public void createSubSubMainCategory(@ModelAttribute("categories") CategoriesForm categoriesForm) {
+        logger.debug("Inside Create sub main category method");
+        try {
+            userService.createSubSubMainCategory(categoriesForm);
+            logger.debug("Sub Sub Main Category created successfully");
+        } catch (Exception e) {
+            logger.error("Exception while creating sub sub main category{}", e.getMessage());
+        }
+    }
+
+    @RequestMapping(value = "/subMainCategory/list")
+    public
+    @ResponseBody
+    List<SubMainCategory> listSubMainCategory(@ModelAttribute("categories") CategoriesForm categoriesForm) {
+        logger.debug("Inside get list of sub main category based on main category method.");
+        try {
+            List<SubMainCategory> subMainCategoryList = userService.findByMainCategoryId(categoriesForm);
+            return subMainCategoryList;
+        } catch (Exception e) {
+            logger.error("exception while getting list of sub main category{}", e);
+        }
+        return null;
+    }
+
+    @RequestMapping(value = "/subSubMainCategory/list")
+    public
+    @ResponseBody
+    List<SubSubMainCategory> listSubSubMainCategory(@ModelAttribute("categories") CategoriesForm categoriesForm) {
+        logger.debug("inside get sub sub main category list");
+        try {
+            List<SubSubMainCategory> subSubMainCategoryList = userService.findBySubMainCategoryId(categoriesForm);
+            return subSubMainCategoryList;
+        } catch (Exception e) {
+            logger.error("Exception while getting list of sub sub main category");
+        }
+        return null;
+    }
 }

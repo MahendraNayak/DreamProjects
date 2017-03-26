@@ -30,4 +30,10 @@ public abstract class DAOFactory {
 
     public abstract AdminUserRoleDAO getAdminUserRoleDAO();
 
+    public abstract MainCategoryDAO getMainCategoryDAO();
+
+    public abstract SubMainCategoryDAO getSubMainCategoryDAO();
+
+    public abstract SubSubMainCategoryDAO getSubSubMainCategoryDAO();
+
 }
