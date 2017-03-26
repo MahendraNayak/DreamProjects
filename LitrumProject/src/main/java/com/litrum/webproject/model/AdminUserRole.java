@@ -14,7 +14,6 @@ import javax.persistence.Table;
 public class AdminUserRole extends PersistentObject {
 
     private String roleName;
-    private String userLoginRole;
 
     @Column(name = "role_name", nullable = false, unique = true)
     public String getRoleName() {
@@ -25,20 +24,10 @@ public class AdminUserRole extends PersistentObject {
         this.roleName = roleName;
     }
 
-    @Column(name = "user_login_role", nullable = false)
-    public String getUserLoginRole() {
-        return userLoginRole;
-    }
-
-    public void setUserLoginRole(String userLoginRole) {
-        this.userLoginRole = userLoginRole;
-    }
-
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .append("roleName", roleName)
-                .append("userLoginRole", userLoginRole)
                 .toString();
     }
 }
