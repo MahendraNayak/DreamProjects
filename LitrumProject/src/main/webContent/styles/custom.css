@@ -1,16 +1,19 @@
 #container {
-   min-height:100%;
+   min-height:70%;
+   max-height:100%;
+   min-width:70%;
+   max-width:100%;
    position:relative;
 }
 
 #header {
    background-image:url('../images/headerLogo.jpg');
-   height:103px; /*height of your image*/
+   height:155px; /*height of your image*/
    padding:10px;
 }
 #body {
    padding:10px;
-   padding-bottom:60px;   /* Height of the footer */
+   padding-bottom:224px;   /* Height of the footer */
 }
 #footer {
    position:absolute;
