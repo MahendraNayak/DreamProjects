@@ -1,5 +1,6 @@
 package com.litrum.webproject.service;
 
+import com.litrum.webproject.form.AdminUserRegistrationForm;
 import com.litrum.webproject.form.CategoriesForm;
 import com.litrum.webproject.form.CompanyTypeAndUserRolesForm;
 import com.litrum.webproject.form.RegisterForm;
@@ -38,4 +39,6 @@ public interface UserService {
     void createCompanyType(CompanyTypeAndUserRolesForm form) throws Exception;
 
     void createEndUserRole(CompanyTypeAndUserRolesForm form) throws Exception;
+
+    void createAdminUser(AdminUserRegistrationForm adminUserRegistrationForm) throws Exception;
 }

@@ -2,6 +2,7 @@ package com.litrum.webproject.service;
 
 import com.litrum.webproject.Utils.LitrumProjectConstants;
 import com.litrum.webproject.dao.DAOFactory;
+import com.litrum.webproject.form.AdminUserRegistrationForm;
 import com.litrum.webproject.form.CategoriesForm;
 import com.litrum.webproject.form.CompanyTypeAndUserRolesForm;
 import com.litrum.webproject.form.RegisterForm;
@@ -259,5 +260,42 @@ public class UserManager implements UserService {
             logger.error("form does not contains company type Id, hence we are not able to create end user role.");
             throw new Exception("Empty company type Id while creating end user role, hence can't proceed.");
         }
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
+    public void createAdminUser(AdminUserRegistrationForm adminUserRegistrationForm) throws Exception {
+        if (null == adminUserRegistrationForm) {
+            logger.error("form does not contains any information, hence can't proceed.");
+            throw new Exception("empty form passed, hence can't proceed.");
+        }
+
+        MainCategory mainCategory = daoFactory.getMainCategoryDAO().findById(adminUserRegistrationForm.getMainCategoryId(), false);
+        if (null == mainCategory) {
+            logger.error("No main category found with id:[{}]", adminUserRegistrationForm.getMainCategoryId());
+            throw new Exception("Unable to get main category,hence cant proceed.");
+        }
+
+        AdminUserRole adminUserRole = daoFactory.getAdminUserRoleDAO().findById(adminUserRegistrationForm.getAdminUserRoleId(), false);
+        if (null == adminUserRole) {
+            logger.error("No admin user found with id:[{}]", adminUserRegistrationForm.getAdminUserRoleId());
+            throw new Exception("Unable to get admin role, hence cant proceed.");
+        }
+
+        AdminUserRegistration adminUserRegistration = new AdminUserRegistration();
+        adminUserRegistration.setFirstName(adminUserRegistrationForm.getFirstName());
+        adminUserRegistration.setLastName(adminUserRegistrationForm.getLastName());
+        adminUserRegistration.setUserName(adminUserRegistrationForm.getUserName());
+        adminUserRegistration.setPassword(adminUserRegistrationForm.getPassword());
+        adminUserRegistration.setMobile(adminUserRegistrationForm.getMobile());
+        adminUserRegistration.setEmailId(adminUserRegistrationForm.getEmailId());
+        adminUserRegistration.setMainCategory(mainCategory);
+        adminUserRegistration.setAdminUserRole(adminUserRole);
+        //TODO discuss if it is required or not.
+        //because in this case we know this user and its role are fix so
+        // we can get the role and redirect it according to role.
+        adminUserRegistration.setUserLoginRole(adminUserRole.getRoleName());
+        daoFactory.getAdminUserRegistrationDAO().makePersistent(adminUserRegistration);
+        logger.debug("admin user register successfully.");
     }
 }
