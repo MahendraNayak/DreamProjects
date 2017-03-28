@@ -48,7 +48,7 @@ public class RegistrationController {
             uiModel.addAttribute("errorMessage", e.getMessage());
             return "register";
         }
-        return "redirect:/login";
+        return "login";
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)

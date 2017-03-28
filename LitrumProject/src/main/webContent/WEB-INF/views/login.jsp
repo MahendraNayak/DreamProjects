@@ -1,34 +1,35 @@
+<!DOCTYPE HTML>
 <html>
 <head>
-<link rel="stylesheet" href="./styles/jquery.ui.1.9.2.ie.css" type="text/css"></link>
-<link rel="stylesheet" href="./styles/jquery.ui.1.10.0.ie.css" type="text/css"></link>
-<link rel="stylesheet" href="./styles/jquery-ui-1.9.2.custom.css" type="text/css"></link>
-<link rel="stylesheet" href="./styles/jquery-ui-1.10.0.custom.css" type="text/css"></link>
-<ink rel="stylesheet" href="./styles/bootstrap_3.3.4.css" type="text/css"></link>
-<link rel="stylesheet" href="./styles/bootstrap.min_3.3.4.css" type="text/css"></link>
-<ink rel="stylesheet" href="./styles/bootstrap-theme_3.3.4.css" type="text/css"></link>
-<link rel="stylesheet" href="./styles/bootstrap-theme.min_3.3.4.css" type="text/css"></link>
-<link rel="stylesheet" href="./styles/bootstrap-grid.css" type="text/css"></link>
-<link rel="stylesheet" href="./styles/bootstrap-grid.min.css" type="text/css"></link>
-<link rel="stylesheet" href="./styles/bootstrap-reboot.css" type="text/css"></link>
-<link rel="stylesheet" href="./styles/bootstrap-reboot.min.css" type="text/css"></link>
-<link rel="stylesheet" href="./styles/custom.css" type="text/css"></link>
+<link rel="stylesheet" href="resources/styles/jquery.ui.1.9.2.ie.css" type="text/css"></link>
+<link rel="stylesheet" href="resources/styles/jquery.ui.1.10.0.ie.css" type="text/css"></link>
+<link rel="stylesheet" href="resources/styles/jquery-ui-1.9.2.custom.css" type="text/css"></link>
+<link rel="stylesheet" href="resources/styles/jquery-ui-1.10.0.custom.css" type="text/css"></link>
+<ink rel="stylesheet" href="resources/styles/bootstrap_3.3.4.css" type="text/css"></link>
+<link rel="stylesheet" href="resources/styles/bootstrap.min_3.3.4.css" type="text/css"></link>
+<ink rel="stylesheet" href="resources/styles/bootstrap-theme_3.3.4.css" type="text/css"></link>
+<link rel="stylesheet" href="resources/styles/bootstrap-theme.min_3.3.4.css" type="text/css"></link>
+<link rel="stylesheet" href="resources/styles/bootstrap-grid.css" type="text/css"></link>
+<link rel="stylesheet" href="resources/styles/bootstrap-grid.min.css" type="text/css"></link>
+<link rel="stylesheet" href="resources/styles/bootstrap-reboot.css" type="text/css"></link>
+<link rel="stylesheet" href="resources/styles/bootstrap-reboot.min.css" type="text/css"></link>
+<link rel="stylesheet" href="resources/styles/custom.css" type="text/css"></link>
 
-<script language="JavaScript" type="text/JavaScript" src="./JS/jquery-3.2.0.min.js"></script>
-<script language="JavaScript" type="text/JavaScript" src="./JS/affix.js"></script>
-<script language="JavaScript" type="text/JavaScript" src="./JS/alert.js"></script>
-<script language="JavaScript" type="text/JavaScript" src="./JS/button.js"></script>
-<script language="JavaScript" type="text/JavaScript" src="./JS/carousel.js"></script>
-<script language="JavaScript" type="text/JavaScript" src="./JS/collapse.js"></script>
-<script language="JavaScript" type="text/JavaScript" src="./JS/dropdown.js"></script>
-<script language="JavaScript" type="text/JavaScript" src="./JS/modal.js"></script>
-<script language="JavaScript" type="text/JavaScript" src="./JS/scrollspy.js"></script>
-<script language="JavaScript" type="text/JavaScript" src="./JS/tab.js"></script>
-<script language="JavaScript" type="text/JavaScript" src="./JS/tooltip.js"></script>
-<script language="JavaScript" type="text/JavaScript" src="./JS/transition.js"></script>
-<script language="JavaScript" type="text/JavaScript" src="./JS/bootstrap_3.3.4.js"></script>
-<script language="JavaScript" type="text/JavaScript" src="./JS/bootstrap.min_3.3.4.js"></script>
-<script language="JavaScript" type="text/JavaScript" src="./JS/custom.js"></script>
+<script language="JavaScript" type="text/JavaScript" src="resources/JS/jquery-3.2.0.min.js"></script>
+<script language="JavaScript" type="text/JavaScript" src="resources/JS/affix.js"></script>
+<script language="JavaScript" type="text/JavaScript" src="resources/JS/alert.js"></script>
+<script language="JavaScript" type="text/JavaScript" src="resources/JS/button.js"></script>
+<script language="JavaScript" type="text/JavaScript" src="resources/JS/carousel.js"></script>
+<script language="JavaScript" type="text/JavaScript" src="resources/JS/collapse.js"></script>
+<script language="JavaScript" type="text/JavaScript" src="resources/JS/dropdown.js"></script>
+<script language="JavaScript" type="text/JavaScript" src="resources/JS/modal.js"></script>
+<script language="JavaScript" type="text/JavaScript" src="resources/JS/scrollspy.js"></script>
+<script language="JavaScript" type="text/JavaScript" src="resources/JS/tab.js"></script>
+<script language="JavaScript" type="text/JavaScript" src="resources/JS/tooltip.js"></script>
+<script language="JavaScript" type="text/JavaScript" src="resources/JS/transition.js"></script>
+<script language="JavaScript" type="text/JavaScript" src="resources/JS/bootstrap_3.3.4.js"></script>
+<script language="JavaScript" type="text/JavaScript" src="resources/JS/bootstrap.min_3.3.4.js"></script>
+<script language="JavaScript" type="text/JavaScript" src="resources/JS/custom.js"></script>
 </head>
 <body>
 <div id="container">
@@ -57,7 +58,7 @@
                                 <input type="submit" class="btn btn-lg btn-success btn-block" value="Sign In">
         					</div>
         					<div class="col-xs-6 col-sm-6 col-md-6">
-        						<a href="register.jsp" class="btn btn-lg btn-primary btn-block">Register</a>
+        						<a href="register" class="btn btn-lg btn-primary btn-block">Register</a>
         					</div>
         				</div>
         			</fieldset>
@@ -67,8 +68,9 @@
 
         </div>
 
-        <div id="footer" class="page-footer">
-    </div>
+
 </div>
+<div id="footer" class="page-footer">
+    </div>
 </body>
 </html>
