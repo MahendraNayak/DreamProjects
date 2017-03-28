@@ -1,5 +1,6 @@
 package com.litrum.webproject.dao;
 
+import com.litrum.webproject.model.AdminUserRegistration;
 import com.litrum.webproject.model.CompanyType;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
@@ -80,5 +81,10 @@ public class HibernateDAOFactory extends DAOFactory {
     @Override
     public SubSubMainCategoryDAO getSubSubMainCategoryDAO() {
         return (SubSubMainCategoryDAO) instantiateDAO(SubSubMainCategoryDAOHibernate.class);
+    }
+
+    @Override
+    public AdminUserRegistrationDAO getAdminUserRegistrationDAO() {
+        return (AdminUserRegistrationDAO) instantiateDAO(AdminUserRegistrationDAOHibernate.class);
     }
 }

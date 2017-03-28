@@ -51,10 +51,16 @@ public class RegistrationController {
         return "redirect:/login";
     }
 
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String login(Model uiModel) {
+        logger.warn("Inside login page");
+        uiModel.addAttribute("name", "mahendra");
+        return "login";
+    }
+
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String loginPage(Model uiModel){
-        RegisterForm registerForm = new RegisterForm();
-        uiModel.addAttribute("form", registerForm);
+    public String loginPage() {
+        logger.warn("Inside login page");
         return "login";
     }
 

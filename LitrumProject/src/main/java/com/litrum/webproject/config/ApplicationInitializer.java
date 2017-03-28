@@ -16,6 +16,6 @@ public class ApplicationInitializer extends AbstractAnnotationConfigDispatcherSe
     }
 
     protected String[] getServletMappings() {
-        return new String[]{"/*"};
+        return new String[]{"/"};
     }
 }

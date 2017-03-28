@@ -30,17 +30,31 @@ public class SucessAuthenticationHandler implements AuthenticationSuccessHandler
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         logger.debug("User Authencaticated successfully");
-/*
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         for (GrantedAuthority grantedAuthority : authorities) {
             if (grantedAuthority.getAuthority()
-                    .equalsIgnoreCase(LitrumProjectConstants.ROLE_PREFIX.concat(LitrumProjectConstants.ROLE_ADMIN))) {
-                response.sendRedirect(request.getContextPath().concat("/adminDashboard"));
+                    .equalsIgnoreCase(LitrumProjectConstants.ROLE_PREFIX.concat(LitrumProjectConstants.ROLE_SUPER_ADMIN))) {
+                response.sendRedirect(request.getContextPath().concat("/adminPannelHome"));
             } else if (grantedAuthority.getAuthority().equalsIgnoreCase(LitrumProjectConstants.ROLE_PREFIX.concat(LitrumProjectConstants
                     .ROLE_END_USER))) {
-                response.sendRedirect(request.getContextPath().concat("/endUserDashboard"));
+                response.sendRedirect(request.getContextPath().concat("/endUserPannelHome"));
+            } else if (grantedAuthority.getAuthority().equalsIgnoreCase(LitrumProjectConstants.ROLE_PREFIX.concat(LitrumProjectConstants
+                    .ROLE_EDITOR))) {
+                //TODO deicde where to redirect
+                response.sendRedirect(request.getContextPath().concat("/endUserPannelHome"));
+            } else if (grantedAuthority.getAuthority().equalsIgnoreCase(LitrumProjectConstants.ROLE_PREFIX.concat(LitrumProjectConstants
+                    .ROLE_AUTHORISER))) {
+                //TODO deicde where to redirect
+                response.sendRedirect(request.getContextPath().concat("/endUserPannelHome"));
+            } else if (grantedAuthority.getAuthority().equalsIgnoreCase(LitrumProjectConstants.ROLE_PREFIX.concat(LitrumProjectConstants
+                    .ROLE_PRIORITY_EDITOR))) {
+                //TODO deicde where to redirect
+                response.sendRedirect(request.getContextPath().concat("/endUserPannelHome"));
+            } else if (grantedAuthority.getAuthority().equalsIgnoreCase(LitrumProjectConstants.ROLE_PREFIX.concat(LitrumProjectConstants
+                    .ROLE_SALES))) {
+                //TODO deicde where to redirect
+                response.sendRedirect(request.getContextPath().concat("/endUserPannelHome"));
             }
         }
-*/
     }
 }

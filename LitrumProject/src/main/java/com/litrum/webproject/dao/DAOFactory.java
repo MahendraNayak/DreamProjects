@@ -1,5 +1,7 @@
 package com.litrum.webproject.dao;
 
+import com.litrum.webproject.model.AdminUserRegistration;
+
 /**
  * Created by Pc on 21/03/2017.
  */
@@ -35,5 +37,7 @@ public abstract class DAOFactory {
     public abstract SubMainCategoryDAO getSubMainCategoryDAO();
 
     public abstract SubSubMainCategoryDAO getSubSubMainCategoryDAO();
+
+    public abstract AdminUserRegistrationDAO getAdminUserRegistrationDAO();
 
 }
