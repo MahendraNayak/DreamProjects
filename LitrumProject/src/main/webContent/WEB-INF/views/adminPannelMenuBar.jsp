@@ -46,7 +46,7 @@
 						<b class="caret"></b></a>
 						<ul class="dropdown-menu dropdown-menu-default">
 						    <li><a href=""><i class="icon-key"></i> Vishal </a></li>
-							<li><a href=""><i class="icon-key"></i> Log Out </a></li>
+							<li><a href="/LitrumWebServer/logout"><i class="icon-key"></i> Log Out </a></li>
 						</ul>
 					</li>
 				</ul>
