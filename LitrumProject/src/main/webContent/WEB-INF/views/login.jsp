@@ -1,4 +1,5 @@
 <!DOCTYPE HTML>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
 <link rel="stylesheet" href="resources/styles/jquery.ui.1.9.2.ie.css" type="text/css"></link>
@@ -39,7 +40,12 @@
 
     <div id="body">
         <div class="container">
-
+                <c:if test="${not empty param.login_error}">
+                    <div class="alert alert-danger fade in">
+                        <a href="#" class="close" data-dismiss="alert">&times;</a>
+                        <strong>Error!</strong> Username or password is incorrect.
+                    </div>
+              </c:if>
         <div class="row" style="margin-top:20px">
             <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
         		<form role="form" method="post" action="j_spring_security_check">
