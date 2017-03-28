@@ -1,16 +1,11 @@
 
 package com.litrum.webproject.config;
 
-import com.litrum.webproject.Utils.LitrumProjectConstants;
-import com.litrum.webproject.redirect.FailureAuthenticationHandler;
 import com.litrum.webproject.redirect.SucessAuthenticationHandler;
-import com.litrum.webproject.service.UserDetailsManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -37,13 +32,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         return new SucessAuthenticationHandler();
     }
 
-    @Bean
-    FailureAuthenticationHandler failureAuthenticationHandler() {
-        FailureAuthenticationHandler failureAuthenticationHandler = new FailureAuthenticationHandler();
-        failureAuthenticationHandler.setDefaultFailureUrl("/login?login_error=t");
-        return failureAuthenticationHandler;
-    }
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -57,8 +45,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .usernameParameter("uname")
                 .passwordParameter("password")
                 .loginProcessingUrl("/j_spring_security_check")
-                .defaultSuccessUrl("/adminPannelHome")
                 .failureUrl("/login?login_error=t")
+                .successHandler(sucessAuthenticationHandler())
                 .loginPage("/")
                 .permitAll()
                 .and()
