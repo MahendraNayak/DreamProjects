@@ -4270,12 +4270,13 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:hover, a.list-g
 	border-bottom: 1px solid #ddd
 }
 .panel-default {
-	border-color: #ddd
+	border-color: #3e6fde;
+	width:350px;
 }
 .panel-default>.panel-heading {
-	color: #333;
-	background-color: #f5f5f5;
-	border-color: #ddd
+	color: white;
+	background-color: #4a71ca;
+	border-color: #1a59e6;
 }
 .panel-default>.panel-heading+.panel-collapse .panel-body {
 	border-top-color: #ddd

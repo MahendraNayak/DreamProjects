@@ -30,6 +30,8 @@ public class AdminController {
 
     @RequestMapping(value = "/adminPannelMainCat", method = RequestMethod.GET)
     public String mainCategory(Model uiModel) {
+        List<MainCategory> mainCategoryList = userService.getAllMainCategoryList();
+        uiModel.addAttribute("mainCategoryList",mainCategoryList);
         return "adminPannelMainCat";
     }
 

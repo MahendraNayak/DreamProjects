@@ -1,4 +1,5 @@
 <!DOCTYPE HTML>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
 <link rel="stylesheet" href="resources/cssfinal/bootstrap3.1.0.min.css" type="text/css"></link>
