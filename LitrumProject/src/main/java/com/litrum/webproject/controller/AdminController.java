@@ -1,19 +1,14 @@
 package com.litrum.webproject.controller;
 
 import com.litrum.webproject.form.CategoriesForm;
-import com.litrum.webproject.model.MainCategory;
-import com.litrum.webproject.model.SubMainCategory;
-import com.litrum.webproject.model.SubSubMainCategory;
+import com.litrum.webproject.model.*;
 import com.litrum.webproject.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -128,4 +123,34 @@ public class AdminController {
         }
         return null;
     }
+
+    @RequestMapping(value = "/serviceOffered", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    List<ServiceOffered> serviceOfferedList() {
+        logger.info("Inside service offered method");
+        List<ServiceOffered> serviceOfferedList = userService.getAllServiceOffered();
+        return serviceOfferedList;
+    }
+
+    @RequestMapping(value = "/companyType/{id}")
+    public
+    @ResponseBody
+    List<CompanyType> companyTypeList(@PathVariable("id") Long serviceOfferedId) {
+        logger.info("Inside company type method");
+        List<CompanyType> companyTypeList = userService.findByServiceOfferedId(serviceOfferedId);
+        return companyTypeList;
+    }
+
+    @RequestMapping(value = "/endUserRole/{id}")
+    public
+    @ResponseBody
+    List<EndUserRole> endUserRoleList(@PathVariable("id") Long companyTypeId) {
+        logger.info("Inside endUser role method");
+        List<EndUserRole> endUserRoleList = userService.findByCompanyTypeId(companyTypeId);
+        return endUserRoleList;
+    }
+
+
+
 }

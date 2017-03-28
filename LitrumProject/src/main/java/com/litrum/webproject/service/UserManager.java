@@ -3,6 +3,7 @@ package com.litrum.webproject.service;
 import com.litrum.webproject.Utils.LitrumProjectConstants;
 import com.litrum.webproject.dao.DAOFactory;
 import com.litrum.webproject.form.CategoriesForm;
+import com.litrum.webproject.form.CompanyTypeAndUserRolesForm;
 import com.litrum.webproject.form.RegisterForm;
 import com.litrum.webproject.model.*;
 import org.apache.commons.lang3.StringUtils;
@@ -208,5 +209,55 @@ public class UserManager implements UserService {
                     "while getting sub sub main category list.");
         }
         return daoFactory.getSubSubMainCategoryDAO().findBySubMainCategory(subMainCategory);
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
+    public void createCompanyType(CompanyTypeAndUserRolesForm form) throws Exception {
+        if (null == form) {
+            logger.error("form does not contains any information, hence can't proceed.");
+            throw new Exception("Empty form passed.");
+        }
+        if (null != form.getServiceOfferedId()) {
+            ServiceOffered serviceOffered = daoFactory.getServiceOfferedDAO().findById(form.getServiceOfferedId(), false);
+            if (null != serviceOffered) {
+                CompanyType companyType = new CompanyType();
+                companyType.setType(form.getCompanyTypeName());
+                companyType.setServiceOffered(serviceOffered);
+                daoFactory.getCompanyTypeDAO().makePersistent(companyType);
+                logger.info("company type created successfully.");
+            } else {
+                logger.error("No service offered found with id[{}]", form.getServiceOfferedId());
+                throw new Exception("No service offered found while creating compant type.");
+            }
+        } else {
+            logger.error("form does not contains service offered Id, hence we are not able to create company type.");
+            throw new Exception("Empty service offered Id while creating company type, hence can't proceed.");
+        }
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
+    public void createEndUserRole(CompanyTypeAndUserRolesForm form) throws Exception {
+        if (null == form) {
+            logger.error("form does not contains any information, hence can't proceed.");
+            throw new Exception("form does not contains any information, hence can't proceed.");
+        }
+        if (null != form.getCompanyTypeId()) {
+            CompanyType companyType = daoFactory.getCompanyTypeDAO().findById(form.getCompanyTypeId(), false);
+            if (null != companyType) {
+                EndUserRole userRole = new EndUserRole();
+                userRole.setRoleName(form.getUserRoleName());
+                userRole.setCompanyType(companyType);
+                daoFactory.getEndUserRoleDAO().makePersistent(userRole);
+                logger.info("end user role created successfully.");
+            } else {
+                logger.error("No company type found with id[{}]", form.getCompanyTypeId());
+                throw new Exception("No company type found while creating end user role");
+            }
+        } else {
+            logger.error("form does not contains company type Id, hence we are not able to create end user role.");
+            throw new Exception("Empty company type Id while creating end user role, hence can't proceed.");
+        }
     }
 }

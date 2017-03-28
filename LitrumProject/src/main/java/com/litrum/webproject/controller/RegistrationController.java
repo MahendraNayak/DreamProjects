@@ -63,31 +63,4 @@ public class RegistrationController {
         logger.warn("Inside login page");
         return "login";
     }
-
-    @RequestMapping(value = "/serviceOffered", method = RequestMethod.GET)
-    public
-    @ResponseBody
-    List<ServiceOffered> serviceOfferedList() {
-        logger.info("Inside service offered method");
-        List<ServiceOffered> serviceOfferedList = userService.getAllServiceOffered();
-        return serviceOfferedList;
-    }
-
-    @RequestMapping(value = "/companyType/{id}")
-    public
-    @ResponseBody
-    List<CompanyType> companyTypeList(@PathVariable("id") Long serviceOfferedId) {
-        logger.info("Inside company type method");
-        List<CompanyType> companyTypeList = userService.findByServiceOfferedId(serviceOfferedId);
-        return companyTypeList;
-    }
-
-    @RequestMapping(value = "/endUserRole/{id}")
-    public
-    @ResponseBody
-    List<EndUserRole> endUserRoleList(@PathVariable("id") Long companyTypeId) {
-        logger.info("Inside endUser role method");
-        List<EndUserRole> endUserRoleList = userService.findByCompanyTypeId(companyTypeId);
-        return endUserRoleList;
-    }
 }

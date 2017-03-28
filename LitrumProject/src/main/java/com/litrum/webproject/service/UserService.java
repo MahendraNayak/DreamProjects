@@ -1,6 +1,7 @@
 package com.litrum.webproject.service;
 
 import com.litrum.webproject.form.CategoriesForm;
+import com.litrum.webproject.form.CompanyTypeAndUserRolesForm;
 import com.litrum.webproject.form.RegisterForm;
 import com.litrum.webproject.model.*;
 
@@ -33,4 +34,8 @@ public interface UserService {
     List<SubMainCategory> findByMainCategoryId(CategoriesForm categoriesForm) throws Exception;
 
     List<SubSubMainCategory> findBySubMainCategoryId(CategoriesForm categoriesForm) throws Exception;
+
+    void createCompanyType(CompanyTypeAndUserRolesForm form) throws Exception;
+
+    void createEndUserRole(CompanyTypeAndUserRolesForm form) throws Exception;
 }
