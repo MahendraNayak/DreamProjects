@@ -31,6 +31,36 @@
 <script language="JavaScript" type="text/JavaScript" src="resources/JS/bootstrap_3.3.4.js"></script>
 <script language="JavaScript" type="text/JavaScript" src="resources/JS/bootstrap.min_3.3.4.js"></script>
 <script language="JavaScript" type="text/JavaScript" src="resources/JS/custom.js"></script>
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/css/bootstrapValidator.min.css"/>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/js/bootstrapValidator.min.js"> </script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#loginForm').bootstrapValidator({
+        container: '#messages',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            uname: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please enter userName'
+                    }
+                }
+            },
+            password: {
+                validators: {
+                    notEmpty: {
+                        message: 'please enter password'
+                    }
+                }
+            }
+        }
+    });
+});
+</script>
 </head>
 <body>
 <div id="container">
@@ -48,7 +78,7 @@
               </c:if>
         <div class="row" style="margin-top:20px">
             <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-        		<form role="form" method="post" action="j_spring_security_check">
+        		<form role="form" id="loginForm" method="post" action="j_spring_security_check">
         			<fieldset>
         				<h2>Please Sign In</h2>
         				<hr class="colorgraph">
