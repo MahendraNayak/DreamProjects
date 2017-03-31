@@ -117,10 +117,20 @@ public class UserManager implements UserService {
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
     public void createMainCategory(CategoriesForm categoriesForm) throws Exception {
         if (null != categoriesForm) {
-            MainCategory mainCategory = new MainCategory();
-            mainCategory.setCategoryName(categoriesForm.getMainCategoryName());
-            daoFactory.getMainCategoryDAO().makePersistent(mainCategory);
-            logger.debug("main category creted successfully.");
+            if (null != categoriesForm.getMainCategoryId() && categoriesForm.getSubMainCategoryId() > 0) {
+                MainCategory mainCategory = daoFactory.getMainCategoryDAO().findById(categoriesForm.getMainCategoryId(), false);
+                if (null != mainCategory) {
+                    mainCategory.setCategoryName(categoriesForm.getMainCategoryName());
+                    logger.debug("main category updated successfully.");
+                } else {
+                    throw new Exception("invalid main category id passed, hence we cant't update the record.");
+                }
+            } else {
+                MainCategory mainCategory = new MainCategory();
+                mainCategory.setCategoryName(categoriesForm.getMainCategoryName());
+                daoFactory.getMainCategoryDAO().makePersistent(mainCategory);
+                logger.debug("main category creted successfully.");
+            }
         } else {
             throw new Exception("categories form does not contains any information, hence we can't create main category.");
         }
