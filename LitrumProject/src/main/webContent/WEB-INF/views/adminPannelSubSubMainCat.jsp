@@ -6,17 +6,46 @@
     <div class="rightInfo landing-page-wrapper">
         <div class="padding-txt">
             <div class="col-xs-12 category-header">
-		<Marquee><b>Sub Sub Main Categories</b></Marquee>
+		<Marquee><b>Sub Main Categories</b></Marquee>
             </div>
         </div>
         <div class="in-services">
-		    <div class="col-md-3 col-sm-6">
-		        <div class="panel panel-default">
-				<div class="panel-heading"><h3 class="panel-title">SUB SUB MAIN CAT</h3></div>
-				<div class="panel-body" style="padding:0;border:0px;height:300px;overflow-y:auto">
-
-                    Under Construction
-		    </div>
+		    <div id="row">
+                <div class="col-md-3 col-sm-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><h3 class="panel-title">MAIN CATEGORIES</h3></div>
+                            <div class="panel-body" style="padding:0;border:0px;height:300px;overflow-y:auto">
+                                <table class="table">
+                                    <tbody>
+                                        <c:forEach var="maincatObj" items="${mainCategoryList}" varStatus="status">
+                                        <tr>
+                                            <td style="font-size:16px;color:black;cursor:pointer" onclick="getSMCBasedOnMC(${maincatObj.id},'SMC')">
+							                    <b><c:out value="${maincatObj.categoryName}"/></b>
+					                    </td>
+                                        </tr>
+                                        </c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><h3 class="panel-title">SUB MAIN CATEGORIES</h3></div>
+                             <div class="panel-body" style="padding:0;border:0px;height:300px;overflow-y:auto">
+                                    Under Constructon
+                             </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><h3 class="panel-title">SUB SUB MAIN CATEGORIES</h3></div>
+                             <div class="panel-body" style="padding:0;border:0px;height:300px;overflow-y:auto">
+                                    Under Constructon
+                             </div>
+                    </div>
+                </div>
+            </div><div class="clearfix" style="height: 10px;clear: both;"></div><div class="clearfix" style="height: 10px;clear: both;"></div>
 		</div>
         </div><!--in-services End -->
     </div><!-- rightInfo landing-page-wrapper End -->

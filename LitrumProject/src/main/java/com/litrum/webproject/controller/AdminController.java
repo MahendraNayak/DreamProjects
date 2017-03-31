@@ -42,11 +42,15 @@ public class AdminController {
 
     @RequestMapping(value = "/adminPannelSubMainCat", method = RequestMethod.GET)
     public String subMainCategory(Model uiModel) {
+        List<MainCategory> mainCategoryList = userService.getAllMainCategoryList();
+        uiModel.addAttribute("mainCategoryList",mainCategoryList);
         return "adminPannelSubMainCat";
     }
 
     @RequestMapping(value = "/adminPannelSubSubMainCat", method = RequestMethod.GET)
-    public String subSubMainCategory(Model uiMdel) {
+    public String subSubMainCategory(Model uiModel) {
+        List<MainCategory> mainCategoryList = userService.getAllMainCategoryList();
+        uiModel.addAttribute("mainCategoryList",mainCategoryList);
         return "adminPannelSubSubMainCat";
     }
 
