@@ -12,6 +12,7 @@ public class CategoriesForm {
     private String subMainCategoryName;
     private Long subMainCategoryId;
     private String subSubMainCategoryName;
+    private Long subSubMainCategoryId;
 
     public String getMainCategoryName() {
         return mainCategoryName;
@@ -53,6 +54,14 @@ public class CategoriesForm {
         this.subSubMainCategoryName = subSubMainCategoryName;
     }
 
+    public Long getSubSubMainCategoryId() {
+        return subSubMainCategoryId;
+    }
+
+    public void setSubSubMainCategoryId(Long subSubMainCategoryId) {
+        this.subSubMainCategoryId = subSubMainCategoryId;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -60,6 +69,7 @@ public class CategoriesForm {
                 .append("mainCategoryId", mainCategoryId)
                 .append("subMainCategoryName", subMainCategoryName)
                 .append("subMainCategoryId", subMainCategoryId)
+                .append("subSubMainCategoryId", subSubMainCategoryId)
                 .append("subSubMainCategoryName", subSubMainCategoryName)
                 .toString();
     }

@@ -117,7 +117,7 @@ public class UserManager implements UserService {
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
     public void createMainCategory(CategoriesForm categoriesForm) throws Exception {
         if (null != categoriesForm) {
-            if (null != categoriesForm.getMainCategoryId() && categoriesForm.getSubMainCategoryId() > 0) {
+            if (null != categoriesForm.getMainCategoryId() && categoriesForm.getMainCategoryId() > 0) {
                 MainCategory mainCategory = daoFactory.getMainCategoryDAO().findById(categoriesForm.getMainCategoryId(), false);
                 if (null != mainCategory) {
                     mainCategory.setCategoryName(categoriesForm.getMainCategoryName());
@@ -139,8 +139,8 @@ public class UserManager implements UserService {
     @Override
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
     public void createSubMainCategory(CategoriesForm categoriesForm) throws Exception {
-        if (null != categoriesForm) {
-            if (null != categoriesForm.getMainCategoryId()) {
+        if (null != categoriesForm && null != categoriesForm.getMainCategoryId()) {
+            if (null == categoriesForm.getSubMainCategoryId() && 0 == categoriesForm.getSubMainCategoryId()) {
                 SubMainCategory subMainCategory = new SubMainCategory();
                 subMainCategory.setSubMainCategoryName(categoriesForm.getSubMainCategoryName());
 
@@ -153,7 +153,12 @@ public class UserManager implements UserService {
                 daoFactory.getSubMainCategoryDAO().makePersistent(subMainCategory);
                 logger.debug("Sub Main category created successfully.");
             } else {
-                throw new Exception("categories form does not contains Main category Id, hence we can't create sub main category.");
+                SubMainCategory subMainCategory = daoFactory.getSubMainCategoryDAO().findById(categoriesForm.getSubMainCategoryId(), false);
+                if (null != subMainCategory) {
+                    subMainCategory.setSubMainCategoryName(categoriesForm.getSubMainCategoryName());
+                } else {
+                    throw new Exception("invalid sub main category id, hence we can't update sub main category.");
+                }
             }
         } else {
             throw new Exception("categories form does not contains any information, hence we can't create sub main category.");
@@ -163,8 +168,8 @@ public class UserManager implements UserService {
     @Override
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
     public void createSubSubMainCategory(CategoriesForm categoriesForm) throws Exception {
-        if (null != categoriesForm) {
-            if (null != categoriesForm.getSubMainCategoryId()) {
+        if (null != categoriesForm && null != categoriesForm.getSubMainCategoryId()) {
+            if (null == categoriesForm.getSubSubMainCategoryId() && 0 == categoriesForm.getSubSubMainCategoryId()) {
                 SubSubMainCategory subSubMainCategory = new SubSubMainCategory();
                 subSubMainCategory.setSubSubMainCategoryName(categoriesForm.getSubSubMainCategoryName());
 
@@ -177,7 +182,12 @@ public class UserManager implements UserService {
                 daoFactory.getSubSubMainCategoryDAO().makePersistent(subSubMainCategory);
                 logger.debug("Sub Sub Main category created successfully.");
             } else {
-                throw new Exception("categories form does not contains Sub Main category Id, hence we can't create sub sub main category.");
+                SubSubMainCategory subSubMainCategory = daoFactory.getSubSubMainCategoryDAO().findById(categoriesForm.getSubSubMainCategoryId(), false);
+                if (null != subSubMainCategory) {
+                    subSubMainCategory.setSubSubMainCategoryName(categoriesForm.getSubSubMainCategoryName());
+                } else {
+                    throw new Exception("invalid id passed for sub sub main category, hence we can't update sub sub main category.");
+                }
             }
         } else {
             throw new Exception("categories form does not contains any information, hence we can't create sub sub main category.");
