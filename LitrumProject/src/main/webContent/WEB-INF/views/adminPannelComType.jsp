@@ -6,7 +6,7 @@
     <div class="rightInfo landing-page-wrapper">
         <div class="padding-txt">
             <div class="col-xs-12 category-header">
-		<Marquee><b>Sub Main Categories</b></Marquee>
+		<Marquee><b>Compant Type</b></Marquee>
             </div>
         </div>
         <div class="in-services">
@@ -19,7 +19,7 @@
                                     <tbody>
                                         <c:forEach var="serviceOfferedObj" items="${serviceOfferedList}" varStatus="status">
                                         <tr>
-                                            <td style="font-size:16px;color:black;cursor:pointer" onclick="getSMCBasedOnMC(${maincatObj.id},'SMC')">
+                                            <td style="font-size:16px;color:black;cursor:pointer" onclick="getCTBasedOnSO(${serviceOfferedObj.id},'CT')">
 							                    <b><c:out value="${serviceOfferedObj.name}"/></b>
 					                    </td>
                                         </tr>
@@ -32,8 +32,8 @@
                 <div class="col-md-4 col-sm-6">
                     <div class="panel panel-default">
                         <div class="panel-heading"><h3 class="panel-title">COMPANY TYPE</h3></div>
-                             <div class="panel-body" style="padding:0;border:0px;height:300px;overflow-y:auto">
-Under Constructon
+                             <div class="panel-body" style="padding:0;border:0px;height:300px;overflow-y:auto" id="CT_TABLE">
+
                              </div>
                     </div>
                 </div>

@@ -58,3 +58,32 @@ function getSSMCBasedOnMC(ID){
         }
     });
 }
+
+function getCTBasedOnSO(ID,PAGE){
+    var companyTypeAndUserForm  = {
+    	"serviceOfferedId":ID
+    }
+
+    $.ajax({
+        url: '/LitrumWebServer/companyType/list',
+        type: 'GET',
+        dataType: 'json',
+        data: companyTypeAndUserForm,
+        success: function (response) {
+	var HTML_TABLE = "<table class='table'><tbody>";
+	for(var i=0;i<response.length;i++){
+		var SMCName = (JSON.stringify(response[i].type)).replace(/"/g, '');
+		var SMCID = JSON.stringify(response[i].companyTypeId);
+
+		if(PAGE == "CT") HTML_TABLE = HTML_TABLE +
+"<tr><td style='font-size:16px;color:black;cursor:pointer' onclick='getSSMCBasedOnMC("+SMCID+")'><b>"+SMCName+"</b></td></tr>";
+	}
+	HTML_TABLE = HTML_TABLE + "</tbody></table>";
+
+	$("#CT_TABLE").html(HTML_TABLE);
+        },
+        error: function (e) {
+            alert('error'+e);
+        }
+    });
+}
