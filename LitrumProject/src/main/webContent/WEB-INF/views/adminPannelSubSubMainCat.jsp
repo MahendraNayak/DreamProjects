@@ -19,7 +19,7 @@
                                     <tbody>
                                         <c:forEach var="maincatObj" items="${mainCategoryList}" varStatus="status">
                                         <tr>
-                                            <td style="font-size:16px;color:black;cursor:pointer" onclick="getSMCBasedOnMC(${maincatObj.id},'SMC')">
+                                            <td style="font-size:16px;color:black;cursor:pointer" onclick="getSMCBasedOnMC(${maincatObj.id},'SSMC')">
 							                    <b><c:out value="${maincatObj.categoryName}"/></b>
 					                    </td>
                                         </tr>
@@ -32,16 +32,14 @@
                 <div class="col-md-3 col-sm-6">
                     <div class="panel panel-default">
                         <div class="panel-heading"><h3 class="panel-title">SUB MAIN CATEGORIES</h3></div>
-                             <div class="panel-body" style="padding:0;border:0px;height:300px;overflow-y:auto">
-                                    Under Constructon
+                             <div class="panel-body" style="padding:0;border:0px;height:300px;overflow-y:auto" id="SUB_MC_TABLE">
                              </div>
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-6">
                     <div class="panel panel-default">
                         <div class="panel-heading"><h3 class="panel-title">SUB SUB MAIN CATEGORIES</h3></div>
-                             <div class="panel-body" style="padding:0;border:0px;height:300px;overflow-y:auto">
-                                    Under Constructon
+                             <div class="panel-body" style="padding:0;border:0px;height:300px;overflow-y:auto"  id="SUB_SUB_MC_TABLE">
                              </div>
                     </div>
                 </div>
