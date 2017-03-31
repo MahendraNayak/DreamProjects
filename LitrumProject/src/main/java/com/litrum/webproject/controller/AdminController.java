@@ -1,6 +1,7 @@
 package com.litrum.webproject.controller;
 
 import com.litrum.webproject.form.CategoriesForm;
+import com.litrum.webproject.form.CompanyTypeAndUserRolesForm;
 import com.litrum.webproject.model.*;
 import com.litrum.webproject.service.UserService;
 import org.hibernate.Hibernate;
@@ -65,24 +66,10 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/adminPannelComType", method = RequestMethod.GET)
-    public String addCompanyType() {
+    public String addCompanyType(Model uiModel) {
+        List<ServiceOffered> serviceOfferedList = userService.getAllServiceOffered();
+        uiModel.addAttribute("serviceOfferedList", serviceOfferedList);
         return "adminPannelComType";
-    }
-
-    @RequestMapping(value = "/create/mainCategory")
-    public
-    @ResponseBody
-    List<MainCategory> createAndListMainCategory(@ModelAttribute("categories") CategoriesForm categoriesForm) {
-        logger.debug("Inside create main category method.");
-        try {
-            userService.createMainCategory(categoriesForm);
-            logger.debug("Main Category created successfully.");
-            List<MainCategory> mainCategoryList = userService.getAllMainCategoryList();
-            return mainCategoryList;
-        } catch (Exception e) {
-            logger.error("Exception while create/list main category{}", e.getMessage());
-        }
-        return null;
     }
 
     @RequestMapping(value = "/create/subMainCategory")
@@ -108,11 +95,33 @@ public class AdminController {
     }
 
     @ResponseBody
+    @RequestMapping(value = "/create/mainCategory")
+    public String createAndListMainCategory(@ModelAttribute("categories") CategoriesForm categoriesForm) {
+        logger.debug("Inside create main category method.");
+        List<JSONObject> list = new ArrayList<>();
+        try {
+            userService.createMainCategory(categoriesForm);
+            logger.debug("Main Category created successfully.");
+            List<MainCategory> mainCategoryList = userService.getAllMainCategoryList();
+            for (MainCategory mainCategory : mainCategoryList) {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("mainCategoryId", mainCategory.getId());
+                jsonObject.put("name", mainCategory.getCategoryName());
+                list.add(jsonObject);
+            }
+            return list.toString();
+        } catch (Exception e) {
+            logger.error("Exception while create/list main category{}", e.getMessage());
+        }
+        return null;
+    }
+
+
+    @ResponseBody
     @RequestMapping(value = "/subMainCategory/list")
     public String listSubMainCategory(@ModelAttribute("categories") CategoriesForm categoriesForm) {
         logger.debug("Inside get list of sub main category based on main category method.");
         List<JSONObject> list = new ArrayList<>();
-        JSONObject respObject = new JSONObject();
         try {
             List<SubMainCategory> subMainCategoryList = userService.findByMainCategoryId(categoriesForm);
             for (SubMainCategory subCat : subMainCategoryList) {
@@ -128,47 +137,83 @@ public class AdminController {
         return null;
     }
 
-    @RequestMapping(value = "/subSubMainCategory/list")
-    public
     @ResponseBody
-    List<SubSubMainCategory> listSubSubMainCategory(@ModelAttribute("categories") CategoriesForm categoriesForm) {
+    @RequestMapping(value = "/subSubMainCategory/list")
+    public String listSubSubMainCategory(@ModelAttribute("categories") CategoriesForm categoriesForm) {
         logger.debug("inside get sub sub main category list");
+        List<JSONObject> list = new ArrayList<>();
         try {
             List<SubSubMainCategory> subSubMainCategoryList = userService.findBySubMainCategoryId(categoriesForm);
-            return subSubMainCategoryList;
+            for (SubSubMainCategory subSubMainCategory : subSubMainCategoryList) {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("subSubMainCategoryId", subSubMainCategory.getId());
+                jsonObject.put("name", subSubMainCategory.getSubSubMainCategoryName());
+                list.add(jsonObject);
+            }
+            return list.toString();
         } catch (Exception e) {
             logger.error("Exception while getting list of sub sub main category");
         }
         return null;
     }
 
+    @ResponseBody
     @RequestMapping(value = "/serviceOffered", method = RequestMethod.GET)
-    public
-    @ResponseBody
-    List<ServiceOffered> serviceOfferedList() {
+    public String serviceOfferedList() {
         logger.info("Inside service offered method");
-        List<ServiceOffered> serviceOfferedList = userService.getAllServiceOffered();
-        return serviceOfferedList;
+        List<JSONObject> list = new ArrayList<>();
+        try {
+            List<ServiceOffered> serviceOfferedList = userService.getAllServiceOffered();
+            for (ServiceOffered serviceOffered : serviceOfferedList) {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("serviceOfferedId", serviceOffered.getId());
+                jsonObject.put("name", serviceOffered.getName());
+                list.add(jsonObject);
+            }
+            return list.toString();
+        } catch (Exception e) {
+            logger.error("Exception while getting list of service offered");
+        }
+        return null;
     }
 
-    @RequestMapping(value = "/companyType/{id}")
-    public
     @ResponseBody
-    List<CompanyType> companyTypeList(@PathVariable("id") Long serviceOfferedId) {
+    @RequestMapping(value = "/companyType/list")
+    public String companyTypeList(@ModelAttribute("companyTypeAndUserForm") CompanyTypeAndUserRolesForm companyTypeAndUserForm) {
         logger.info("Inside company type method");
-        List<CompanyType> companyTypeList = userService.findByServiceOfferedId(serviceOfferedId);
-        return companyTypeList;
+        List<JSONObject> list = new ArrayList<>();
+        try {
+            List<CompanyType> companyTypeList = userService.findByServiceOfferedId(companyTypeAndUserForm.getServiceOfferedId());
+            for (CompanyType companyType : companyTypeList) {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("companyTypeId", companyType.getId());
+                jsonObject.put("type", companyType.getType());
+                list.add(jsonObject);
+            }
+            return list.toString();
+        } catch (Exception e) {
+            logger.error("Exception while getting list of company type");
+        }
+        return null;
     }
 
-    @RequestMapping(value = "/endUserRole/{id}")
-    public
     @ResponseBody
-    List<EndUserRole> endUserRoleList(@PathVariable("id") Long companyTypeId) {
+    @RequestMapping(value = "/endUserRole/list")
+    public String endUserRoleList(@ModelAttribute("companyTypeAndUserForm") CompanyTypeAndUserRolesForm companyTypeAndUserRolesForm) {
         logger.info("Inside endUser role method");
-        List<EndUserRole> endUserRoleList = userService.findByCompanyTypeId(companyTypeId);
-        return endUserRoleList;
+        List<JSONObject> list = new ArrayList<>();
+        try {
+            List<EndUserRole> endUserRoleList = userService.findByCompanyTypeId(companyTypeAndUserRolesForm.getCompanyTypeId());
+            for (EndUserRole endUserRole : endUserRoleList) {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("endUserRoleId", endUserRole.getId());
+                jsonObject.put("roleName", endUserRole.getRoleName());
+                list.add(jsonObject);
+            }
+            return list.toString();
+        } catch (Exception e) {
+            logger.error("Exception while getting list of end user role");
+        }
+        return null;
     }
-
-
-
 }
