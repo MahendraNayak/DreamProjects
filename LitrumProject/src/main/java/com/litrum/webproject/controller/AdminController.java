@@ -31,14 +31,29 @@ public class AdminController {
 
     @RequestMapping(value = "/adminPannelHome", method = RequestMethod.GET)
     public String adminDashboard(Model uiModel) {
+        logger.debug(" adminPannelHome : GET ");
         return "adminPannelHome";
     }
 
     @RequestMapping(value = "/adminPannelMainCat", method = RequestMethod.GET)
     public String mainCategory(Model uiModel) {
+        logger.debug(" adminPannelMainCat : GET ");
         List<MainCategory> mainCategoryList = userService.getAllMainCategoryList();
         uiModel.addAttribute("mainCategoryList",mainCategoryList);
         return "adminPannelMainCat";
+    }
+
+    @RequestMapping(value = "/adminPannelMainCat", method = RequestMethod.POST)
+    public String createmainCategory(Model uiModel,@ModelAttribute("categories") CategoriesForm categoriesForm) {
+        try{
+            logger.debug(" adminPannelMainCat : POST ");
+            userService.createMainCategory(categoriesForm);
+            logger.debug("Main Category created successfully.");
+        }catch(Exception e){
+            logger.debug("Exception while createMainCategory :: "+e.getMessage());
+        }
+
+        return "redirect:adminPannelMainCat";
     }
 
     @RequestMapping(value = "/adminPannelSubMainCat", method = RequestMethod.GET)
@@ -100,8 +115,6 @@ public class AdminController {
         logger.debug("Inside create main category method.");
         List<JSONObject> list = new ArrayList<>();
         try {
-            userService.createMainCategory(categoriesForm);
-            logger.debug("Main Category created successfully.");
             List<MainCategory> mainCategoryList = userService.getAllMainCategoryList();
             for (MainCategory mainCategory : mainCategoryList) {
                 JSONObject jsonObject = new JSONObject();
