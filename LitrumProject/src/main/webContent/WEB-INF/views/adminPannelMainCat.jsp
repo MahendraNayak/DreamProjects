@@ -19,7 +19,7 @@
 						<tbody>
 						<c:forEach var="maincatObj" items="${mainCategoryList}" varStatus="status">
 						<tr>
-							<td style="font-size:16px;color:black;cursor:pointer"><b><c:out value="${maincatObj.categoryName}"/></b></td>
+							<td style="font-size:16px;color:black;cursor:pointer" onclick="setMainCategoryID(${maincatObj.id},'${maincatObj.categoryName}')"><b><c:out value="${maincatObj.categoryName}"/></b></td>
 						</tr>
 						</c:forEach>
 						</tbody>
@@ -30,8 +30,10 @@
         <div class="col-md-3 col-sm-6">
         <form role="form" id="form" method="POST" action="adminPannelMainCat">
             <div class="form-group">
+                <input type="hidden" id="mainCategoryId" name="mainCategoryId" value="0">
                 <input type="text" id="mainCategoryName" name="mainCategoryName" class="form-control" autocomplete="off" style="width:350px;height:35px">
-                <input type="submit" class="btn btn-lg btn-success btn-block" style="margin-top:7px;width:129px" value="Add/Update">
+                <input type="submit" class="btn btn-lg btn-success btn-block" style="margin-top:7px;width:129px" value="Add New MC">
+                <input type="submit" class="btn btn-lg btn-success btn-block" style="margin-top:7px;width:129px" value="Update">
             </div>
         </form>
         </div>

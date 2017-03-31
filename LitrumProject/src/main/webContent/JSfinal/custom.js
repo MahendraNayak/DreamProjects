@@ -1,3 +1,8 @@
+function setMainCategoryID(MCID,MCNAME){
+    $("#mainCategoryId").val(MCID);
+    $("#mainCategoryName").val(MCNAME);
+}
+
 function getSMCBasedOnMC(ID,PAGE){
     var categoriesForm  = {
     	"mainCategoryId":ID,

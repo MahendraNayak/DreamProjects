@@ -46,7 +46,7 @@ public class AdminController {
     @RequestMapping(value = "/adminPannelMainCat", method = RequestMethod.POST)
     public String createmainCategory(Model uiModel,@ModelAttribute("categories") CategoriesForm categoriesForm) {
         try{
-            logger.debug(" adminPannelMainCat : POST ");
+            logger.debug(" adminPannelMainCat : POST "+categoriesForm.toString());
             userService.createMainCategory(categoriesForm);
             logger.debug("Main Category created successfully.");
         }catch(Exception e){
