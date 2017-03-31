@@ -3,13 +3,18 @@ package com.litrum.webproject.controller;
 import com.litrum.webproject.form.CategoriesForm;
 import com.litrum.webproject.model.*;
 import com.litrum.webproject.service.UserService;
+import org.hibernate.Hibernate;
+import org.hibernate.proxy.HibernateProxy;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -98,14 +103,21 @@ public class AdminController {
         }
     }
 
-    @RequestMapping(value = "/subMainCategory/list")
-    public
     @ResponseBody
-    List<SubMainCategory> listSubMainCategory(@ModelAttribute("categories") CategoriesForm categoriesForm) {
+    @RequestMapping(value = "/subMainCategory/list")
+    public String listSubMainCategory(@ModelAttribute("categories") CategoriesForm categoriesForm) {
         logger.debug("Inside get list of sub main category based on main category method.");
+        List<JSONObject> list = new ArrayList<>();
+        JSONObject respObject = new JSONObject();
         try {
             List<SubMainCategory> subMainCategoryList = userService.findByMainCategoryId(categoriesForm);
-            return subMainCategoryList;
+            for (SubMainCategory subCat : subMainCategoryList) {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("subMainCategoryId", subCat.getId());
+                jsonObject.put("name", subCat.getSubMainCategoryName());
+                list.add(jsonObject);
+            }
+            return list.toString();
         } catch (Exception e) {
             logger.error("exception while getting list of sub main category{}", e);
         }

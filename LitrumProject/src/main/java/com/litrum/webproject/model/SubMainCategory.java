@@ -37,7 +37,7 @@ public class SubMainCategory extends PersistentObject {
         this.activeFlag = activeFlag;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = MainCategory.class)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = MainCategory.class)
     @JoinColumn(name = "main_category_id")
     public MainCategory getMainCategory() {
         return mainCategory;

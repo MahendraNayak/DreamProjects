@@ -66,7 +66,10 @@ dependencies {
     providedCompile("javax.servlet.jsp:jsp-api:$servletJspVersion")
 
     //dependency for data conversion.
+    compile group: 'org.json', name: 'json', version: '20090211'
     compile "com.fasterxml.jackson.core:jackson-databind:$dataBindVersion"
+    compile "com.fasterxml.jackson.core:jackson-core:$dataBindVersion"
+
 
     // org slf4j dependnecy
     compile "org.slf4j:slf4j-api:$slf4jVersion"
@@ -121,7 +124,7 @@ war {
     webInf {
         from 'src/main/webContent/WEB-INF'
     }
-    from('src/main/webContent') { include('styles/*', 'JS/*', 'images/**') }
+    from('src/main/webContent') { include('*/*') }
 }.archiveName("LitrumWebServer.war")
 
 task deployToLocalTomcat(dependsOn: [war]) {
