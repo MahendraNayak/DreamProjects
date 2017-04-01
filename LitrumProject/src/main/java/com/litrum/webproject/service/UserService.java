@@ -41,4 +41,6 @@ public interface UserService {
     void createEndUserRole(CompanyTypeAndUserRolesForm form) throws Exception;
 
     void createAdminUser(AdminUserRegistrationForm adminUserRegistrationForm) throws Exception;
+
+    long getAllEnudUserCounts();
 }

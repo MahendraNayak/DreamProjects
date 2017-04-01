@@ -10,4 +10,6 @@ import java.util.List;
 public interface MainCategoryDAO extends GenericeDAO<MainCategory, Long> {
 
     List<MainCategory> getAllMainCategoryList();
+
+    MainCategory findByCategoryName(String mainCategoryName);
 }

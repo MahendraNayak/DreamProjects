@@ -126,10 +126,15 @@ public class UserManager implements UserService {
                     throw new Exception("invalid main category id passed, hence we cant't update the record.");
                 }
             } else {
-                MainCategory mainCategory = new MainCategory();
-                mainCategory.setCategoryName(categoriesForm.getMainCategoryName());
-                daoFactory.getMainCategoryDAO().makePersistent(mainCategory);
-                logger.debug("main category creted successfully.");
+                MainCategory mainCategory = daoFactory.getMainCategoryDAO().findByCategoryName(categoriesForm.getMainCategoryName());
+                if (null == mainCategory) {
+                    mainCategory = new MainCategory();
+                    mainCategory.setCategoryName(categoriesForm.getMainCategoryName());
+                    daoFactory.getMainCategoryDAO().makePersistent(mainCategory);
+                    logger.debug("main category creted successfully.");
+                } else {
+                    throw new Exception("main category already exist with this name.");
+                }
             }
         } else {
             throw new Exception("categories form does not contains any information, hence we can't create main category.");
@@ -140,20 +145,25 @@ public class UserManager implements UserService {
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
     public void createSubMainCategory(CategoriesForm categoriesForm) throws Exception {
         if (null != categoriesForm && null != categoriesForm.getMainCategoryId()) {
-            if (null == categoriesForm.getSubMainCategoryId() && 0 == categoriesForm.getSubMainCategoryId()) {
-                SubMainCategory subMainCategory = new SubMainCategory();
-                subMainCategory.setSubMainCategoryName(categoriesForm.getSubMainCategoryName());
+            if (categoriesForm.getSubMainCategoryId() <= 0) {
+                SubMainCategory subMainCategory = daoFactory.getSubMainCategoryDAO().getById(categoriesForm.getSubMainCategoryId(), false);
+                if (null == subMainCategory) {
+                    subMainCategory = new SubMainCategory();
+                    subMainCategory.setSubMainCategoryName(categoriesForm.getSubMainCategoryName());
 
-                MainCategory mainCategory = daoFactory.getMainCategoryDAO().findById(categoriesForm.getSubMainCategoryId(), false);
-                if (mainCategory == null) {
-                    logger.error("No category found with id:[{}]", categoriesForm.getMainCategoryId());
-                    throw new Exception("No category found while creating sub main category");
+                    MainCategory mainCategory = daoFactory.getMainCategoryDAO().findById(categoriesForm.getSubMainCategoryId(), false);
+                    if (mainCategory == null) {
+                        logger.error("No category found with id:[{}]", categoriesForm.getMainCategoryId());
+                        throw new Exception("No category found while creating sub main category");
+                    }
+                    subMainCategory.setMainCategory(mainCategory);
+                    daoFactory.getSubMainCategoryDAO().makePersistent(subMainCategory);
+                    logger.debug("Sub Main category created successfully.");
+                } else {
+                    throw new Exception("Sub main category alreadt exist with name.");
                 }
-                subMainCategory.setMainCategory(mainCategory);
-                daoFactory.getSubMainCategoryDAO().makePersistent(subMainCategory);
-                logger.debug("Sub Main category created successfully.");
             } else {
-                SubMainCategory subMainCategory = daoFactory.getSubMainCategoryDAO().findById(categoriesForm.getSubMainCategoryId(), false);
+                SubMainCategory subMainCategory = daoFactory.getSubMainCategoryDAO().getById(categoriesForm.getSubMainCategoryId(), false);
                 if (null != subMainCategory) {
                     subMainCategory.setSubMainCategoryName(categoriesForm.getSubMainCategoryName());
                 } else {
@@ -239,21 +249,31 @@ public class UserManager implements UserService {
             logger.error("form does not contains any information, hence can't proceed.");
             throw new Exception("Empty form passed.");
         }
-        if (null != form.getServiceOfferedId()) {
+        if (null != form.getCompanyTypeId() && form.getCompanyTypeId() <= 0) {
             ServiceOffered serviceOffered = daoFactory.getServiceOfferedDAO().findById(form.getServiceOfferedId(), false);
             if (null != serviceOffered) {
-                CompanyType companyType = new CompanyType();
-                companyType.setType(form.getCompanyTypeName());
-                companyType.setServiceOffered(serviceOffered);
-                daoFactory.getCompanyTypeDAO().makePersistent(companyType);
-                logger.info("company type created successfully.");
+                CompanyType companyType = daoFactory.getCompanyTypeDAO().findByCompanyType(form.getCompanyTypeName());
+                if (null == companyType) {
+                    companyType = new CompanyType();
+                    companyType.setType(form.getCompanyTypeName());
+                    companyType.setServiceOffered(serviceOffered);
+                    daoFactory.getCompanyTypeDAO().makePersistent(companyType);
+                    logger.info("company type created successfully.");
+                } else {
+                    throw new Exception("company type with this name is already cretaed, hence can't crete new.");
+                }
             } else {
                 logger.error("No service offered found with id[{}]", form.getServiceOfferedId());
-                throw new Exception("No service offered found while creating compant type.");
+                throw new Exception("No service offered found while creating company type.");
             }
         } else {
-            logger.error("form does not contains service offered Id, hence we are not able to create company type.");
-            throw new Exception("Empty service offered Id while creating company type, hence can't proceed.");
+            CompanyType companyType = daoFactory.getCompanyTypeDAO().findById(form.getCompanyTypeId(), false);
+            if (null != companyType) {
+                companyType.setType(form.getCompanyTypeName());
+                logger.info("company type updated successfully.");
+            } else {
+                throw new Exception("invalid company type id passed, hence we can't update the company type");
+            }
         }
     }
 
@@ -317,5 +337,11 @@ public class UserManager implements UserService {
         adminUserRegistration.setUserLoginRole(adminUserRole.getRoleName());
         daoFactory.getAdminUserRegistrationDAO().makePersistent(adminUserRegistration);
         logger.debug("admin user register successfully.");
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public long getAllEnudUserCounts() {
+        return daoFactory.getEndUserRegistrationDAO().countAll();
     }
 }

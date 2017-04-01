@@ -2,6 +2,7 @@ package com.litrum.webproject.dao;
 
 import com.litrum.webproject.model.MainCategory;
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
 
 import java.util.List;
 
@@ -15,5 +16,12 @@ public class MainCategoryDAOHibernate extends GenericDAOHibernate<MainCategory, 
     public List<MainCategory> getAllMainCategoryList() {
         Criteria criteria = getSession().createCriteria(getPersistentClass());
         return criteria.list();
+    }
+
+    @Override
+    public MainCategory findByCategoryName(String mainCategoryName) {
+        Criteria criteria = getSession().createCriteria(getPersistentClass());
+        criteria.add(Restrictions.eq("categoryName", mainCategoryName));
+        return (MainCategory) criteria.uniqueResult();
     }
 }
