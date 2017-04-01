@@ -18,13 +18,13 @@
 
                         <br>
 			<div class="col-sm-9" style="width:499px">
-				<input type="text" id="firstName" placeholder="First Name" class="form-control" autofocus>
+				<input type="text" id="firstName" name="firstName" placeholder="First Name" class="form-control" autofocus>
 			</div>
     			<div class="col-sm-9" style="width:499px;margin-left:482px;margin-top:-34px">
-				<input type="text" id="lastName" placeholder="Last Name" class="form-control" autofocus>
+				<input type="text" id="lastName"  name="lastName" placeholder="Last Name" class="form-control" autofocus>
 			</div>
 			<div class="col-sm-9" style="width:981px">
-				<br><input type="text" id="fuserName" placeholder="User Name" class="form-control" autofocus>
+				<br><input type="text" id="userName" name="userName" placeholder="User Name" class="form-control" autofocus>
 			</div>
 			<div class="col-sm-9" style="width:499px">
 				<br><input type="password" placeholder="Your Password" id="password" name="password" class="form-control" autofocus>
@@ -36,19 +36,19 @@
 				<br><input type="text" placeholder="Your Email" id="emailId" name="emailId" class="form-control" autofocus>
 			</div>
     			<div class="col-sm-9" style="width:499px;margin-left:482px;margin-top:-34px">
-			<input type="text" placeholder="Mobile Number" id="mobileNumber" name="mobileNumber" class="form-control" autofocus>
+			<input type="text" placeholder="Mobile Number" id="mobile" name="mobile" class="form-control" autofocus>
 			</div>
 			<div class="col-sm-9" style="width:499px"><br>
-			    <select class="form-control" name="MCID" id="MCID">
+			    <select class="form-control" name="mainCategoryId" id="mainCategoryId">
 				<c:forEach var="maincatObj" items="${allMainCategoryList}" varStatus="status">
-		                    <option id="${maincatObj.id}">${maincatObj.categoryName}</option>
+		                    <option value="${maincatObj.id}">${maincatObj.categoryName}</option>
 				</c:forEach>
                           </select>
 			</div>
 			<div class="col-sm-9" style="width:499px;margin-left:482px;margin-top:-52px"><br>
-			    <select class="form-control" name="USER_ROLE" id="USER_ROLE">
+			    <select class="form-control" name="adminUserRoleId" id="adminUserRoleId">
 				<c:forEach var="adminUserRoleObj" items="${adminUserRoleList}" varStatus="status">
-		                    <option id="${adminUserRoleObj.id}">${adminUserRoleObj.roleName}</option>
+		                    <option value="${adminUserRoleObj.id}">${adminUserRoleObj.roleName}</option>
 				</c:forEach>
                           </select>
 			</div>

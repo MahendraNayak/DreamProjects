@@ -138,13 +138,14 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/adminPannelUserReg", method = RequestMethod.POST)
-    public void createInternalUserRoles(@ModelAttribute("sdminUserRegistrationForm") AdminUserRegistrationForm adminUserRegistrationForm, Model uiModel){
+    public String createInternalUser(@ModelAttribute("sdminUserRegistrationForm") AdminUserRegistrationForm adminUserRegistrationForm, Model uiModel) {
         logger.info(" adminPannelUserReg : POST ");
         try {
             userService.createAdminUser(adminUserRegistrationForm);
         } catch (Exception e) {
             logger.info("Exception : adminPannelUserReg :: "+e.getMessage());
         }
+        return "redirect:adminPannelUserReg";
     }
 
     @RequestMapping(value = "/adminPannelComType", method = RequestMethod.GET)
