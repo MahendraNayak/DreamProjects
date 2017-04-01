@@ -11,7 +11,7 @@
         </div>
 	<div class="in-services">
 		<div class="col-md-3 col-sm-6">
-			<div class="service">User Role page</div>
+			<div class="service">Add User and Role page</div>
 	     	</div>
 	</div>
     </div>

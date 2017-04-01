@@ -97,9 +97,14 @@ public class AdminController {
         return "redirect:adminPannelSubSubMainCat";
     }
 
-    @RequestMapping(value = "/adminPannelAddUserAndRole", method = RequestMethod.GET)
-    public String addUserAndRole(Model uiModel) {
-        return "adminPannelAddUserAndRole";
+    @RequestMapping(value = "/adminPannelEndUserRole", method = RequestMethod.GET)
+    public String addEndUserRole(Model uiModel) {
+        return "adminPannelEndUserRole";
+    }
+
+    @RequestMapping(value = "/adminPannelUserRole", method = RequestMethod.GET)
+    public String addUserRole(Model uiModel) {
+        return "adminPannelUserRole";
     }
 
     @RequestMapping(value = "/adminPannelAuth", method = RequestMethod.GET)
