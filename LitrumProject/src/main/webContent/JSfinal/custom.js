@@ -180,3 +180,8 @@ function getEndUserRoleBasedOnCompType(CTID){
         }
     });
 }
+
+function setAdminUserRoleID(AURID,AURNAME){
+    $("#userRoleId").val(AURID);
+    $("#userRoleName").val(AURNAME);
+}

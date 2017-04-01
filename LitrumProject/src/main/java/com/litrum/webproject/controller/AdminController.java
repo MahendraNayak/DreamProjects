@@ -113,12 +113,26 @@ public class AdminController {
         } catch (Exception e) {
             logger.error("Exception while create or update end user role.{}", e);
         }
-        return "adminPannelEndUserRole";
+        return "redirect:adminPannelEndUserRole";
     }
 
     @RequestMapping(value = "/adminPannelUserRole", method = RequestMethod.GET)
     public String addUserRole(Model uiModel) {
+        logger.info("Inside add admin user role get method");
+        List<AdminUserRole> adminUserRoleList = userService.getAllAdminUserRole();
+        uiModel.addAttribute("adminUserRoleList", adminUserRoleList);
         return "adminPannelUserRole";
+    }
+
+    @RequestMapping(value = "/adminPannelUserRole", method = RequestMethod.POST)
+    public String addAdminUserRole(@ModelAttribute("companyTypeAndUserRolesForm") CompanyTypeAndUserRolesForm companyTypeAndUserRolesForm, Model uiModel) {
+        logger.info("Inside create admin user role post method");
+        try {
+            userService.createAdminUserRole(companyTypeAndUserRolesForm);
+        } catch (Exception e) {
+            logger.error("Exception while create admin user role{}", e);
+        }
+        return "redirect:adminPannelUserRole";
     }
 
     @RequestMapping(value = "/adminPannelAuth", method = RequestMethod.GET)

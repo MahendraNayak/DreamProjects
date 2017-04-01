@@ -45,4 +45,6 @@ public interface UserService {
     long getAllEnudUserCounts();
 
     List<AdminUserRole> getAllAdminUserRole();
+
+    void createAdminUserRole(CompanyTypeAndUserRolesForm companyTypeAndUserRolesForm) throws Exception;
 }

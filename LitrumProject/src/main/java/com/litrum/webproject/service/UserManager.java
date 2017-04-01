@@ -354,4 +354,32 @@ public class UserManager implements UserService {
     public List<AdminUserRole> getAllAdminUserRole() {
         return daoFactory.getAdminUserRoleDAO().findAll();
     }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
+    public void createAdminUserRole(CompanyTypeAndUserRolesForm companyTypeAndUserRolesForm) throws Exception {
+        if (null != companyTypeAndUserRolesForm) {
+            if (null != companyTypeAndUserRolesForm.getUserRoleId() && companyTypeAndUserRolesForm.getUserRoleId() > 0) {
+                AdminUserRole adminUserRole = daoFactory.getAdminUserRoleDAO().getById(companyTypeAndUserRolesForm.getUserRoleId(), false);
+                if (null != adminUserRole) {
+                    adminUserRole.setRoleName(companyTypeAndUserRolesForm.getUserRoleName());
+                    logger.info("admin role updated successfully.");
+                } else {
+                    throw new Exception("invalid admin user role id passed, hence can't update it.");
+                }
+            } else {
+                AdminUserRole adminUserRole = daoFactory.getAdminUserRoleDAO().findAdminUserRoleByName(companyTypeAndUserRolesForm.getUserRoleName());
+                if (null == adminUserRole) {
+                    adminUserRole = new AdminUserRole();
+                    adminUserRole.setRoleName(companyTypeAndUserRolesForm.getUserRoleName());
+                    daoFactory.getAdminUserRoleDAO().makePersistent(adminUserRole);
+                    logger.info("admin user role created succesfully.");
+                } else {
+                    throw new Exception("Admin user role is already exist with name hence can't create new.");
+                }
+            }
+        } else {
+            throw new Exception("Form does not contains any information, hence we can't create admin user role");
+        }
+    }
 }
