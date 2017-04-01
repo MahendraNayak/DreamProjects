@@ -12,7 +12,7 @@
         <div class="in-services">
 		    <div id="row">
                 <div class="col-md-3 col-sm-6" style="width:33%">
-                    <div class="panel panel-default" style="width:341px">
+                    <div class="panel panel-default" style="width:332px">
                         <div class="panel-heading"><h3 class="panel-title">MAIN CATEGORIES</h3></div>
                             <div class="panel-body" style="padding:0;border:0px;height:300px;overflow-y:auto">
                                 <table class="table">
@@ -30,14 +30,14 @@
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-6" style="width:33%">
-                    <div class="panel panel-default" style="width:341px">
+                    <div class="panel panel-default" style="width:332px">
                         <div class="panel-heading"><h3 class="panel-title">SUB MAIN CATEGORIES</h3></div>
                              <div class="panel-body" style="padding:0;border:0px;height:300px;overflow-y:auto" id="SUB_MC_TABLE">
                              </div>
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-6" style="width:33%">
-                    <div class="panel panel-default" style="width:341px">
+                    <div class="panel panel-default" style="width:332px">
                         <div class="panel-heading"><h3 class="panel-title">SUB SUB MAIN CATEGORIES</h3></div>
                              <div class="panel-body" style="padding:0;border:0px;height:300px;overflow-y:auto"  id="SUB_SUB_MC_TABLE">
                              </div>

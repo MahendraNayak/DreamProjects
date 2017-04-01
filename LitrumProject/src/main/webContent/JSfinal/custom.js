@@ -27,6 +27,7 @@ if(PAGE == "SMC"){
 if(PAGE == "SSMC"){
         $("#subMainCategoryId").val(0);
         $("#subSubMainCategoryId").val(0);
+        $("#SUB_SUB_MC_TABLE").html("");
 }
     $.ajax({
         url: '/LitrumWebServer/subMainCategory/list',
