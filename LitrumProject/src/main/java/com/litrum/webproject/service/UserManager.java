@@ -177,19 +177,24 @@ public class UserManager implements UserService {
     @Override
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
     public void createSubSubMainCategory(CategoriesForm categoriesForm) throws Exception {
-        if (null != categoriesForm && null != categoriesForm.getSubMainCategoryId()) {
-            if (null == categoriesForm.getSubSubMainCategoryId() && 0 == categoriesForm.getSubSubMainCategoryId()) {
-                SubSubMainCategory subSubMainCategory = new SubSubMainCategory();
-                subSubMainCategory.setSubSubMainCategoryName(categoriesForm.getSubSubMainCategoryName());
+        if (null != categoriesForm && categoriesForm.getSubMainCategoryId() >=0) {
+            if (categoriesForm.getSubSubMainCategoryId() <= 0) {
+                SubSubMainCategory subSubMainCategory = daoFactory.getSubSubMainCategoryDAO().findSubSubManinCategoryByName(categoriesForm.getSubSubMainCategoryName());
+                if (null == subSubMainCategory) {
+                    subSubMainCategory = new SubSubMainCategory();
+                    subSubMainCategory.setSubSubMainCategoryName(categoriesForm.getSubSubMainCategoryName());
 
-                SubMainCategory subMainCategory = daoFactory.getSubMainCategoryDAO().getById(categoriesForm.getSubMainCategoryId(), false);
-                if (subMainCategory == null) {
-                    logger.error("No sub Main category found with id:[{}]", categoriesForm.getSubMainCategoryId());
-                    throw new Exception("No sub main category found while creating sub sub main category");
+                    SubMainCategory subMainCategory = daoFactory.getSubMainCategoryDAO().getById(categoriesForm.getSubMainCategoryId(), false);
+                    if (subMainCategory == null) {
+                        logger.error("No sub Main category found with id:[{}]", categoriesForm.getSubMainCategoryId());
+                        throw new Exception("No sub main category found while creating sub sub main category");
+                    }
+                    subSubMainCategory.setSubMainCategory(subMainCategory);
+                    daoFactory.getSubSubMainCategoryDAO().makePersistent(subSubMainCategory);
+                    logger.debug("Sub Sub Main category created successfully.");
+                } else {
+                    throw new Exception("sub sub main category already exist with this name.");
                 }
-                subSubMainCategory.setSubMainCategory(subMainCategory);
-                daoFactory.getSubSubMainCategoryDAO().makePersistent(subSubMainCategory);
-                logger.debug("Sub Sub Main category created successfully.");
             } else {
                 SubSubMainCategory subSubMainCategory = daoFactory.getSubSubMainCategoryDAO().getById(categoriesForm.getSubSubMainCategoryId(), false);
                 if (null != subSubMainCategory) {

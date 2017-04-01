@@ -9,12 +9,25 @@ function setSubMainCategoryID(MCID,SMCID,SMCNAME){
 	$("#subMainCategoryName").val(SMCNAME);
 }
 
+function setSubSubMainCategoryID(SMCID,SSMCID,SSMCNAME){
+	$("#subMainCategoryId").val(SMCID);
+	$("#subSubMainCategoryId").val(SSMCID);
+	$("#subSubMainCategoryName").val(SSMCNAME);
+}
+
 function getSMCBasedOnMC(ID,PAGE){
     var categoriesForm  = {
     	"mainCategoryId":ID,
     	"mainCategoryName":'MC1'
     }
-
+if(PAGE == "SMC"){
+        $("#mainCategoryId").val(ID);
+		 $("#subMainCategoryId").val(0);
+}
+if(PAGE == "SSMC"){
+        $("#subMainCategoryId").val(0);
+        $("#subSubMainCategoryId").val(0);
+}
     $.ajax({
         url: '/LitrumWebServer/subMainCategory/list',
         type: 'GET',
@@ -30,11 +43,10 @@ function getSMCBasedOnMC(ID,PAGE){
 
 		if(PAGE == "SMC"){
 		 HTML_TABLE = HTML_TABLE + "<tr><td style='font-size:16px;color:black;cursor:pointer' onclick='setSubMainCategoryID("+ID+","+SMCID+","+SMCNameWithQuote+")'><b>"+SMCName+"</b></td></tr>";
-		 $("#mainCategoryId").val(ID);
-		 $("#subMainCategoryId").val(0);
 		}
-		if(PAGE == "SSMC") HTML_TABLE = HTML_TABLE +
-"<tr><td style='font-size:16px;color:black;cursor:pointer' onclick='getSSMCBasedOnMC("+SMCID+")'><b>"+SMCName+"</b></td></tr>";
+		if(PAGE == "SSMC"){
+ 			HTML_TABLE = HTML_TABLE + "<tr><td style='font-size:16px;color:black;cursor:pointer' onclick='getSSMCBasedOnMC("+SMCID+")'><b>"+SMCName+"</b></td></tr>";
+		}
 	}
 	HTML_TABLE = HTML_TABLE + "</tbody></table>";
 
@@ -50,6 +62,9 @@ function getSSMCBasedOnMC(ID){
     var categoriesForm  = {
     	"subMainCategoryId":ID
     }
+	$("#subMainCategoryId").val(ID);
+	$("#subSubMainCategoryId").val(0);
+	$("#subSubMainCategoryName").val("");
 
     $.ajax({
         url: '/LitrumWebServer/subSubMainCategory/list',
@@ -60,10 +75,12 @@ function getSSMCBasedOnMC(ID){
 
 	var HTML_TABLE = "<table class='table'><tbody>";
 	for(var i=0;i<response.length;i++){
+		var SMCNameWithQuotes = JSON.stringify(response[i].name);
 		var SMCName = (JSON.stringify(response[i].name)).replace(/"/g, '');
-		var SMCID = JSON.stringify(response[i].subMainCategoryId);
+		var SSMCID = JSON.stringify(response[i].subSubMainCategoryId);
 
-		HTML_TABLE = HTML_TABLE + "<tr><td style='font-size:16px;color:black;cursor:pointer' onclick='getSSMCBasedOnMC("+SMCID+","+SMCName+")'><b>"+SMCName+"</b></td></tr>";
+		HTML_TABLE = HTML_TABLE + "<tr><td style='font-size:16px;color:black;cursor:pointer' onclick='setSubSubMainCategoryID("+ID+","+SSMCID+","+SMCNameWithQuotes+")'><b>"+SMCName+"</b></td></tr>";
+
 	}
 	HTML_TABLE = HTML_TABLE + "</tbody></table>";
 
@@ -79,7 +96,8 @@ function getCTBasedOnSO(ID,PAGE){
     var companyTypeAndUserForm  = {
     	"serviceOfferedId":ID
     }
-
+            $("#serviceOfferedId").val(ID);
+        		 $("#companyTypeId").val(0);
     $.ajax({
         url: '/LitrumWebServer/companyType/list',
         type: 'GET',
@@ -94,8 +112,6 @@ function getCTBasedOnSO(ID,PAGE){
 
 		if(PAGE == "CT") HTML_TABLE = HTML_TABLE +
         "<tr><td style='font-size:16px;color:black;cursor:pointer' onclick='setCompanyTypeID("+ID+","+CTID+","+CTNameWithQuote+")'><b>"+CTName+"</b></td></tr>";
-        		$("#serviceOfferedId").val(ID);
-        		 $("#companyTypeId").val(0);
         	}
 
 	HTML_TABLE = HTML_TABLE + "</tbody></table>";
