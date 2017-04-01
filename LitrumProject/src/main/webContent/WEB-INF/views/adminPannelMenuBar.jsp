@@ -14,7 +14,7 @@
                                 <li class="list-group-item list-group-item-success"><a href="adminPannelComType" id="leftAllLink" >Company Type<span class="arrow"></span></a></li>
                                 <li class="list-group-item list-group-item-success"><a href="adminPannelEndUserRole" id="leftAllLink" >User Role<span class="arrow"></span></a></li>
                                 <li class="list-group-item list-group-item-success"><a href="adminPannelAuth" id="leftAllLink" >U & C Authorization<span class="arrow"></span></a></li>
-                                <li class="list-group-item list-group-item-success"><a href="adminPannelComReg" id="leftAllLink" >Company Registration<span class="arrow"></span></a></li>
+                                <li class="list-group-item list-group-item-success"><a href="adminPannelUserReg" id="leftAllLink" >Company Registration<span class="arrow"></span></a></li>
                                 <li class="list-group-item list-group-item-success"><a href="adminPannelProductMaster" id="leftAllLink" >Product Master<span class="arrow"></span></a></li>
                                 <li class="list-group-item list-group-item-success"><a href="adminPannelUserRole" id="leftAllLink" >New Users & Role<span class="arrow"></span></a></li>
                             </div>

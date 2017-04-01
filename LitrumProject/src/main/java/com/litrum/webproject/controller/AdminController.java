@@ -1,5 +1,6 @@
 package com.litrum.webproject.controller;
 
+import com.litrum.webproject.form.AdminUserRegistrationForm;
 import com.litrum.webproject.form.CategoriesForm;
 import com.litrum.webproject.form.CompanyTypeAndUserRolesForm;
 import com.litrum.webproject.model.*;
@@ -44,7 +45,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/adminPannelMainCat", method = RequestMethod.POST)
-    public String createmainCategory(Model uiModel,@ModelAttribute("categories") CategoriesForm categoriesForm) {
+    public String createmainCategory(@ModelAttribute("categories") CategoriesForm categoriesForm, Model uiModel) {
         try{
             logger.debug(" adminPannelMainCat : POST ");
             userService.createMainCategory(categoriesForm);
@@ -123,6 +124,27 @@ public class AdminController {
     @RequestMapping(value = "/adminPannelAuth", method = RequestMethod.GET)
     public String authentication(Model uiModel) {
         return "adminPannelAuth";
+    }
+
+    @RequestMapping(value = "/adminPannelUserReg", method = RequestMethod.GET)
+    public String getInternalUserRoles(Model uiModel) {
+        logger.info(" adminPannelUserReg : GET ");
+        List<AdminUserRole> adminUserRoles = userService.getAllAdminUserRole();
+        List<MainCategory> allMainCategoryList = userService.getAllMainCategoryList();
+        uiModel.addAttribute("adminUserRoleList", adminUserRoles);
+        uiModel.addAttribute("allMainCategoryList", allMainCategoryList);
+        logger.info(" adminPannelUserReg : GET END ");
+        return "adminPannelUserReg";
+    }
+
+    @RequestMapping(value = "/adminPannelUserReg", method = RequestMethod.POST)
+    public void createInternalUserRoles(@ModelAttribute("sdminUserRegistrationForm") AdminUserRegistrationForm adminUserRegistrationForm, Model uiModel){
+        logger.info(" adminPannelUserReg : POST ");
+        try {
+            userService.createAdminUser(adminUserRegistrationForm);
+        } catch (Exception e) {
+            logger.info("Exception : adminPannelUserReg :: "+e.getMessage());
+        }
     }
 
     @RequestMapping(value = "/adminPannelComType", method = RequestMethod.GET)

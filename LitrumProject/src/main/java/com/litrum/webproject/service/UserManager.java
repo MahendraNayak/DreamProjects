@@ -348,4 +348,10 @@ public class UserManager implements UserService {
     public long getAllEnudUserCounts() {
         return daoFactory.getEndUserRegistrationDAO().countAll();
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<AdminUserRole> getAllAdminUserRole() {
+        return daoFactory.getAdminUserRoleDAO().findAll();
+    }
 }
