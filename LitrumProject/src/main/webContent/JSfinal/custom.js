@@ -28,7 +28,10 @@ function getSMCBasedOnMC(ID,PAGE){
 		var SMCName = (JSON.stringify(response[i].name)).replace(/"/g, '');
 		var SMCID = JSON.stringify(response[i].subMainCategoryId);
 
-		if(PAGE == "SMC") HTML_TABLE = HTML_TABLE + "<tr><td style='font-size:16px;color:black;cursor:pointer' onclick='setSubMainCategoryID("+ID+","+SMCID+","+SMCNameWithQuote+")'><b>"+SMCName+"</b></td></tr>";
+		if(PAGE == "SMC"){
+		 HTML_TABLE = HTML_TABLE + "<tr><td style='font-size:16px;color:black;cursor:pointer' onclick='setSubMainCategoryID("+ID+","+SMCID+","+SMCNameWithQuote+")'><b>"+SMCName+"</b></td></tr>";
+		 $("#mainCategoryId").val(ID);
+		}
 		if(PAGE == "SSMC") HTML_TABLE = HTML_TABLE +
 "<tr><td style='font-size:16px;color:black;cursor:pointer' onclick='getSSMCBasedOnMC("+SMCID+")'><b>"+SMCName+"</b></td></tr>";
 	}

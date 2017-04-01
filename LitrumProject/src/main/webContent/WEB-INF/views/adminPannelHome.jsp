@@ -14,7 +14,7 @@
 		    <div class="col-md-3 col-sm-6" style="width:33%">
 		        <div class="panel panel-default" style="width:330px">
 				<div class="panel-heading"><h3 class="panel-title">USERS</h3></div>
-				<div class="panel-body" style="padding:0;border:0px;height:230px;overflow-y:auto">
+				<div class="panel-body" style="padding:0;border:0px;height:150px;overflow-y:auto">
 
 				</div>
 		        </div>
@@ -22,7 +22,7 @@
 		    <div class="col-md-3 col-sm-6" style="width:33%">
 		        <div class="panel panel-default" style="width:330px">
 				<div class="panel-heading"><h3 class="panel-title">ITEMS</h3></div>
-				<div class="panel-body" style="padding:0;border:0px;height:230px;overflow-y:auto">
+				<div class="panel-body" style="padding:0;border:0px;height:150px;overflow-y:auto">
 
 				</div>
 		        </div>
@@ -30,7 +30,7 @@
 		    <div class="col-md-3 col-sm-6" style="width:33%">
                  <div class="panel panel-default" style="width:330px">
                  <div class="panel-heading"><h3 class="panel-title">BOQ DN.</h3></div>
-                     <div class="panel-body" style="padding:0;border:0px;height:230px;overflow-y:auto">
+                     <div class="panel-body" style="padding:0;border:0px;height:150px;overflow-y:auto">
 
                      </div>
                  </div>
