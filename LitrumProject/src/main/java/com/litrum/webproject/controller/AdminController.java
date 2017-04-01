@@ -76,6 +76,7 @@ public class AdminController {
         return "redirect:adminPannelSubMainCat";
     }
 
+
     @RequestMapping(value = "/adminPannelSubSubMainCat", method = RequestMethod.GET)
     public String subSubMainCategory(Model uiModel) {
         List<MainCategory> mainCategoryList = userService.getAllMainCategoryList();
@@ -98,6 +99,19 @@ public class AdminController {
         List<ServiceOffered> serviceOfferedList = userService.getAllServiceOffered();
         uiModel.addAttribute("serviceOfferedList", serviceOfferedList);
         return "adminPannelComType";
+    }
+
+    @RequestMapping(value = "/adminPannelComType", method = RequestMethod.POST)
+    public String createCompanyType(@ModelAttribute("companyTypeAndUserRolesForm") CompanyTypeAndUserRolesForm companyTypeAndUserRolesForm, Model uiModel) {
+        try {
+            logger.debug(" adminPannelSubMainCat : POST ");
+            userService.createCompanyType(companyTypeAndUserRolesForm);
+            logger.debug("Sub Main Category created successfully.");
+        } catch (Exception e) {
+            logger.debug("Exception while createSubMainCategory :: " + e.getMessage());
+        }
+
+        return "redirect:adminPannelComType";
     }
 
     @RequestMapping(value = "/create/subMainCategory")

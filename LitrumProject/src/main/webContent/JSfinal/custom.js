@@ -88,12 +88,16 @@ function getCTBasedOnSO(ID,PAGE){
         success: function (response) {
 	var HTML_TABLE = "<table class='table'><tbody>";
 	for(var i=0;i<response.length;i++){
-		var SMCName = (JSON.stringify(response[i].type)).replace(/"/g, '');
-		var SMCID = JSON.stringify(response[i].companyTypeId);
+		var CTNameWithQuote = (JSON.stringify(response[i].type))
+		var CTName = (JSON.stringify(response[i].type)).replace(/"/g, '');
+		var CTID = JSON.stringify(response[i].companyTypeId);
 
 		if(PAGE == "CT") HTML_TABLE = HTML_TABLE +
-"<tr><td style='font-size:16px;color:black;cursor:pointer' onclick='getSSMCBasedOnMC("+SMCID+")'><b>"+SMCName+"</b></td></tr>";
-	}
+        "<tr><td style='font-size:16px;color:black;cursor:pointer' onclick='setCompanyTypeID("+ID+","+CTID+","+CTNameWithQuote+")'><b>"+CTName+"</b></td></tr>";
+        		$("#serviceOfferedId").val(ID);
+        		 $("#companyTypeId").val(0);
+        	}
+
 	HTML_TABLE = HTML_TABLE + "</tbody></table>";
 
 	$("#CT_TABLE").html(HTML_TABLE);
@@ -102,4 +106,10 @@ function getCTBasedOnSO(ID,PAGE){
             alert('error'+e);
         }
     });
+}
+
+function setCompanyTypeID(SOID,CTID,CTNAME){
+	$("#serviceOfferedId").val(SOID);
+	$("#companyTypeId").val(CTID);
+	$("#companyTypeName").val(CTNAME);
 }
