@@ -99,6 +99,19 @@ public class AdminController {
 
     @RequestMapping(value = "/adminPannelEndUserRole", method = RequestMethod.GET)
     public String addEndUserRole(Model uiModel) {
+        List<ServiceOffered> serviceOfferedList = userService.getAllServiceOffered();
+        uiModel.addAttribute("serviceOfferedList", serviceOfferedList);
+        return "adminPannelEndUserRole";
+    }
+
+    @RequestMapping(value = "/adminPannelEndUserRole", method = RequestMethod.POST)
+    public String addEndUserRoles(@ModelAttribute("companyTypeAndUserRolesForm") CompanyTypeAndUserRolesForm companyTypeAndUserRolesForm, Model uiModel) {
+        logger.info("inside add end user role post method");
+        try {
+            userService.createEndUserRole(companyTypeAndUserRolesForm);
+        } catch (Exception e) {
+            logger.error("Exception while create or update end user role.{}", e);
+        }
         return "adminPannelEndUserRole";
     }
 

@@ -11,6 +11,7 @@ public class CompanyTypeAndUserRolesForm {
     private String companyTypeName;
     private Long companyTypeId;
     private String userRoleName;
+    private Long userRoleId;
 
     public Long getServiceOfferedId() {
         return serviceOfferedId;
@@ -44,6 +45,14 @@ public class CompanyTypeAndUserRolesForm {
         this.userRoleName = userRoleName;
     }
 
+    public Long getUserRoleId() {
+        return userRoleId;
+    }
+
+    public void setUserRoleId(Long userRoleId) {
+        this.userRoleId = userRoleId;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -51,6 +60,7 @@ public class CompanyTypeAndUserRolesForm {
                 .append("companyTypeName", companyTypeName)
                 .append("companyTypeId", companyTypeId)
                 .append("userRoleName", userRoleName)
+                .append("userRoleId", userRoleId)
                 .toString();
     }
 }
