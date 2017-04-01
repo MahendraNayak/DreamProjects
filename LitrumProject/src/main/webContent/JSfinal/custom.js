@@ -31,6 +31,7 @@ function getSMCBasedOnMC(ID,PAGE){
 		if(PAGE == "SMC"){
 		 HTML_TABLE = HTML_TABLE + "<tr><td style='font-size:16px;color:black;cursor:pointer' onclick='setSubMainCategoryID("+ID+","+SMCID+","+SMCNameWithQuote+")'><b>"+SMCName+"</b></td></tr>";
 		 $("#mainCategoryId").val(ID);
+		 $("#subMainCategoryId").val(0);
 		}
 		if(PAGE == "SSMC") HTML_TABLE = HTML_TABLE +
 "<tr><td style='font-size:16px;color:black;cursor:pointer' onclick='getSSMCBasedOnMC("+SMCID+")'><b>"+SMCName+"</b></td></tr>";
