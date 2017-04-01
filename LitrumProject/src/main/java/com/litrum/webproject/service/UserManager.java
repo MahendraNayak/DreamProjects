@@ -150,7 +150,7 @@ public class UserManager implements UserService {
                     subMainCategory = new SubMainCategory();
                     subMainCategory.setSubMainCategoryName(categoriesForm.getSubMainCategoryName());
 
-                    MainCategory mainCategory = daoFactory.getMainCategoryDAO().getById(categoriesForm.getSubMainCategoryId(), false);
+                    MainCategory mainCategory = daoFactory.getMainCategoryDAO().getById(categoriesForm.getMainCategoryId(), false);
                     if (mainCategory == null) {
                         logger.error("No category found with id:[{}]", categoriesForm.getMainCategoryId());
                         throw new Exception("No category found while creating sub main category");

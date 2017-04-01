@@ -67,7 +67,6 @@ public class AdminController {
     public String createSubMainCategory(Model uiModel,@ModelAttribute("categories") CategoriesForm categoriesForm) {
         try{
             logger.debug(" adminPannelSubMainCat : POST ");
-            System.out.println(categoriesForm.toString());
             userService.createSubMainCategory(categoriesForm);
             logger.debug("Sub Main Category created successfully.");
         }catch(Exception e){
