@@ -63,6 +63,19 @@ public class AdminController {
         return "adminPannelSubMainCat";
     }
 
+    @RequestMapping(value = "/adminPannelSubMainCat", method = RequestMethod.POST)
+    public String createSubMainCategory(Model uiModel,@ModelAttribute("categories") CategoriesForm categoriesForm) {
+        try{
+            logger.debug(" adminPannelSubMainCat : POST ");
+            userService.createSubMainCategory(categoriesForm);
+            logger.debug("Sub Main Category created successfully.");
+        }catch(Exception e){
+            logger.debug("Exception while createSubMainCategory :: "+e.getMessage());
+        }
+
+        return "redirect:adminPannelSubMainCat";
+    }
+
     @RequestMapping(value = "/adminPannelSubSubMainCat", method = RequestMethod.GET)
     public String subSubMainCategory(Model uiModel) {
         List<MainCategory> mainCategoryList = userService.getAllMainCategoryList();

@@ -3,6 +3,12 @@ function setMainCategoryID(MCID,MCNAME){
     $("#mainCategoryName").val(MCNAME);
 }
 
+function setSubMainCategoryID(MCID,SMCID,SMCNAME){
+	$("#mainCategoryId").val(MCID);
+	$("#subMainCategoryId").val(SMCID);
+	$("#subMainCategoryName").val(SMCNAME);
+}
+
 function getSMCBasedOnMC(ID,PAGE){
     var categoriesForm  = {
     	"mainCategoryId":ID,
@@ -18,10 +24,11 @@ function getSMCBasedOnMC(ID,PAGE){
 
 	var HTML_TABLE = "<table class='table'><tbody>";
 	for(var i=0;i<response.length;i++){
+		var SMCNameWithQuote = (JSON.stringify(response[i].name))
 		var SMCName = (JSON.stringify(response[i].name)).replace(/"/g, '');
 		var SMCID = JSON.stringify(response[i].subMainCategoryId);
 
-		if(PAGE == "SMC") HTML_TABLE = HTML_TABLE + "<tr><td style='font-size:16px;color:black;cursor:pointer'><b>"+SMCName+"</b></td></tr>";
+		if(PAGE == "SMC") HTML_TABLE = HTML_TABLE + "<tr><td style='font-size:16px;color:black;cursor:pointer' onclick='setSubMainCategoryID("+ID+","+SMCID+","+SMCNameWithQuote+")'><b>"+SMCName+"</b></td></tr>";
 		if(PAGE == "SSMC") HTML_TABLE = HTML_TABLE +
 "<tr><td style='font-size:16px;color:black;cursor:pointer' onclick='getSSMCBasedOnMC("+SMCID+")'><b>"+SMCName+"</b></td></tr>";
 	}
@@ -52,7 +59,7 @@ function getSSMCBasedOnMC(ID){
 		var SMCName = (JSON.stringify(response[i].name)).replace(/"/g, '');
 		var SMCID = JSON.stringify(response[i].subMainCategoryId);
 
-		HTML_TABLE = HTML_TABLE + "<tr><td style='font-size:16px;color:black;cursor:pointer'><b>"+SMCName+"</b></td></tr>";
+		HTML_TABLE = HTML_TABLE + "<tr><td style='font-size:16px;color:black;cursor:pointer' onclick='getSSMCBasedOnMC("+SMCID+","+SMCName+")'><b>"+SMCName+"</b></td></tr>";
 	}
 	HTML_TABLE = HTML_TABLE + "</tbody></table>";
 

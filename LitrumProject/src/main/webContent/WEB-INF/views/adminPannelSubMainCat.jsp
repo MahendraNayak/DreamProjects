@@ -38,7 +38,20 @@
                 </div>
             </div><div class="clearfix" style="height: 10px;clear: both;"></div><div class="clearfix" style="height: 10px;clear: both;"></div>
 		</div>
+<div class="row" >
+            <div class="col-md-3 col-sm-6">
+            <form role="form" id="form" method="POST" action="adminPannelSubMainCat">
+                <div class="form-group" style="margin-left:382px">
+                    <input type="hidden" id="mainCategoryId" name="mainCategoryId" value="0">
+		    <input type="hidden" id="subMainCategoryId" name="subMainCategoryId" value="0">
+                    <input type="text" id="subMainCategoryName" name="subMainCategoryName" placeholder="Add / Update SMC" class="form-control" autocomplete="off" style="width:350px;height:35px">
+                    <input type="submit" class="btn btn-lg btn-success btn-block" style="margin-top:7px;width:138px" value="Add New SMC">
+                    <input type="submit" class="btn btn-lg btn-success btn-block" style="margin-top:-89px;width:129px;margin-left:143px" value="Update">
+                </div>
+            </form>
+            </div>
+         </div>
         </div><!--in-services End -->
     </div><!-- rightInfo landing-page-wrapper End -->
 </div><!-- body-wrapper End -->
-</body>
+</body>s

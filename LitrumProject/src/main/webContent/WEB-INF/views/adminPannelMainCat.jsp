@@ -31,9 +31,9 @@
         <form role="form" id="form" method="POST" action="adminPannelMainCat">
             <div class="form-group">
                 <input type="hidden" id="mainCategoryId" name="mainCategoryId" value="0">
-                <input type="text" id="mainCategoryName" name="mainCategoryName" class="form-control" autocomplete="off" style="width:350px;height:35px">
+                <input type="text" id="mainCategoryName" name="mainCategoryName" placeholder="Add / Update MC" class="form-control" autocomplete="off" style="width:350px;height:35px">
                 <input type="submit" class="btn btn-lg btn-success btn-block" style="margin-top:7px;width:129px" value="Add New MC">
-                <input type="submit" class="btn btn-lg btn-success btn-block" style="margin-top:7px;width:129px" value="Update">
+                <input type="submit" class="btn btn-lg btn-success btn-block" style="margin-top:-89px;width:129px;margin-left:143px" value="Update">
             </div>
         </form>
         </div>
