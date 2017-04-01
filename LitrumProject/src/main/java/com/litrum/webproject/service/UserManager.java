@@ -117,7 +117,7 @@ public class UserManager implements UserService {
     public void createMainCategory(CategoriesForm categoriesForm) throws Exception {
         if (null != categoriesForm) {
             if (null != categoriesForm.getMainCategoryId() && categoriesForm.getMainCategoryId() > 0) {
-                MainCategory mainCategory = daoFactory.getMainCategoryDAO().findById(categoriesForm.getMainCategoryId(), false);
+                MainCategory mainCategory = daoFactory.getMainCategoryDAO().getById(categoriesForm.getMainCategoryId(), false);
                 if (null != mainCategory) {
                     mainCategory.setCategoryName(categoriesForm.getMainCategoryName());
                     logger.debug("main category updated successfully.");
@@ -150,7 +150,7 @@ public class UserManager implements UserService {
                     subMainCategory = new SubMainCategory();
                     subMainCategory.setSubMainCategoryName(categoriesForm.getSubMainCategoryName());
 
-                    MainCategory mainCategory = daoFactory.getMainCategoryDAO().findById(categoriesForm.getSubMainCategoryId(), false);
+                    MainCategory mainCategory = daoFactory.getMainCategoryDAO().getById(categoriesForm.getSubMainCategoryId(), false);
                     if (mainCategory == null) {
                         logger.error("No category found with id:[{}]", categoriesForm.getMainCategoryId());
                         throw new Exception("No category found while creating sub main category");
@@ -182,7 +182,7 @@ public class UserManager implements UserService {
                 SubSubMainCategory subSubMainCategory = new SubSubMainCategory();
                 subSubMainCategory.setSubSubMainCategoryName(categoriesForm.getSubSubMainCategoryName());
 
-                SubMainCategory subMainCategory = daoFactory.getSubMainCategoryDAO().findById(categoriesForm.getSubMainCategoryId(), false);
+                SubMainCategory subMainCategory = daoFactory.getSubMainCategoryDAO().getById(categoriesForm.getSubMainCategoryId(), false);
                 if (subMainCategory == null) {
                     logger.error("No sub Main category found with id:[{}]", categoriesForm.getSubMainCategoryId());
                     throw new Exception("No sub main category found while creating sub sub main category");
@@ -191,7 +191,7 @@ public class UserManager implements UserService {
                 daoFactory.getSubSubMainCategoryDAO().makePersistent(subSubMainCategory);
                 logger.debug("Sub Sub Main category created successfully.");
             } else {
-                SubSubMainCategory subSubMainCategory = daoFactory.getSubSubMainCategoryDAO().findById(categoriesForm.getSubSubMainCategoryId(), false);
+                SubSubMainCategory subSubMainCategory = daoFactory.getSubSubMainCategoryDAO().getById(categoriesForm.getSubSubMainCategoryId(), false);
                 if (null != subSubMainCategory) {
                     subSubMainCategory.setSubSubMainCategoryName(categoriesForm.getSubSubMainCategoryName());
                 } else {
@@ -216,7 +216,7 @@ public class UserManager implements UserService {
             logger.error("Invalid param passed mainCAtegoryId:[{}]", categoriesForm.getMainCategoryId());
             throw new Exception("Main category Id is null while getting sub main category list.");
         }
-        MainCategory mainCategory = daoFactory.getMainCategoryDAO().findById(categoriesForm.getMainCategoryId(), false);
+        MainCategory mainCategory = daoFactory.getMainCategoryDAO().getById(categoriesForm.getMainCategoryId(), false);
         if (null == mainCategory) {
             logger.error("No main category found with id:[{}] while getting sub main category");
             throw new Exception("No Main category found with id:[" + categoriesForm.getMainCategoryId() + "] " +
@@ -232,7 +232,7 @@ public class UserManager implements UserService {
             logger.error("Invalid param passed Sub Main CategoryId:[{}]", categoriesForm.getSubMainCategoryId());
             throw new Exception("Sub Main category Id is null while getting sub sub main category list.");
         }
-        SubMainCategory subMainCategory = daoFactory.getSubMainCategoryDAO().findById(categoriesForm.getSubMainCategoryId(), false);
+        SubMainCategory subMainCategory = daoFactory.getSubMainCategoryDAO().getById(categoriesForm.getSubMainCategoryId(), false);
         if (null == subMainCategory) {
             logger.error("No Sub Main category found with id:[{}] while getting sub sub main category");
             throw new Exception("No Sub main category found with id:[" + categoriesForm.getSubMainCategoryId() + "] " +
@@ -249,7 +249,7 @@ public class UserManager implements UserService {
             throw new Exception("Empty form passed.");
         }
         if (null != form.getCompanyTypeId() && form.getCompanyTypeId() <= 0) {
-            ServiceOffered serviceOffered = daoFactory.getServiceOfferedDAO().findById(form.getServiceOfferedId(), false);
+            ServiceOffered serviceOffered = daoFactory.getServiceOfferedDAO().getById(form.getServiceOfferedId(), false);
             if (null != serviceOffered) {
                 CompanyType companyType = daoFactory.getCompanyTypeDAO().findByCompanyType(form.getCompanyTypeName());
                 if (null == companyType) {
@@ -266,7 +266,7 @@ public class UserManager implements UserService {
                 throw new Exception("No service offered found while creating company type.");
             }
         } else {
-            CompanyType companyType = daoFactory.getCompanyTypeDAO().findById(form.getCompanyTypeId(), false);
+            CompanyType companyType = daoFactory.getCompanyTypeDAO().getById(form.getCompanyTypeId(), false);
             if (null != companyType) {
                 companyType.setType(form.getCompanyTypeName());
                 logger.info("company type updated successfully.");
@@ -284,7 +284,7 @@ public class UserManager implements UserService {
             throw new Exception("form does not contains any information, hence can't proceed.");
         }
         if (null != form.getCompanyTypeId()) {
-            CompanyType companyType = daoFactory.getCompanyTypeDAO().findById(form.getCompanyTypeId(), false);
+            CompanyType companyType = daoFactory.getCompanyTypeDAO().getById(form.getCompanyTypeId(), false);
             if (null != companyType) {
                 EndUserRole userRole = new EndUserRole();
                 userRole.setRoleName(form.getUserRoleName());
@@ -309,13 +309,13 @@ public class UserManager implements UserService {
             throw new Exception("empty form passed, hence can't proceed.");
         }
 
-        MainCategory mainCategory = daoFactory.getMainCategoryDAO().findById(adminUserRegistrationForm.getMainCategoryId(), false);
+        MainCategory mainCategory = daoFactory.getMainCategoryDAO().getById(adminUserRegistrationForm.getMainCategoryId(), false);
         if (null == mainCategory) {
             logger.error("No main category found with id:[{}]", adminUserRegistrationForm.getMainCategoryId());
             throw new Exception("Unable to get main category,hence cant proceed.");
         }
 
-        AdminUserRole adminUserRole = daoFactory.getAdminUserRoleDAO().findById(adminUserRegistrationForm.getAdminUserRoleId(), false);
+        AdminUserRole adminUserRole = daoFactory.getAdminUserRoleDAO().getById(adminUserRegistrationForm.getAdminUserRoleId(), false);
         if (null == adminUserRole) {
             logger.error("No admin user found with id:[{}]", adminUserRegistrationForm.getAdminUserRoleId());
             throw new Exception("Unable to get admin role, hence cant proceed.");
