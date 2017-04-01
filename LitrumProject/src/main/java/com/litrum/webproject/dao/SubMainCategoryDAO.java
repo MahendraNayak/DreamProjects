@@ -12,4 +12,6 @@ import java.util.List;
 public interface SubMainCategoryDAO extends GenericeDAO<SubMainCategory, Long> {
 
     List<SubMainCategory> findByMainCategory(MainCategory mainCategory);
+
+    SubMainCategory findBySubCategoryName(String subMainCategoryName);
 }

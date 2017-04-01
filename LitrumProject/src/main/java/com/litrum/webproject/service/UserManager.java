@@ -7,7 +7,6 @@ import com.litrum.webproject.form.CategoriesForm;
 import com.litrum.webproject.form.CompanyTypeAndUserRolesForm;
 import com.litrum.webproject.form.RegisterForm;
 import com.litrum.webproject.model.*;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -146,7 +145,7 @@ public class UserManager implements UserService {
     public void createSubMainCategory(CategoriesForm categoriesForm) throws Exception {
         if (null != categoriesForm && null != categoriesForm.getMainCategoryId()) {
             if (categoriesForm.getSubMainCategoryId() <= 0) {
-                SubMainCategory subMainCategory = daoFactory.getSubMainCategoryDAO().getById(categoriesForm.getSubMainCategoryId(), false);
+                SubMainCategory subMainCategory = daoFactory.getSubMainCategoryDAO().findBySubCategoryName(categoriesForm.getSubMainCategoryName());
                 if (null == subMainCategory) {
                     subMainCategory = new SubMainCategory();
                     subMainCategory.setSubMainCategoryName(categoriesForm.getSubMainCategoryName());
@@ -160,7 +159,7 @@ public class UserManager implements UserService {
                     daoFactory.getSubMainCategoryDAO().makePersistent(subMainCategory);
                     logger.debug("Sub Main category created successfully.");
                 } else {
-                    throw new Exception("Sub main category alreadt exist with name.");
+                    throw new Exception("Sub main category already exist with name.");
                 }
             } else {
                 SubMainCategory subMainCategory = daoFactory.getSubMainCategoryDAO().getById(categoriesForm.getSubMainCategoryId(), false);
