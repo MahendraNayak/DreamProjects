@@ -17,10 +17,10 @@ public class RegisterForm {
     private String mobileNumber;
     private String emailId;
     private String companyName;
-    private String companyCity;
-    private String serviceOffered;
-    private String companyType;
-    private String endUserRole;
+    private Long companyCity;
+    private Long serviceOffered;
+    private Long companyType;
+    private Long endUserRole;
 
 
     public String getFirstName() {
@@ -71,35 +71,35 @@ public class RegisterForm {
         this.emailId = emailId;
     }
 
-    public String getCompanyCity() {
+    public Long getCompanyCity() {
         return companyCity;
     }
 
-    public void setCompanyCity(String companyCity) {
+    public void setCompanyCity(Long companyCity) {
         this.companyCity = companyCity;
     }
 
-    public String getServiceOffered() {
+    public Long getServiceOffered() {
         return serviceOffered;
     }
 
-    public void setServiceOffered(String serviceOffered) {
+    public void setServiceOffered(Long serviceOffered) {
         this.serviceOffered = serviceOffered;
     }
 
-    public String getCompanyType() {
+    public Long getCompanyType() {
         return companyType;
     }
 
-    public void setCompanyType(String companyType) {
+    public void setCompanyType(Long companyType) {
         this.companyType = companyType;
     }
 
-    public String getEndUserRole() {
+    public Long getEndUserRole() {
         return endUserRole;
     }
 
-    public void setEndUserRole(String endUserRole) {
+    public void setEndUserRole(Long endUserRole) {
         this.endUserRole = endUserRole;
     }
 

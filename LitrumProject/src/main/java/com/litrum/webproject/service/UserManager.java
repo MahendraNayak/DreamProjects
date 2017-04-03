@@ -37,28 +37,28 @@ public class UserManager implements UserService {
         if (null != registerForm) {
 
             //get service offered and set to comapany object.
-            ServiceOffered serviceOffered = daoFactory.getServiceOfferedDAO().findServiceOfferedByName(registerForm.getServiceOffered());
+            ServiceOffered serviceOffered = daoFactory.getServiceOfferedDAO().findById(registerForm.getServiceOffered(), false);
             if (null == serviceOffered) {
                 logger.error("service offered by company not found with name:[{}]", registerForm.getServiceOffered());
                 throw new Exception("End user role not found");
             }
 
             // get company type and set to comany details object
-            CompanyType companyType = daoFactory.getCompanyTypeDAO().findByCompanyType(registerForm.getCompanyType());
+            CompanyType companyType = daoFactory.getCompanyTypeDAO().findById(registerForm.getCompanyType(), false);
             if (null == companyType) {
                 logger.error("Company type not found with type:[{}]", registerForm.getCompanyType());
                 throw new Exception("Company tye not found");
             }
 
             //get end user role and set to comapany details object.
-            EndUserRole endUserRole = daoFactory.getEndUserRoleDAO().findByRoleName(registerForm.getEndUserRole());
+            EndUserRole endUserRole = daoFactory.getEndUserRoleDAO().findById(registerForm.getEndUserRole(), false);
             if (null == endUserRole) {
                 logger.error("End user role not found with roleName:[{}]", registerForm.getEndUserRole());
                 throw new Exception("End user role not found");
             }
 
             //get the company city for the current user.
-            CompanyCity companyCity = daoFactory.getCompanyCItyDAO().findByCityName(registerForm.getCompanyCity());
+            CompanyCity companyCity = daoFactory.getCompanyCItyDAO().findById(registerForm.getCompanyCity(), false);
             if (null == companyCity) {
                 logger.error("End user role not found with roleName:[{}]", registerForm.getEndUserRole());
                 throw new Exception("Company city not found not found");
