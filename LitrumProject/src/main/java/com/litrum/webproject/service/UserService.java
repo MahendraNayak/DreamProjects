@@ -42,11 +42,13 @@ public interface UserService {
 
     void createAdminUser(AdminUserRegistrationForm adminUserRegistrationForm) throws Exception;
 
-    long getAllEnudUserCounts();
+    long getAllEndUserCounts();
 
     List<AdminUserRole> getAllAdminUserRole();
 
     void createAdminUserRole(CompanyTypeAndUserRolesForm companyTypeAndUserRolesForm) throws Exception;
 
     List<CompanyCity> getAllCompanyCity();
+
+    List<EndUserRegistration> getAllEndUsers();
 }

@@ -354,7 +354,7 @@ public class UserManager implements UserService {
 
     @Override
     @Transactional(readOnly = true)
-    public long getAllEnudUserCounts() {
+    public long getAllEndUserCounts() {
         return daoFactory.getEndUserRegistrationDAO().countAll();
     }
 
@@ -396,5 +396,11 @@ public class UserManager implements UserService {
     @Transactional(readOnly = true)
     public List<CompanyCity> getAllCompanyCity() {
         return daoFactory.getCompanyCItyDAO().findAll();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<EndUserRegistration> getAllEndUsers() {
+        return daoFactory.getEndUserRegistrationDAO().findAll();
     }
 }

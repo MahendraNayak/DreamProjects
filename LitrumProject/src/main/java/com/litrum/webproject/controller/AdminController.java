@@ -5,8 +5,6 @@ import com.litrum.webproject.form.CategoriesForm;
 import com.litrum.webproject.form.CompanyTypeAndUserRolesForm;
 import com.litrum.webproject.model.*;
 import com.litrum.webproject.service.UserService;
-import org.hibernate.Hibernate;
-import org.hibernate.proxy.HibernateProxy;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +29,9 @@ public class AdminController {
 
     @RequestMapping(value = "/adminPannelHome", method = RequestMethod.GET)
     public String adminDashboard(Model uiModel) {
+        uiModel.addAttribute("AllEndUsersCount", userService.getAllEndUserCounts());
+        List<EndUserRegistration> endUserList = userService.getAllEndUsers();
+        uiModel.addAttribute("AllEndUserList", endUserList);
         logger.debug(" adminPannelHome : GET ");
         return "adminPannelHome";
     }
