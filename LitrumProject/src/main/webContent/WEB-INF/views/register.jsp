@@ -1,4 +1,5 @@
 <!DOCTYPE HTML>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
 <link rel="stylesheet" href="resources/styles/jquery.ui.1.9.2.ie.css" type="text/css"></link>
@@ -31,7 +32,7 @@
 
 <script language="JavaScript" type="text/JavaScript" src="resources/JS/bootstrap_3.3.4.js"></script>
 <script language="JavaScript" type="text/JavaScript" src="resources/JS/bootstrap.min_3.3.4.js"></script>
-<script language="JavaScript" type="text/JavaScript" src="resources/JS/custom.js"></script>
+<script language="JavaScript" type="text/JavaScript" src="resources/JSfinal/custom.js"></script>
 </head>
 <body>
 <div id="container">
@@ -126,44 +127,36 @@
                     <div class="form-group">
                        <div class="col-lg-6">
                           <select class="form-control" name="companyCity" id="companyCity">
-                            <option>Select Current City</option>
-                            <option>Mumbai</option>
-                            <option>Pune</option>
+                          <c:forEach var="companyCityListObj" items="${companyCityList}" varStatus="status">
+                            <option value="${companyCityListObj.id}">${companyCityListObj.cityName}</option>
+                          </c:forEach>
                           </select>
                       </div>
                     </div>
                     <div class="clearfix" style="height: 10px;clear: both;"></div>
                     <div class="form-group">
                        <div class="col-lg-6">
-                          <select class="form-control" name="serviceOffered" id="serviceOffered">
-                            <option>Select Service Offered</option>
-                            <option>DD</option>
-                            <option>CO</option>
-                            <option>SM</option>
+                          <select class="form-control" name="serviceOffered" id="serviceOffered" onChange="getCompanyTypeBasedOnSO(this.value)">
+                             <option value="0">Select Service Offered</option>
+                             <c:forEach var="serviceOfferedListObj" items="${serviceOfferedList}" varStatus="status">
+                                <option value="${serviceOfferedListObj.id}">${serviceOfferedListObj.name}</option>
+                              </c:forEach>
                           </select>
                       </div>
                     </div>
                         <div class="clearfix" style="height: 10px;clear: both;"></div>
                       <div class="form-group">
-                         <div class="col-lg-6">
+                         <div class="col-lg-6" id="COMP_TYPE">
                             <select class="form-control" name="companyType" id="companyType">
-                              <option>Select Company Type</option>
-                              <option>CO_CT 1</option>
-                              <option>SM_CT 1</option>
-                              <option>SM_CT 2</option>
-                              <option>DD_CT 1</option>
+                                <option value="0">Select Company Type</option>
                             </select>
                           </div>
                        </div>
                         <div class="clearfix" style="height: 10px;clear: both;"></div>
                         <div class="form-group">
-                         <div class="col-lg-6">
+                         <div class="col-lg-6" id="USR_ROLE">
                             <select class="form-control" name="endUserRole" id="endUserRole">
-                              <option>Select Role</option>
-                              <option>SM_CT1_UR1</option>
-                              <option>CO_CT1_UR1</option>
-                              <option>DD_CT1_UR2</option>
-                              <option>DD_CT1_UR1</option>
+                              <option value="0">Select Role</option>
                             </select>
                           </div>
                        </div>

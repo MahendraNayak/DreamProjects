@@ -185,3 +185,67 @@ function setAdminUserRoleID(AURID,AURNAME){
     $("#userRoleId").val(AURID);
     $("#userRoleName").val(AURNAME);
 }
+
+function getCompanyTypeBasedOnSO(SERVICE_OFFERED_ID){
+ 	if(SERVICE_OFFERED_ID == 0) return;
+ 	var companyTypeAndUserForm  = {
+     		"serviceOfferedId":SERVICE_OFFERED_ID
+     	}
+
+ 	$.ajax({
+ 		url: '/LitrumWebServer/companyType/list',
+ 		type: 'GET',
+ 		dataType: 'json',
+ 		data: companyTypeAndUserForm,
+ 		async:true,
+ 		success: function (response) {
+ 			if(response.length == 0) return;
+ 			var HTML_TABLE = "<select class='form-control' name='companyType' id='companyType' onChange='getEURoleBasedOnCompTypeReg(this.value)'>";
+ 			for(var i=0;i<response.length;i++){
+ 			var CTNameWithQuote = (JSON.stringify(response[i].type))
+ 			var CTName = (JSON.stringify(response[i].type)).replace(/"/g, '');
+ 			var CTID = JSON.stringify(response[i].companyTypeId);
+ 				HTML_TABLE = HTML_TABLE  + "<option value='"+CTID+"'>"+CTName+"</option>";
+ 			     }
+ 		 	HTML_TABLE = HTML_TABLE  + "</select>";
+ 			$("#COMP_TYPE").html(HTML_TABLE);
+
+            var COMP_ID = $("#companyType").val();
+ 			if(COMP_ID != 0) getEURoleBasedOnCompTypeReg(COMP_ID)
+ 		},
+ 		error: function (e) {
+ 		    alert('error'+e);
+ 		}
+     	});
+
+ }
+
+ function getEURoleBasedOnCompTypeReg(COMP_ID){
+ 	var companyTypeAndUserRolesForm  = {
+        		"companyTypeId":COMP_ID
+    }
+
+ 	$.ajax({
+ 		url: '/LitrumWebServer/endUserRole/list',
+ 		type: 'GET',
+ 		dataType: 'json',
+ 		data: companyTypeAndUserRolesForm,
+ 		async:true,
+ 		success: function (response) {
+ 			if(response.length == 0) return;
+ 			var HTML_TABLE = "<select class='form-control' name='companyType' id='companyType'>";
+ 			for(var i=0;i<response.length;i++){
+ 			var userRoleNameWithQuotes = JSON.stringify(response[i].roleName);
+            var userRoleName = (JSON.stringify(response[i].roleName)).replace(/"/g, '');
+            var userRoleId = JSON.stringify(response[i].endUserRoleId);
+ 				HTML_TABLE = HTML_TABLE  + "<option value='"+userRoleId+"'>"+userRoleName+"</option>";
+ 			     }
+ 		 	HTML_TABLE = HTML_TABLE  + "</select>";
+ 			$("#USR_ROLE").html(HTML_TABLE);
+ 		},
+ 		error: function (e) {
+ 		    alert('error'+e);
+ 		}
+     	});
+
+ }
