@@ -33,6 +33,8 @@ public class RegistrationController {
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String registerPage(Model uiModel){
         RegisterForm registerForm = new RegisterForm();
+        uiModel.addAttribute("companyCityList", userService.getAllCompanyCity());
+        uiModel.addAttribute("serviceOfferedList", userService.getAllServiceOffered());
         uiModel.addAttribute("form", registerForm);
         return "register";
     }

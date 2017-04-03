@@ -47,4 +47,6 @@ public interface UserService {
     List<AdminUserRole> getAllAdminUserRole();
 
     void createAdminUserRole(CompanyTypeAndUserRolesForm companyTypeAndUserRolesForm) throws Exception;
+
+    List<CompanyCity> getAllCompanyCity();
 }

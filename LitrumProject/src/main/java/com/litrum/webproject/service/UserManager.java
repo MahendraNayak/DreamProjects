@@ -391,4 +391,10 @@ public class UserManager implements UserService {
             throw new Exception("Form does not contains any information, hence we can't create admin user role");
         }
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<CompanyCity> getAllCompanyCity() {
+        return daoFactory.getCompanyCItyDAO().findAll();
+    }
 }
