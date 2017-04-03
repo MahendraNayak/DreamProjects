@@ -284,25 +284,34 @@ public class UserManager implements UserService {
     @Override
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
     public void createEndUserRole(CompanyTypeAndUserRolesForm form) throws Exception {
-        if (null == form) {
-            logger.error("form does not contains any information, hence can't proceed.");
-            throw new Exception("form does not contains any information, hence can't proceed.");
-        }
-        if (null != form.getCompanyTypeId()) {
-            CompanyType companyType = daoFactory.getCompanyTypeDAO().getById(form.getCompanyTypeId(), false);
-            if (null != companyType) {
-                EndUserRole userRole = new EndUserRole();
-                userRole.setRoleName(form.getUserRoleName());
-                userRole.setCompanyType(companyType);
-                daoFactory.getEndUserRoleDAO().makePersistent(userRole);
-                logger.info("end user role created successfully.");
+        if (null != form && form.getCompanyTypeId() >= 0) {
+            if (form.getUserRoleId() <= 0) {
+                EndUserRole endUserRole = daoFactory.getEndUserRoleDAO().findByRoleName(form.getUserRoleName());
+                if (null == endUserRole) {
+                    endUserRole = new EndUserRole();
+                    endUserRole.setRoleName(form.getUserRoleName());
+
+                    CompanyType companyType = daoFactory.getCompanyTypeDAO().findById(form.getCompanyTypeId(), false);
+                    if (companyType == null) {
+                        logger.error("No company type found with id:[{}]", form.getCompanyTypeId());
+                        throw new Exception("No company type found while creating end user role");
+                    }
+                    endUserRole.setCompanyType(companyType);
+                    daoFactory.getEndUserRoleDAO().makePersistent(endUserRole);
+                    logger.debug("end user role created successfully.");
+                } else {
+                    throw new Exception("end user role already exist with this name.");
+                }
             } else {
-                logger.error("No company type found with id[{}]", form.getCompanyTypeId());
-                throw new Exception("No company type found while creating end user role");
+                EndUserRole endUserRole = daoFactory.getEndUserRoleDAO().findById(form.getUserRoleId(), false);
+                if (null != endUserRole) {
+                    endUserRole.setRoleName(form.getUserRoleName());
+                } else {
+                    throw new Exception("invalid id passed for user roleId, hence we can't update end user role.");
+                }
             }
         } else {
-            logger.error("form does not contains company type Id, hence we are not able to create end user role.");
-            throw new Exception("Empty company type Id while creating end user role, hence can't proceed.");
+            throw new Exception("categories form does not contains any information, hence we can't create sub sub main category.");
         }
     }
 

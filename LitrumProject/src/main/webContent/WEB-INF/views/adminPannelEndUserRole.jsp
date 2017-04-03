@@ -53,9 +53,9 @@
             <div class="col-md-3 col-sm-6">
             <form role="form" id="form" method="POST" action="adminPannelEndUserRole">
                 <div class="form-group" style="margin-left:382px">
-		            <input type="text" id="userRoleId" name="userRoleId" value="0">
-			    <input type="hidden" id="companyTypeId" name="companyTypeId" value="0">
-                    <input type="hidden" id="userRoleName" name="userRoleName" placeholder="Add / Update UR" class="form-control" autocomplete="off" style="width:350px;height:35px">
+		            <input type="hidden" id="userRoleId" name="userRoleId" value="0">
+			        <input type="hidden" id="companyTypeId" name="companyTypeId" value="0">
+                    <input type="text" id="userRoleName" name="userRoleName" placeholder="Add / Update UR" class="form-control" autocomplete="off" style="width:350px;height:35px">
                     <input type="submit" class="btn btn-lg btn-success btn-block" style="margin-top:7px;width:138px" value="Add New UR">
                     <input type="submit" class="btn btn-lg btn-success btn-block" style="margin-top:-89px;width:129px;margin-left:143px" value="Update">
                 </div>
