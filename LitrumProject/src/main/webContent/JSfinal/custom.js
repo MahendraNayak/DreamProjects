@@ -233,7 +233,7 @@ function getCompanyTypeBasedOnSO(SERVICE_OFFERED_ID){
  		async:true,
  		success: function (response) {
  			if(response.length == 0) return;
- 			var HTML_TABLE = "<select class='form-control' name='companyType' id='companyType'>";
+ 			var HTML_TABLE = "<select class='form-control' name='endUserRole' id='endUserRole'>";
  			for(var i=0;i<response.length;i++){
  			var userRoleNameWithQuotes = JSON.stringify(response[i].roleName);
             var userRoleName = (JSON.stringify(response[i].roleName)).replace(/"/g, '');
