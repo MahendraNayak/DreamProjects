@@ -26,4 +26,11 @@ public class EndUserRoleDAOHibernate extends GenericDAOHibernate<EndUserRole, Lo
         criteria.add(Restrictions.eq("companyType.id", companyTypeId));
         return criteria.list();
     }
+
+    @Override
+    public boolean isExistEndUserRoleByName(String userRoleName) {
+        Criteria criteria = getSession().createCriteria(getPersistentClass());
+        criteria.add(Restrictions.eq("roleName", userRoleName));
+        return criteria.uniqueResult() != null;
+    }
 }

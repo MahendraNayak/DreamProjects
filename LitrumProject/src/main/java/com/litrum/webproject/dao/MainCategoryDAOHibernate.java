@@ -24,4 +24,11 @@ public class MainCategoryDAOHibernate extends GenericDAOHibernate<MainCategory, 
         criteria.add(Restrictions.eq("categoryName", mainCategoryName));
         return (MainCategory) criteria.uniqueResult();
     }
+
+    @Override
+    public boolean isExistMainCategoryByName(String name) {
+        Criteria criteria = getSession().createCriteria(getPersistentClass());
+        criteria.add(Restrictions.eq("categoryName", name));
+        return criteria.uniqueResult() != null;
+    }
 }

@@ -12,4 +12,6 @@ public interface EndUserRoleDAO extends GenericeDAO<EndUserRole, Long> {
     EndUserRole findByRoleName(String roleName);
 
     List<EndUserRole> findByCompanyTypeId(Long companyTypeId);
+
+    boolean isExistEndUserRoleByName(String userRoleName);
 }

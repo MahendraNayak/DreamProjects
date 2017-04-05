@@ -118,7 +118,7 @@ public class UserManager implements UserService {
         if (null != categoriesForm) {
             if (null != categoriesForm.getMainCategoryId() && categoriesForm.getMainCategoryId() > 0) {
                 MainCategory mainCategory = daoFactory.getMainCategoryDAO().getById(categoriesForm.getMainCategoryId(), false);
-                if (null != mainCategory) {
+                if (null != mainCategory && !daoFactory.getMainCategoryDAO().isExistMainCategoryByName(categoriesForm.getMainCategoryName())) {
                     mainCategory.setCategoryName(categoriesForm.getMainCategoryName());
                     logger.debug("main category updated successfully.");
                 } else {
@@ -163,7 +163,7 @@ public class UserManager implements UserService {
                 }
             } else {
                 SubMainCategory subMainCategory = daoFactory.getSubMainCategoryDAO().getById(categoriesForm.getSubMainCategoryId(), false);
-                if (null != subMainCategory) {
+                if (null != subMainCategory && !daoFactory.getSubMainCategoryDAO().isExistSubMainCatByName(categoriesForm.getSubMainCategoryName())) {
                     subMainCategory.setSubMainCategoryName(categoriesForm.getSubMainCategoryName());
                 } else {
                     throw new Exception("invalid sub main category id, hence we can't update sub main category.");
@@ -197,7 +197,7 @@ public class UserManager implements UserService {
                 }
             } else {
                 SubSubMainCategory subSubMainCategory = daoFactory.getSubSubMainCategoryDAO().getById(categoriesForm.getSubSubMainCategoryId(), false);
-                if (null != subSubMainCategory) {
+                if (null != subSubMainCategory && !daoFactory.getSubSubMainCategoryDAO().isExistSubSubMainCatByName(categoriesForm.getSubSubMainCategoryName())) {
                     subSubMainCategory.setSubSubMainCategoryName(categoriesForm.getSubSubMainCategoryName());
                 } else {
                     throw new Exception("invalid id passed for sub sub main category, hence we can't update sub sub main category.");
@@ -272,7 +272,7 @@ public class UserManager implements UserService {
             }
         } else {
             CompanyType companyType = daoFactory.getCompanyTypeDAO().getById(form.getCompanyTypeId(), false);
-            if (null != companyType) {
+            if (null != companyType && !daoFactory.getCompanyTypeDAO().isExistCompanyTypeByName(form.getCompanyTypeName())) {
                 companyType.setType(form.getCompanyTypeName());
                 logger.info("company type updated successfully.");
             } else {
@@ -304,7 +304,7 @@ public class UserManager implements UserService {
                 }
             } else {
                 EndUserRole endUserRole = daoFactory.getEndUserRoleDAO().findById(form.getUserRoleId(), false);
-                if (null != endUserRole) {
+                if (null != endUserRole && !daoFactory.getEndUserRoleDAO().isExistEndUserRoleByName(form.getUserRoleName())) {
                     endUserRole.setRoleName(form.getUserRoleName());
                 } else {
                     throw new Exception("invalid id passed for user roleId, hence we can't update end user role.");
@@ -370,7 +370,7 @@ public class UserManager implements UserService {
         if (null != companyTypeAndUserRolesForm) {
             if (null != companyTypeAndUserRolesForm.getUserRoleId() && companyTypeAndUserRolesForm.getUserRoleId() > 0) {
                 AdminUserRole adminUserRole = daoFactory.getAdminUserRoleDAO().getById(companyTypeAndUserRolesForm.getUserRoleId(), false);
-                if (null != adminUserRole) {
+                if (null != adminUserRole && !daoFactory.getAdminUserRoleDAO().isExistAdminUserRoleByName(companyTypeAndUserRolesForm.getUserRoleName())) {
                     adminUserRole.setRoleName(companyTypeAndUserRolesForm.getUserRoleName());
                     logger.info("admin role updated successfully.");
                 } else {

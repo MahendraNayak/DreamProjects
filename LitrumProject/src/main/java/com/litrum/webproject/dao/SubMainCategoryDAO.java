@@ -14,4 +14,6 @@ public interface SubMainCategoryDAO extends GenericeDAO<SubMainCategory, Long> {
     List<SubMainCategory> findByMainCategory(MainCategory mainCategory);
 
     SubMainCategory findBySubCategoryName(String subMainCategoryName);
+
+    boolean isExistSubMainCatByName(String subMainCategoryName);
 }

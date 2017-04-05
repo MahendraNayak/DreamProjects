@@ -8,4 +8,6 @@ import com.litrum.webproject.model.AdminUserRole;
 public interface AdminUserRoleDAO extends GenericeDAO<AdminUserRole, Long> {
 
     AdminUserRole findAdminUserRoleByName(String userRoleName);
+
+    boolean isExistAdminUserRoleByName(String userRoleName);
 }

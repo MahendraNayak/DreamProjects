@@ -12,4 +12,6 @@ public interface CompanyTypeDAO extends GenericeDAO<CompanyType, Long> {
     CompanyType findByCompanyType(String type);
 
     List<CompanyType> fidByServiceOfferedId(Long serviceOffereId);
+
+    boolean isExistCompanyTypeByName(String companyTypeName);
 }

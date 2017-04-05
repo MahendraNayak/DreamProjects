@@ -12,4 +12,6 @@ public interface MainCategoryDAO extends GenericeDAO<MainCategory, Long> {
     List<MainCategory> getAllMainCategoryList();
 
     MainCategory findByCategoryName(String mainCategoryName);
+
+    boolean isExistMainCategoryByName(String name);
 }

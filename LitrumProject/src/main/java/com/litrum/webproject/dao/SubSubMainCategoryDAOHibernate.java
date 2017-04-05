@@ -26,4 +26,11 @@ public class SubSubMainCategoryDAOHibernate extends GenericDAOHibernate<SubSubMa
         criteria.add(Restrictions.eq("subSubMainCategoryName", subSubMainCategoryName));
         return (SubSubMainCategory) criteria.uniqueResult();
     }
+
+    @Override
+    public boolean isExistSubSubMainCatByName(String subSubMainCategoryName) {
+        Criteria criteria = getSession().createCriteria(getPersistentClass());
+        criteria.add(Restrictions.eq("subSubMainCategoryName", subSubMainCategoryName));
+        return criteria.uniqueResult() != null;
+    }
 }

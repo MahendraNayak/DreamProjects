@@ -16,4 +16,11 @@ public class AdminUserRoleDAOHibernate extends GenericDAOHibernate<AdminUserRole
         criteria.add(Restrictions.eq("roleName", userRoleName));
         return (AdminUserRole) criteria.uniqueResult();
     }
+
+    @Override
+    public boolean isExistAdminUserRoleByName(String userRoleName) {
+        Criteria criteria = getSession().createCriteria(getPersistentClass());
+        criteria.add(Restrictions.eq("roleName", userRoleName));
+        return criteria.uniqueResult() != null;
+    }
 }

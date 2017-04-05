@@ -26,4 +26,11 @@ public class CompanyTypeDAOHibernate extends GenericDAOHibernate<CompanyType, Lo
         criteria.add(Restrictions.eq("serviceOffered.id", serviceOffereId));
         return criteria.list();
     }
+
+    @Override
+    public boolean isExistCompanyTypeByName(String companyTypeName) {
+        Criteria criteria = getSession().createCriteria(getPersistentClass());
+        criteria.add(Restrictions.eq("type", companyTypeName));
+        return criteria.uniqueResult() != null;
+    }
 }
