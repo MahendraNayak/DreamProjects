@@ -249,3 +249,7 @@ function getCompanyTypeBasedOnSO(SERVICE_OFFERED_ID){
      	});
 
  }
+
+  function setZeroIDOnClick(FIELD_ID){
+    $("#"+FIELD_ID).val(0);
+  }

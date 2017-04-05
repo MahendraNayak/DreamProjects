@@ -46,7 +46,7 @@
                     <input type="hidden" id="serviceOfferedId" name="serviceOfferedId" value="0">
 		            <input type="hidden" id="companyTypeId" name="companyTypeId" value="0">
                     <input type="text" id="companyTypeName" name="companyTypeName" placeholder="Add / Update CT" class="form-control" autocomplete="off" style="width:350px;height:35px">
-                    <input type="submit" class="btn btn-lg btn-success btn-block" style="margin-top:7px;width:138px" value="Add New CT">
+                    <input type="submit" class="btn btn-lg btn-success btn-block" style="margin-top:7px;width:138px" value="Add New CT" onclick="setZeroIDOnClick('companyTypeId')">
                     <input type="submit" class="btn btn-lg btn-success btn-block" style="margin-top:-89px;width:129px;margin-left:143px" value="Update">
                 </div>
             </form>
