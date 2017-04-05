@@ -48,7 +48,7 @@
                 </div>
                 <div class="panel-body">
                   <form name="form" id="form" method="post" action="register">
-                    <div id="sf1" class="frm">
+                    <div id="sf1" class="frm" id="FIRST_DIV">
                       <fieldset>
                         <legend>Step 1 of 3</legend>
                         <div class="form-group">
@@ -73,12 +73,12 @@
                             <div class="clearfix" style="height: 10px;clear: both;"></div>
                             <div class="form-group">
                                 <div class="col-lg-10 col-lg-offset-2">
-                                    <button class="btn btn-primary open1" type="button">Next <span class="fa fa-arrow-right"></span></button>
+                                    <button class="btn btn-primary open1" type="button" id="FIRST_NEXT" onclick="validateBeforeFirstNext()">Next <span class="fa fa-arrow-right"></span></button>
                                 </div>
                             </div>
                       </fieldset>
                     </div>
-                    <div id="sf2" class="frm" style="display: none;">
+                    <div id="sf2" class="frm" style="display: none;" id="SECOND_DIV">
                       <fieldset>
                         <legend>Step 2 of 3</legend>
                         <div class="form-group">
@@ -108,14 +108,14 @@
                         <div class="clearfix" style="height: 10px;clear: both;"></div>
                         <div class="form-group">
                           <div class="col-lg-10 col-lg-offset-2">
-                            <button class="btn btn-warning back2" type="button"><span class="fa fa-arrow-left"></span> Back</button>
-                            <button class="btn btn-primary open2" type="button">Next <span class="fa fa-arrow-right"></span></button>
+                            <button class="btn btn-warning back2" type="button" id="FIRST_PREV"><span class="fa fa-arrow-left"></span> Back</button>
+                            <button class="btn btn-primary open2" type="button" onclick="validateBeforeSecondNext()">Next <span class="fa fa-arrow-right"></span></button>
                           </div>
                         </div>
                       </fieldset>
                     </div>
 
-                    <div id="sf3" class="frm" style="display: none;">
+                    <div id="sf3" class="frm" style="display: none;" id="THIRD_DIV">
                       <fieldset>
                         <legend>Step 3 of 3</legend>
                         <div class="form-group">
@@ -164,7 +164,7 @@
                         <div class="form-group">
                           <div class="col-lg-10 col-lg-offset-2">
                             <button class="btn btn-warning back3" type="button"><span class="fa fa-arrow-left"></span> Back</button>
-                            <button type="submit" value="Submit" class="btn btn-success">Submit</button>
+                            <button type="submit" value="Submit" class="btn btn-success" onclick="return validateBeforefinalSubmit()">Submit</button>
                           </div>
                         </div>
                       </fieldset>
@@ -177,6 +177,24 @@
 
 
 </div>
+<!-- Bootstrap Error modal -->
+<div id="alert-modal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 id="alert-modal-title" class="modal-title"></h4>
+      </div>
+      <div id="alert-modal-body" class="modal-body"></div>
+      <div class="modal-footer">
+        <span style="display:none" id="BACK_2"><button type="button" class="btn btn-default back2" data-dismiss="modal">Close</button></span>
+	<span style="display:none" id="BACK_3"><button type="button" class="btn btn-default back3" data-dismiss="modal">Close</button></span>
+	<span style="display:none" id="F_SUBMIT"><button type="button" class="btn btn-default" data-dismiss="modal">Close</button></span>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End -->
 <div id="footer" class="page-footer">
     </div>
 </body>
