@@ -253,3 +253,66 @@ function getCompanyTypeBasedOnSO(SERVICE_OFFERED_ID){
   function setZeroIDOnClick(FIELD_ID){
     $("#"+FIELD_ID).val(0);
   }
+
+  function validateAdminUsrBeforefinalSubmit(){
+
+  	var fName = $("#firstName").val();
+    var lName = $("#lastName").val();
+    var uName = $("#userName").val();
+    var password = $("#password").val();
+	var password1 = $("#password1").val();
+	var emailId = $("#emailId").val();
+	var mobileNumber = $("#mobile").val();
+	var mainCategoryId = $("#mainCategoryId").val();
+	var adminUserRoleId = $("#adminUserRoleId").val();
+
+	var IndNum = /^[0]?[789]\d{9}$/;
+    var email = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+    if(fName == ""){
+        alertModalForAdmUsr("First Name","Please Enter First Name");
+        return false;
+    }else if(lName == ""){
+        alertModalForAdmUsr("Last Name","Please Enter Last Name");
+        return false;
+    }else if(uName == ""){
+        alertModalForAdmUsr("User Name","Please Enter User Name");
+        return false;
+    }else if(password == ""){
+        alertModalForAdmUsr("Password","Please Enter Password");
+        return false;
+    }else if(password1 == ""){
+        alertModalForAdmUsr("Confirm Password","Please Enter Confirm Password");
+        return false;
+    }else if(password != password1){
+        alertModalForAdmUsr("Confirm Password","Confirm password should be same as Password");
+        return false;
+    }else if(emailId == ""){
+        alertModalForAdmUsr("Email","Please Enter Email ID");
+        return false;
+    }else if(!email.test(emailId)){
+        alertModalForAdmUsr("Email ID","Invalid Email ID Entered");
+        return false;
+    }else if(mobileNumber == ""){
+        alertModalForAdmUsr("Mobile Number","Please Enter Mobile Number");
+        return false;
+    }else if(!IndNum.test(mobileNumber)){
+        alertModalForAdmUsr("Mobile Number","Invalid Mobile Number Entered");
+        return false;
+    }else if(mainCategoryId ==0){
+        alertModalForAdmUsr("Main Category","Please Select Category");
+        return false;
+    }else if(adminUserRoleId == 0){
+        alertModalForAdmUsr("User Role","Please Select Role");
+        return false;
+    }
+
+  }
+
+
+  function alertModalForAdmUsr(title, body) {
+    // Display error message to the user in a modal
+    $('#alert-modal-title').html(title);
+    $('#alert-modal-body').html(body);
+    $('#alert-modal').modal('show');
+  }

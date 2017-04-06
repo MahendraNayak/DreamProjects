@@ -54,7 +54,7 @@
 			</div>
 			<div class="clearfix" style="height: 10px;clear: both;"></div><div class="clearfix" style="height: 10px;clear: both;"></div>
 			<div class="col-sm-9" style="width:499px;margin-left:480px;margin-top:31px">
-			    <br><input type="submit" class="btn btn-lg btn-success btn-block" style="margin-top:-56px;width:129px;margin-left:-480px" value="CREATE USER">
+			    <br><input type="submit" class="btn btn-lg btn-success btn-block" style="margin-top:-56px;width:129px;margin-left:-480px" value="CREATE USER" onclick="return validateAdminUsrBeforefinalSubmit()">
 			</div>
                     </div>
 		        </div>
@@ -62,4 +62,21 @@
         </div><!--in-services End -->
     </div><!-- rightInfo landing-page-wrapper End -->
 </div><!-- body-wrapper End -->
+
+<!-- Bootstrap Error modal -->
+<div id="alert-modal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 id="alert-modal-title" class="modal-title"></h4>
+      </div>
+      <div id="alert-modal-body" class="modal-body"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default back2" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End -->
 </body>
