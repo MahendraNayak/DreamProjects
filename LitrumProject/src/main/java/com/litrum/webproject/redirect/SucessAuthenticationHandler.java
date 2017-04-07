@@ -41,7 +41,7 @@ public class SucessAuthenticationHandler implements AuthenticationSuccessHandler
             } else if (grantedAuthority.getAuthority().equalsIgnoreCase(LitrumProjectConstants.ROLE_PREFIX.concat(LitrumProjectConstants
                     .ROLE_EDITOR))) {
                 //TODO deicde where to redirect
-                response.sendRedirect(request.getContextPath().concat("/endUserPannelHome"));
+                response.sendRedirect(request.getContextPath().concat("/editorPannelHome"));
             } else if (grantedAuthority.getAuthority().equalsIgnoreCase(LitrumProjectConstants.ROLE_PREFIX.concat(LitrumProjectConstants
                     .ROLE_AUTHORISER))) {
                 //TODO deicde where to redirect
