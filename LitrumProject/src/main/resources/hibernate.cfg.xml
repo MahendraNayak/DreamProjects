@@ -26,6 +26,13 @@
         <mapping class="com.litrum.webproject.model.CompanyCity"/>
         <mapping class="com.litrum.webproject.model.AdminUserRole"/>
         <mapping class="com.litrum.webproject.model.AdminUserRegistration"/>
-
+        <mapping class="com.litrum.webproject.model.MainItem"/>
+        <mapping class="com.litrum.webproject.model.RateCity"/>
+        <mapping class="com.litrum.webproject.model.MainItemMaker"/>
+        <mapping class="com.litrum.webproject.model.MainItemContractor"/>
+        <mapping class="com.litrum.webproject.model.LoadUnit"/>
+        <mapping class="com.litrum.webproject.model.SubMainItem"/>
+        <mapping class="com.litrum.webproject.model.SubMainItemMaker"/>
+        <mapping class="com.litrum.webproject.model.SubMainItemContractor"/>
     </session-factory>
 </hibernate-configuration>
