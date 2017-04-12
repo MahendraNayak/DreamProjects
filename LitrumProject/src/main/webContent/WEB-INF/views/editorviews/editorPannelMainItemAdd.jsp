@@ -6,7 +6,7 @@
     <div class="rightInfo landing-page-wrapper">
         <div class="padding-txt">
             <div class="col-xs-12 category-header">
-		<Marquee><b>ADD MAIN ITEM</b></Marquee>
+		<a href="editorPannelHome"><b>SUB MAIN CAT 1.1</b></a><b> >  </b><b>SSMC 1.1.1</b>
             </div>
         </div>
         <div class="in-services">
