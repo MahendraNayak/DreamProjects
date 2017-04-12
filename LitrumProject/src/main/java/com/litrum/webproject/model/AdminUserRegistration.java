@@ -85,7 +85,7 @@ public class AdminUserRegistration extends PersistentObject {
         this.userLoginRole = userLoginRole;
     }
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = MainCategory.class)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = MainCategory.class)
     @JoinColumn(name = "main_category_id", nullable = false)
     public MainCategory getMainCategory() {
         return mainCategory;
