@@ -25,4 +25,11 @@ public class EditorController {
         logger.debug(" editorPannelHome : GET ");
         return "editorviews/editorPannelHome";
     }
+
+    @RequestMapping(value = "/editorPannelMainItemAdd", method = RequestMethod.GET)
+    public String editorPannelMainItemGet(Model uiModel) {
+
+        logger.debug(" editorPannelMainItemAdd : GET ");
+        return "editorviews/editorPannelMainItemAdd";
+    }
 }
