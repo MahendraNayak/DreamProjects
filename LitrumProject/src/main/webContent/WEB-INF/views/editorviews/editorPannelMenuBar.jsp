@@ -11,8 +11,8 @@
                                 <li class="list-group-item list-group-item-success"><a href="editorPannelMainItemAdd" id="leftAllLink" >SSMC 1.1.1<span class="arrow"></span></a></li>
                                 <li class="list-group-item list-group-item-success"><a href="editorPannelMainItemAdd" id="leftAllLink" >SSMC 1.1.2<span class="arrow"></span></a></li>
                                 <li class="list-group-item list-group-item-success"><a href="editorPannelMainItemAdd" id="leftAllLink" >ADD MAIN ITEM<span class="arrow"></span></a></li>
-                                <li class="list-group-item list-group-item-success"><a href="" id="leftAllLink" >ADD MAIN ITEM SR<span class="arrow"></span></a></li>
-                                <li class="list-group-item list-group-item-success"><a href="" id="leftAllLink" >ADD MAIN ITEM IR<span class="arrow"></span></a></li>
+                                <li class="list-group-item list-group-item-success"><a href="editorPannelMainItemSR" id="leftAllLink" >ADD MAIN ITEM SR<span class="arrow"></span></a></li>
+                                <li class="list-group-item list-group-item-success"><a href="editorPannelMainItemIR" id="leftAllLink" >ADD MAIN ITEM IR<span class="arrow"></span></a></li>
                             </div>
                         </nav>
                     </div>

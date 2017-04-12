@@ -26,6 +26,20 @@ public class EditorController {
         return "editorviews/editorPannelHome";
     }
 
+    @RequestMapping(value = "/editorPannelMainItemSR", method = RequestMethod.GET)
+    public String editorPannelAddMainItemSR(Model uiModel) {
+
+        logger.debug(" editorPannelMainItemSR : GET ");
+        return "editorviews/editorPannelMainItemSR";
+    }
+
+    @RequestMapping(value = "/editorPannelMainItemIR", method = RequestMethod.GET)
+    public String editorPannelAddMainItemIR(Model uiModel) {
+
+        logger.debug(" editorPannelMainItemIR : GET ");
+        return "editorviews/editorPannelMainItemIR";
+    }
+
     @RequestMapping(value = "/editorPannelMainItemAdd", method = RequestMethod.GET)
     public String editorPannelMainItemGet(Model uiModel) {
 
