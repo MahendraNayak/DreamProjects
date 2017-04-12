@@ -87,4 +87,15 @@ public class HibernateDAOFactory extends DAOFactory {
     public AdminUserRegistrationDAO getAdminUserRegistrationDAO() {
         return (AdminUserRegistrationDAO) instantiateDAO(AdminUserRegistrationDAOHibernate.class);
     }
+
+    @Override
+    public MainItemDAO getMainItemDAO() {
+        return (MainItemDAO) instantiateDAO(MainItemDAOHibernate.class);
+    }
+
+    @Override
+    public LoadUnitDAO getLoadUnitDAO() {
+        return (LoadUnitDAO) instantiateDAO(LoadUnitDAOHibernate.class);
+    }
+
 }

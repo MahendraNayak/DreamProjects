@@ -1,5 +1,6 @@
 package com.litrum.webproject.service;
 
+import com.litrum.webproject.form.ItemsForm;
 import com.litrum.webproject.model.MainCategory;
 
 /**
@@ -11,5 +12,6 @@ public interface EditorService {
 
     MainCategory findMainCatgoryByLoggedInUser();
 
+    void createMainItem(ItemsForm form) throws Exception;
 }
 

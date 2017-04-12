@@ -40,4 +40,7 @@ public abstract class DAOFactory {
 
     public abstract AdminUserRegistrationDAO getAdminUserRegistrationDAO();
 
+    public abstract MainItemDAO getMainItemDAO();
+
+    public abstract LoadUnitDAO getLoadUnitDAO();
 }
