@@ -1,6 +1,7 @@
 package com.litrum.webproject.controller;
 
 import com.litrum.webproject.form.CategoriesForm;
+import com.litrum.webproject.form.ItemsForm;
 import com.litrum.webproject.model.MainCategory;
 import com.litrum.webproject.model.SubMainCategory;
 import com.litrum.webproject.service.EditorService;
@@ -10,8 +11,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -63,7 +67,8 @@ public class EditorController {
     }
 
     @RequestMapping(value = "/editorPannelMainItemAdd", method = RequestMethod.GET)
-    public String editorPannelMainItemGet(Model uiModel) {
+    public String editorPannelMainItemGet(@ModelAttribute("itemForm") ItemsForm form,
+                                          Model uiModel) {
 
         logger.debug(" editorPannelMainItemAdd : GET ");
         return "editorviews/editorPannelMainItemAdd";
