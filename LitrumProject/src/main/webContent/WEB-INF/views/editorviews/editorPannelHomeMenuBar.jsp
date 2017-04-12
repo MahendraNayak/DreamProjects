@@ -8,8 +8,9 @@
                     <div class="navbar-inverse side-collapse in">
                         <nav id="MainMenu">
                             <div class="list-group panel" >
-                                <li class="list-group-item list-group-item-success"><a href="editorPannelMainItemAdd" id="leftAllLink">SUB MAIN CAT 1.1<span class="arrow"></span></a></li>
-                                <li class="list-group-item list-group-item-success"><a href="editorPannelMainItemAdd" id="leftAllLink">SUB MAIN CAT 1.2<span class="arrow"></span></a></li>
+                            <c:forEach var="subMaincatObj" items="${subMainCategory}" varStatus="status">
+                                <li class="list-group-item list-group-item-success"><a href="editorPannelMainItemAdd" id="leftAllLink">${subMaincatObj.subMainCategoryName}<span class="arrow"></span></a></li>
+                            </c:forEach>
                             </div>
                         </nav>
                     </div>
@@ -29,7 +30,7 @@
 				</div>
 			</div>
 			<a href="editorPannelHome"><div class="call">
-				<p>Go To >> <br/><span>Editor Dashboard</span></p>
+				<p>Go To >> <br/><span>Editor Dashboard - ${mainCategory.categoryName}</span></p>
 			</div></a>
             <div class="user nav ">
 
