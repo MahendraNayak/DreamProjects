@@ -21,6 +21,7 @@ public class ItemsForm {
     private String contractorName;
     private Double contractorPrice;
     private String contractorPriority;
+    private String itemType;
 
     public Long getSubSubMainCategoryId() {
         return subSubMainCategoryId;
@@ -134,6 +135,14 @@ public class ItemsForm {
         this.contractorPriority = contractorPriority;
     }
 
+    public String getItemType() {
+        return itemType;
+    }
+
+    public void setItemType(String itemType) {
+        this.itemType = itemType;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -151,6 +160,7 @@ public class ItemsForm {
                 .append("contractorName", contractorName)
                 .append("contractorPrice", contractorPrice)
                 .append("contractorPriority", contractorPriority)
+                .append("itemType", itemType)
                 .toString();
     }
 }
