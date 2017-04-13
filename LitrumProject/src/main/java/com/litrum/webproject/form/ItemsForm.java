@@ -10,6 +10,7 @@ public class ItemsForm {
     private Long subSubMainCategoryId;
     private Long loadUnitId;
     private Long cityId;
+    private Long mainItemId;
     private String shortDescription;
     private String longDescription;
     private String pdfFileName;
@@ -22,6 +23,7 @@ public class ItemsForm {
     private Double contractorPrice;
     private String contractorPriority;
     private String itemType;
+    private boolean isSubItemForMainItem;
 
     public Long getSubSubMainCategoryId() {
         return subSubMainCategoryId;
@@ -143,6 +145,22 @@ public class ItemsForm {
         this.itemType = itemType;
     }
 
+    public Long getMainItemId() {
+        return mainItemId;
+    }
+
+    public void setMainItemId(Long mainItemId) {
+        this.mainItemId = mainItemId;
+    }
+
+    public boolean isSubItemForMainItem() {
+        return isSubItemForMainItem;
+    }
+
+    public void setSubItemForMainItem(boolean subItemForMainItem) {
+        isSubItemForMainItem = subItemForMainItem;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -161,6 +179,8 @@ public class ItemsForm {
                 .append("contractorPrice", contractorPrice)
                 .append("contractorPriority", contractorPriority)
                 .append("itemType", itemType)
+                .append("isSubItemForMainItem", isSubItemForMainItem)
+                .append("mainItemId", mainItemId)
                 .toString();
     }
 }
