@@ -1,5 +1,6 @@
 package com.litrum.webproject.model;
 
+import com.litrum.webproject.Utils.LitrumProjectConstants;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.persistence.*;
@@ -18,6 +19,8 @@ public class MainItem extends PersistentObject {
     private String techSpecificationName;
     private String imageName;
     private LoadUnit loadUnit;
+    private String mainItemStatus;
+    private boolean isSubMainItemForMainItem;
 
     @Column(name = "main_item_name")
     public String getMainItemName() {
@@ -84,6 +87,24 @@ public class MainItem extends PersistentObject {
         this.subSubMainCategory = subSubMainCategory;
     }
 
+    @Column(name = "main_item_status", nullable = false)
+    public String getMainItemStatus() {
+        return mainItemStatus;
+    }
+
+    public void setMainItemStatus(String mainItemStatus) {
+        this.mainItemStatus = mainItemStatus;
+    }
+
+    @Column(name = "isSubMainItem", nullable = false)
+    public boolean isSubMainItemForMainItem() {
+        return isSubMainItemForMainItem;
+    }
+
+    public void setSubMainItemForMainItem(boolean subMainItemForMainItem) {
+        isSubMainItemForMainItem = subMainItemForMainItem;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -93,6 +114,8 @@ public class MainItem extends PersistentObject {
                 .append("techSpecificationName", techSpecificationName)
                 .append("imageName", imageName)
                 .append("loadUnit", loadUnit)
+                .append("mainItemStatus", mainItemStatus)
+                .append("isSubMainItemForMainItem", isSubMainItemForMainItem)
                 .toString();
     }
 }

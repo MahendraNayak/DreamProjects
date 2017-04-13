@@ -218,6 +218,22 @@ public class EditorController {
         return "editorviews/editorPannelMainItemAdd";
     }
 
+    @RequestMapping(value = "/editorPannelMainItemIRAndSRAdd", method = RequestMethod.POST)
+    public String addContractorOrMaker(@ModelAttribute("itemForm") ItemsForm form,
+                                       Model uiModel, BindingResult result) {
+        logger.info("inside add contractor or maker post method");
+        try {
+            editorService.createMakerOrContractorForMainItem(form);
+        } catch (Exception e) {
+            logger.error("Exception while creaing contractor or maker{}", e);
+        }
+        if (form != null && LitrumProjectConstants.CONTRACTOR.equalsIgnoreCase(form.getItemType())) {
+            return "editorviews/editorPannelMainItemIR";
+        } else {
+            return "editorviews/editorPannelMainItemSR";
+        }
+    }
+
     //this called is added if we want to show image into browser then called this method.
     @RequestMapping(value = "/getImage/{fileName}")
     @ResponseBody

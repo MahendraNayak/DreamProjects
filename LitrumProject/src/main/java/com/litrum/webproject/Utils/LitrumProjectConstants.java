@@ -15,4 +15,8 @@ public interface LitrumProjectConstants {
     String MAKER = "MAKER";
     String CONTRACTOR = "CONTRACTOR";
     String UNDER_SCORE = "_";
+    String PENDING = "PENDING";
+    String APPROVED = "APPROVED";
+    String YES = "YES";
+    String NO = "NO";
 }

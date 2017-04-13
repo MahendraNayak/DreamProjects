@@ -23,7 +23,7 @@ public class ItemsForm {
     private Double contractorPrice;
     private String contractorPriority;
     private String itemType;
-    private boolean isSubItemForMainItem;
+    private String subItemForMainItem;
 
     public Long getSubSubMainCategoryId() {
         return subSubMainCategoryId;
@@ -153,12 +153,12 @@ public class ItemsForm {
         this.mainItemId = mainItemId;
     }
 
-    public boolean isSubItemForMainItem() {
-        return isSubItemForMainItem;
+    public String getSubItemForMainItem() {
+        return subItemForMainItem;
     }
 
-    public void setSubItemForMainItem(boolean subItemForMainItem) {
-        isSubItemForMainItem = subItemForMainItem;
+    public void setSubItemForMainItem(String subItemForMainItem) {
+        subItemForMainItem = subItemForMainItem;
     }
 
     @Override
@@ -179,7 +179,7 @@ public class ItemsForm {
                 .append("contractorPrice", contractorPrice)
                 .append("contractorPriority", contractorPriority)
                 .append("itemType", itemType)
-                .append("isSubItemForMainItem", isSubItemForMainItem)
+                .append("subItemForMainItem", subItemForMainItem)
                 .append("mainItemId", mainItemId)
                 .toString();
     }

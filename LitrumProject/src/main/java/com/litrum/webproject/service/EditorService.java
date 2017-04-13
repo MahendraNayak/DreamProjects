@@ -13,5 +13,7 @@ public interface EditorService {
     MainCategory findMainCatgoryByLoggedInUser();
 
     void createMainItem(ItemsForm form) throws Exception;
+
+    void createMakerOrContractorForMainItem(ItemsForm form) throws Exception;
 }
 
