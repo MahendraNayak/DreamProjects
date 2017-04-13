@@ -7,9 +7,7 @@
                 <div class="simplebar " data-simplebar-direction="vertical">
                     <div class="navbar-inverse side-collapse in">
                         <nav id="MainMenu">
-                            <div class="list-group panel" >
-                                <li class="list-group-item list-group-item-success"><a href="editorPannelMainItemAdd" id="leftAllLink" >SSMC 1.1.1<span class="arrow"></span></a></li>
-                                <li class="list-group-item list-group-item-success"><a href="editorPannelMainItemAdd" id="leftAllLink" >SSMC 1.1.2<span class="arrow"></span></a></li>
+                            <div class="list-group panel">
                                 <li class="list-group-item list-group-item-success"><a href="editorPannelMainItemAdd" id="leftAllLink" >ADD MAIN ITEM<span class="arrow"></span></a></li>
                                 <li class="list-group-item list-group-item-success"><a href="editorPannelMainItemSR" id="leftAllLink" >ADD MAIN ITEM SR<span class="arrow"></span></a></li>
                                 <li class="list-group-item list-group-item-success"><a href="editorPannelMainItemIR" id="leftAllLink" >ADD MAIN ITEM IR<span class="arrow"></span></a></li>
@@ -32,7 +30,7 @@
 				</div>
 			</div>
 			<a href="editorPannelHome"><div class="call">
-				<p>Go To >> <br/><span>Editor Dashboard</span></p>
+				<p>Go To >> <br/><span>Editor Dashboard </span></p>
 			</div></a>
             <div class="user nav ">
 

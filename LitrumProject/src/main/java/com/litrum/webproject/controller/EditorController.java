@@ -4,6 +4,7 @@ import com.litrum.webproject.form.CategoriesForm;
 import com.litrum.webproject.form.ItemsForm;
 import com.litrum.webproject.model.MainCategory;
 import com.litrum.webproject.model.SubMainCategory;
+import com.litrum.webproject.model.SubSubMainCategory;
 import com.litrum.webproject.service.EditorService;
 import com.litrum.webproject.service.UserService;
 import org.slf4j.Logger;
@@ -58,23 +59,92 @@ public class EditorController {
     }
 
     @RequestMapping(value = "/editorPannelMainItemSR", method = RequestMethod.GET)
-    public String editorPannelAddMainItemSR(Model uiModel) {
+    public String editorPannelAddMainItemSR(HttpServletRequest request,Model uiModel) {
 
         logger.debug(" editorPannelMainItemSR : GET ");
+
+        long SMCID = Long.parseLong(request.getParameter("SMCID"));
+        String SMCNAME = request.getParameter("SMCNM");
+
+        long SSMCID = Long.parseLong(request.getParameter("SSMCID"));
+        String SSMCNAME = request.getParameter("SSMCNM");
+
+        uiModel.addAttribute("SMCID", SMCID);
+        uiModel.addAttribute("SMCNAME", SMCNAME);
+        uiModel.addAttribute("SSMCID", SSMCID);
+        uiModel.addAttribute("SSMCNAME", SSMCNAME);
+
         return "editorviews/editorPannelMainItemSR";
     }
 
     @RequestMapping(value = "/editorPannelMainItemIR", method = RequestMethod.GET)
-    public String editorPannelAddMainItemIR(Model uiModel) {
+    public String editorPannelAddMainItemIR(HttpServletRequest request,Model uiModel) {
 
         logger.debug(" editorPannelMainItemIR : GET ");
+
+        long SMCID = Long.parseLong(request.getParameter("SMCID"));
+        String SMCNAME = request.getParameter("SMCNM");
+
+        long SSMCID = Long.parseLong(request.getParameter("SSMCID"));
+        String SSMCNAME = request.getParameter("SSMCNM");
+
+        uiModel.addAttribute("SMCID", SMCID);
+        uiModel.addAttribute("SMCNAME", SMCNAME);
+        uiModel.addAttribute("SSMCID", SSMCID);
+        uiModel.addAttribute("SSMCNAME", SSMCNAME);
+
         return "editorviews/editorPannelMainItemIR";
     }
 
     @RequestMapping(value = "/editorPannelMainItemAdd", method = RequestMethod.GET)
-    public String editorPannelMainItemGet(Model uiModel) {
+    public String editorPannelMainItemGet(HttpServletRequest request ,Model uiModel) {
         logger.debug(" editorPannelMainItemAdd : GET ");
+        long SMCID = Long.parseLong(request.getParameter("SMCID"));
+        String SMCNAME = request.getParameter("SMCNM");
+
+        long SSMCID = Long.parseLong(request.getParameter("SSMCID"));
+        String SSMCNAME = request.getParameter("SSMCNM");
+
+        List<SubSubMainCategory> subSubMainCategoryList = null;
+        CategoriesForm categoriesForm = new CategoriesForm();
+        categoriesForm.setSubMainCategoryId(SMCID);
+        try{
+            subSubMainCategoryList = userService.findBySubMainCategoryId(categoriesForm);
+            uiModel.addAttribute("subSubMainCategoryList", subSubMainCategoryList);
+
+            uiModel.addAttribute("SMCID", SMCID);
+            uiModel.addAttribute("SMCNAME", SMCNAME);
+            uiModel.addAttribute("SSMCID", SSMCID);
+            uiModel.addAttribute("SSMCNAME", SSMCNAME);
+
+        }catch (Exception e){
+            logger.debug("Exception editorPannelMainItemAdd :: findBySubMainCategoryId "+e.getMessage());
+        }
+
         return "editorviews/editorPannelMainItemAdd";
+    }
+
+    @RequestMapping(value = "/editorPannelSSMCHome", method = RequestMethod.GET)
+    public String editorPannelSSMCHomeGet(HttpServletRequest request ,Model uiModel) {
+        logger.debug(" editorPannelSSMCHome : GET ");
+        long SMCID = Long.parseLong(request.getParameter("SMCID"));
+        String SMCNAME = request.getParameter("SMCNM");
+        System.out.println("SMCID :: " + SMCID + " SMCNAME :: " + SMCNAME);
+        List<SubSubMainCategory> subSubMainCategoryList = null;
+        CategoriesForm categoriesForm = new CategoriesForm();
+        categoriesForm.setSubMainCategoryId(SMCID);
+        try {
+            subSubMainCategoryList = userService.findBySubMainCategoryId(categoriesForm);
+            uiModel.addAttribute("subSubMainCategoryList", subSubMainCategoryList);
+
+            uiModel.addAttribute("SMCID", SMCID);
+            uiModel.addAttribute("SMCNAME", SMCNAME);
+
+        } catch (Exception e) {
+            logger.debug("Exception editorPannelSSMCHome :: findBySubMainCategoryId " + e.getMessage());
+        }
+
+        return "editorviews/editorPannelSSMCHome";
     }
 
     @RequestMapping(value = "/editorPannelMainItemAdd", method = RequestMethod.POST)

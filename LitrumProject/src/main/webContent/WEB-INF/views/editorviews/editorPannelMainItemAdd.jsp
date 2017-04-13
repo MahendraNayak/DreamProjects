@@ -6,7 +6,7 @@
     <div class="rightInfo landing-page-wrapper">
         <div class="padding-txt">
             <div class="col-xs-12 category-header">
-		<a href="editorPannelHome"><b>SUB MAIN CAT 1.1</b></a><b> >  </b><b>SSMC 1.1.1</b>
+		<a href="editorPannelHome"><b>${SMCNAME}</b></a><b> > </b><a href="editorPannelSSMCHome?SMCID=${SMCID}&SMCNM=${SMCNAME}"><b>${SSMCNAME}</b></a>
             </div>
         </div>
         <div class="in-services">
