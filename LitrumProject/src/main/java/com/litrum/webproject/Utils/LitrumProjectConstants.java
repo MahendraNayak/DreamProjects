@@ -14,4 +14,5 @@ public interface LitrumProjectConstants {
     String ROLE_SALES = "SALES";
     String MAKER = "MAKER";
     String CONTRACTOR = "CONTRACTOR";
+    String UNDER_SCORE = "_";
 }
