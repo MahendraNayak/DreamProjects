@@ -17,6 +17,10 @@ public class ItemsForm {
     private String makerName;
     private Double makerPrice;
     private String makerPriority;
+    private String makerDescription;
+    private String contractorName;
+    private Double contractorPrice;
+    private String contractorPriority;
 
     public Long getSubSubMainCategoryId() {
         return subSubMainCategoryId;
@@ -98,6 +102,38 @@ public class ItemsForm {
         this.makerPriority = makerPriority;
     }
 
+    public String getMakerDescription() {
+        return makerDescription;
+    }
+
+    public void setMakerDescription(String makerDescription) {
+        this.makerDescription = makerDescription;
+    }
+
+    public String getContractorName() {
+        return contractorName;
+    }
+
+    public void setContractorName(String contractorName) {
+        this.contractorName = contractorName;
+    }
+
+    public Double getContractorPrice() {
+        return contractorPrice;
+    }
+
+    public void setContractorPrice(Double contractorPrice) {
+        this.contractorPrice = contractorPrice;
+    }
+
+    public String getContractorPriority() {
+        return contractorPriority;
+    }
+
+    public void setContractorPriority(String contractorPriority) {
+        this.contractorPriority = contractorPriority;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -111,6 +147,10 @@ public class ItemsForm {
                 .append("makerName", makerName)
                 .append("makerPrice", makerPrice)
                 .append("makerPriority", makerPriority)
+                .append("makerDescription", makerDescription)
+                .append("contractorName", contractorName)
+                .append("contractorPrice", contractorPrice)
+                .append("contractorPriority", contractorPriority)
                 .toString();
     }
 }
