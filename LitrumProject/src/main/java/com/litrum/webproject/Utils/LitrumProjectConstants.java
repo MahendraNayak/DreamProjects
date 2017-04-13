@@ -12,4 +12,6 @@ public interface LitrumProjectConstants {
     String ROLE_AUTHORISER = "AUTHORISER";
     String ROLE_PRIORITY_EDITOR = "PRIORITY EDITOR;";
     String ROLE_SALES = "SALES";
+    String MAKER = "MAKER";
+    String CONTRACTOR = "CONTRACTOR";
 }

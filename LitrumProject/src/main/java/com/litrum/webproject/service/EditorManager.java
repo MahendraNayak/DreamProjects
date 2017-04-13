@@ -1,5 +1,6 @@
 package com.litrum.webproject.service;
 
+import com.litrum.webproject.Utils.LitrumProjectConstants;
 import com.litrum.webproject.dao.DAOFactory;
 import com.litrum.webproject.form.ItemsForm;
 import com.litrum.webproject.model.*;
@@ -68,6 +69,34 @@ public class EditorManager implements EditorService {
                     mainItem.setLoadUnit(loadUnit);
                     mainItem.setSubSubMainCategory(subSubMainCategory);
                     daoFactory.getMainItemDAO().makePersistent(mainItem);
+
+                    if (null != form.getItemType() && LitrumProjectConstants.MAKER.equalsIgnoreCase(form.getItemType())) {
+                        MainItemMaker mainItemMaker = new MainItemMaker();
+                        mainItemMaker.setMainItem(mainItem);
+                        mainItemMaker.setMakerName(form.getMakerName());
+                        mainItemMaker.setMakerPriority(form.getMakerPriority());
+                        mainItemMaker.setMakerRate(form.getMakerPrice());
+
+                        RateCity rateCity = daoFactory.getRateCityDAO().findById(form.getCityId(), false);
+                        if (null == rateCity) {
+                            throw new Exception("rate city not found with id, hence cant create rate city");
+                        }
+                        mainItemMaker.setRateCity(rateCity);
+                        daoFactory.getRateCityDAO().makePersistent(rateCity);
+
+                    } else if (LitrumProjectConstants.CONTRACTOR.equalsIgnoreCase(form.getItemType())) {
+                        MainItemContractor mainItemContractor = new MainItemContractor();
+                        mainItemContractor.setMainItem(mainItem);
+                        mainItemContractor.setContractorName(form.getContractorName());
+                        mainItemContractor.setContractorPriority(form.getContractorPriority());
+
+                        RateCity rateCity = daoFactory.getRateCityDAO().findById(form.getCityId(), false);
+                        if (null == rateCity) {
+                            throw new Exception("rate city not found with id, hence cant create rate city");
+                        }
+                        mainItemContractor.setRateCity(rateCity);
+                        daoFactory.getRateCityDAO().makePersistent(rateCity);
+                    }
                     logger.debug("Main Item created successfully.");
                 } else {
                     throw new Exception("MainItem with short description is already exist hence can't create new.");
