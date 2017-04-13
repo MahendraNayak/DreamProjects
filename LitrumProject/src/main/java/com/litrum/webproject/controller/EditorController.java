@@ -151,8 +151,8 @@ public class EditorController {
     //this called is added if we want to show image into browser then called this method.
     @RequestMapping(value = "/getImage/{fileName}")
     @ResponseBody
-    public byte[] getImage(@PathVariable String imageName, HttpServletRequest request) {
-        String imageFilePath = request.getRealPath("") + "/imageFolder/" + imageName;
+    public byte[] getImage(@PathVariable String imageName) {
+        String imageFilePath = TMP_DIR + "/imageFolder/" + imageName;
         Path path = Paths.get(imageFilePath);
         try {
             return Files.readAllBytes(path);
@@ -165,8 +165,8 @@ public class EditorController {
     //this called is added if we want to show image into browser then called this method.
     @RequestMapping(value = "/getPdfFile/{pdfFileName}")
     @ResponseBody
-    public byte[] getPdfFile(@PathVariable String pdfFileName, HttpServletRequest request) {
-        String imageFilePath = request.getRealPath("") + "/pdfFolder/" + pdfFileName;
+    public byte[] getPdfFile(@PathVariable String pdfFileName) {
+        String imageFilePath = TMP_DIR + "/pdfFolder/" + pdfFileName;
         Path path = Paths.get(imageFilePath);
         try {
             return Files.readAllBytes(path);
