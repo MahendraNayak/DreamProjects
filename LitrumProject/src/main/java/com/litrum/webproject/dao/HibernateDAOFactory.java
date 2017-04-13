@@ -98,4 +98,33 @@ public class HibernateDAOFactory extends DAOFactory {
         return (LoadUnitDAO) instantiateDAO(LoadUnitDAOHibernate.class);
     }
 
+    @Override
+    public RateCityDAO getRateCityDAO() {
+        return (RateCityDAO) instantiateDAO(RateCityDAOHibernate.class);
+    }
+
+    @Override
+    public MainItemContractorDAO getMainItemContractorDAO() {
+        return (MainItemContractorDAO) instantiateDAO(MainItemContractorDAOHibernate.class);
+    }
+
+    @Override
+    public MainItemMakerDAO getMainItemMakerDAO() {
+        return (MainItemMakerDAO) instantiateDAO(MainItemMakerDAOHibernate.class);
+    }
+
+    @Override
+    public SubMainItemDAO getSubMainItemDAO() {
+        return (SubMainItemDAO) instantiateDAO(SubMainItemDAOHibernate.class);
+    }
+
+    @Override
+    public SubMainItemContractorDAO getSubMainItemContractorDAO() {
+        return (SubMainItemContractorDAO) instantiateDAO(SubMainItemContractorDAOHibernate.class);
+    }
+
+    @Override
+    public SubMainItemMakerDAO getSubMainItemMakerDAO() {
+        return (SubMainItemMakerDAO) instantiateDAO(SubMainItemMakerDAOHibernate.class);
+    }
 }

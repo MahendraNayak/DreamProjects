@@ -43,4 +43,17 @@ public abstract class DAOFactory {
     public abstract MainItemDAO getMainItemDAO();
 
     public abstract LoadUnitDAO getLoadUnitDAO();
+
+    public abstract RateCityDAO getRateCityDAO();
+
+    public abstract MainItemContractorDAO getMainItemContractorDAO();
+
+    public abstract MainItemMakerDAO getMainItemMakerDAO();
+
+    public abstract SubMainItemDAO getSubMainItemDAO();
+
+    public abstract SubMainItemContractorDAO getSubMainItemContractorDAO();
+
+    public abstract SubMainItemMakerDAO getSubMainItemMakerDAO();
+
 }
