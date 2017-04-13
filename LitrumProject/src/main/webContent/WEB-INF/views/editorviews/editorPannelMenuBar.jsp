@@ -8,9 +8,9 @@
                     <div class="navbar-inverse side-collapse in">
                         <nav id="MainMenu">
                             <div class="list-group panel">
-                                <li class="list-group-item list-group-item-success"><a href="editorPannelMainItemAdd" id="leftAllLink" >ADD MAIN ITEM<span class="arrow"></span></a></li>
-                                <li class="list-group-item list-group-item-success"><a href="editorPannelMainItemSR" id="leftAllLink" >ADD MAIN ITEM SR<span class="arrow"></span></a></li>
-                                <li class="list-group-item list-group-item-success"><a href="editorPannelMainItemIR" id="leftAllLink" >ADD MAIN ITEM IR<span class="arrow"></span></a></li>
+                                <li class="list-group-item list-group-item-success"><a href="editorPannelMainItemAdd?SMCID=${SMCID}&SMCNM=${SMCNAME}&SSMCID=${SSMCID}&SSMCNM=${SSMCNAME}" id="leftAllLink" >ADD MAIN ITEM<span class="arrow"></span></a></li>
+                                <li class="list-group-item list-group-item-success"><a href="editorPannelMainItemSR?SMCID=${SMCID}&SMCNM=${SMCNAME}&SSMCID=${SSMCID}&SSMCNM=${SSMCNAME}" id="leftAllLink" >ADD MAIN ITEM SR<span class="arrow"></span></a></li>
+                                <li class="list-group-item list-group-item-success"><a href="editorPannelMainItemIR?SMCID=${SMCID}&SMCNM=${SMCNAME}&SSMCID=${SSMCID}&SSMCNM=${SSMCNAME}" id="leftAllLink" >ADD MAIN ITEM IR<span class="arrow"></span></a></li>
                             </div>
                         </nav>
                     </div>
