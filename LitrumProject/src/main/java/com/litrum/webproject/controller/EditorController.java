@@ -81,6 +81,10 @@ public class EditorController {
         List<RateCity> rateCityList = editorService.getAllRateCity();
         List<LoadUnit> loadUnitList = userService.getAllLoadUnit();
 
+        long mainItemId = 0;
+        if(mainItemList != null && mainItemList.size() > 0) mainItemId = mainItemList.get(0).getId();
+
+        uiModel.addAttribute("mainItemId", mainItemId);
         uiModel.addAttribute("mainItemList", mainItemList);
         uiModel.addAttribute("rateCityList", rateCityList);
         uiModel.addAttribute("loadUnitList", loadUnitList);
@@ -108,6 +112,10 @@ public class EditorController {
         List<RateCity> rateCityList = editorService.getAllRateCity();
         List<LoadUnit> loadUnitList = userService.getAllLoadUnit();
 
+        long mainItemId = 0;
+        if(mainItemList != null && mainItemList.size() > 0) mainItemId = mainItemList.get(0).getId();
+
+        uiModel.addAttribute("mainItemId", mainItemId);
         uiModel.addAttribute("mainItemList", mainItemList);
         uiModel.addAttribute("rateCityList", rateCityList);
         uiModel.addAttribute("loadUnitList", loadUnitList);
@@ -248,17 +256,26 @@ public class EditorController {
 
     @RequestMapping(value = "/editorPannelMainItemIRAndSRAdd", method = RequestMethod.POST)
     public String addContractorOrMaker(@ModelAttribute("itemForm") ItemsForm form,
-                                       Model uiModel, BindingResult result) {
+                                       Model uiModel,HttpServletRequest request, BindingResult result) {
         logger.info("inside add contractor or maker post method");
+        try {
+            uiModel.addAttribute("SMCID", Long.parseLong(request.getParameter("SMCID")));
+            uiModel.addAttribute("SMCNM", request.getParameter("SMCNM"));
+            uiModel.addAttribute("SSMCID", Long.parseLong(request.getParameter("SSMCID")));
+            uiModel.addAttribute("SSMCNM", request.getParameter("SSMCNM"));
+        } catch (Exception e) {
+            logger.error("Exception ::: " + e.getMessage());
+        }
+
         try {
             editorService.createMakerOrContractorForMainItem(form);
         } catch (Exception e) {
             logger.error("Exception while creaing contractor or maker{}", e);
         }
         if (form != null && LitrumProjectConstants.CONTRACTOR.equalsIgnoreCase(form.getItemType())) {
-            return "editorviews/editorPannelMainItemIR";
+            return "redirect:/editorPannelMainItemIR";
         } else {
-            return "editorviews/editorPannelMainItemSR";
+            return "redirect:/editorPannelMainItemSR";
         }
     }
 
