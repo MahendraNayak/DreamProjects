@@ -1,6 +1,7 @@
 package com.litrum.webproject.form;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * Created by Pc on 12/04/2017.
@@ -24,6 +25,8 @@ public class ItemsForm {
     private String contractorPriority;
     private String itemType;
     private String subItemForMainItem;
+    private MultipartFile imageFile;
+    private MultipartFile pdfFile;
 
     public Long getSubSubMainCategoryId() {
         return subSubMainCategoryId;
@@ -158,7 +161,23 @@ public class ItemsForm {
     }
 
     public void setSubItemForMainItem(String subItemForMainItem) {
-        subItemForMainItem = subItemForMainItem;
+        this.subItemForMainItem = subItemForMainItem;
+    }
+
+    public MultipartFile getImageFile() {
+        return imageFile;
+    }
+
+    public void setImageFile(MultipartFile imageFile) {
+        this.imageFile = imageFile;
+    }
+
+    public MultipartFile getPdfFile() {
+        return pdfFile;
+    }
+
+    public void setPdfFile(MultipartFile pdfFile) {
+        this.pdfFile = pdfFile;
     }
 
     @Override

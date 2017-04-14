@@ -3,6 +3,7 @@ package com.litrum.webproject.controller;
 import com.litrum.webproject.Utils.LitrumProjectConstants;
 import com.litrum.webproject.form.CategoriesForm;
 import com.litrum.webproject.form.ItemsForm;
+import com.litrum.webproject.model.LoadUnit;
 import com.litrum.webproject.model.MainCategory;
 import com.litrum.webproject.model.SubMainCategory;
 import com.litrum.webproject.model.SubSubMainCategory;
@@ -115,6 +116,9 @@ public class EditorController {
             subSubMainCategoryList = userService.findBySubMainCategoryId(categoriesForm);
             uiModel.addAttribute("subSubMainCategoryList", subSubMainCategoryList);
 
+            List<LoadUnit> loadUnitList = userService.getAllLoadUnit();
+            uiModel.addAttribute("loadUnitList", loadUnitList);
+
             uiModel.addAttribute("SMCID", SMCID);
             uiModel.addAttribute("SMCNAME", SMCNAME);
             uiModel.addAttribute("SSMCID", SSMCID);
@@ -151,62 +155,56 @@ public class EditorController {
     }
 
     @RequestMapping(value = "/editorPannelMainItemAdd", method = RequestMethod.POST)
-    public String editorPannelMainItemGet(@ModelAttribute("itemForm") ItemsForm form,
-                                          @RequestParam("imageFile") MultipartFile imageFile,
-                                          @RequestParam("pdfFile") MultipartFile pdfFile,
-                                          HttpServletRequest request,
-                                          Model uiModel, BindingResult result) {
-        if (imageFile.isEmpty() || imageFile.getSize() <= 0) {
+    public String editorPannelMainItemGet(@ModelAttribute("itemForm") ItemsForm form, Model uiModel, BindingResult result) {
+        if (form.getImageFile().isEmpty() || form.getImageFile().getSize() <= 0) {
             result.rejectValue("imageFile", "Please select file");
         }
-        if (!(imageFile.getContentType().toLowerCase().equals("image/jpg")
-                || imageFile.getContentType().toLowerCase().equals("image/jpeg")
-                || imageFile.getContentType().toLowerCase().equals("image/png")
-                || imageFile.getContentType().toLowerCase().equals("image/gif"))) {
+        if (!(form.getImageFile().getContentType().toLowerCase().equals("image/jpg")
+                || form.getImageFile().getContentType().toLowerCase().equals("image/jpeg")
+                || form.getImageFile().getContentType().toLowerCase().equals("image/png")
+                || form.getImageFile().getContentType().toLowerCase().equals("image/gif"))) {
             result.rejectValue("imageFile", "Please choose jpg, jpeg, png or gif format image");
         }
         try {
-            String imageFileOriginalName = imageFile.getOriginalFilename();
+            String imageFileOriginalName = form.getImageFile().getOriginalFilename();
             if (imageFileOriginalName != null && imageFileOriginalName.contains(".")) {
                 imageFileOriginalName = imageFileOriginalName.substring(0, imageFileOriginalName.lastIndexOf("."));
             }
             String fileName = imageFileOriginalName + LitrumProjectConstants.UNDER_SCORE + form.getSubSubMainCategoryId() +
                     LitrumProjectConstants.UNDER_SCORE + System.currentTimeMillis();
-            String filePath = TMP_DIR + "/imageFolder/"
-                    + fileName;
+            String filePath = TMP_DIR + "/" + fileName;
 
             FileOutputStream fos = new FileOutputStream(filePath);
-            fos.write(imageFile.getBytes());
+            fos.write(form.getImageFile().getBytes());
             fos.close();
             form.setImageFileName(fileName);
         } catch (IOException e) {
             logger.error("Exception while process file{}", e);
-            return "editorviews/editorPannelMainItemAdd";
+            return "redirect:/editorPannelHome";
         }
 
-        if (pdfFile.isEmpty() || pdfFile.getSize() <= 0) {
+        if (form.getPdfFile().isEmpty() || form.getPdfFile().getSize() <= 0) {
             result.rejectValue("pdfFile", "Empty file contents");
         }
-        if (!(pdfFile.getContentType().toLowerCase().equals("application/pdf"))) {
+        if (!(form.getPdfFile().getContentType().toLowerCase().equals("application/pdf"))) {
             result.rejectValue("pdfFile", "Please choose pdf file");
         }
         try {
-            String pdfFileOriginalName = pdfFile.getOriginalFilename();
+            String pdfFileOriginalName = form.getPdfFile().getOriginalFilename();
             if (pdfFileOriginalName != null && pdfFileOriginalName.contains(".")) {
                 pdfFileOriginalName = pdfFileOriginalName.substring(0, pdfFileOriginalName.lastIndexOf("."));
             }
             String fileName = pdfFileOriginalName + LitrumProjectConstants.UNDER_SCORE + form.getSubSubMainCategoryId() +
                     LitrumProjectConstants.UNDER_SCORE + System.currentTimeMillis();
-            String filePath = TMP_DIR + "/pdfFolder/"
-                    + fileName;
+            String filePath = TMP_DIR + "/" + fileName;
 
             FileOutputStream fos = new FileOutputStream(filePath);
-            fos.write(pdfFile.getBytes());
+            fos.write(form.getPdfFile().getBytes());
             fos.close();
             form.setPdfFileName(fileName);
         } catch (IOException e) {
             logger.error("Exception while process file{}", e);
-            return "editorviews/editorPannelMainItemAdd";
+            return "redirect:/editorPannelHome";
         }
 
         try {
@@ -215,7 +213,7 @@ public class EditorController {
             logger.error("Exception while creating main item{}", e);
         }
         logger.debug(" editorPannelMainItemAdd : GET ");
-        return "editorviews/editorPannelMainItemAdd";
+        return "redirect:/editorPannelHome";
     }
 
     @RequestMapping(value = "/editorPannelMainItemIRAndSRAdd", method = RequestMethod.POST)
@@ -238,7 +236,7 @@ public class EditorController {
     @RequestMapping(value = "/getImage/{fileName}")
     @ResponseBody
     public byte[] getImage(@PathVariable String imageName) {
-        String imageFilePath = TMP_DIR + "/imageFolder/" + imageName;
+        String imageFilePath = TMP_DIR + "/" + imageName;
         Path path = Paths.get(imageFilePath);
         try {
             return Files.readAllBytes(path);
@@ -252,7 +250,7 @@ public class EditorController {
     @RequestMapping(value = "/getPdfFile/{pdfFileName}")
     @ResponseBody
     public byte[] getPdfFile(@PathVariable String pdfFileName) {
-        String imageFilePath = TMP_DIR + "/pdfFolder/" + pdfFileName;
+        String imageFilePath = TMP_DIR + "/" + pdfFileName;
         Path path = Paths.get(imageFilePath);
         try {
             return Files.readAllBytes(path);

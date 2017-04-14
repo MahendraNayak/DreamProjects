@@ -403,4 +403,10 @@ public class UserManager implements UserService {
     public List<EndUserRegistration> getAllEndUsers() {
         return daoFactory.getEndUserRegistrationDAO().findAll();
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<LoadUnit> getAllLoadUnit() {
+        return daoFactory.getLoadUnitDAO().findAll();
+    }
 }

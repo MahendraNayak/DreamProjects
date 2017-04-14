@@ -51,4 +51,6 @@ public interface UserService {
     List<CompanyCity> getAllCompanyCity();
 
     List<EndUserRegistration> getAllEndUsers();
+
+    List<LoadUnit> getAllLoadUnit();
 }
