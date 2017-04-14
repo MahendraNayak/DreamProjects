@@ -9,6 +9,7 @@ import com.litrum.webproject.model.SubMainCategory;
 import com.litrum.webproject.model.SubSubMainCategory;
 import com.litrum.webproject.service.EditorService;
 import com.litrum.webproject.service.UserService;
+import org.json.HTTP;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -134,10 +136,9 @@ public class EditorController {
     @RequestMapping(value = "/editorPannelSSMCHome", method = RequestMethod.GET)
     public String editorPannelSSMCHomeGet(HttpServletRequest request ,Model uiModel) {
         logger.debug(" editorPannelSSMCHome : GET ");
-        long SMCID = Long.parseLong(request.getParameter("SMCID"));
-        String SMCNAME = request.getParameter("SMCNM");
-        System.out.println("SMCID :: " + SMCID + " SMCNAME :: " + SMCNAME);
         List<SubSubMainCategory> subSubMainCategoryList = null;
+        Long SMCID = Long.parseLong(request.getParameter("SMCID"));
+
         CategoriesForm categoriesForm = new CategoriesForm();
         categoriesForm.setSubMainCategoryId(SMCID);
         try {
@@ -145,7 +146,7 @@ public class EditorController {
             uiModel.addAttribute("subSubMainCategoryList", subSubMainCategoryList);
 
             uiModel.addAttribute("SMCID", SMCID);
-            uiModel.addAttribute("SMCNAME", SMCNAME);
+            uiModel.addAttribute("SMCNAME", request.getParameter("SMCNM"));
 
         } catch (Exception e) {
             logger.debug("Exception editorPannelSSMCHome :: findBySubMainCategoryId " + e.getMessage());
@@ -155,65 +156,81 @@ public class EditorController {
     }
 
     @RequestMapping(value = "/editorPannelMainItemAdd", method = RequestMethod.POST)
-    public String editorPannelMainItemGet(@ModelAttribute("itemForm") ItemsForm form, Model uiModel, BindingResult result) {
-        if (form.getImageFile().isEmpty() || form.getImageFile().getSize() <= 0) {
-            result.rejectValue("imageFile", "Please select file");
+    public String editorPannelMainItemGet(@ModelAttribute("itemForm") ItemsForm form, Model uiModel, HttpServletRequest request, BindingResult result) {
+        try {
+            uiModel.addAttribute("SMCID", Long.parseLong(request.getParameter("SMCID")));
+            uiModel.addAttribute("SMCNM", request.getParameter("SMCNM"));
+            uiModel.addAttribute("SSMCID", Long.parseLong(request.getParameter("SSMCID")));
+            uiModel.addAttribute("SSMCNM", request.getParameter("SSMCNM"));
+        } catch (Exception e) {
+            logger.error("Exception ::: " + e.getMessage());
         }
-        if (!(form.getImageFile().getContentType().toLowerCase().equals("image/jpg")
+
+        if (!form.getImageFile().isEmpty() && (form.getImageFile().getContentType().toLowerCase().equals("image/jpg")
                 || form.getImageFile().getContentType().toLowerCase().equals("image/jpeg")
                 || form.getImageFile().getContentType().toLowerCase().equals("image/png")
                 || form.getImageFile().getContentType().toLowerCase().equals("image/gif"))) {
+
+            try {
+                String imageFileOriginalName = form.getImageFile().getOriginalFilename();
+                String imageFileOriginalNameExtn = imageFileOriginalName;
+
+                if (imageFileOriginalName != null && imageFileOriginalName.contains(".")) {
+                    imageFileOriginalName = imageFileOriginalName.substring(0, imageFileOriginalName.lastIndexOf("."));
+                }
+                String fileName = imageFileOriginalName + LitrumProjectConstants.UNDER_SCORE + form.getSubSubMainCategoryId() +
+                        LitrumProjectConstants.UNDER_SCORE + imageFileOriginalNameExtn.substring(imageFileOriginalNameExtn.lastIndexOf("."), imageFileOriginalNameExtn.length());
+                String filePath = TMP_DIR + "/" + fileName;
+
+                FileOutputStream fos = new FileOutputStream(filePath);
+                fos.write(form.getImageFile().getBytes());
+                fos.close();
+                form.setImageFileName(fileName);
+            } catch (IOException e) {
+                logger.error("Exception while process file{}", e);
+                return "redirect:/editorPannelMainItemAdd";
+            }
+        } else if (!form.getImageFile().isEmpty()) {
             result.rejectValue("imageFile", "Please choose jpg, jpeg, png or gif format image");
         }
-        try {
-            String imageFileOriginalName = form.getImageFile().getOriginalFilename();
-            if (imageFileOriginalName != null && imageFileOriginalName.contains(".")) {
-                imageFileOriginalName = imageFileOriginalName.substring(0, imageFileOriginalName.lastIndexOf("."));
+
+        if (!form.getPdfFile().isEmpty() && (form.getPdfFile().getContentType().toLowerCase().equals("application/pdf"))) {
+            try {
+                String pdfFileOriginalName = form.getPdfFile().getOriginalFilename();
+                String pdfFileOriginalNameExtn = pdfFileOriginalName;
+
+                if (pdfFileOriginalName != null && pdfFileOriginalName.contains(".")) {
+                    pdfFileOriginalName = pdfFileOriginalName.substring(0, pdfFileOriginalName.lastIndexOf("."));
+                }
+                String fileName = pdfFileOriginalName + LitrumProjectConstants.UNDER_SCORE + form.getSubSubMainCategoryId() +
+                        LitrumProjectConstants.UNDER_SCORE + pdfFileOriginalNameExtn.substring(pdfFileOriginalNameExtn.lastIndexOf("."), pdfFileOriginalNameExtn.length());
+                ;
+                String filePath = TMP_DIR + "/" + fileName;
+
+                FileOutputStream fos = new FileOutputStream(filePath);
+                fos.write(form.getPdfFile().getBytes());
+                fos.close();
+                form.setPdfFileName(fileName);
+            } catch (IOException e) {
+                logger.error("Exception while process file{}", e);
+                return "redirect:/editorPannelMainItemAdd";
             }
-            String fileName = imageFileOriginalName + LitrumProjectConstants.UNDER_SCORE + form.getSubSubMainCategoryId() +
-                    LitrumProjectConstants.UNDER_SCORE + System.currentTimeMillis();
-            String filePath = TMP_DIR + "/" + fileName;
-
-            FileOutputStream fos = new FileOutputStream(filePath);
-            fos.write(form.getImageFile().getBytes());
-            fos.close();
-            form.setImageFileName(fileName);
-        } catch (IOException e) {
-            logger.error("Exception while process file{}", e);
-            return "redirect:/editorPannelHome";
-        }
-
-        if (form.getPdfFile().isEmpty() || form.getPdfFile().getSize() <= 0) {
-            result.rejectValue("pdfFile", "Empty file contents");
-        }
-        if (!(form.getPdfFile().getContentType().toLowerCase().equals("application/pdf"))) {
+        } else if (!form.getPdfFile().isEmpty()) {
             result.rejectValue("pdfFile", "Please choose pdf file");
         }
-        try {
-            String pdfFileOriginalName = form.getPdfFile().getOriginalFilename();
-            if (pdfFileOriginalName != null && pdfFileOriginalName.contains(".")) {
-                pdfFileOriginalName = pdfFileOriginalName.substring(0, pdfFileOriginalName.lastIndexOf("."));
-            }
-            String fileName = pdfFileOriginalName + LitrumProjectConstants.UNDER_SCORE + form.getSubSubMainCategoryId() +
-                    LitrumProjectConstants.UNDER_SCORE + System.currentTimeMillis();
-            String filePath = TMP_DIR + "/" + fileName;
 
-            FileOutputStream fos = new FileOutputStream(filePath);
-            fos.write(form.getPdfFile().getBytes());
-            fos.close();
-            form.setPdfFileName(fileName);
-        } catch (IOException e) {
-            logger.error("Exception while process file{}", e);
-            return "redirect:/editorPannelHome";
+        if (result.hasErrors()) {
+            return "redirect:/editorPannelMainItemAdd";
         }
-
         try {
             editorService.createMainItem(form);
+            uiModel.addAttribute("sucessMessage", "Main Item Has Successfully Added");
         } catch (Exception e) {
             logger.error("Exception while creating main item{}", e);
+            uiModel.addAttribute("errorMessage", "Unable to add Main Item");
         }
         logger.debug(" editorPannelMainItemAdd : GET ");
-        return "redirect:/editorPannelHome";
+        return "redirect:/editorPannelMainItemAdd";
     }
 
     @RequestMapping(value = "/editorPannelMainItemIRAndSRAdd", method = RequestMethod.POST)
