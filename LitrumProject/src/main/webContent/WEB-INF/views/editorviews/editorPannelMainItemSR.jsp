@@ -34,7 +34,7 @@
                                     <select class="form-control" name="shortDescription" id="shortDescription">
                                         <option value="0">SELECT MAIN ITEM SD</option>
                                         <c:forEach var="mainItemObj" items="${mainItemList}" varStatus="mainItemStatus">
-                                            <option value="${mainItemObj.id}">${mainItemObj.shortDescription}</option>
+                                            <option value="${mainItemObj.shortDescription}">${mainItemObj.shortDescription}</option>
                                         </c:forEach>
                                     </select>
                                 </div>

@@ -28,29 +28,7 @@
         </layout>
     </appender>
 
-    <!--  Print the Hibernate SQL -->
-    <logger name="org.hibernate.SQL">
-        <level value="INFO"/>
-    </logger>
-    <logger name="com.mchange.v2">
-        <level value="INFO"/>
-    </logger>
-    <!--  Print values bound to the Hibernate SQL -->
-    <logger name="org.hibernate.type">
-        <level value="INFO"/>
-    </logger>
-    <!--  Log the state of all entities (max 20 entities) associated with the session at flush time -->
-    <logger name="org.hibernate.pretty">
-        <level value="INFO"/>
-    </logger>
-    <!-- Warning message of Narrowing proxy to class will go aways. check https://forum.hibernate.org/viewtopic.php?p=2404391 -->
-    <logger name="org.hibernate.engine.internal.StatefulPersistenceContext">
-        <level value="ERROR"/>
-    </logger>
     <logger name="com.litrum.webproject">
-        <level value="DEBUG"/>
-    </logger>
-    <logger name="org.springframework">
         <level value="DEBUG"/>
     </logger>
     <root>

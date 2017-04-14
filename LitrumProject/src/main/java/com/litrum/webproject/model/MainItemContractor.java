@@ -13,7 +13,7 @@ public class MainItemContractor extends PersistentObject {
 
     private String contractorName;
     private String contractorPriority;
-    private String contractorRate;
+    private Double contractorRate;
     private RateCity rateCity;
     private MainItem mainItem;
 
@@ -36,11 +36,11 @@ public class MainItemContractor extends PersistentObject {
     }
 
     @Column(name = "contractor_rate")
-    public String getContractorRate() {
+    public Double getContractorRate() {
         return contractorRate;
     }
 
-    public void setContractorRate(String contractorRate) {
+    public void setContractorRate(Double contractorRate) {
         this.contractorRate = contractorRate;
     }
 

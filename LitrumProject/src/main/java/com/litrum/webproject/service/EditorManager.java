@@ -3,6 +3,7 @@ package com.litrum.webproject.service;
 import com.litrum.webproject.Utils.LitrumProjectConstants;
 import com.litrum.webproject.dao.DAOFactory;
 import com.litrum.webproject.form.ItemsForm;
+import com.litrum.webproject.form.SubMainItemsForm;
 import com.litrum.webproject.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -109,20 +110,21 @@ public class EditorManager implements EditorService {
                     throw new Exception("rate city not found with id, hence cant create rate city");
                 }
                 mainItemMaker.setRateCity(rateCity);
-                daoFactory.getRateCityDAO().makePersistent(rateCity);
+                daoFactory.getMainItemMakerDAO().makePersistent(mainItemMaker);
 
             } else if (LitrumProjectConstants.CONTRACTOR.equalsIgnoreCase(form.getItemType())) {
                 MainItemContractor mainItemContractor = new MainItemContractor();
                 mainItemContractor.setMainItem(mainItem);
                 mainItemContractor.setContractorName(form.getContractorName());
                 mainItemContractor.setContractorPriority(form.getContractorPriority());
+                mainItemContractor.setContractorRate(form.getContractorPrice());
 
                 RateCity rateCity = daoFactory.getRateCityDAO().findById(form.getCityId(), false);
                 if (null == rateCity) {
                     throw new Exception("rate city not found with id, hence cant create rate city");
                 }
                 mainItemContractor.setRateCity(rateCity);
-                daoFactory.getRateCityDAO().makePersistent(rateCity);
+                daoFactory.getMainItemContractorDAO().makePersistent(mainItemContractor);
             }
         } else {
             throw new Exception("empty form values while creating contractor or maker, hence cant proceed.");
@@ -139,5 +141,33 @@ public class EditorManager implements EditorService {
     @Transactional(readOnly = true)
     public List<RateCity> getAllRateCity() {
         return daoFactory.getRateCityDAO().findAll();
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
+    public SubMainItem createSubMainItem(SubMainItemsForm form) throws Exception {
+        if (form != null && form.getMainItemId() > 0 && form.getLoadUnitId() > 0) {
+            MainItem mainItem = daoFactory.getMainItemDAO().findById(form.getMainItemId(), false);
+            if (mainItem == null) {
+                throw new Exception("main item not found with id, hence can't create sub main item");
+            }
+            LoadUnit loadUnit = daoFactory.getLoadUnitDAO().findById(form.getLoadUnitId(), false);
+            if (loadUnit == null) {
+                throw new Exception("load unit not found with id, hence can't create sub main item");
+            }
+            SubMainItem subMainItem = daoFactory.getSubMainItemDAO().findSubMainItemByShortDescription(form.getShortDecription());
+            if (null == subMainItem) {
+                subMainItem = new SubMainItem();
+                subMainItem.setShortDescription(form.getShortDecription());
+                subMainItem.setMainItem(mainItem);
+                subMainItem.setLoadUnit(loadUnit);
+                logger.info("sub main item created successfully.");
+                return daoFactory.getSubMainItemDAO().makePersistent(subMainItem);
+            } else {
+                throw new Exception("Sub Main item already exist with short decription hence, can't create new.");
+            }
+        } else {
+            throw new Exception("Main Item not found while creating sub main item.");
+        }
     }
 }

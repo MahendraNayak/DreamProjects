@@ -1,9 +1,11 @@
 package com.litrum.webproject.service;
 
 import com.litrum.webproject.form.ItemsForm;
+import com.litrum.webproject.form.SubMainItemsForm;
 import com.litrum.webproject.model.MainCategory;
 import com.litrum.webproject.model.MainItem;
 import com.litrum.webproject.model.RateCity;
+import com.litrum.webproject.model.SubMainItem;
 
 import java.util.List;
 
@@ -23,5 +25,7 @@ public interface EditorService {
     List<MainItem> getAllMainItems();
 
     List<RateCity> getAllRateCity();
+
+    SubMainItem createSubMainItem(SubMainItemsForm form) throws Exception;
 }
 

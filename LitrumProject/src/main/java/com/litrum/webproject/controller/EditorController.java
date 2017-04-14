@@ -3,6 +3,7 @@ package com.litrum.webproject.controller;
 import com.litrum.webproject.Utils.LitrumProjectConstants;
 import com.litrum.webproject.form.CategoriesForm;
 import com.litrum.webproject.form.ItemsForm;
+import com.litrum.webproject.form.SubMainItemsForm;
 import com.litrum.webproject.model.*;
 import com.litrum.webproject.service.EditorService;
 import com.litrum.webproject.service.UserService;
@@ -285,8 +286,15 @@ public class EditorController {
     }
 
     @RequestMapping(value = "/editorPannelSubMainItemAdd", method = RequestMethod.POST)
-    public String addSubMainItemPost() {
-        return "editorviews/editorPannelSubMainItemAdd";
+    public String addSubMainItemPost(@ModelAttribute("subMainItemForm") SubMainItemsForm form, Model uiModel) {
+        logger.debug("inside add sub main item post method");
+        try {
+            SubMainItem subMainItem = editorService.createSubMainItem(form);
+
+        } catch (Exception e) {
+            logger.error("Exception while creating sub main item:", e);
+        }
+        return "redirect:/editorPannelSubMainItemAdd";
     }
 
     @RequestMapping(value = "/editorPannelSubMainItemSR", method = RequestMethod.GET)
