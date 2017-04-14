@@ -104,6 +104,14 @@ public class EditorController {
         uiModel.addAttribute("SSMCID", SSMCID);
         uiModel.addAttribute("SSMCNAME", SSMCNAME);
 
+        List<MainItem> mainItemList = editorService.getAllMainItems();
+        List<RateCity> rateCityList = editorService.getAllRateCity();
+        List<LoadUnit> loadUnitList = userService.getAllLoadUnit();
+
+        uiModel.addAttribute("mainItemList", mainItemList);
+        uiModel.addAttribute("rateCityList", rateCityList);
+        uiModel.addAttribute("loadUnitList", loadUnitList);
+
         return "editorviews/editorPannelMainItemIR";
     }
 
