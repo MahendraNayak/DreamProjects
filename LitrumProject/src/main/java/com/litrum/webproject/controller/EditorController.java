@@ -3,10 +3,7 @@ package com.litrum.webproject.controller;
 import com.litrum.webproject.Utils.LitrumProjectConstants;
 import com.litrum.webproject.form.CategoriesForm;
 import com.litrum.webproject.form.ItemsForm;
-import com.litrum.webproject.model.LoadUnit;
-import com.litrum.webproject.model.MainCategory;
-import com.litrum.webproject.model.SubMainCategory;
-import com.litrum.webproject.model.SubSubMainCategory;
+import com.litrum.webproject.model.*;
 import com.litrum.webproject.service.EditorService;
 import com.litrum.webproject.service.UserService;
 import org.json.HTTP;
@@ -80,6 +77,14 @@ public class EditorController {
         uiModel.addAttribute("SSMCID", SSMCID);
         uiModel.addAttribute("SSMCNAME", SSMCNAME);
 
+        List<MainItem> mainItemList = editorService.getAllMainItems();
+        List<RateCity> rateCityList = editorService.getAllRateCity();
+        List<LoadUnit> loadUnitList = userService.getAllLoadUnit();
+
+        uiModel.addAttribute("mainItemList", mainItemList);
+        uiModel.addAttribute("rateCityList", rateCityList);
+        uiModel.addAttribute("loadUnitList", loadUnitList);
+
         return "editorviews/editorPannelMainItemSR";
     }
 
@@ -98,6 +103,14 @@ public class EditorController {
         uiModel.addAttribute("SMCNAME", SMCNAME);
         uiModel.addAttribute("SSMCID", SSMCID);
         uiModel.addAttribute("SSMCNAME", SSMCNAME);
+
+        List<MainItem> mainItemList = editorService.getAllMainItems();
+        List<RateCity> rateCityList = editorService.getAllRateCity();
+        List<LoadUnit> loadUnitList = userService.getAllLoadUnit();
+
+        uiModel.addAttribute("mainItemList", mainItemList);
+        uiModel.addAttribute("rateCityList", rateCityList);
+        uiModel.addAttribute("loadUnitList", loadUnitList);
 
         return "editorviews/editorPannelMainItemIR";
     }
