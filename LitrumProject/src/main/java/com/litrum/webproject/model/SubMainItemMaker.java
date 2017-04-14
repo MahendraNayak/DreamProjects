@@ -14,7 +14,6 @@ public class SubMainItemMaker extends PersistentObject {
     private String subMainItemMakerName;
     private SubMainItem subMainItem;
     private Double subMainItemMakerRate;
-    private RateCity rateCity;
 
     @Column(name = "sub_main_item_maker_name")
     public String getSubMainItemMakerName() {
@@ -44,23 +43,12 @@ public class SubMainItemMaker extends PersistentObject {
         this.subMainItem = subMainItem;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = RateCity.class)
-    @JoinColumn(name = "rate_city_id", nullable = false)
-    public RateCity getRateCity() {
-        return rateCity;
-    }
-
-    public void setRateCity(RateCity rateCity) {
-        this.rateCity = rateCity;
-    }
-
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .append("subMainItemMakerName", subMainItemMakerName)
                 .append("subMainItem", subMainItem)
                 .append("subMainItemMakerRate", subMainItemMakerRate)
-                .append("rateCity", rateCity)
                 .toString();
     }
 }
