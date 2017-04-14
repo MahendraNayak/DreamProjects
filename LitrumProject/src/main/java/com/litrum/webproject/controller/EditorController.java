@@ -262,6 +262,26 @@ public class EditorController {
         }
     }
 
+    @RequestMapping(value = "/editorPannelSubMainItemAdd", method = RequestMethod.GET)
+    public String addSubMainItemGet() {
+        return "editorviews/editorPannelSubMainItemAdd";
+    }
+
+    @RequestMapping(value = "/editorPannelSubMainItemAdd", method = RequestMethod.POST)
+    public String addSubMainItemPost() {
+        return "editorviews/editorPannelSubMainItemAdd";
+    }
+
+    @RequestMapping(value = "/editorPannelSubMainItemSR", method = RequestMethod.GET)
+    public String addSubMainItemSR() {
+        return "editorviews/editorPannelSubMainItemSR";
+    }
+
+    @RequestMapping(value = "/editorPannelSubMainItemIR", method = RequestMethod.GET)
+    public String addSubMainItemIR() {
+        return "editorviews/editorPannelSubMainItemIR";
+    }
+
     //this called is added if we want to show image into browser then called this method.
     @RequestMapping(value = "/getImage/{fileName}")
     @ResponseBody
