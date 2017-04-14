@@ -14,7 +14,6 @@ public class SubMainItemContractor extends PersistentObject {
     private String subMainItemContractorName;
     private Double subMainItemContractorRate;
     private SubMainItem subMainItem;
-    private RateCity rateCity;
 
     @Column(name = "sub_main_item_contractor_name")
     public String getSubMainItemContractorName() {
@@ -44,23 +43,12 @@ public class SubMainItemContractor extends PersistentObject {
         this.subMainItem = subMainItem;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = RateCity.class)
-    @JoinColumn(name = "rate_city_id", nullable = false)
-    public RateCity getRateCity() {
-        return rateCity;
-    }
-
-    public void setRateCity(RateCity rateCity) {
-        this.rateCity = rateCity;
-    }
-
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .append("subMainItemContractorName", subMainItemContractorName)
                 .append("subMainItemContractorRate", subMainItemContractorRate)
                 .append("subMainItem", subMainItem)
-                .append("rateCity", rateCity)
                 .toString();
     }
 }
