@@ -14,6 +14,8 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * Created by Pc on 12/04/2017.
  */
@@ -125,5 +127,17 @@ public class EditorManager implements EditorService {
         } else {
             throw new Exception("empty form values while creating contractor or maker, hence cant proceed.");
         }
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<MainItem> getAllMainItems() {
+        return daoFactory.getMainItemDAO().findAll();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<RateCity> getAllRateCity() {
+        return daoFactory.getRateCityDAO().findAll();
     }
 }
