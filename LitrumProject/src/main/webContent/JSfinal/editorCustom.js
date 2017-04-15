@@ -9,7 +9,7 @@ function setMainItemID(mainItemID){
 
 function setMainAndSubItems(mainItemID,subMainItemID,SD,unit){
     $("#mainItemId").val(mainItemID);
-    $("#subMainIemId").val(mainItemID);
+    $("#subMainIemId").val(subMainItemID);
 	$("#shortDecription").val(SD);
 $("#loadUnitId").val(unit);
 }
