@@ -28,25 +28,17 @@
 					    </tr>
 					</thead>
 					<tbody>
+					<c:forEach var="mainItemObj" items="${mainItemList}" varStatus="status">
 					    <tr>
-						<td>SMC1</td>
-						<td><textarea rows="2" cols="50" placeholder="Describe yourself here..."></textarea></td>
-						<td><textarea rows="4" cols="50" placeholder="Describe yourself here..."></textarea></td>
-						<td>XXX.pdf</td>
-						<td>XXX.jpeg</td>
-						<td>KG</td>
-						<td>YES</td>
+						<td>SMC${mainItemObj.id}</td>
+						<td><textarea rows="2" cols="50" placeholder="Describe yourself here...">${mainItemObj.shortDescription}</textarea></td>
+						<td><textarea rows="4" cols="50" placeholder="Describe yourself here...">${mainItemObj.longDescription}</textarea></td>
+						<td>${mainItemObj.techSpecificationName}</td>
+						<td>${mainItemObj.imageName}</td>
+						<td></td>
+						<td>${mainItemObj.isSubMainItemForMainItem}</td>
 					    </tr>
-					    <tr>
-						<td>SMC2</td>
-						<td><textarea rows="2" cols="50" placeholder="Describe yourself here..."></textarea></td>
-						<td><textarea rows="4" cols="50" placeholder="Describe yourself here..."></textarea></td>
-						<td>XXX.pdf</td>
-						<td>XXX.jpeg</td>
-						<td>KG</td>
-						<td>YES</td>
-					    </tr>
-
+					</c:forEach>
 					</tbody>
 				</table>
 			</div>

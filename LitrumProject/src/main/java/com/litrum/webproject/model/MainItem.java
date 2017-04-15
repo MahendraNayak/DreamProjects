@@ -96,7 +96,7 @@ public class MainItem extends PersistentObject {
         this.mainItemStatus = mainItemStatus;
     }
 
-    @Column(name = "isSubMainItem", nullable = false)
+    @Column(name = "issubmainitem", nullable = false)
     public boolean isSubMainItemForMainItem() {
         return isSubMainItemForMainItem;
     }
