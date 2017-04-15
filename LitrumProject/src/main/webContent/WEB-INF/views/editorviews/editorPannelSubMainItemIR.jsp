@@ -44,7 +44,7 @@
 					<br><input type="text" placeholder="CT" id="contractorName" name="contractorName" class="form-control" autofocus>
 				</div>
 				<div class="col-sm-9" style="width:499px;margin-left:482px;margin-top:-51px">
-					<br><input type="text" placeholder="CP" id="contractorPriority" name="contractorPriority" class="form-control" autofocus>
+					<br><input type="text" placeholder="CR" id="contractorPrice" name="contractorPrice" class="form-control" autofocus>
 				</div>
 
                                 <div class="clearfix" style="height: 10px;clear: both;"></div>

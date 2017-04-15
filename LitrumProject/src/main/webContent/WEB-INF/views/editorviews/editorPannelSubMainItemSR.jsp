@@ -44,7 +44,7 @@
 					<br><input type="text" placeholder="MK" id="makerName" name="makerName" class="form-control" autofocus>
 				</div>
 				<div class="col-sm-9" style="width:499px;margin-left:482px;margin-top:-51px">
-					<br><input type="text" placeholder="MP" id="makerPriority" name="makerPriority" class="form-control" autofocus>
+					<br><input type="text" placeholder="MR" id="makerPrice" name="makerPrice" class="form-control" autofocus>
 				    <input type="hidden" name="itemType" value="MAKER"/>
 				    <input type="hidden" name="mainItemId" value="${mainItemId}"/>
 				</div>
