@@ -12,7 +12,7 @@
         <div class="in-services">
         <c:if test="${not empty sucecssMessage}"><font color="green">${successMessage}</font></c:if>
         <c:if test="${not empty errorMessage}"><font color="red">${errorMessage}</font></c:if>
-        <form commandName="form" id="form" method="POST" action="editorPannelMainItemIRAndSRAdd">
+        <form commandName="form" id="form" method="POST" action="editorPannelSubMainItemSRORIRAdd">
 		    <div class="col-md-3 col-sm-6">
 		        <div class="panel panel-default" style="width:1017px">
                     <span>
