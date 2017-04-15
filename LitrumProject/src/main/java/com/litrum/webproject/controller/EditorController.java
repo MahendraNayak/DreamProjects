@@ -308,12 +308,28 @@ public class EditorController {
     }
 
     @RequestMapping(value = "/editorPannelSubMainItemSR", method = RequestMethod.GET)
-    public String addSubMainItemSR() {
+    public String addSubMainItemSR(Model uiModel, HttpServletRequest request) {
+        try {
+            uiModel.addAttribute("SMCID", Long.parseLong(request.getParameter("SMCID")));
+            uiModel.addAttribute("SMCNAME", request.getParameter("SMCNM"));
+            uiModel.addAttribute("SSMCID", Long.parseLong(request.getParameter("SSMCID")));
+            uiModel.addAttribute("SSMCNAME", request.getParameter("SSMCNM"));
+        } catch (Exception e) {
+            logger.error("Exception ::: " + e.getMessage());
+        }
         return "editorviews/editorPannelSubMainItemSR";
     }
 
     @RequestMapping(value = "/editorPannelSubMainItemIR", method = RequestMethod.GET)
-    public String addSubMainItemIR() {
+    public String addSubMainItemIR(Model uiModel, HttpServletRequest request) {
+        try {
+            uiModel.addAttribute("SMCID", Long.parseLong(request.getParameter("SMCID")));
+            uiModel.addAttribute("SMCNAME", request.getParameter("SMCNM"));
+            uiModel.addAttribute("SSMCID", Long.parseLong(request.getParameter("SSMCID")));
+            uiModel.addAttribute("SSMCNAME", request.getParameter("SSMCNM"));
+        } catch (Exception e) {
+            logger.error("Exception ::: " + e.getMessage());
+        }
         return "editorviews/editorPannelSubMainItemIR";
     }
 
