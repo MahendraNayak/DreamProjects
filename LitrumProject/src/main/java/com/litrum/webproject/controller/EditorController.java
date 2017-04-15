@@ -293,6 +293,10 @@ public class EditorController {
 
             List<MainItem> mainItemList = editorService.getMainItemsBySubSubMainCaegoryId(subSubMainCategoryId);
             uiModel.addAttribute("mainItemList", mainItemList);
+
+            List<LoadUnit> loadUnitList = userService.getAllLoadUnit();
+            uiModel.addAttribute("loadUnitList", loadUnitList);
+
         } catch (Exception e) {
             logger.error("Exception ::: " + e.getMessage());
         }
