@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
@@ -257,7 +258,8 @@ public class EditorController {
 
     @RequestMapping(value = "/editorPannelMainItemIRAndSRAdd", method = RequestMethod.POST)
     public String addContractorOrMaker(@ModelAttribute("itemForm") ItemsForm form,
-                                       Model uiModel,HttpServletRequest request, BindingResult result) {
+                                       Model uiModel, HttpServletRequest request,
+                                       BindingResult result, RedirectAttributes redirectAttributes) {
         logger.info("inside add contractor or maker post method");
         try {
             uiModel.addAttribute("SMCID", Long.parseLong(request.getParameter("SMCID")));
@@ -271,11 +273,14 @@ public class EditorController {
         try {
             editorService.createMakerOrContractorForMainItem(form);
         } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
             logger.error("Exception while creaing contractor or maker{}", e);
         }
         if (form != null && LitrumProjectConstants.CONTRACTOR.equalsIgnoreCase(form.getItemType())) {
+            redirectAttributes.addFlashAttribute("successMessge", "Contractor rate saved successfully");
             return "redirect:/editorPannelMainItemIR";
         } else {
+            redirectAttributes.addFlashAttribute("successMessge", "Supplier rate saved successfully");
             return "redirect:/editorPannelMainItemSR";
         }
     }
