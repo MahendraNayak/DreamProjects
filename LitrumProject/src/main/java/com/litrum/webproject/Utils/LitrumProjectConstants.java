@@ -19,4 +19,8 @@ public interface LitrumProjectConstants {
     String APPROVED = "APPROVED";
     String YES = "YES";
     String NO = "NO";
+    int ZERO = 0;
+    String ADD = "ADD";
+    String UPDATE = "UPDATE";
+    String DELETE = "DELETE";
 }

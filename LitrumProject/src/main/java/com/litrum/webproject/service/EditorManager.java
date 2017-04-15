@@ -145,8 +145,9 @@ public class EditorManager implements EditorService {
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
-    public SubMainItem createSubMainItem(SubMainItemsForm form) throws Exception {
-        if (form != null && form.getMainItemId() > 0 && form.getLoadUnitId() > 0) {
+    public void createSubMainItem(SubMainItemsForm form) throws Exception {
+        if (form != null && form.getMainItemId() > LitrumProjectConstants.ZERO && form.getLoadUnitId() > LitrumProjectConstants.ZERO) {
+            SubMainItem subMainItem;
             MainItem mainItem = daoFactory.getMainItemDAO().findById(form.getMainItemId(), false);
             if (mainItem == null) {
                 throw new Exception("main item not found with id, hence can't create sub main item");
@@ -155,16 +156,32 @@ public class EditorManager implements EditorService {
             if (loadUnit == null) {
                 throw new Exception("load unit not found with id, hence can't create sub main item");
             }
-            SubMainItem subMainItem = daoFactory.getSubMainItemDAO().findSubMainItemByShortDescription(form.getShortDecription());
-            if (null == subMainItem) {
-                subMainItem = new SubMainItem();
-                subMainItem.setShortDescription(form.getShortDecription());
-                subMainItem.setMainItem(mainItem);
-                subMainItem.setLoadUnit(loadUnit);
-                logger.info("sub main item created successfully.");
-                return daoFactory.getSubMainItemDAO().makePersistent(subMainItem);
+            if (form.getSubMainIemId() > LitrumProjectConstants.ZERO) {
+                subMainItem = daoFactory.getSubMainItemDAO().findById(form.getSubMainIemId(), false);
+                if (null == subMainItem) {
+                    throw new Exception("no sub main item found while update/delete");
+                }
+                if (LitrumProjectConstants.DELETE.equalsIgnoreCase(form.getFormSubmitType())) {
+                    daoFactory.getSubMainItemDAO().makeTransient(subMainItem);
+                    logger.info("sub main item deleted successfully.");
+                } else if (LitrumProjectConstants.UPDATE.equalsIgnoreCase(form.getFormSubmitType()) &&
+                        !daoFactory.getSubMainItemDAO().isShortDescriptionExistForSubMainItem(form.getShortDecription())) {
+                    subMainItem.setShortDescription(form.getShortDecription());
+                    subMainItem.setLoadUnit(loadUnit);
+                    logger.info("sub main item updated successfully.");
+                }
             } else {
-                throw new Exception("Sub Main item already exist with short decription hence, can't create new.");
+                if (LitrumProjectConstants.ADD.equalsIgnoreCase(form.getFormSubmitType()) &&
+                        !daoFactory.getSubMainItemDAO().isShortDescriptionExistForSubMainItem(form.getShortDecription())) {
+                    subMainItem = new SubMainItem();
+                    subMainItem.setShortDescription(form.getShortDecription());
+                    subMainItem.setMainItem(mainItem);
+                    subMainItem.setLoadUnit(loadUnit);
+                    logger.info("sub main item created successfully.");
+                    daoFactory.getSubMainItemDAO().makePersistent(subMainItem);
+                } else {
+                    throw new Exception("Sub Main item already exist with short decription hence, can't create new.");
+                }
             }
         } else {
             throw new Exception("Main Item not found while creating sub main item.");

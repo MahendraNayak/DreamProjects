@@ -318,7 +318,7 @@ public class EditorController {
             uiModel.addAttribute("SSMCID", subSubMainCategoryId);
             uiModel.addAttribute("SSMCNM", request.getParameter("SSMCNM"));
 
-            SubMainItem subMainItem = editorService.createSubMainItem(form);
+            editorService.createSubMainItem(form);
 
         } catch (Exception e) {
             logger.error("Exception while creating sub main item:", e);
@@ -363,6 +363,7 @@ public class EditorController {
                 jsonObject.put("subMainItemId", subMainItem.getId());
                 jsonObject.put("shortDescription", subMainItem.getShortDescription());
                 jsonObject.put("unitName", subMainItem.getLoadUnit().getUnitName());
+                jsonObject.put("unitId", subMainItem.getLoadUnit().getId());
                 list.add(jsonObject);
             }
             return list.toString();
