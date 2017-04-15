@@ -7,7 +7,6 @@ import com.litrum.webproject.form.SubMainItemsForm;
 import com.litrum.webproject.model.*;
 import com.litrum.webproject.service.EditorService;
 import com.litrum.webproject.service.UserService;
-import org.json.HTTP;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,17 +14,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -79,7 +74,7 @@ public class EditorController {
         uiModel.addAttribute("SSMCID", SSMCID);
         uiModel.addAttribute("SSMCNAME", SSMCNAME);
 
-        List<MainItem> mainItemList = editorService.getAllMainItems();
+        List<MainItem> mainItemList = editorService.getMainItemsBySubSubMainCaegoryId(SSMCID);
         List<RateCity> rateCityList = editorService.getAllRateCity();
         List<LoadUnit> loadUnitList = userService.getAllLoadUnit();
 
@@ -110,7 +105,7 @@ public class EditorController {
         uiModel.addAttribute("SSMCID", SSMCID);
         uiModel.addAttribute("SSMCNAME", SSMCNAME);
 
-        List<MainItem> mainItemList = editorService.getAllMainItems();
+        List<MainItem> mainItemList = editorService.getMainItemsBySubSubMainCaegoryId(SSMCID);
         List<RateCity> rateCityList = editorService.getAllRateCity();
         List<LoadUnit> loadUnitList = userService.getAllLoadUnit();
 
@@ -259,7 +254,7 @@ public class EditorController {
     @RequestMapping(value = "/editorPannelMainItemIRAndSRAdd", method = RequestMethod.POST)
     public String addContractorOrMaker(@ModelAttribute("itemForm") ItemsForm form,
                                        Model uiModel, HttpServletRequest request,
-                                       BindingResult result, RedirectAttributes redirectAttributes) {
+                                       BindingResult result) {
         logger.info("inside add contractor or maker post method");
         try {
             uiModel.addAttribute("SMCID", Long.parseLong(request.getParameter("SMCID")));
@@ -273,14 +268,14 @@ public class EditorController {
         try {
             editorService.createMakerOrContractorForMainItem(form);
         } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
+            //redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
             logger.error("Exception while creaing contractor or maker{}", e);
         }
         if (form != null && LitrumProjectConstants.CONTRACTOR.equalsIgnoreCase(form.getItemType())) {
-            redirectAttributes.addFlashAttribute("successMessge", "Contractor rate saved successfully");
+           // redirectAttributes.addFlashAttribute("successMessge", "Contractor rate saved successfully");
             return "redirect:/editorPannelMainItemIR";
         } else {
-            redirectAttributes.addFlashAttribute("successMessge", "Supplier rate saved successfully");
+           // redirectAttributes.addFlashAttribute("successMessge", "Supplier rate saved successfully");
             return "redirect:/editorPannelMainItemSR";
         }
     }

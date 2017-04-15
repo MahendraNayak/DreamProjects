@@ -22,7 +22,7 @@ public interface EditorService {
 
     void createMakerOrContractorForMainItem(ItemsForm form) throws Exception;
 
-    List<MainItem> getAllMainItems();
+    List<MainItem> getMainItemsBySubSubMainCaegoryId(Long subSubMainCategoryId);
 
     List<RateCity> getAllRateCity();
 

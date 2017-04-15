@@ -133,8 +133,8 @@ public class EditorManager implements EditorService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<MainItem> getAllMainItems() {
-        return daoFactory.getMainItemDAO().findAll();
+    public List<MainItem> getMainItemsBySubSubMainCaegoryId(Long subSubMainCategoryId) {
+        return daoFactory.getMainItemDAO().findBySubSubMainCategoryId(subSubMainCategoryId);
     }
 
     @Override
