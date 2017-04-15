@@ -393,9 +393,14 @@ public class EditorController {
         return null;
     }
     @RequestMapping(value = "/editorPannelSubMainItemSRORIRAdd", method = RequestMethod.POST)
-    public String addSubMainItemSRORIR(@ModelAttribute("subMainItemForm") SubMainItemsForm form) {
+    public String addSubMainItemSRORIR(@ModelAttribute("subMainItemForm") SubMainItemsForm form, Model uiModel, HttpServletRequest request) {
         logger.debug("Inside sub main Item SR or IR add post method");
         try {
+            Long subSubMainCatId = Long.parseLong(request.getParameter("SSMCID"));
+            uiModel.addAttribute("SMCID", Long.parseLong(request.getParameter("SMCID")));
+            uiModel.addAttribute("SMCNM", request.getParameter("SMCNM"));
+            uiModel.addAttribute("SSMCID", subSubMainCatId);
+            uiModel.addAttribute("SSMCNM", request.getParameter("SSMCNM"));
             editorService.createMakerOrContractorForSubMainItem(form);
         } catch (Exception e) {
             logger.error("Exception while adding sub main item SR or IR", e);
