@@ -307,9 +307,17 @@ public class EditorController {
     }
 
     @RequestMapping(value = "/editorPannelSubMainItemAdd", method = RequestMethod.POST)
-    public String addSubMainItemPost(@ModelAttribute("subMainItemForm") SubMainItemsForm form, Model uiModel) {
+    public String addSubMainItemPost(@ModelAttribute("subMainItemForm") SubMainItemsForm form, Model uiModel,
+                                     HttpServletRequest request) {
         logger.debug("inside add sub main item post method");
         try {
+            Long subSubMainCategoryId = Long.parseLong(request.getParameter("SSMCID"));
+
+            uiModel.addAttribute("SMCID", Long.parseLong(request.getParameter("SMCID")));
+            uiModel.addAttribute("SMCNAME", request.getParameter("SMCNM"));
+            uiModel.addAttribute("SSMCID", subSubMainCategoryId);
+            uiModel.addAttribute("SSMCNAME", request.getParameter("SSMCNM"));
+
             SubMainItem subMainItem = editorService.createSubMainItem(form);
 
         } catch (Exception e) {
