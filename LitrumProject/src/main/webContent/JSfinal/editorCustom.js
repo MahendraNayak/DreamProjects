@@ -7,9 +7,11 @@ function setMainItemID(mainItemID){
     getSubMainItemsBasedOnMainItem(mainItemID);
 }
 
-function setMainAndSubItems(mainItemID,subMainItemID){
+function setMainAndSubItems(mainItemID,subMainItemID,SD,unit){
     $("#mainItemId").val(mainItemID);
     $("#subMainIemId").val(mainItemID);
+	$("#shortDecription").val(SD);
+$("#loadUnitId").val(unit);
 }
 
 function setZeroIDOnClick(){
@@ -18,6 +20,10 @@ function setZeroIDOnClick(){
         return false;
     }
     $("#subMainIemId").val(0);
+}
+
+function setFormSubmitType(formSubmitType){
+	$("#formSubmitType").val(formSubmitType);
 }
 
 function getSubMainItemsBasedOnMainItem(mainItemID){
@@ -34,11 +40,14 @@ function getSubMainItemsBasedOnMainItem(mainItemID){
 
 	var HTML_TABLE = "<table class='table'><tbody>";
 	for(var i=0;i<response.length;i++){
-		//var SMCNameWithQuotes = JSON.stringify(response[i].name);
-		//var SMCName = (JSON.stringify(response[i].name)).replace(/"/g, '');
-		//var SSMCID = JSON.stringify(response[i].subSubMainCategoryId);
+		var subMainItemID = JSON.stringify(response[i].subMainItemId);
+		var shortDescription = (JSON.stringify(response[i].shortDescription)).replace(/"/g, '');
+		var unitName = (JSON.stringify(response[i].unitName)).replace(/"/g, '');
 
-		//HTML_TABLE = HTML_TABLE + "<tr><td style='font-size:16px;color:black;cursor:pointer' onclick='setSubSubMainCategoryID("+ID+","+SSMCID+","+SMCNameWithQuotes+")'><b>"+SMCName+"</b></td></tr>";
+    var orgSD = JSON.stringify(response[i].shortDescription);
+    var orgId = JSON.stringify(response[i].unitId);
+
+		HTML_TABLE = HTML_TABLE + "<tr><td style='font-size:16px;color:black;cursor:pointer' onclick='setMainAndSubItems("+mainItemID+","+subMainItemID+","+orgSD+","+orgId+")'><b>"+shortDescription+" | "+unitName +"</b></td></tr>";
 
 	}
 	HTML_TABLE = HTML_TABLE + "</tbody></table>";

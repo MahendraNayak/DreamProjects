@@ -30,7 +30,7 @@
 					<tbody>
 					<c:forEach var="mainItemObj" items="${mainItemList}" varStatus="status">
 					    <tr>
-						<td>SMC${mainItemObj.id}</td>
+						<td>SMI${mainItemObj.id}</td>
 						<td><textarea rows="2" cols="50" placeholder="Describe yourself here...">${mainItemObj.shortDescription}</textarea></td>
 						<td><textarea rows="4" cols="50" placeholder="Describe yourself here...">${mainItemObj.longDescription}</textarea></td>
 						<td>${mainItemObj.techSpecificationName}</td>
@@ -55,7 +55,7 @@
                                     <tbody>
                                     <c:forEach var="mainItemObj" items="${mainItemList}" varStatus="status">
 					                    <tr>
-					                        <td style="font-size:16px;color:black;cursor:pointer" onClick=setMainItemID(${mainItemObj.id})><b>SMC${mainItemObj.id}</b></td>
+					                        <td style="font-size:16px;color:black;cursor:pointer" onClick=setMainItemID(${mainItemObj.id})><b>SMI${mainItemObj.id}</b></td>
                                         </tr>
                                     </c:forEach>
 
@@ -80,6 +80,7 @@
                 <input type="hidden" name="SSMCID" id="SSMCID" value="${SSMCID}">
                 <input type="hidden" name="SMCNM" id="SMCID" value="${SMCNM}">
                 <input type="hidden" name="SSMCNM" id="SMCID" value="${SSMCNM}">
+		        <input type="hidden" name="formSubmitType" id="formSubmitType" value="">
             </span>
                 <div class="form-group" style="margin-left:382px">
                     <input type="hidden" id="mainItemId" name="mainItemId" value="0">
@@ -91,9 +92,9 @@
                             <option value="${loadUnit.id}">${loadUnit.unitName}</option>
                 </c:forEach>
 			</select>
-                    <input type="submit" class="btn btn-lg btn-success btn-block" style="margin-top:7px;width:138px" value="Add" onclick="return setZeroIDOnClick()">
-                    <input type="submit" class="btn btn-lg btn-success btn-block" style="margin-top:-89px;width:129px;margin-left:143px" value="Update">
-		    <input type="submit" class="btn btn-lg btn-success btn-block" style="margin-top:-89px;width:129px;margin-left:278px" value="Delete">
+                    <input type="submit" class="btn btn-lg btn-success btn-block" style="margin-top:7px;width:138px" value="Add" onclick=";setFormSubmitType('ADD');return setZeroIDOnClick()">
+                    <input type="submit" class="btn btn-lg btn-success btn-block" style="margin-top:-89px;width:129px;margin-left:143px" value="Update" onclick="setFormSubmitType('UPDATE')">
+		            <input type="submit" class="btn btn-lg btn-success btn-block" style="margin-top:-89px;width:129px;margin-left:278px" value="Delete" onclick="setFormSubmitType('DELETE')">
                 </div>
             </form>
             </div>
