@@ -31,5 +31,7 @@ public interface EditorService {
     void createMakerOrContractorForSubMainItem(SubMainItemsForm form) throws Exception;
 
     List<SubMainItem> getAllSubMainItemsByMainItemId(Long mainItemId) throws Exception;
+
+    List<SubMainItem> findSubMainItemByMainItemIds(List<Long> mainItemIds);
 }
 

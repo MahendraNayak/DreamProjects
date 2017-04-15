@@ -225,4 +225,10 @@ public class EditorManager implements EditorService {
         }
         return daoFactory.getSubMainItemDAO().findByMainItemId(mainItemId);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<SubMainItem> findSubMainItemByMainItemIds(List<Long> mainItemIds) {
+        return daoFactory.getSubMainItemDAO().findByMainItemIds(mainItemIds);
+    }
 }

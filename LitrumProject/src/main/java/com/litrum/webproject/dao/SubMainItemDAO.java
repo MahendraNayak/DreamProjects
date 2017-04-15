@@ -14,4 +14,6 @@ public interface SubMainItemDAO extends GenericeDAO<SubMainItem, Long> {
     List<SubMainItem> findByMainItemId(Long mainItemId);
 
     boolean isShortDescriptionExistForSubMainItem(String shortDescription);
+
+    List<SubMainItem> findByMainItemIds(List<Long> mainItemIds);
 }

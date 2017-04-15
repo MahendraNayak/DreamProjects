@@ -33,4 +33,12 @@ public class SubMainItemDAOHibernate extends GenericDAOHibernate<SubMainItem, Lo
         criteria.add(Restrictions.eq("shortDescription", shortDescription));
         return null != criteria.uniqueResult();
     }
+
+    @Override
+    public List<SubMainItem> findByMainItemIds(List<Long> mainItemIds) {
+        Criteria criteria = getSession().createCriteria(getPersistentClass());
+        criteria.createAlias("mainItem", "mainItem");
+        criteria.add(Restrictions.in("mainItem.id", mainItemIds));
+        return criteria.list();
+    }
 }

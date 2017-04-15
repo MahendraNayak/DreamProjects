@@ -329,10 +329,20 @@ public class EditorController {
     @RequestMapping(value = "/editorPannelSubMainItemSR", method = RequestMethod.GET)
     public String addSubMainItemSR(Model uiModel, HttpServletRequest request) {
         try {
+            Long subSubMainCatId = Long.parseLong(request.getParameter("SSMCID"));
             uiModel.addAttribute("SMCID", Long.parseLong(request.getParameter("SMCID")));
             uiModel.addAttribute("SMCNM", request.getParameter("SMCNM"));
-            uiModel.addAttribute("SSMCID", Long.parseLong(request.getParameter("SSMCID")));
+            uiModel.addAttribute("SSMCID", subSubMainCatId);
             uiModel.addAttribute("SSMCNM", request.getParameter("SSMCNM"));
+
+            List<MainItem> mainItemList = editorService.getMainItemsBySubSubMainCaegoryId(subSubMainCatId);
+            List<Long> mainItemIds = new ArrayList<>();
+            for (MainItem mainItem : mainItemList) {
+                mainItemIds.add(mainItem.getId());
+            }
+            List<SubMainItem> subMainItemList = editorService.findSubMainItemByMainItemIds(mainItemIds);
+            uiModel.addAttribute("subMainItemList", subMainItemList);
+
         } catch (Exception e) {
             logger.error("Exception ::: " + e.getMessage());
         }
@@ -342,10 +352,20 @@ public class EditorController {
     @RequestMapping(value = "/editorPannelSubMainItemIR", method = RequestMethod.GET)
     public String addSubMainItemIR(Model uiModel, HttpServletRequest request) {
         try {
+            Long subSubMainCatId = Long.parseLong(request.getParameter("SSMCID"));
             uiModel.addAttribute("SMCID", Long.parseLong(request.getParameter("SMCID")));
             uiModel.addAttribute("SMCNM", request.getParameter("SMCNM"));
-            uiModel.addAttribute("SSMCID", Long.parseLong(request.getParameter("SSMCID")));
+            uiModel.addAttribute("SSMCID", subSubMainCatId);
             uiModel.addAttribute("SSMCNM", request.getParameter("SSMCNM"));
+
+            List<MainItem> mainItemList = editorService.getMainItemsBySubSubMainCaegoryId(subSubMainCatId);
+            List<Long> mainItemIds = new ArrayList<>();
+            for (MainItem mainItem : mainItemList) {
+                mainItemIds.add(mainItem.getId());
+            }
+            List<SubMainItem> subMainItemList = editorService.findSubMainItemByMainItemIds(mainItemIds);
+            uiModel.addAttribute("subMainItemList", subMainItemList);
+
         } catch (Exception e) {
             logger.error("Exception ::: " + e.getMessage());
         }
