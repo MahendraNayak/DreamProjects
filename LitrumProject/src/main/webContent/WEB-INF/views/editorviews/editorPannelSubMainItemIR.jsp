@@ -20,7 +20,7 @@
                         <input type="hidden" name="SSMCID" id="SSMCID" value="${SSMCID}">
                         <input type="hidden" name="SMCNM" id="SMCNM" value="${SMCNM}">
                         <input type="hidden" name="SSMCNM" id="SSMCNM" value="${SSMCNM}">
-                        <input type="hidden" name="itemType" value="CONTRACTOR"/>
+                        <input type="hidden" name="subItemType" value="CONTRACTOR"/>
                     </span>
 				    <div class="panel-heading"><h3 class="panel-title">SUB ITEM DETAILS - IR</h3></div>
 				    <div class="panel-body" style="padding:0;border:0px;height:300px;overflow-y:auto;margin-top:6px">
