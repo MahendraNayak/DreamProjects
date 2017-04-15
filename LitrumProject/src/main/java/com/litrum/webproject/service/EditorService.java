@@ -29,5 +29,7 @@ public interface EditorService {
     SubMainItem createSubMainItem(SubMainItemsForm form) throws Exception;
 
     void createMakerOrContractorForSubMainItem(SubMainItemsForm form) throws Exception;
+
+    List<SubMainItem> getAllSubMainItemsByMainItemId(Long mainItemId) throws Exception;
 }
 

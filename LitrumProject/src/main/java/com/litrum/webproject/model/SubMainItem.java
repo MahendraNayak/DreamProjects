@@ -34,7 +34,7 @@ public class SubMainItem extends PersistentObject {
         this.mainItem = mainItem;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = LoadUnit.class)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = LoadUnit.class)
     @JoinColumn(name = "load_unit_id", nullable = false)
     public LoadUnit getLoadUnit() {
         return loadUnit;

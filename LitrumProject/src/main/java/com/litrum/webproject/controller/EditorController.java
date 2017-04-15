@@ -7,6 +7,7 @@ import com.litrum.webproject.form.SubMainItemsForm;
 import com.litrum.webproject.model.*;
 import com.litrum.webproject.service.EditorService;
 import com.litrum.webproject.service.UserService;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -342,6 +344,25 @@ public class EditorController {
         return "editorviews/editorPannelSubMainItemIR";
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/subMainItem/list")
+    public String getAllSubMainItemsByMainItemId(@ModelAttribute("subMainItemForm") SubMainItemsForm form) {
+        List<JSONObject> list = new ArrayList<>();
+        try {
+            List<SubMainItem> subMainItemList = editorService.getAllSubMainItemsByMainItemId(form.getMainItemId());
+            for (SubMainItem subMainItem : subMainItemList) {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("subMainItemId", subMainItem.getId());
+                jsonObject.put("shortDescription", subMainItem.getShortDescription());
+                jsonObject.put("unitName", subMainItem.getLoadUnit().getUnitName());
+                list.add(jsonObject);
+            }
+            return list.toString();
+        } catch (Exception e) {
+            logger.error("Exception while getting sub main item list based on main item", e);
+        }
+        return null;
+    }
     @RequestMapping(value = "/editorPannelSubMainItemSRORIRAdd", method = RequestMethod.POST)
     public String addSubMainItemSRORIR(@ModelAttribute("subMainItemForm") SubMainItemsForm form) {
         logger.debug("Inside sub main Item SR or IR add post method");

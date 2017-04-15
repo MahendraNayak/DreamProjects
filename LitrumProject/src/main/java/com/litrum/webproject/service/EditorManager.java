@@ -198,4 +198,14 @@ public class EditorManager implements EditorService {
             throw new Exception("form doesn't contains sub main item id, hnce can't proceed");
         }
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<SubMainItem> getAllSubMainItemsByMainItemId(Long mainItemId) throws Exception {
+        if (mainItemId <= 0) {
+            logger.error("invalid param passed, mainItemId:[{}]", mainItemId);
+            throw new Exception("Invalid param passed");
+        }
+        return daoFactory.getSubMainItemDAO().findByMainItemId(mainItemId);
+    }
 }
