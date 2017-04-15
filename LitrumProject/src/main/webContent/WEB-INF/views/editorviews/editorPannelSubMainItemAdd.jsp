@@ -6,7 +6,7 @@
 	<div class="rightInfo landing-page-wrapper">
         <div class="padding-txt">
             <div class="col-xs-12 category-header">
-		<a href="editorPannelHome"><b>${SMCNAME}</b></a><b> > </b><a href="editorPannelSSMCHome?SMCID=${SMCID}&SMCNM=${SMCNAME}"><b>${SSMCNAME}</b></a>
+		<a href="editorPannelHome"><b>${SMCNM}</b></a><b> > </b><a href="editorPannelSSMCHome?SMCID=${SMCID}&SMCNM=${SMCNM}"><b>${SSMCNM}</b></a>
             </div>
         </div>
         <div class="in-services">
@@ -35,8 +35,8 @@
 						<td><textarea rows="4" cols="50" placeholder="Describe yourself here...">${mainItemObj.longDescription}</textarea></td>
 						<td>${mainItemObj.techSpecificationName}</td>
 						<td>${mainItemObj.imageName}</td>
-						<td></td>
-						<td>${mainItemObj.isSubMainItemForMainItem}</td>
+						<td>${mainItemObj.loadUnit.unitName}</td>
+						<td>${mainItemObj.isSubMainItemForMainItem()}</td>
 					    </tr>
 					</c:forEach>
 					</tbody>
@@ -53,9 +53,11 @@
                             <div class="panel-body" style="padding:0;border:0px;height:230px;overflow-y:auto">
                                 <table class="table">
                                     <tbody>
-					<tr>
-					    <td style="font-size:16px;color:black;cursor:pointer"><b>XXXXXXX</b></td>
+                                    <c:forEach var="mainItemObj" items="${mainItemList}" varStatus="status">
+					                    <tr>
+					                        <td style="font-size:16px;color:black;cursor:pointer" onClick=setMainItemID(${mainItemObj.id})><b>SMC${mainItemObj.id}</b></td>
                                         </tr>
+                                    </c:forEach>
 
                                     </tbody>
                                 </table>
@@ -65,40 +67,31 @@
 		<div class="col-md-4 col-sm-6">
                     <div class="panel panel-default">
                         <div class="panel-heading"><h3 class="panel-title">SUB MAIN ITEM</h3></div>
-                            <div class="panel-body" style="padding:0;border:0px;height:230px;overflow-y:auto">
-                                <table class="table">
-                                    <tbody>
-					<tr>
-					    <td style="font-size:16px;color:black;cursor:pointer"><b>DEMOSD - KG</b></td>
-                                        </tr>
-
-                                    </tbody>
-                                </table>
+                            <div class="panel-body" style="padding:0;border:0px;height:230px;overflow-y:auto" id="SUB_MI_TABLE">
                             </div>
                     </div>
                 </div>
 </div><!--row End -->
 <div class="row" >
             <div class="col-md-3 col-sm-6">
-            <form role="form" id="form" method="POST" action="adminPannelSubMainCat">
+            <form role="form" id="form" method="POST" action="editorPannelSubMainItemAdd">
             <span>
                 <input type="hidden" name="SMCID" id="SMCID" value="${SMCID}">
                 <input type="hidden" name="SSMCID" id="SSMCID" value="${SSMCID}">
-                <input type="hidden" name="SMCNM" id="SMCID" value="${SMCNAME}">
-                <input type="hidden" name="SSMCNM" id="SMCID" value="${SSMCNAME}">
+                <input type="hidden" name="SMCNM" id="SMCID" value="${SMCNM}">
+                <input type="hidden" name="SSMCNM" id="SMCID" value="${SSMCNM}">
             </span>
                 <div class="form-group" style="margin-left:382px">
-                    <input type="hidden" id="mainCategoryId" name="mainCategoryId" value="0">
-		    <input type="hidden" id="subMainCategoryId" name="subMainCategoryId" value="0">
-                    <input type="text" id="subMainCategoryName" name="subMainCategoryName" placeholder="Sub Main Item SD" class="form-control" autocomplete="off" style="width:420px;height:35px"><br>
+                    <input type="hidden" id="mainItemId" name="mainItemId" value="0">
+                    <input type="hidden" id="subMainIemId" name="subMainIemId" value="0">
+                    <input type="text" id="shortDecription" name="shortDecription" placeholder="Sub Main Item SD" class="form-control" autocomplete="off" style="width:420px;height:35px"><br>
 			<select class="form-control" name="loadUnitId" id="loadUnitId" style="width:419px">
 				<option value="0">Select Unit</option>
-				<option value="1">KG</option>
-				<option value="1">NUMBER</option>
+				<c:forEach var="loadUnit" items="${loadUnitList}" varStatus="loadUnitId">
+                            <option value="${loadUnit.id}">${loadUnit.unitName}</option>
+                </c:forEach>
 			</select>
-
-
-                    <input type="submit" class="btn btn-lg btn-success btn-block" style="margin-top:7px;width:138px" value="Add" onclick="setZeroIDOnClick('subMainCategoryId')">
+                    <input type="submit" class="btn btn-lg btn-success btn-block" style="margin-top:7px;width:138px" value="Add" onclick="return setZeroIDOnClick()">
                     <input type="submit" class="btn btn-lg btn-success btn-block" style="margin-top:-89px;width:129px;margin-left:143px" value="Update">
 		    <input type="submit" class="btn btn-lg btn-success btn-block" style="margin-top:-89px;width:129px;margin-left:278px" value="Delete">
                 </div>

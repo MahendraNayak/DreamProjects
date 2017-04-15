@@ -16,7 +16,7 @@ public class SubMainItemDAOHibernate extends GenericDAOHibernate<SubMainItem, Lo
     public SubMainItem findSubMainItemByShortDescription(String shortDecription) {
         Criteria criteria = getSession().createCriteria(getPersistentClass());
         criteria.add(Restrictions.eq("shortDescription", shortDecription));
-        return (SubMainItem) criteria.list();
+        return (SubMainItem) criteria.uniqueResult();
     }
 
     @Override

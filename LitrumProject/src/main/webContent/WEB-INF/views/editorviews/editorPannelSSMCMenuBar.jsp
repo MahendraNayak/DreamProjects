@@ -9,7 +9,7 @@
                         <nav id="MainMenu">
                             <div class="list-group panel" >
                             <c:forEach var="subSubMainCategoryObj" items="${subSubMainCategoryList}" varStatus="status">
-                                <li class="list-group-item list-group-item-success"><a href="editorPannelMainItemAdd?SMCID=${SMCID}&SMCNM=${SMCNAME}&SSMCID=${subSubMainCategoryObj.id}&SSMCNM=${subSubMainCategoryObj.subSubMainCategoryName}" id="leftAllLink" >${subSubMainCategoryObj.subSubMainCategoryName}<span class="arrow"></span></a></li>
+                                <li class="list-group-item list-group-item-success"><a href="editorPannelMainItemAdd?SMCID=${SMCID}&SMCNM=${SMCNM}&SSMCID=${subSubMainCategoryObj.id}&SSMCNM=${subSubMainCategoryObj.subSubMainCategoryName}" id="leftAllLink" >${subSubMainCategoryObj.subSubMainCategoryName}<span class="arrow"></span></a></li>
                             </c:forEach>
                             </div>
                         </nav>

@@ -5,8 +5,8 @@
 <span>
 <input type="hidden" name="SMCID" id="SMCID" value="${SMCID}">
 <input type="hidden" name="SSMCID" id="SSMCID" value="${SSMCID}">
-<input type="hidden" name="SMCNM" id="SMCID" value="${SMCNAME}">
-<input type="hidden" name="SSMCNM" id="SMCID" value="${SSMCNAME}">
+<input type="hidden" name="SMCNM" id="SMCNM" value="${SMCNM}">
+<input type="hidden" name="SSMCNM" id="SSMCNM" value="${SSMCNM}">
 
 </span>
 <div class="col-sm-9" style="width:981px">

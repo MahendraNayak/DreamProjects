@@ -6,7 +6,7 @@
     <div class="rightInfo landing-page-wrapper">
         <div class="padding-txt">
             <div class="col-xs-12 category-header">
-                <a href="editorPannelHome"><b>${SMCNAME}</b></a><b> > </b><a href="editorPannelSSMCHome?SMCID=${SMCID}&SMCNM=${SMCNAME}"><b>${SSMCNAME}</b></a>
+                <a href="editorPannelHome"><b>${SMCNM}</b></a><b> > </b><a href="editorPannelSSMCHome?SMCID=${SMCID}&SMCNM=${SMCNM}"><b>${SSMCNM}</b></a>
             </div>
         </div>
         <div class="in-services">
@@ -18,8 +18,8 @@
                     <span>
                         <input type="hidden" name="SMCID" id="SMCID" value="${SMCID}">
                         <input type="hidden" name="SSMCID" id="SSMCID" value="${SSMCID}">
-                        <input type="hidden" name="SMCNM" id="SMCID" value="${SMCNAME}">
-                        <input type="hidden" name="SSMCNM" id="SMCID" value="${SSMCNAME}">
+                        <input type="hidden" name="SMCNM" id="SMCID" value="${SMCNM}">
+                        <input type="hidden" name="SSMCNM" id="SMCID" value="${SSMCNM}">
                     </span>
 				    <div class="panel-heading"><h3 class="panel-title">ITEM DETAILS - MAIN ITEM</h3></div>
 				    <div class="panel-body" style="padding:0;border:0px;height:333px;overflow-y:auto;margin-top:6px">

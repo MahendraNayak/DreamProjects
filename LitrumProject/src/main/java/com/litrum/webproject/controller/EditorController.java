@@ -66,15 +66,15 @@ public class EditorController {
         logger.debug(" editorPannelMainItemSR : GET ");
 
         long SMCID = Long.parseLong(request.getParameter("SMCID"));
-        String SMCNAME = request.getParameter("SMCNM");
+        String SMCNM = request.getParameter("SMCNM");
 
         long SSMCID = Long.parseLong(request.getParameter("SSMCID"));
-        String SSMCNAME = request.getParameter("SSMCNM");
+        String SSMCNM = request.getParameter("SSMCNM");
 
         uiModel.addAttribute("SMCID", SMCID);
-        uiModel.addAttribute("SMCNAME", SMCNAME);
+        uiModel.addAttribute("SMCNM", SMCNM);
         uiModel.addAttribute("SSMCID", SSMCID);
-        uiModel.addAttribute("SSMCNAME", SSMCNAME);
+        uiModel.addAttribute("SSMCNM", SSMCNM);
 
         List<MainItem> mainItemList = editorService.getMainItemsBySubSubMainCaegoryId(SSMCID);
         List<RateCity> rateCityList = editorService.getAllRateCity();
@@ -97,15 +97,15 @@ public class EditorController {
         logger.debug(" editorPannelMainItemIR : GET ");
 
         long SMCID = Long.parseLong(request.getParameter("SMCID"));
-        String SMCNAME = request.getParameter("SMCNM");
+        String SMCNM = request.getParameter("SMCNM");
 
         long SSMCID = Long.parseLong(request.getParameter("SSMCID"));
-        String SSMCNAME = request.getParameter("SSMCNM");
+        String SSMCNM = request.getParameter("SSMCNM");
 
         uiModel.addAttribute("SMCID", SMCID);
-        uiModel.addAttribute("SMCNAME", SMCNAME);
+        uiModel.addAttribute("SMCNM", SMCNM);
         uiModel.addAttribute("SSMCID", SSMCID);
-        uiModel.addAttribute("SSMCNAME", SSMCNAME);
+        uiModel.addAttribute("SSMCNM", SSMCNM);
 
         List<MainItem> mainItemList = editorService.getMainItemsBySubSubMainCaegoryId(SSMCID);
         List<RateCity> rateCityList = editorService.getAllRateCity();
@@ -126,10 +126,10 @@ public class EditorController {
     public String editorPannelMainItemGet(HttpServletRequest request ,Model uiModel) {
         logger.debug(" editorPannelMainItemAdd : GET ");
         long SMCID = Long.parseLong(request.getParameter("SMCID"));
-        String SMCNAME = request.getParameter("SMCNM");
+        String SMCNM = request.getParameter("SMCNM");
 
         long SSMCID = Long.parseLong(request.getParameter("SSMCID"));
-        String SSMCNAME = request.getParameter("SSMCNM");
+        String SSMCNM = request.getParameter("SSMCNM");
 
         List<SubSubMainCategory> subSubMainCategoryList = null;
         CategoriesForm categoriesForm = new CategoriesForm();
@@ -142,9 +142,9 @@ public class EditorController {
             uiModel.addAttribute("loadUnitList", loadUnitList);
 
             uiModel.addAttribute("SMCID", SMCID);
-            uiModel.addAttribute("SMCNAME", SMCNAME);
+            uiModel.addAttribute("SMCNM", SMCNM);
             uiModel.addAttribute("SSMCID", SSMCID);
-            uiModel.addAttribute("SSMCNAME", SSMCNAME);
+            uiModel.addAttribute("SSMCNM", SSMCNM);
 
         }catch (Exception e){
             logger.debug("Exception editorPannelMainItemAdd :: findBySubMainCategoryId "+e.getMessage());
@@ -166,7 +166,7 @@ public class EditorController {
             uiModel.addAttribute("subSubMainCategoryList", subSubMainCategoryList);
 
             uiModel.addAttribute("SMCID", SMCID);
-            uiModel.addAttribute("SMCNAME", request.getParameter("SMCNM"));
+            uiModel.addAttribute("SMCNM", request.getParameter("SMCNM"));
 
         } catch (Exception e) {
             logger.debug("Exception editorPannelSSMCHome :: findBySubMainCategoryId " + e.getMessage());
@@ -289,9 +289,9 @@ public class EditorController {
             Long subSubMainCategoryId = Long.parseLong(request.getParameter("SSMCID"));
 
             uiModel.addAttribute("SMCID", Long.parseLong(request.getParameter("SMCID")));
-            uiModel.addAttribute("SMCNAME", request.getParameter("SMCNM"));
+            uiModel.addAttribute("SMCNM", request.getParameter("SMCNM"));
             uiModel.addAttribute("SSMCID", subSubMainCategoryId);
-            uiModel.addAttribute("SSMCNAME", request.getParameter("SSMCNM"));
+            uiModel.addAttribute("SSMCNM", request.getParameter("SSMCNM"));
 
             List<MainItem> mainItemList = editorService.getMainItemsBySubSubMainCaegoryId(subSubMainCategoryId);
             uiModel.addAttribute("mainItemList", mainItemList);
@@ -314,9 +314,9 @@ public class EditorController {
             Long subSubMainCategoryId = Long.parseLong(request.getParameter("SSMCID"));
 
             uiModel.addAttribute("SMCID", Long.parseLong(request.getParameter("SMCID")));
-            uiModel.addAttribute("SMCNAME", request.getParameter("SMCNM"));
+            uiModel.addAttribute("SMCNM", request.getParameter("SMCNM"));
             uiModel.addAttribute("SSMCID", subSubMainCategoryId);
-            uiModel.addAttribute("SSMCNAME", request.getParameter("SSMCNM"));
+            uiModel.addAttribute("SSMCNM", request.getParameter("SSMCNM"));
 
             SubMainItem subMainItem = editorService.createSubMainItem(form);
 
@@ -330,9 +330,9 @@ public class EditorController {
     public String addSubMainItemSR(Model uiModel, HttpServletRequest request) {
         try {
             uiModel.addAttribute("SMCID", Long.parseLong(request.getParameter("SMCID")));
-            uiModel.addAttribute("SMCNAME", request.getParameter("SMCNM"));
+            uiModel.addAttribute("SMCNM", request.getParameter("SMCNM"));
             uiModel.addAttribute("SSMCID", Long.parseLong(request.getParameter("SSMCID")));
-            uiModel.addAttribute("SSMCNAME", request.getParameter("SSMCNM"));
+            uiModel.addAttribute("SSMCNM", request.getParameter("SSMCNM"));
         } catch (Exception e) {
             logger.error("Exception ::: " + e.getMessage());
         }
@@ -343,9 +343,9 @@ public class EditorController {
     public String addSubMainItemIR(Model uiModel, HttpServletRequest request) {
         try {
             uiModel.addAttribute("SMCID", Long.parseLong(request.getParameter("SMCID")));
-            uiModel.addAttribute("SMCNAME", request.getParameter("SMCNM"));
+            uiModel.addAttribute("SMCNM", request.getParameter("SMCNM"));
             uiModel.addAttribute("SSMCID", Long.parseLong(request.getParameter("SSMCID")));
-            uiModel.addAttribute("SSMCNAME", request.getParameter("SSMCNM"));
+            uiModel.addAttribute("SSMCNM", request.getParameter("SSMCNM"));
         } catch (Exception e) {
             logger.error("Exception ::: " + e.getMessage());
         }

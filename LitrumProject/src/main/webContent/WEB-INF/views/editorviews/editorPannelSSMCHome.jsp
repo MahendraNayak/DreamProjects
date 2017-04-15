@@ -6,7 +6,7 @@
     <div class="rightInfo landing-page-wrapper">
         <div class="padding-txt">
             <div class="col-xs-12 category-header">
-		<a href="editorPannelHome?SMCID=${SMCID}&SMCNM=${SMCNAME}"><b>${SMCNAME}</b></a><b> ></b>
+		<a href="editorPannelHome?SMCID=${SMCID}&SMCNM=${SMCNM}"><b>${SMCNM}</b></a><b> ></b>
             </div>
         </div>
         <div class="in-services">
