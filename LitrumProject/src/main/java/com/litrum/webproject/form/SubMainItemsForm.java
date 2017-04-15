@@ -15,6 +15,7 @@ public class SubMainItemsForm {
     private String subMainItemMakerName;
     private Double subMainItemContractorRate;
     private String subMainItemContractorName;
+    private String subItemType;
 
     public Long getMainItemId() {
         return mainItemId;
@@ -80,6 +81,14 @@ public class SubMainItemsForm {
         this.subMainItemContractorName = subMainItemContractorName;
     }
 
+    public String getSubItemType() {
+        return subItemType;
+    }
+
+    public void setSubItemType(String subItemType) {
+        this.subItemType = subItemType;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -91,6 +100,7 @@ public class SubMainItemsForm {
                 .append("subMainItemMakerName", subMainItemMakerName)
                 .append("subMainItemContractorRate", subMainItemContractorRate)
                 .append("subMainItemContractorName", subMainItemContractorName)
+                .append("subItemType", subItemType)
                 .toString();
     }
 }

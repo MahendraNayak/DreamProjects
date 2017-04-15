@@ -284,10 +284,15 @@ public class EditorController {
     public String addSubMainItemGet(Model uiModel, HttpServletRequest request) {
 
         try {
+            Long subSubMainCategoryId = Long.parseLong(request.getParameter("SSMCID"));
+
             uiModel.addAttribute("SMCID", Long.parseLong(request.getParameter("SMCID")));
             uiModel.addAttribute("SMCNAME", request.getParameter("SMCNM"));
-            uiModel.addAttribute("SSMCID", Long.parseLong(request.getParameter("SSMCID")));
+            uiModel.addAttribute("SSMCID", subSubMainCategoryId);
             uiModel.addAttribute("SSMCNAME", request.getParameter("SSMCNM"));
+
+            List<MainItem> mainItemList = editorService.getMainItemsBySubSubMainCaegoryId(subSubMainCategoryId);
+            uiModel.addAttribute("mainItemList", mainItemList);
         } catch (Exception e) {
             logger.error("Exception ::: " + e.getMessage());
         }
@@ -333,6 +338,20 @@ public class EditorController {
         return "editorviews/editorPannelSubMainItemIR";
     }
 
+    @RequestMapping(value = "/editorPannelSubMainItemSRORIRAdd", method = RequestMethod.POST)
+    public String addSubMainItemSRORIR(@ModelAttribute("subMainItemForm") SubMainItemsForm form) {
+        logger.debug("Inside sub main Item SR or IR add post method");
+        try {
+            editorService.createMakerOrContractorForSubMainItem(form);
+        } catch (Exception e) {
+            logger.error("Exception while adding sub main item SR or IR", e);
+        }
+        if (null != form && LitrumProjectConstants.CONTRACTOR.equalsIgnoreCase(form.getSubItemType())) {
+            return "redirect:/editorPannelSubMainItemIR";
+        } else {
+            return "redirect:/editorPannelSubMainItemSR";
+        }
+    }
     //this called is added if we want to show image into browser then called this method.
     @RequestMapping(value = "/getImage/{fileName}")
     @ResponseBody

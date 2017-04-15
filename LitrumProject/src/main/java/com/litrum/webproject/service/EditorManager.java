@@ -170,4 +170,32 @@ public class EditorManager implements EditorService {
             throw new Exception("Main Item not found while creating sub main item.");
         }
     }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
+    public void createMakerOrContractorForSubMainItem(SubMainItemsForm form) throws Exception {
+        if (null != form && form.getSubMainIemId() > 0) {
+            SubMainItem subMainItem = daoFactory.getSubMainItemDAO().findById(form.getSubMainIemId(), false);
+            if (null == subMainItem) {
+                throw new Exception("Sub Main Item Not found while addding SR or CR");
+            }
+            if (LitrumProjectConstants.MAKER.equalsIgnoreCase(form.getSubItemType())) {
+                SubMainItemMaker subMainItemMaker = new SubMainItemMaker();
+                subMainItemMaker.setSubMainItem(subMainItem);
+                subMainItemMaker.setSubMainItemMakerName(form.getSubMainItemMakerName());
+                subMainItemMaker.setSubMainItemMakerRate(form.getSubMainItemMakerRate());
+                daoFactory.getSubMainItemMakerDAO().makePersistent(subMainItemMaker);
+                logger.info("maker for sub main item added successfully");
+            } else if (LitrumProjectConstants.CONTRACTOR.equalsIgnoreCase(form.getSubItemType())) {
+                SubMainItemContractor subMainItemContractor = new SubMainItemContractor();
+                subMainItemContractor.setSubMainItem(subMainItem);
+                subMainItemContractor.setSubMainItemContractorName(form.getSubMainItemContractorName());
+                subMainItemContractor.setSubMainItemContractorRate(form.getSubMainItemContractorRate());
+                daoFactory.getSubMainItemContractorDAO().makePersistent(subMainItemContractor);
+                logger.info("contractor for sub main item added successfully");
+            }
+        } else {
+            throw new Exception("form doesn't contains sub main item id, hnce can't proceed");
+        }
+    }
 }

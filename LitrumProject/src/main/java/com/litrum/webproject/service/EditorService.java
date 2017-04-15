@@ -27,5 +27,7 @@ public interface EditorService {
     List<RateCity> getAllRateCity();
 
     SubMainItem createSubMainItem(SubMainItemsForm form) throws Exception;
+
+    void createMakerOrContractorForSubMainItem(SubMainItemsForm form) throws Exception;
 }
 
