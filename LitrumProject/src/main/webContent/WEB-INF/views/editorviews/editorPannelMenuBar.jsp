@@ -11,6 +11,9 @@
                                 <li class="list-group-item list-group-item-success"><a href="editorPannelMainItemAdd?SMCID=${SMCID}&SMCNM=${SMCNAME}&SSMCID=${SSMCID}&SSMCNM=${SSMCNAME}" id="leftAllLink" >ADD MAIN ITEM<span class="arrow"></span></a></li>
                                 <li class="list-group-item list-group-item-success"><a href="editorPannelMainItemSR?SMCID=${SMCID}&SMCNM=${SMCNAME}&SSMCID=${SSMCID}&SSMCNM=${SSMCNAME}" id="leftAllLink" >ADD MAIN ITEM SR<span class="arrow"></span></a></li>
                                 <li class="list-group-item list-group-item-success"><a href="editorPannelMainItemIR?SMCID=${SMCID}&SMCNM=${SMCNAME}&SSMCID=${SSMCID}&SSMCNM=${SSMCNAME}" id="leftAllLink" >ADD MAIN ITEM IR<span class="arrow"></span></a></li>
+				                <li class="list-group-item list-group-item-success"><a href="editorPannelSubMainItemAdd?SMCID=${SMCID}&SMCNM=${SMCNAME}&SSMCID=${SSMCID}&SSMCNM=${SSMCNAME}" id="leftAllLink" >ADD SUB MAIN ITEM<span class="arrow"></span></a></li>
+				                <li class="list-group-item list-group-item-success"><a href="editorPannelSubMainItemSR?SMCID=${SMCID}&SMCNM=${SMCNAME}&SSMCID=${SSMCID}&SSMCNM=${SSMCNAME}" id="leftAllLink" >ADD SUB MAIN ITEM SR<span class="arrow"></span></a></li>
+				                <li class="list-group-item list-group-item-success"><a href="editorPannelSubMainItemIR?SMCID=${SMCID}&SMCNM=${SMCNAME}&SSMCID=${SSMCID}&SSMCNM=${SSMCNAME}" id="leftAllLink" >ADD SUB MAIN ITEM IR<span class="arrow"></span></a></li>
                             </div>
                         </nav>
                     </div>

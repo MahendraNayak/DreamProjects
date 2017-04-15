@@ -281,7 +281,17 @@ public class EditorController {
     }
 
     @RequestMapping(value = "/editorPannelSubMainItemAdd", method = RequestMethod.GET)
-    public String addSubMainItemGet() {
+    public String addSubMainItemGet(Model uiModel, HttpServletRequest request) {
+
+        try {
+            uiModel.addAttribute("SMCID", Long.parseLong(request.getParameter("SMCID")));
+            uiModel.addAttribute("SMCNAME", request.getParameter("SMCNM"));
+            uiModel.addAttribute("SSMCID", Long.parseLong(request.getParameter("SSMCID")));
+            uiModel.addAttribute("SSMCNAME", request.getParameter("SSMCNM"));
+        } catch (Exception e) {
+            logger.error("Exception ::: " + e.getMessage());
+        }
+
         return "editorviews/editorPannelSubMainItemAdd";
     }
 
