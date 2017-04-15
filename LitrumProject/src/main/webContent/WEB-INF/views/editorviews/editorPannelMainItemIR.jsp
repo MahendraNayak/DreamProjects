@@ -10,9 +10,11 @@
             </div>
         </div>
         <div class="in-services">
+        <c:if test="${not empty sucecssMessage}"><font color="green">${successMessage}</font></c:if>
+        <c:if test="${not empty errorMessage}"><font color="red">${errorMessage}</font></c:if>
+        <form commandName="form" id="form" method="POST" action="editorPannelMainItemIRAndSRAdd">
 		    <div class="col-md-3 col-sm-6">
 		        <div class="panel panel-default" style="width:1017px">
-                    <form commandName="form" id="form" method="POST" action="editorPannelMainItemIRAndSRAdd">
                     <span>
                         <input type="hidden" name="SMCID" id="SMCID" value="${SMCID}">
                         <input type="hidden" name="SSMCID" id="SSMCID" value="${SSMCID}">
@@ -65,9 +67,9 @@
                                     <br><input type="submit" class="btn btn-lg btn-success btn-block" style="margin-top:-56px;width:129px;margin-left:-480px" value="Add">
                                 </div>
                     </div>
-                 </form>
                 </div>
             </div>
+            </form>
        </div>
     </div>
 </div>
