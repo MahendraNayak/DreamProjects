@@ -53,4 +53,6 @@ public interface UserService {
     List<EndUserRegistration> getAllEndUsers();
 
     List<LoadUnit> getAllLoadUnit();
+
+    List<SubSubMainCategory> findSubSubMainCategoryBySubMainCatIds(List<Long> subMainCatIds);
 }

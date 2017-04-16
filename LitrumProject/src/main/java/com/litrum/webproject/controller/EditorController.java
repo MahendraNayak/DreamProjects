@@ -54,6 +54,28 @@ public class EditorController {
 
             List<SubMainCategory> subMainCategoryList = userService.findByMainCategoryId(form);
             uiModel.addAttribute("subMainCategory", subMainCategoryList);
+
+            List<Long> subMainCatIds = new ArrayList<>();
+            for (SubMainCategory subMainCategory : subMainCategoryList) {
+                subMainCatIds.add(subMainCategory.getId());
+            }
+
+            List<Long> subSubMainCatIds = new ArrayList<>();
+            List<SubSubMainCategory> subSubMainCategoryList = userService.findSubSubMainCategoryBySubMainCatIds(subMainCatIds);
+
+            for (SubSubMainCategory subSubMainCategory : subSubMainCategoryList) {
+                subSubMainCatIds.add(subSubMainCategory.getId());
+            }
+
+            List<MainItem> mainItemList = editorService.findMainItemsBySubSubMainCatIds(subSubMainCatIds, null);
+            uiModel.addAttribute("mainItemList", mainItemList);
+
+            List<MainItem> pendingMainItemList = editorService.findMainItemsBySubSubMainCatIds(subSubMainCatIds, LitrumProjectConstants.PENDING);
+            uiModel.addAttribute("pendingMainItemList", pendingMainItemList);
+
+            List<AdminUserRegistration> adminUserList = editorService.getAdminUserByMainCategoryId(mainCategory.getId());
+            uiModel.addAttribute("adminUserList", adminUserList);
+
         } catch (Exception e) {
             logger.error("Exception while getting categories{}", e);
         }

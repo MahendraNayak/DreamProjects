@@ -2,10 +2,7 @@ package com.litrum.webproject.service;
 
 import com.litrum.webproject.form.ItemsForm;
 import com.litrum.webproject.form.SubMainItemsForm;
-import com.litrum.webproject.model.MainCategory;
-import com.litrum.webproject.model.MainItem;
-import com.litrum.webproject.model.RateCity;
-import com.litrum.webproject.model.SubMainItem;
+import com.litrum.webproject.model.*;
 
 import java.util.List;
 
@@ -33,5 +30,9 @@ public interface EditorService {
     List<SubMainItem> getAllSubMainItemsByMainItemId(Long mainItemId) throws Exception;
 
     List<SubMainItem> findSubMainItemByMainItemIds(List<Long> mainItemIds);
+
+    List<AdminUserRegistration> getAdminUserByMainCategoryId(Long mainCategoryId) throws Exception;
+
+    List<MainItem> findMainItemsBySubSubMainCatIds(List<Long> subSubMainCatIds, String itemStatus);
 }
 

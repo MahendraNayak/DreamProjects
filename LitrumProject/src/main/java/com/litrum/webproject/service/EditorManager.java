@@ -231,4 +231,21 @@ public class EditorManager implements EditorService {
     public List<SubMainItem> findSubMainItemByMainItemIds(List<Long> mainItemIds) {
         return daoFactory.getSubMainItemDAO().findByMainItemIds(mainItemIds);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<AdminUserRegistration> getAdminUserByMainCategoryId(Long mainCategoryId) throws Exception {
+        if (mainCategoryId <= 0) {
+            logger.error("invalid param passed, mainItemId:[{}]", mainCategoryId);
+            throw new Exception("Invalid param passed");
+        }
+        return daoFactory.getAdminUserRegistrationDAO().findByMainCategoryId(mainCategoryId);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<MainItem> findMainItemsBySubSubMainCatIds(List<Long> subSubMainCatIds, String status) {
+        return daoFactory.getMainItemDAO().findBySubSubMainCatIds(subSubMainCatIds, status);
+    }
+
 }

@@ -409,4 +409,10 @@ public class UserManager implements UserService {
     public List<LoadUnit> getAllLoadUnit() {
         return daoFactory.getLoadUnitDAO().findAll();
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<SubSubMainCategory> findSubSubMainCategoryBySubMainCatIds(List<Long> subMainCatIds) {
+        return daoFactory.getSubSubMainCategoryDAO().findBySubMainCatIds(subMainCatIds);
+    }
 }
