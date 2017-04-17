@@ -17,9 +17,9 @@
 		        <div class="panel-body" style="padding:0;border:0px;height:460px;overflow-y:auto">
 				<table class="table">
 					<tbody>
-					<c:forEach var="usersCategoryObj" items="${adminUserList}" varStatus="status">
+					<c:forEach var="userRoleAndCountObj" items="${UserRoleAndCount}" varStatus="status">
 						<tr>
-						<td style="font-size:16px;color:black;cursor:pointer"><b><c:out value="${usersCategoryObj.firstName} ${usersCategoryObj.lastName}"/></b></td>
+						<td style="font-size:16px;color:black;cursor:pointer"><b><c:out value="${userRoleAndCountObj.key} ${userRoleAndCountObj.value}"/></b></td>
 						</tr>
 					</c:forEach>
 					</tbody>
