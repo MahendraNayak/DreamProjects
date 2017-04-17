@@ -415,4 +415,18 @@ public class UserManager implements UserService {
     public List<SubSubMainCategory> findSubSubMainCategoryBySubMainCatIds(List<Long> subMainCatIds) {
         return daoFactory.getSubSubMainCategoryDAO().findBySubMainCatIds(subMainCatIds);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<CompanyType> getAllCompanyType() {
+        return daoFactory.getCompanyTypeDAO().findAll();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public long countEndUserRoleByCompanyTypeId(Long companyTypeId) {
+        return daoFactory.getEndUserRoleDAO().countByCompanyTypeId(companyTypeId);
+    }
+
+
 }

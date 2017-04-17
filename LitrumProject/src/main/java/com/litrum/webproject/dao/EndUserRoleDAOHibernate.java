@@ -2,6 +2,7 @@ package com.litrum.webproject.dao;
 
 import com.litrum.webproject.model.EndUserRole;
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 import java.util.List;
@@ -32,5 +33,14 @@ public class EndUserRoleDAOHibernate extends GenericDAOHibernate<EndUserRole, Lo
         Criteria criteria = getSession().createCriteria(getPersistentClass());
         criteria.add(Restrictions.eq("roleName", userRoleName));
         return criteria.uniqueResult() != null;
+    }
+
+    @Override
+    public long countByCompanyTypeId(Long companyTypeId) {
+        Criteria criteria = getSession().createCriteria(getPersistentClass());
+        criteria.createAlias("companyType", "companyType");
+        criteria.add(Restrictions.eq("companyType.id", companyTypeId));
+        criteria.setProjection(Projections.rowCount());
+        return (long) criteria.uniqueResult();
     }
 }

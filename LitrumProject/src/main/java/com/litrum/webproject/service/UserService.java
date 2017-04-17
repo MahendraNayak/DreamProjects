@@ -1,9 +1,6 @@
 package com.litrum.webproject.service;
 
-import com.litrum.webproject.form.AdminUserRegistrationForm;
-import com.litrum.webproject.form.CategoriesForm;
-import com.litrum.webproject.form.CompanyTypeAndUserRolesForm;
-import com.litrum.webproject.form.RegisterForm;
+import com.litrum.webproject.form.*;
 import com.litrum.webproject.model.*;
 
 import java.util.List;
@@ -55,4 +52,8 @@ public interface UserService {
     List<LoadUnit> getAllLoadUnit();
 
     List<SubSubMainCategory> findSubSubMainCategoryBySubMainCatIds(List<Long> subMainCatIds);
+
+    List<CompanyType> getAllCompanyType();
+
+    long countEndUserRoleByCompanyTypeId(Long companyTypeId);
 }

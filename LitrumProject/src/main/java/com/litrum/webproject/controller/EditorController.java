@@ -74,8 +74,12 @@ public class EditorController {
             List<MainItem> pendingMainItemList = editorService.findMainItemsBySubSubMainCatIds(subSubMainCatIds, LitrumProjectConstants.PENDING);
             uiModel.addAttribute("pendingMainItemList", pendingMainItemList);
 
-            List<AdminUserRegistration> adminUserList = editorService.getAdminUserByMainCategoryId(mainCategory.getId());
-            uiModel.addAttribute("adminUserList", adminUserList);
+            HashMap userRoleMap = new HashMap();
+            List<CompanyType> companyTypeList = userService.getAllCompanyType();
+            for (CompanyType companyType : companyTypeList) {
+                userRoleMap.put(companyType.getType(), userService.countEndUserRoleByCompanyTypeId(companyType.getId()));
+            }
+            uiModel.addAttribute("UserRoleAndCount", userRoleMap);
 
         } catch (Exception e) {
             logger.error("Exception while getting categories{}", e);
