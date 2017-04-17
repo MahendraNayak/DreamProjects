@@ -1,5 +1,6 @@
 package com.litrum.webproject.service;
 
+import com.litrum.webproject.Utils.HIbernateUtils;
 import com.litrum.webproject.Utils.LitrumProjectConstants;
 import com.litrum.webproject.dao.DAOFactory;
 import com.litrum.webproject.form.ItemsForm;
@@ -255,6 +256,6 @@ public class EditorManager implements EditorService {
             logger.error("invalid param passed, mainItemId:[{}]", form.getMainItemId());
             throw new Exception("Invalid param passed");
         }
-        return daoFactory.getMainItemDAO().findById(form.getMainItemId(), false);
+        return HIbernateUtils.unproxy(daoFactory.getMainItemDAO().findById(form.getMainItemId(), false));
     }
 }
