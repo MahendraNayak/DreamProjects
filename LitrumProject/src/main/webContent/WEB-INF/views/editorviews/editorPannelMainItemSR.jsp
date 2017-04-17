@@ -33,10 +33,10 @@
                                     </select>
                                 </div>
                                 <div class="col-sm-9" style="width:981px"><br>
-                                    <select class="form-control" name="shortDescription" id="shortDescription">
+                                    <select class="form-control" name="shortDescription" id="shortDescription" onChange="getMainItemLoadUnit(this.value)">
                                         <option value="0">SELECT MAIN ITEM SD</option>
                                         <c:forEach var="mainItemObj" items="${mainItemList}" varStatus="mainItemStatus">
-                                            <option value="${mainItemObj.shortDescription}">${mainItemObj.shortDescription}</option>
+                                            <option value="${mainItemObj.id}">${mainItemObj.shortDescription}</option>
                                         </c:forEach>
                                     </select>
                                 </div>

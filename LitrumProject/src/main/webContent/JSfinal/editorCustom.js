@@ -59,3 +59,28 @@ function getSubMainItemsBasedOnMainItem(mainItemID){
         }
     });
 }
+
+function getMainItemLoadUnit(mainItemID){
+    if(mainItemID == 0){
+        $("#loadUnitId").val(mainItemID);
+        $("#loadUnitId").prop('disabled',false);
+    }
+
+    var itemsForm  = {
+        	"mainItemId":mainItemID
+     }
+    .ajax({
+        url: '/LitrumWebServer/loadUnit',
+        type: 'GET',
+        dataType: 'json',
+        data: itemsForm,
+        success: function (response) {
+            var loadUnitId = JSON.stringify(response.loadUnitId);
+            $("#loadUnitId").val(loadUnitId);
+            $("#loadUnitId").prop('disabled',true);
+        },
+        error: function (e) {
+            alert('error'+e);
+        }
+    });
+}
