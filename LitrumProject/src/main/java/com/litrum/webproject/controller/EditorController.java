@@ -23,6 +23,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -457,6 +458,20 @@ public class EditorController {
             return Files.readAllBytes(path);
         } catch (IOException e) {
             logger.error("Exception while reading byte from file{}", e);
+        }
+        return null;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/loadUnit")
+    public String mainItemUnitLoad(@ModelAttribute("itemsForm") ItemsForm form) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            MainItem mainItem = editorService.findMainItemById(form);
+            jsonObject.put("loadUnitId", mainItem.getLoadUnit().getId());
+            return jsonObject.toString();
+        } catch (Exception e) {
+            logger.error("exception while getting load unit load based on  main item", e);
         }
         return null;
     }

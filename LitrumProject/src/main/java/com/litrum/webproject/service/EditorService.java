@@ -34,5 +34,7 @@ public interface EditorService {
     List<AdminUserRegistration> getAdminUserByMainCategoryId(Long mainCategoryId) throws Exception;
 
     List<MainItem> findMainItemsBySubSubMainCatIds(List<Long> subSubMainCatIds, String itemStatus);
+
+    MainItem findMainItemById(ItemsForm form) throws Exception;
 }
 

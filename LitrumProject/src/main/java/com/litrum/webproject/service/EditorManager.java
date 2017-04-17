@@ -248,4 +248,13 @@ public class EditorManager implements EditorService {
         return daoFactory.getMainItemDAO().findBySubSubMainCatIds(subSubMainCatIds, status);
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public MainItem findMainItemById(ItemsForm form) throws Exception {
+        if (form.getMainItemId() <= 0) {
+            logger.error("invalid param passed, mainItemId:[{}]", form.getMainItemId());
+            throw new Exception("Invalid param passed");
+        }
+        return daoFactory.getMainItemDAO().findById(form.getMainItemId(), false);
+    }
 }
