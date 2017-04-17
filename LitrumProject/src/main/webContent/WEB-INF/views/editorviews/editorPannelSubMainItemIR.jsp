@@ -27,7 +27,7 @@
                         		<div class="col-sm-9" style="width:981px"><h4 style="color:#4d20d8">SUB MAIN ITEM INSTALLATION RATE MODULE</h4></div>
                                 <div class="col-sm-9" style="width:981px"><br>
                                     <select class="form-control" name="subMainIemId" id="subMainIemId">
-                                        <option value="0">SELECT SUB MAIN ITEM Size</option>
+                                        <option value="0">SELECT SUB MAIN ITEM SIZE</option>
                                         <c:forEach var="subMainItemObj" items="${subMainItemList}" varStatus="subMainItemStatus">
                                             <option value="${subMainItemObj.id}">${subMainItemObj.mainItem.shortDescription} - ${subMainItemObj.shortDescription}</option>
                                         </c:forEach>

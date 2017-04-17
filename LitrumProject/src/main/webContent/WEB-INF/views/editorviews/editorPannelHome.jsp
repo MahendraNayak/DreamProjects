@@ -35,7 +35,7 @@
 					<tbody>
 					<c:forEach var="itemsCategoryObj" items="${mainItemList}" varStatus="status">
 						<tr>
-						<td style="font-size:16px;color:black;cursor:pointer"><b><c:out value="SMI${itemsCategoryObj.id}"/></b></td>
+						<td style="font-size:16px;color:black;cursor:pointer"><b><c:out value="${itemsCategoryObj.key} ${itemsCategoryObj.value}"/></b></td>
 						</tr>
 					</c:forEach>
 					</tbody>
@@ -51,7 +51,7 @@
 					<tbody>
 					<c:forEach var="pendingAuthObj" items="${pendingMainItemList}" varStatus="status">
 						<tr>
-						<td style="font-size:16px;color:black;cursor:pointer"><b><c:out value="SMI${pendingAuthObj.id}"/></b></td>
+						<td style="font-size:16px;color:black;cursor:pointer"><b><c:out value="${pendingAuthObj.key} ${pendingAuthObj.value}"/></b></td>
 						</tr>
 					</c:forEach>
 					</tbody>
