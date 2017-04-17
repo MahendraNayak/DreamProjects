@@ -69,7 +69,7 @@ function getMainItemLoadUnit(mainItemID){
     var itemsForm  = {
         	"mainItemId":mainItemID
      }
-    .ajax({
+    $.ajax({
         url: '/LitrumWebServer/loadUnit',
         type: 'GET',
         dataType: 'json',
