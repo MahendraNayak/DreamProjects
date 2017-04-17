@@ -55,7 +55,7 @@
                                     <tbody>
                                     <c:forEach var="mainItemObj" items="${mainItemList}" varStatus="status">
 					                    <tr>
-					                        <td style="font-size:16px;color:black;cursor:pointer" onClick=setMainItemID(${mainItemObj.id})><b>SMI${mainItemObj.id}</b></td>
+					                        <td style="font-size:16px;color:black;cursor:pointer" onClick=setMainItemID(${mainItemObj.id})><b>${mainItemObj.shortDescription}</b></td>
                                         </tr>
                                     </c:forEach>
 
@@ -85,7 +85,7 @@
                 <div class="form-group" style="margin-left:382px">
                     <input type="hidden" id="mainItemId" name="mainItemId" value="0">
                     <input type="hidden" id="subMainIemId" name="subMainIemId" value="0">
-                    <input type="text" id="shortDecription" name="shortDecription" placeholder="Sub Main Item SD" class="form-control" autocomplete="off" style="width:420px;height:35px"><br>
+                    <input type="text" id="shortDecription" name="shortDecription" placeholder="Sub Main Item Size" class="form-control" autocomplete="off" style="width:420px;height:35px"><br>
 			<select class="form-control" name="loadUnitId" id="loadUnitId" style="width:419px">
 				<option value="0">Select Unit</option>
 				<c:forEach var="loadUnit" items="${loadUnitList}" varStatus="loadUnitId">
