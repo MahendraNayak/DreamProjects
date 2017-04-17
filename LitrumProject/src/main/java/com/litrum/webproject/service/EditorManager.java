@@ -258,4 +258,14 @@ public class EditorManager implements EditorService {
         }
         return HIbernateUtils.unproxy(daoFactory.getMainItemDAO().findById(form.getMainItemId(), false));
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public long countMainItemBySubSubMainCatId(Long subSubMainCatId, String status) throws Exception {
+        if (subSubMainCatId <= 0) {
+            logger.error("invalid param passed, subSubMainCatId:[{}]", subSubMainCatId);
+            throw new Exception("Invalid param passed");
+        }
+        return daoFactory.getMainItemDAO().countMainItemBySubSubMainCatId(subSubMainCatId, status);
+    }
 }

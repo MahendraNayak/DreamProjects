@@ -2,6 +2,7 @@ package com.litrum.webproject.dao;
 
 import com.litrum.webproject.model.MainItem;
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 import java.util.List;
@@ -36,5 +37,17 @@ public class MainItemDAOHibernate extends GenericDAOHibernate<MainItem, Long>
             criteria.add(Restrictions.eq("mainItemStatus", status));
         }
         return criteria.list();
+    }
+
+    @Override
+    public long countMainItemBySubSubMainCatId(long subSubMainCategoryId, String status) {
+        Criteria criteria = getSession().createCriteria(getPersistentClass());
+        criteria.createAlias("subSubMainCategory", "subSubMainCategory");
+        criteria.add(Restrictions.eq("subSubMainCategory.id", subSubMainCategoryId));
+        if (null != status) {
+            criteria.add(Restrictions.eq("mainItemStatus", status));
+        }
+        criteria.setProjection(Projections.rowCount());
+        return (long) criteria.uniqueResult();
     }
 }

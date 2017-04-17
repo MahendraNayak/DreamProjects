@@ -15,4 +15,6 @@ public interface MainItemDAO extends GenericeDAO<MainItem, Long> {
 
     List<MainItem> findBySubSubMainCatIds(List<Long> subSubMainCatIds, String status);
 
+    long countMainItemBySubSubMainCatId(long subSubMainCategoryId, String status);
+
 }

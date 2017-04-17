@@ -36,5 +36,7 @@ public interface EditorService {
     List<MainItem> findMainItemsBySubSubMainCatIds(List<Long> subSubMainCatIds, String itemStatus);
 
     MainItem findMainItemById(ItemsForm form) throws Exception;
+
+    long countMainItemBySubSubMainCatId(Long subSubMainCatId, String status) throws Exception;
 }
 

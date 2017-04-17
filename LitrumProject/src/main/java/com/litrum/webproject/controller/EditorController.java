@@ -56,23 +56,23 @@ public class EditorController {
             List<SubMainCategory> subMainCategoryList = userService.findByMainCategoryId(form);
             uiModel.addAttribute("subMainCategory", subMainCategoryList);
 
-            List<Long> subMainCatIds = new ArrayList<>();
+            HashMap itemCountMap = new HashMap();
+            long pendingItemCount = 0;
+            long mainItemCount = 0;
+
             for (SubMainCategory subMainCategory : subMainCategoryList) {
-                subMainCatIds.add(subMainCategory.getId());
+                CategoriesForm catForm = new CategoriesForm();
+                catForm.setSubMainCategoryId(subMainCategory.getId());
+                List<SubSubMainCategory> subSubMainCategoryList = userService.findBySubMainCategoryId(catForm);
+                for (SubSubMainCategory subSubMainCategory : subSubMainCategoryList) {
+                    mainItemCount = mainItemCount + editorService.countMainItemBySubSubMainCatId(subSubMainCategory.getId(), null);
+                    pendingItemCount = pendingItemCount + editorService.countMainItemBySubSubMainCatId(subSubMainCategory.getId(), LitrumProjectConstants.PENDING);
+                }
+                itemCountMap.put(subMainCategory.getSubMainCategoryName(), mainItemCount);
             }
 
-            List<Long> subSubMainCatIds = new ArrayList<>();
-            List<SubSubMainCategory> subSubMainCategoryList = userService.findSubSubMainCategoryBySubMainCatIds(subMainCatIds);
-
-            for (SubSubMainCategory subSubMainCategory : subSubMainCategoryList) {
-                subSubMainCatIds.add(subSubMainCategory.getId());
-            }
-
-            List<MainItem> mainItemList = editorService.findMainItemsBySubSubMainCatIds(subSubMainCatIds, null);
-            uiModel.addAttribute("mainItemList", mainItemList);
-
-            List<MainItem> pendingMainItemList = editorService.findMainItemsBySubSubMainCatIds(subSubMainCatIds, LitrumProjectConstants.PENDING);
-            uiModel.addAttribute("pendingMainItemList", pendingMainItemList);
+            uiModel.addAttribute("mainItemList", itemCountMap);
+            uiModel.addAttribute("pendingMainItemList", pendingItemCount);
 
             HashMap userRoleMap = new HashMap();
             List<CompanyType> companyTypeList = userService.getAllCompanyType();
