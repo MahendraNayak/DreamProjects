@@ -268,4 +268,29 @@ public class EditorManager implements EditorService {
         }
         return daoFactory.getMainItemDAO().countMainItemBySubSubMainCatId(subSubMainCatId, status);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<MainItemMaker> findMainItemMakerByMainItemAndCity(ItemsForm form) {
+        return daoFactory.getMainItemMakerDAO().findByMainItemAndCity(form);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<MainItemContractor> findMainItemContractorByMainItemAndCity(ItemsForm form) {
+        return daoFactory.getMainItemContractorDAO().findByMainItemAndCity(form);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<SubMainItemMaker> findSubMainItemMakerBySubMainItem(SubMainItemsForm form) {
+        return daoFactory.getSubMainItemMakerDAO().findBySubMainItem(form);
+
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<SubMainItemContractor> findSubMainItemContractorBySubMainItem(SubMainItemsForm form) {
+        return daoFactory.getSubMainItemContractorDAO().findBySubMainItem(form);
+    }
 }

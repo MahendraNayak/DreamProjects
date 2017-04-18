@@ -9,7 +9,7 @@ import java.util.List;
  */
 public interface EndUserRoleDAO extends GenericeDAO<EndUserRole, Long> {
 
-    EndUserRole findByRoleName(String roleName);
+    EndUserRole findByRoleNameAndCompanyType(String roleName, Long companyTypeId);
 
     List<EndUserRole> findByCompanyTypeId(Long companyTypeId);
 

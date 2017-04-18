@@ -422,6 +422,85 @@ public class EditorController {
         }
         return null;
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/mainItemMaker/list")
+    public String getMainItemMakerList(@ModelAttribute("mainItemForm") ItemsForm form) {
+        List<JSONObject> list = new ArrayList<>();
+        try {
+            List<MainItemMaker> mainItemMakerList = editorService.findMainItemMakerByMainItemAndCity(form);
+            for (MainItemMaker mainItemMaker : mainItemMakerList) {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("mainItemMakerName", mainItemMaker.getMakerName());
+                jsonObject.put("mainItemMakerPriority", mainItemMaker.getMakerPriority());
+                jsonObject.put("mainItemMakerRate", mainItemMaker.getMakerRate());
+                list.add(jsonObject);
+            }
+            return list.toString();
+        } catch (Exception e) {
+            logger.error("Exception while getting sub main item list based on main item", e);
+        }
+        return null;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/mainItemContractor/list")
+    public String getMainItemContractorList(@ModelAttribute("mainItemForm") ItemsForm form) {
+        List<JSONObject> list = new ArrayList<>();
+        try {
+            List<MainItemContractor> mainItemContractorList = editorService.findMainItemContractorByMainItemAndCity(form);
+            for (MainItemContractor mainItemContractor : mainItemContractorList) {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("mainItemContractorName", mainItemContractor.getContractorName());
+                jsonObject.put("mainItemContractorPriority", mainItemContractor.getContractorPriority());
+                jsonObject.put("mainItemContractorRate", mainItemContractor.getContractorRate());
+                list.add(jsonObject);
+            }
+            return list.toString();
+        } catch (Exception e) {
+            logger.error("Exception while getting sub main item list based on main item", e);
+        }
+        return null;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/subMainItemMaker/list")
+    public String getSubMainItemMakerList(@ModelAttribute("subMainItemForm") SubMainItemsForm form) {
+        List<JSONObject> list = new ArrayList<>();
+        try {
+            List<SubMainItemMaker> subMainItemMakerList = editorService.findSubMainItemMakerBySubMainItem(form);
+            for (SubMainItemMaker subMainItemMaker : subMainItemMakerList) {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("subMainItemMakerName", subMainItemMaker.getSubMainItemMakerName());
+                jsonObject.put("subMainItemMakerPriority", subMainItemMaker.getSubMainItemMakerRate());
+                list.add(jsonObject);
+            }
+            return list.toString();
+        } catch (Exception e) {
+            logger.error("Exception while getting sub main item list based on main item", e);
+        }
+        return null;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/subMainItemContractor/list")
+    public String getSubMainItemContractorList(@ModelAttribute("subMainItemForm") SubMainItemsForm form) {
+        List<JSONObject> list = new ArrayList<>();
+        try {
+            List<SubMainItemContractor> subMainItemContractorList = editorService.findSubMainItemContractorBySubMainItem(form);
+            for (SubMainItemContractor subMainItemContractor : subMainItemContractorList) {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("subMainItemContractorName", subMainItemContractor.getSubMainItemContractorName());
+                jsonObject.put("subMainItemContractorPriority", subMainItemContractor.getSubMainItemContractorRate());
+                list.add(jsonObject);
+            }
+            return list.toString();
+        } catch (Exception e) {
+            logger.error("Exception while getting sub main item list based on main item", e);
+        }
+        return null;
+    }
+
     @RequestMapping(value = "/editorPannelSubMainItemSRORIRAdd", method = RequestMethod.POST)
     public String addSubMainItemSRORIR(@ModelAttribute("subMainItemForm") SubMainItemsForm form, Model uiModel, HttpServletRequest request) {
         logger.debug("Inside sub main Item SR or IR add post method");

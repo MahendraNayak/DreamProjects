@@ -286,7 +286,7 @@ public class UserManager implements UserService {
     public void createEndUserRole(CompanyTypeAndUserRolesForm form) throws Exception {
         if (null != form && form.getCompanyTypeId() >= 0) {
             if (form.getUserRoleId() <= 0) {
-                EndUserRole endUserRole = daoFactory.getEndUserRoleDAO().findByRoleName(form.getUserRoleName());
+                EndUserRole endUserRole = daoFactory.getEndUserRoleDAO().findByRoleNameAndCompanyType(form.getUserRoleName(), form.getCompanyTypeId());
                 if (null == endUserRole) {
                     endUserRole = new EndUserRole();
                     endUserRole.setRoleName(form.getUserRoleName());

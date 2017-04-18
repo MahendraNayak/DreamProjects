@@ -38,5 +38,13 @@ public interface EditorService {
     MainItem findMainItemById(ItemsForm form) throws Exception;
 
     long countMainItemBySubSubMainCatId(Long subSubMainCatId, String status) throws Exception;
+
+    List<MainItemMaker> findMainItemMakerByMainItemAndCity(ItemsForm form);
+
+    List<MainItemContractor> findMainItemContractorByMainItemAndCity(ItemsForm form);
+
+    List<SubMainItemMaker> findSubMainItemMakerBySubMainItem(SubMainItemsForm form);
+
+    List<SubMainItemContractor> findSubMainItemContractorBySubMainItem(SubMainItemsForm form);
 }
 

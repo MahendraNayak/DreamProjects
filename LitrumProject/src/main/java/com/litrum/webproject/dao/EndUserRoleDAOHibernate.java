@@ -14,8 +14,10 @@ public class EndUserRoleDAOHibernate extends GenericDAOHibernate<EndUserRole, Lo
         implements EndUserRoleDAO {
 
     @Override
-    public EndUserRole findByRoleName(String roleName) {
+    public EndUserRole findByRoleNameAndCompanyType(String roleName, Long companyTypeId) {
         Criteria criteria = getSession().createCriteria(getPersistentClass());
+        criteria.createAlias("companyType", "companyType");
+        criteria.add(Restrictions.eq("companyType.id", companyTypeId));
         criteria.add(Restrictions.eq("roleName", roleName));
         return (EndUserRole) criteria.uniqueResult();
     }
