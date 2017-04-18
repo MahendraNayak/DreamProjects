@@ -57,6 +57,7 @@ public class EditorController {
             uiModel.addAttribute("subMainCategory", subMainCategoryList);
 
             HashMap itemCountMap = new HashMap();
+            HashMap pendingItemsCountMap = new HashMap();
             long pendingItemCount = 0;
             long mainItemCount = 0;
 
@@ -69,10 +70,12 @@ public class EditorController {
                     pendingItemCount = pendingItemCount + editorService.countMainItemBySubSubMainCatId(subSubMainCategory.getId(), LitrumProjectConstants.PENDING);
                 }
                 itemCountMap.put(subMainCategory.getSubMainCategoryName(), mainItemCount);
+                pendingItemsCountMap.put(subMainCategory.getSubMainCategoryName(), pendingItemCount);
+
             }
 
             uiModel.addAttribute("mainItemList", itemCountMap);
-            uiModel.addAttribute("pendingMainItemList", pendingItemCount);
+            uiModel.addAttribute("pendingMainItemList", pendingItemsCountMap);
 
             HashMap userRoleMap = new HashMap();
             List<CompanyType> companyTypeList = userService.getAllCompanyType();
