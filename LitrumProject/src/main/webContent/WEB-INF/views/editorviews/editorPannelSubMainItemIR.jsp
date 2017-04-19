@@ -12,6 +12,7 @@
         <div class="in-services">
         <c:if test="${not empty sucecssMessage}"><font color="green">${successMessage}</font></c:if>
         <c:if test="${not empty errorMessage}"><font color="red">${errorMessage}</font></c:if>
+        <div id="row">
         <form commandName="form" id="form" method="POST" action="editorPannelSubMainItemSRORIRAdd">
 		    <div class="col-md-3 col-sm-6">
 		        <div class="panel panel-default" style="width:1017px">
@@ -26,7 +27,7 @@
 				    <div class="panel-body" style="padding:0;border:0px;height:300px;overflow-y:auto;margin-top:6px">
                         		<div class="col-sm-9" style="width:981px"><h4 style="color:#4d20d8">SUB MAIN ITEM INSTALLATION RATE MODULE</h4></div>
                                 <div class="col-sm-9" style="width:981px"><br>
-                                    <select class="form-control" name="subMainIemId" id="subMainIemId">
+                                    <select class="form-control" name="subMainIemId" id="subMainIemId" onChange="getAvailableSubMainItemContractor()">
                                         <option value="0">SELECT SUB MAIN ITEM SIZE</option>
                                         <c:forEach var="subMainItemObj" items="${subMainItemList}" varStatus="subMainItemStatus">
                                             <option value="${subMainItemObj.id}">${subMainItemObj.mainItem.shortDescription} - ${subMainItemObj.shortDescription}</option>
@@ -50,6 +51,16 @@
                 </div>
             </div>
             </form>
+            </div><div class="clearfix" style="height: 10px;clear: both;"></div><div class="clearfix" style="height: 10px;clear: both;"></div>
+            	<div id="row">
+            		<div class="col-md-3 col-sm-6">
+            			<div class="panel panel-default" style="width:1017px">
+            				<div class="panel-heading"><h3 class="panel-title">AVAILABLE CONTRACTOR LIST</h3></div>
+            					<div class="panel-body" style="padding:0;border:0px;height:333px;overflow-y:auto;margin-top:6px" id="SMI_CONTRACTOR_TABLE">
+            					</div>
+            			</div>
+            		</div>
+            	</div>
        </div>
     </div>
 </div>

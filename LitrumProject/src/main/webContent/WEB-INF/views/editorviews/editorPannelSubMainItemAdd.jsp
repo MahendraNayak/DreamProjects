@@ -55,7 +55,7 @@
                                     <tbody>
                                     <c:forEach var="mainItemObj" items="${mainItemList}" varStatus="status">
 					                    <tr>
-					                        <td style="font-size:16px;color:black;cursor:pointer" onClick=setMainItemID(${mainItemObj.id})><b>${mainItemObj.shortDescription}</b></td>
+					                        <td style="font-size:16px;color:black;cursor:pointer" onClick=setMainItemID(${mainItemObj.id});getMainItemLoadUnit(${mainItemObj.id})><b>${mainItemObj.shortDescription}</b></td>
                                         </tr>
                                     </c:forEach>
 

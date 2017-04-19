@@ -472,7 +472,7 @@ public class EditorController {
             for (SubMainItemMaker subMainItemMaker : subMainItemMakerList) {
                 JSONObject jsonObject = new JSONObject();
                 jsonObject.put("subMainItemMakerName", subMainItemMaker.getSubMainItemMakerName());
-                jsonObject.put("subMainItemMakerPriority", subMainItemMaker.getSubMainItemMakerRate());
+                jsonObject.put("subMainItemMakerRate", subMainItemMaker.getSubMainItemMakerRate());
                 list.add(jsonObject);
             }
             return list.toString();
@@ -491,7 +491,7 @@ public class EditorController {
             for (SubMainItemContractor subMainItemContractor : subMainItemContractorList) {
                 JSONObject jsonObject = new JSONObject();
                 jsonObject.put("subMainItemContractorName", subMainItemContractor.getSubMainItemContractorName());
-                jsonObject.put("subMainItemContractorPriority", subMainItemContractor.getSubMainItemContractorRate());
+                jsonObject.put("subMainItemContractorRate", subMainItemContractor.getSubMainItemContractorRate());
                 list.add(jsonObject);
             }
             return list.toString();

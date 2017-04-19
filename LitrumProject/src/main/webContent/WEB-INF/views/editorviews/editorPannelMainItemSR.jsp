@@ -12,6 +12,7 @@
         <div class="in-services">
         <c:if test="${not empty sucecssMessage}"><font color="green">${successMessage}</font></c:if>
         <c:if test="${not empty errorMessage}"><font color="red">${errorMessage}</font></c:if>
+	<div id="row">
         <form commandName="form" id="form" method="POST" action="editorPannelMainItemIRAndSRAdd">
 		    <div class="col-md-3 col-sm-6">
 		        <div class="panel panel-default" style="width:1017px">
@@ -25,7 +26,7 @@
 				    <div class="panel-body" style="padding:0;border:0px;height:333px;overflow-y:auto;margin-top:6px">
                         		<div class="col-sm-9" style="width:981px"><h4 style="color:#4d20d8">MAIN ITEM SUPPLY RATE MODULE</h4></div>
                                 <div class="col-sm-9" style="width:981px"><br>
-                                    <select class="form-control" name="cityId" id="cityId">
+                                    <select class="form-control" name="cityId" id="cityId" onChange="getAvailableMainItemMakers()">
                                         <option value="0">Select CITY</option>
                                         <c:forEach var="rateCityObj" items="${rateCityList}" varStatus="rateCityStatus">
                                             <option value="${rateCityObj.id}">${rateCityObj.city}</option>
@@ -33,7 +34,7 @@
                                     </select>
                                 </div>
                                 <div class="col-sm-9" style="width:981px"><br>
-                                    <select class="form-control" name="shortDescription" id="shortDescription" onChange="getMainItemLoadUnit(this.value)">
+                                    <select class="form-control" name="shortDescription" id="shortDescription" onChange="getMainItemLoadUnit(this.value);getAvailableMainItemMakers()">
                                         <option value="0">SELECT MAIN ITEM SD</option>
                                         <c:forEach var="mainItemObj" items="${mainItemList}" varStatus="mainItemStatus">
                                             <option value="${mainItemObj.id}">${mainItemObj.shortDescription}</option>
@@ -46,7 +47,7 @@
 				<div class="col-sm-9" style="width:499px;margin-left:482px;margin-top:-51px">
 					<br><input type="text" placeholder="MP" id="makerPriority" name="makerPriority" class="form-control" autofocus>
 				    <input type="hidden" name="itemType" value="MAKER"/>
-				    <input type="hidden" name="mainItemId" value="${mainItemId}"/>
+				    <input type="hidden" name="mainItemId" id="mainItemId" value="0"/>
 				</div>
 				<div class="col-sm-9" style="width:981px"><h4 style="color:#4d20d8">MAIN ITEM SUPPLY RATE INPUT MODULE</h4></div>
 				<div class="col-sm-9" style="width:499px">
@@ -70,6 +71,16 @@
                 </div>
             </div>
             </form>
+	</div><div class="clearfix" style="height: 10px;clear: both;"></div><div class="clearfix" style="height: 10px;clear: both;"></div>
+	<div id="row">
+		<div class="col-md-3 col-sm-6">
+			<div class="panel panel-default" style="width:1017px">
+				<div class="panel-heading"><h3 class="panel-title">AVAILABLE SUPPLIER LIST BASED ON CITY AND MAIN ITEM</h3></div>
+					<div class="panel-body" style="padding:0;border:0px;height:333px;overflow-y:auto;margin-top:6px" id="MI_MAKER_TABLE">
+					</div>
+			</div>
+		</div>
+	</div>
        </div>
     </div>
 </div>
