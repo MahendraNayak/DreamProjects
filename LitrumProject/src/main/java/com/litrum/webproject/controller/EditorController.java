@@ -576,4 +576,33 @@ public class EditorController {
         }
         return respObject.toString();
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/mainItemIR/update")
+    public String updateMainItemIR(@ModelAttribute("itemForm") ItemsForm form) {
+        logger.info("Inside update main item IR method");
+        JSONObject respObject = new JSONObject();
+        try {
+            editorService.updateMainItemIR(form);
+            respObject.put(LitrumProjectConstants.SUCCESS_MESSAGE, "Main Item IR Updated successfully");
+        } catch (Exception e) {
+            logger.error("Exception while update main item IR", e);
+        }
+        return respObject.toString();
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/mainItemSR/update")
+    public String updateMainItemSR(@ModelAttribute("itemForm") ItemsForm form) {
+        logger.info("Inside update main item SR method");
+        JSONObject respObject = new JSONObject();
+        try {
+            editorService.updateMainItemSR(form);
+            respObject.put(LitrumProjectConstants.SUCCESS_MESSAGE, "Main Item SR Updated successfully");
+        } catch (Exception e) {
+            logger.error("Exception while update main item SR", e);
+        }
+        return respObject.toString();
+    }
+
 }

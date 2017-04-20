@@ -321,4 +321,40 @@ public class EditorManager implements EditorService {
             throw new Exception("Main item Id not found while updating main item");
         }
     }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
+    public void updateMainItemIR(ItemsForm form) throws Exception {
+        if (null != form && form.getContractorId() > LitrumProjectConstants.ZERO) {
+            MainItemContractor mainItemContractor = daoFactory.getMainItemContractorDAO().findById(form.getContractorId(), false);
+            if (null != mainItemContractor) {
+                mainItemContractor.setContractorName(form.getContractorName());
+                mainItemContractor.setContractorRate(form.getContractorPrice());
+                mainItemContractor.setContractorPriority(form.getContractorPriority());
+                logger.info("Main item contractor updated successfully.");
+            } else {
+                throw new Exception("Main Item contractor not found while update");
+            }
+        } else {
+            throw new Exception("Main item contractor id not found while update main item contractor");
+        }
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
+    public void updateMainItemSR(ItemsForm form) throws Exception {
+        if (null != form && form.getMakerId() > LitrumProjectConstants.ZERO) {
+            MainItemMaker mainItemMaker = daoFactory.getMainItemMakerDAO().findById(form.getMakerId(), false);
+            if (null != mainItemMaker) {
+                mainItemMaker.setMakerName(form.getMakerName());
+                mainItemMaker.setMakerRate(form.getMakerPrice());
+                mainItemMaker.setMakerPriority(form.getMakerPriority());
+                logger.info("Main item maker updated successfully.");
+            } else {
+                throw new Exception("Main Item maker not found while update");
+            }
+        } else {
+            throw new Exception("Main item maker id not found while update main item maker");
+        }
+    }
 }

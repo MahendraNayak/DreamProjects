@@ -12,6 +12,8 @@ public class ItemsForm {
     private Long loadUnitId;
     private Long cityId;
     private Long mainItemId;
+    private Long makerId;
+    private Long contractorId;
     private String shortDescription;
     private String longDescription;
     private String pdfFileName;
@@ -178,6 +180,22 @@ public class ItemsForm {
 
     public void setPdfFile(MultipartFile pdfFile) {
         this.pdfFile = pdfFile;
+    }
+
+    public Long getMakerId() {
+        return makerId;
+    }
+
+    public void setMakerId(Long makerId) {
+        this.makerId = makerId;
+    }
+
+    public Long getContractorId() {
+        return contractorId;
+    }
+
+    public void setContractorId(Long contractorId) {
+        this.contractorId = contractorId;
     }
 
     @Override
