@@ -336,24 +336,25 @@ public class EditorController {
         return "editorviews/editorPannelSubMainItemAdd";
     }
 
-    @RequestMapping(value = "/editorPannelSubMainItemAdd", method = RequestMethod.POST)
-    public String addSubMainItemPost(@ModelAttribute("subMainItemForm") SubMainItemsForm form, Model uiModel,
-                                     HttpServletRequest request) {
+    @ResponseBody
+    @RequestMapping(value = "/editorPannelSubMainItemAdd")
+    public String addSubMainItemPost(@ModelAttribute("subMainItemForm") SubMainItemsForm form) {
         logger.debug("inside add sub main item post method");
+        JSONObject jsonObject = new JSONObject();
         try {
-            Long subSubMainCategoryId = Long.parseLong(request.getParameter("SSMCID"));
+            /*Long subSubMainCategoryId = Long.parseLong(request.getParameter("SSMCID"));
 
             uiModel.addAttribute("SMCID", Long.parseLong(request.getParameter("SMCID")));
             uiModel.addAttribute("SMCNM", request.getParameter("SMCNM"));
             uiModel.addAttribute("SSMCID", subSubMainCategoryId);
-            uiModel.addAttribute("SSMCNM", request.getParameter("SSMCNM"));
+            uiModel.addAttribute("SSMCNM", request.getParameter("SSMCNM"));*/
 
             editorService.createSubMainItem(form);
-
+            jsonObject.put("MSG","Data Saved Successfully");
         } catch (Exception e) {
             logger.error("Exception while creating sub main item:", e);
         }
-        return "redirect:/editorPannelSubMainItemAdd";
+        return jsonObject.toString();
     }
 
     @RequestMapping(value = "/editorPannelSubMainItemSR", method = RequestMethod.GET)

@@ -231,3 +231,37 @@ function getAvailableSubMainItemContractor(){
                     }
                 });
 }
+
+function addUpdateDeleteSubMainItems(formSubmitType){
+	$("#loadUnitId").prop('disabled',false);
+	var loadUnitId = $("#loadUnitId").val();
+	$("#loadUnitId").prop('disabled',true);
+	var mainItemId = $("#mainItemId").val();
+	var shortDecription = $("#shortDecription").val();
+	var subMainIemId = 0;
+
+	if(formSubmitType == 'UPDATE' || formSubmitType == 'DELETE') subMainIemId = $("#subMainIemId").val()
+
+	var subItemForm  = {
+		"formSubmitType":formSubmitType,
+		"subMainIemId":subMainIemId,
+		"mainItemId":mainItemId,
+		"loadUnitId":loadUnitId,
+		"shortDecription":shortDecription
+        }
+
+	        $.ajax({
+                url: '/LitrumWebServer/editorPannelSubMainItemAdd',
+                type: 'POST',
+                dataType: 'json',
+                data: subItemForm,
+                success: function (response) {
+			        getSubMainItemsBasedOnMainItem(mainItemId);
+		        },
+                error: function (e) {
+                    alert('error'+e);
+                }
+
+            });
+            return false;
+}

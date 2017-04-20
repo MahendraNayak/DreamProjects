@@ -92,9 +92,9 @@
                             <option value="${loadUnit.id}">${loadUnit.unitName}</option>
                 </c:forEach>
 			</select>
-                    <input type="submit" class="btn btn-lg btn-success btn-block" style="margin-top:7px;width:138px" value="Add" onclick=";setFormSubmitType('ADD');return setZeroIDOnClick()">
-                    <input type="submit" class="btn btn-lg btn-success btn-block" style="margin-top:-89px;width:129px;margin-left:143px" value="Update" onclick="setFormSubmitType('UPDATE')">
-		            <input type="submit" class="btn btn-lg btn-success btn-block" style="margin-top:-89px;width:129px;margin-left:278px" value="Delete" onclick="setFormSubmitType('DELETE')">
+                    <input type="button" class="btn btn-lg btn-success btn-block" style="margin-top:7px;width:138px" value="Add" onclick="return addUpdateDeleteSubMainItems('ADD')">
+                    <input type="button" class="btn btn-lg btn-success btn-block" style="margin-top:-89px;width:129px;margin-left:143px" value="Update" onclick="return addUpdateDeleteSubMainItems('UPDATE')">
+		            <input type="button" class="btn btn-lg btn-success btn-block" style="margin-top:-89px;width:129px;margin-left:278px" value="Delete" onclick="return addUpdateDeleteSubMainItems('DELETE')">
                 </div>
             </form>
             </div>
