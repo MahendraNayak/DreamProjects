@@ -17,4 +17,5 @@ public interface MainItemDAO extends GenericeDAO<MainItem, Long> {
 
     long countMainItemBySubSubMainCatId(long subSubMainCategoryId, String status);
 
+    boolean isMainItemExistByShortDescripton(String shortDescription);
 }

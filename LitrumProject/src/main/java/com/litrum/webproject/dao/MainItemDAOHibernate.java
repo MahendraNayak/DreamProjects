@@ -50,4 +50,11 @@ public class MainItemDAOHibernate extends GenericDAOHibernate<MainItem, Long>
         criteria.setProjection(Projections.rowCount());
         return (long) criteria.uniqueResult();
     }
+
+    @Override
+    public boolean isMainItemExistByShortDescripton(String shortDescription) {
+        Criteria criteria = getSession().createCriteria(getPersistentClass());
+        criteria.add(Restrictions.eq("shortDescription", shortDescription));
+        return null != criteria.uniqueResult();
+    }
 }
