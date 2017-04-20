@@ -605,4 +605,32 @@ public class EditorController {
         return respObject.toString();
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/subMainItemSR/update")
+    public String updateSubMainItemSR(@ModelAttribute("subMainItemForm") SubMainItemsForm form) {
+        logger.info("Inside update sub main item SR method");
+        JSONObject respObject = new JSONObject();
+        try {
+            editorService.updateSubMainItemSR(form);
+            respObject.put(LitrumProjectConstants.SUCCESS_MESSAGE, "Sub Main Item SR Updated successfully");
+        } catch (Exception e) {
+            logger.error("Exception while update sub main item SR", e);
+        }
+        return respObject.toString();
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/subMainItemIR/update")
+    public String updateSubMainItemIR(@ModelAttribute("subMainItemForm") SubMainItemsForm form) {
+        logger.info("Inside update sub main item IR method");
+        JSONObject respObject = new JSONObject();
+        try {
+            editorService.updateSubMainItemIR(form);
+            respObject.put(LitrumProjectConstants.SUCCESS_MESSAGE, "Sub Main Item IR Updated successfully");
+        } catch (Exception e) {
+            logger.error("Exception while update sub main item IR", e);
+        }
+        return respObject.toString();
+    }
+
 }

@@ -52,5 +52,9 @@ public interface EditorService {
     void updateMainItemIR(ItemsForm form) throws Exception;
 
     void updateMainItemSR(ItemsForm form) throws Exception;
+
+    void updateSubMainItemSR(SubMainItemsForm form) throws Exception;
+
+    void updateSubMainItemIR(SubMainItemsForm form) throws Exception;
 }
 

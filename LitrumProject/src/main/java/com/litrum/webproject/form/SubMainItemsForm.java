@@ -9,6 +9,8 @@ public class SubMainItemsForm {
 
     private Long mainItemId;
     private Long loadUnitId;
+    private Long subMainItemMakerId;
+    private Long subMainItemContractorId;
     private String shortDecription;
     private Long subMainIemId;
     private Double subMainItemMakerRate;
@@ -96,6 +98,22 @@ public class SubMainItemsForm {
 
     public void setFormSubmitType(String formSubmitType) {
         this.formSubmitType = formSubmitType;
+    }
+
+    public Long getSubMainItemMakerId() {
+        return subMainItemMakerId;
+    }
+
+    public void setSubMainItemMakerId(Long subMainItemMakerId) {
+        this.subMainItemMakerId = subMainItemMakerId;
+    }
+
+    public Long getSubMainItemContractorId() {
+        return subMainItemContractorId;
+    }
+
+    public void setSubMainItemContractorId(Long subMainItemContractorId) {
+        this.subMainItemContractorId = subMainItemContractorId;
     }
 
     @Override

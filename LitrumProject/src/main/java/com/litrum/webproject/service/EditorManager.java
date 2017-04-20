@@ -357,4 +357,38 @@ public class EditorManager implements EditorService {
             throw new Exception("Main item maker id not found while update main item maker");
         }
     }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
+    public void updateSubMainItemSR(SubMainItemsForm form) throws Exception {
+        if (null != form && form.getSubMainItemMakerId() > LitrumProjectConstants.ZERO) {
+            SubMainItemMaker subMainItemMaker = daoFactory.getSubMainItemMakerDAO().findById(form.getSubMainItemMakerId(), false);
+            if (null != subMainItemMaker) {
+                subMainItemMaker.setSubMainItemMakerName(form.getSubMainItemMakerName());
+                subMainItemMaker.setSubMainItemMakerRate(form.getSubMainItemMakerRate());
+                logger.info("Sub Main item maker updated successfully.");
+            } else {
+                throw new Exception("Sub Main Item maker not found while update");
+            }
+        } else {
+            throw new Exception("Sub Main item maker id not found while update sub main item maker");
+        }
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
+    public void updateSubMainItemIR(SubMainItemsForm form) throws Exception {
+        if (null != form && form.getSubMainItemContractorId() > LitrumProjectConstants.ZERO) {
+            SubMainItemContractor subMainItemContractor = daoFactory.getSubMainItemContractorDAO().findById(form.getSubMainItemContractorId(), false);
+            if (null != subMainItemContractor) {
+                subMainItemContractor.setSubMainItemContractorName(form.getSubMainItemContractorName());
+                subMainItemContractor.setSubMainItemContractorRate(form.getSubMainItemContractorRate());
+                logger.info("Sub Main item contractor updated successfully.");
+            } else {
+                throw new Exception("Sub Main Item contractor not found while update");
+            }
+        } else {
+            throw new Exception("Sub Main item contractor id not found while update sub main item contractor");
+        }
+    }
 }
