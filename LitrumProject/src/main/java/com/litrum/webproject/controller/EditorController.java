@@ -562,7 +562,6 @@ public class EditorController {
         return null;
     }
 
-    @ResponseBody
     @RequestMapping(value = "/mainItem/update")
     public String updateMainItem(@ModelAttribute("itemForm") ItemsForm form) {
         logger.info("Inside update main item method");
