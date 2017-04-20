@@ -176,6 +176,9 @@ public class EditorController {
             uiModel.addAttribute("SSMCID", SSMCID);
             uiModel.addAttribute("SSMCNM", SSMCNM);
 
+            List<MainItem> mainItemList = editorService.getMainItemsBySubSubMainCaegoryId(SSMCID);
+            uiModel.addAttribute("mainItemList", mainItemList);
+
         }catch (Exception e){
             logger.debug("Exception editorPannelMainItemAdd :: findBySubMainCategoryId "+e.getMessage());
         }
