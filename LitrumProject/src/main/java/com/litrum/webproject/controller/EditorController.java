@@ -561,4 +561,16 @@ public class EditorController {
         }
         return null;
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/mainItem/update")
+    public String updateMainItem(@ModelAttribute("itemForm") ItemsForm form) {
+        logger.info("Inside update main item method");
+        try {
+            editorService.updateMainItem(form);
+        } catch (Exception e) {
+            logger.error("Exception while update main item", e);
+        }
+        return "redirect:/editorPannelMainItemAdd";
+    }
 }

@@ -46,5 +46,7 @@ public interface EditorService {
     List<SubMainItemMaker> findSubMainItemMakerBySubMainItem(SubMainItemsForm form);
 
     List<SubMainItemContractor> findSubMainItemContractorBySubMainItem(SubMainItemsForm form);
+
+    void updateMainItem(ItemsForm form) throws Exception;
 }
 

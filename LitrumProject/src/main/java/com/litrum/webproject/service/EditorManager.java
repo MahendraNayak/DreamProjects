@@ -293,4 +293,32 @@ public class EditorManager implements EditorService {
     public List<SubMainItemContractor> findSubMainItemContractorBySubMainItem(SubMainItemsForm form) {
         return daoFactory.getSubMainItemContractorDAO().findBySubMainItem(form);
     }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
+    public void updateMainItem(ItemsForm form) throws Exception {
+        if (null != form && form.getMainItemId() > LitrumProjectConstants.ZERO) {
+            MainItem mainItem = daoFactory.getMainItemDAO().findById(form.getMainItemId(), false);
+            if (null != mainItem && !daoFactory.getMainItemDAO().isMainItemExistByShortDescripton(form.getShortDescription())) {
+                mainItem.setShortDescription(form.getShortDescription());
+                mainItem.setLongDescription(form.getLongDescription());
+                if (LitrumProjectConstants.YES.equalsIgnoreCase(form.getSubItemForMainItem())) {
+                    mainItem.setSubMainItemForMainItem(true);
+                } else {
+                    mainItem.setSubMainItemForMainItem(false);
+                }
+
+                LoadUnit loadUnit = daoFactory.getLoadUnitDAO().findById(form.getLoadUnitId(), false);
+                if (null != loadUnit) {
+                    mainItem.setLoadUnit(loadUnit);
+                } else {
+                    throw new Exception("Load unit not found while updating main item");
+                }
+            } else {
+                throw new Exception("No main item found for update");
+            }
+        } else {
+            throw new Exception("Main item Id not found while updating main item");
+        }
+    }
 }
