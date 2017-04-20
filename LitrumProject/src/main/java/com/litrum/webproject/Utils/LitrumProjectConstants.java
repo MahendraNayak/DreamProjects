@@ -23,4 +23,6 @@ public interface LitrumProjectConstants {
     String ADD = "ADD";
     String UPDATE = "UPDATE";
     String DELETE = "DELETE";
+    String SUCCESS_MESSAGE = "successMessage";
+    String ERROR_MESSAGE = "errorMessage";
 }

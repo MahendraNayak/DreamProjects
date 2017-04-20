@@ -562,14 +562,17 @@ public class EditorController {
         return null;
     }
 
+    @ResponseBody
     @RequestMapping(value = "/mainItem/update")
     public String updateMainItem(@ModelAttribute("itemForm") ItemsForm form) {
         logger.info("Inside update main item method");
+        JSONObject respObject = new JSONObject();
         try {
             editorService.updateMainItem(form);
+            respObject.put(LitrumProjectConstants.SUCCESS_MESSAGE, "Main Item Updated successfully");
         } catch (Exception e) {
             logger.error("Exception while update main item", e);
         }
-        return "redirect:/editorPannelMainItemAdd";
+        return respObject.toString();
     }
 }
