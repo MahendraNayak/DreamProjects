@@ -29,6 +29,15 @@ public class MainItemDAOHibernate extends GenericDAOHibernate<MainItem, Long>
     }
 
     @Override
+    public List<MainItem> findBySubSubMainCatAvailItem(Long subSubMainCategoryId, boolean isSubMainItemForMainItem) {
+        Criteria criteria = getSession().createCriteria(getPersistentClass());
+        criteria.createAlias("subSubMainCategory", "subSubMainCategory");
+        criteria.add(Restrictions.eq("subSubMainCategory.id", subSubMainCategoryId));
+        criteria.add(Restrictions.eq("isSubMainItemForMainItem", isSubMainItemForMainItem));
+        return criteria.list();
+    }
+
+    @Override
     public List<MainItem> findBySubSubMainCatIds(List<Long> subSubMainCatIds, String status) {
         Criteria criteria = getSession().createCriteria(getPersistentClass());
         criteria.createAlias("subSubMainCategory", "subSubMainCategory");

@@ -21,6 +21,8 @@ public interface EditorService {
 
     List<MainItem> getMainItemsBySubSubMainCaegoryId(Long subSubMainCategoryId);
 
+    List<MainItem> getMainItemsBySubSubMainCatAvailSubItems(Long subSubMainCategoryId,boolean isSubMainItemForMainItem);
+
     List<RateCity> getAllRateCity();
 
     void createSubMainItem(SubMainItemsForm form) throws Exception;

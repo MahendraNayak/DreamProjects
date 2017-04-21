@@ -326,7 +326,7 @@ public class EditorController {
             uiModel.addAttribute("SSMCID", subSubMainCategoryId);
             uiModel.addAttribute("SSMCNM", request.getParameter("SSMCNM"));
 
-            List<MainItem> mainItemList = editorService.getMainItemsBySubSubMainCaegoryId(subSubMainCategoryId);
+            List<MainItem> mainItemList = editorService.getMainItemsBySubSubMainCatAvailSubItems(subSubMainCategoryId,true);
             uiModel.addAttribute("mainItemList", mainItemList);
 
             List<LoadUnit> loadUnitList = userService.getAllLoadUnit();

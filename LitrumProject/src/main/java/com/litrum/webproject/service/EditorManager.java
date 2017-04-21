@@ -147,6 +147,11 @@ public class EditorManager implements EditorService {
     }
 
     @Override
+    public List<MainItem> getMainItemsBySubSubMainCatAvailSubItems(Long subSubMainCategoryId, boolean isSubMainItemForMainItem) {
+        return daoFactory.getMainItemDAO().findBySubSubMainCatAvailItem(subSubMainCategoryId,isSubMainItemForMainItem);
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public List<RateCity> getAllRateCity() {
         return daoFactory.getRateCityDAO().findAll();
