@@ -99,40 +99,41 @@ public class EditorManager implements EditorService {
             if (null == mainItem) {
                 throw new Exception("No Main Item found, hence cant proceed for creating contractor ot maker");
             }
-            if (null != form.getItemType() && LitrumProjectConstants.MAKER.equalsIgnoreCase(form.getItemType()) &&
-                    !daoFactory.getMainItemMakerDAO().isExistByMainItemIdAndRateCityAndMakerName(form)) {
-                MainItemMaker mainItemMaker = new MainItemMaker();
-                mainItemMaker.setMainItem(mainItem);
-                mainItemMaker.setMakerName(form.getMakerName());
-                mainItemMaker.setMakerPriority(form.getMakerPriority());
-                mainItemMaker.setMakerRate(form.getMakerPrice());
+            if (null != form.getItemType() && LitrumProjectConstants.MAKER.equalsIgnoreCase(form.getItemType())) {
+                if (!daoFactory.getMainItemMakerDAO().isExistByMainItemIdAndRateCityAndMakerName(form)) {
+                    MainItemMaker mainItemMaker = new MainItemMaker();
+                    mainItemMaker.setMainItem(mainItem);
+                    mainItemMaker.setMakerName(form.getMakerName());
+                    mainItemMaker.setMakerPriority(form.getMakerPriority());
+                    mainItemMaker.setMakerRate(form.getMakerPrice());
 
-                RateCity rateCity = daoFactory.getRateCityDAO().findById(form.getCityId(), false);
-                if (null == rateCity) {
-                    throw new Exception("rate city not found with id, hence cant create rate city");
+                    RateCity rateCity = daoFactory.getRateCityDAO().findById(form.getCityId(), false);
+                    if (null == rateCity) {
+                        throw new Exception("rate city not found with id, hence cant create rate city");
+                    }
+                    mainItemMaker.setRateCity(rateCity);
+                    daoFactory.getMainItemMakerDAO().makePersistent(mainItemMaker);
+                } else {
+                    throw new Exception("Maker already exist with name");
                 }
-                mainItemMaker.setRateCity(rateCity);
-                daoFactory.getMainItemMakerDAO().makePersistent(mainItemMaker);
-
-            } else {
-                throw new Exception("Maker already exist with name");
             }
-            if (LitrumProjectConstants.CONTRACTOR.equalsIgnoreCase(form.getItemType()) &&
-                    !daoFactory.getMainItemContractorDAO().isExistByMainItemIdAndRateCityAndMakerName(form)) {
-                MainItemContractor mainItemContractor = new MainItemContractor();
-                mainItemContractor.setMainItem(mainItem);
-                mainItemContractor.setContractorName(form.getContractorName());
-                mainItemContractor.setContractorPriority(form.getContractorPriority());
-                mainItemContractor.setContractorRate(form.getContractorPrice());
+            if (LitrumProjectConstants.CONTRACTOR.equalsIgnoreCase(form.getItemType())) {
+                if (!daoFactory.getMainItemContractorDAO().isExistByMainItemIdAndRateCityAndMakerName(form)) {
+                    MainItemContractor mainItemContractor = new MainItemContractor();
+                    mainItemContractor.setMainItem(mainItem);
+                    mainItemContractor.setContractorName(form.getContractorName());
+                    mainItemContractor.setContractorPriority(form.getContractorPriority());
+                    mainItemContractor.setContractorRate(form.getContractorPrice());
 
-                RateCity rateCity = daoFactory.getRateCityDAO().findById(form.getCityId(), false);
-                if (null == rateCity) {
-                    throw new Exception("rate city not found with id, hence cant create rate city");
+                    RateCity rateCity = daoFactory.getRateCityDAO().findById(form.getCityId(), false);
+                    if (null == rateCity) {
+                        throw new Exception("rate city not found with id, hence cant create rate city");
+                    }
+                    mainItemContractor.setRateCity(rateCity);
+                    daoFactory.getMainItemContractorDAO().makePersistent(mainItemContractor);
+                } else {
+                    throw new Exception("Contractor already exist with name");
                 }
-                mainItemContractor.setRateCity(rateCity);
-                daoFactory.getMainItemContractorDAO().makePersistent(mainItemContractor);
-            } else {
-                throw new Exception("Contractor already exist with name");
             }
         } else {
             throw new Exception("empty form values while creating contractor or maker, hence cant proceed.");
@@ -205,19 +206,27 @@ public class EditorManager implements EditorService {
                 throw new Exception("Sub Main Item Not found while addding SR or CR");
             }
             if (LitrumProjectConstants.MAKER.equalsIgnoreCase(form.getSubItemType())) {
-                SubMainItemMaker subMainItemMaker = new SubMainItemMaker();
-                subMainItemMaker.setSubMainItem(subMainItem);
-                subMainItemMaker.setSubMainItemMakerName(form.getSubMainItemMakerName());
-                subMainItemMaker.setSubMainItemMakerRate(form.getSubMainItemMakerRate());
-                daoFactory.getSubMainItemMakerDAO().makePersistent(subMainItemMaker);
-                logger.info("maker for sub main item added successfully");
+                if (!daoFactory.getSubMainItemMakerDAO().isExistBySubMainItemAndMakerName(form)) {
+                    SubMainItemMaker subMainItemMaker = new SubMainItemMaker();
+                    subMainItemMaker.setSubMainItem(subMainItem);
+                    subMainItemMaker.setSubMainItemMakerName(form.getSubMainItemMakerName());
+                    subMainItemMaker.setSubMainItemMakerRate(form.getSubMainItemMakerRate());
+                    daoFactory.getSubMainItemMakerDAO().makePersistent(subMainItemMaker);
+                    logger.info("maker for sub main item added successfully");
+                } else {
+                    throw new Exception("Maker already exist with name");
+                }
             } else if (LitrumProjectConstants.CONTRACTOR.equalsIgnoreCase(form.getSubItemType())) {
-                SubMainItemContractor subMainItemContractor = new SubMainItemContractor();
-                subMainItemContractor.setSubMainItem(subMainItem);
-                subMainItemContractor.setSubMainItemContractorName(form.getSubMainItemContractorName());
-                subMainItemContractor.setSubMainItemContractorRate(form.getSubMainItemContractorRate());
-                daoFactory.getSubMainItemContractorDAO().makePersistent(subMainItemContractor);
-                logger.info("contractor for sub main item added successfully");
+                if (!daoFactory.getSubMainItemContractorDAO().isExistBySubMainItemAndContractorName(form)) {
+                    SubMainItemContractor subMainItemContractor = new SubMainItemContractor();
+                    subMainItemContractor.setSubMainItem(subMainItem);
+                    subMainItemContractor.setSubMainItemContractorName(form.getSubMainItemContractorName());
+                    subMainItemContractor.setSubMainItemContractorRate(form.getSubMainItemContractorRate());
+                    daoFactory.getSubMainItemContractorDAO().makePersistent(subMainItemContractor);
+                    logger.info("contractor for sub main item added successfully");
+                } else {
+                    throw new Exception("Contractor already exist with name");
+                }
             }
         } else {
             throw new Exception("form doesn't contains sub main item id, hnce can't proceed");

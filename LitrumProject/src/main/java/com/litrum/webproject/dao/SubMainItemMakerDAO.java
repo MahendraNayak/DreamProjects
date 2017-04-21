@@ -11,4 +11,6 @@ import java.util.List;
 public interface SubMainItemMakerDAO extends GenericeDAO<SubMainItemMaker, Long> {
 
     List<SubMainItemMaker> findBySubMainItem(SubMainItemsForm form);
+
+    boolean isExistBySubMainItemAndMakerName(SubMainItemsForm form);
 }

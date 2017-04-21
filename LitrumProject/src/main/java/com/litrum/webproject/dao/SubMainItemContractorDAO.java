@@ -11,4 +11,6 @@ import java.util.List;
 public interface SubMainItemContractorDAO extends GenericeDAO<SubMainItemContractor, Long> {
 
     List<SubMainItemContractor> findBySubMainItem(SubMainItemsForm form);
+
+    boolean isExistBySubMainItemAndContractorName(SubMainItemsForm form);
 }

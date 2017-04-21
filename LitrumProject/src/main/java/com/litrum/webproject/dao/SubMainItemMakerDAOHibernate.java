@@ -20,4 +20,13 @@ public class SubMainItemMakerDAOHibernate extends GenericDAOHibernate<SubMainIte
         criteria.add(Restrictions.eq("subMainItem.id", form.getSubMainIemId()));
         return criteria.list();
     }
+
+    @Override
+    public boolean isExistBySubMainItemAndMakerName(SubMainItemsForm form) {
+        Criteria criteria = getSession().createCriteria(getPersistentClass());
+        criteria.createAlias("subMainItem", "subMainItem");
+        criteria.add(Restrictions.eq("subMainItem.id", form.getSubMainIemId()));
+        criteria.add(Restrictions.eq("subMainItemMakerName", form.getSubMainItemMakerName()));
+        return null != criteria.uniqueResult();
+    }
 }
