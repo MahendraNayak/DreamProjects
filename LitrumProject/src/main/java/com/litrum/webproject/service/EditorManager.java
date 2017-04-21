@@ -99,7 +99,8 @@ public class EditorManager implements EditorService {
             if (null == mainItem) {
                 throw new Exception("No Main Item found, hence cant proceed for creating contractor ot maker");
             }
-            if (null != form.getItemType() && LitrumProjectConstants.MAKER.equalsIgnoreCase(form.getItemType())) {
+            if (null != form.getItemType() && LitrumProjectConstants.MAKER.equalsIgnoreCase(form.getItemType()) &&
+                    !daoFactory.getMainItemMakerDAO().isExistByMainItemIdAndRateCityAndMakerName(form)) {
                 MainItemMaker mainItemMaker = new MainItemMaker();
                 mainItemMaker.setMainItem(mainItem);
                 mainItemMaker.setMakerName(form.getMakerName());
@@ -113,7 +114,11 @@ public class EditorManager implements EditorService {
                 mainItemMaker.setRateCity(rateCity);
                 daoFactory.getMainItemMakerDAO().makePersistent(mainItemMaker);
 
-            } else if (LitrumProjectConstants.CONTRACTOR.equalsIgnoreCase(form.getItemType())) {
+            } else {
+                throw new Exception("Maker already exist with name");
+            }
+            if (LitrumProjectConstants.CONTRACTOR.equalsIgnoreCase(form.getItemType()) &&
+                    !daoFactory.getMainItemContractorDAO().isExistByMainItemIdAndRateCityAndMakerName(form)) {
                 MainItemContractor mainItemContractor = new MainItemContractor();
                 mainItemContractor.setMainItem(mainItem);
                 mainItemContractor.setContractorName(form.getContractorName());
@@ -126,6 +131,8 @@ public class EditorManager implements EditorService {
                 }
                 mainItemContractor.setRateCity(rateCity);
                 daoFactory.getMainItemContractorDAO().makePersistent(mainItemContractor);
+            } else {
+                throw new Exception("Contractor already exist with name");
             }
         } else {
             throw new Exception("empty form values while creating contractor or maker, hence cant proceed.");
