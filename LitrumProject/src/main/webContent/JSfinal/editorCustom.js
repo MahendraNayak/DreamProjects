@@ -265,3 +265,38 @@ function addUpdateDeleteSubMainItems(formSubmitType){
             });
             return false;
 }
+
+
+function setMainItemDetailsToupdate(mainItemId,shortDescription,longDescription,loadUnitId,subItemForMainItem){
+	var mainItemAvail = 'NO';
+	if(subItemForMainItem) mainItemAvail = 'YES';
+	$("#mainITEMID").val(mainItemId);
+	$("#shortDescriptionUpdate").val(shortDescription);
+	$("#longDescriptionUpdate").val(longDescription);
+	$("#loadUnitIdUpdate").val(loadUnitId);
+	$("#subItemForMainItemsUpdate").val(mainItemAvail);
+}
+
+/*function updateMainItemDetails(){
+	var itemForm  = {
+		"mainItemId":$("#mainITEMID").val(),
+		"loadUnitId":$("#loadUnitIdUpdate").val(),
+		"shortDescription":$("#shortDescriptionUpdate").val(),
+		"longDescription":$("#longDescriptionUpdate").val(),
+		"subItemForMainItem":$("#subItemForMainItemsUpdate").val()
+	}
+
+	$.ajax({
+		url: '/LitrumWebServer/mainItem/update',
+		type: 'POST',
+		dataType: 'json',
+		data: itemForm,
+		success: function (response) {
+				//getSubMainItemsBasedOnMainItem(mainItemId);
+				alert("updated sucessfully");
+			},
+		error: function (e) {
+		    alert('error'+e);
+		}
+	});
+}*/

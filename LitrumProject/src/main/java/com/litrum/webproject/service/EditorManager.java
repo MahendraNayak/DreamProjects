@@ -315,7 +315,16 @@ public class EditorManager implements EditorService {
     public void updateMainItem(ItemsForm form) throws Exception {
         if (null != form && form.getMainItemId() > LitrumProjectConstants.ZERO) {
             MainItem mainItem = daoFactory.getMainItemDAO().findById(form.getMainItemId(), false);
-            if (null != mainItem && !daoFactory.getMainItemDAO().isMainItemExistByShortDescripton(form.getShortDescription())) {
+
+            boolean hasCallFunction = false;
+
+            if(null != mainItem && ((mainItem.getShortDescription()).equalsIgnoreCase(form.getShortDescription()))){
+                hasCallFunction = true;
+            }else if(null != mainItem && !((mainItem.getShortDescription()).equalsIgnoreCase(form.getShortDescription()))){
+                hasCallFunction = !daoFactory.getMainItemDAO().isMainItemExistByShortDescripton(form.getShortDescription());
+            }
+
+            if (null != mainItem && hasCallFunction) {
                 mainItem.setShortDescription(form.getShortDescription());
                 mainItem.setLongDescription(form.getLongDescription());
                 if (LitrumProjectConstants.YES.equalsIgnoreCase(form.getSubItemForMainItem())) {

@@ -566,18 +566,20 @@ public class EditorController {
         return null;
     }
 
-    @ResponseBody
-    @RequestMapping(value = "/mainItem/update")
-    public String updateMainItem(@ModelAttribute("itemForm") ItemsForm form) {
+    @RequestMapping(value = "/mainItemUpdate", method = RequestMethod.POST)
+    public String updateMainItem(@ModelAttribute("updateItemForm") ItemsForm form, Model uiModel, HttpServletRequest request) {
         logger.info("Inside update main item method");
-        JSONObject respObject = new JSONObject();
         try {
+            uiModel.addAttribute("SMCID", Long.parseLong(request.getParameter("SMCID")));
+            uiModel.addAttribute("SMCNM", request.getParameter("SMCNM"));
+            uiModel.addAttribute("SSMCID", Long.parseLong(request.getParameter("SSMCID")));
+            uiModel.addAttribute("SSMCNM", request.getParameter("SSMCNM"));
+
             editorService.updateMainItem(form);
-            respObject.put(LitrumProjectConstants.SUCCESS_MESSAGE, "Main Item Updated successfully");
         } catch (Exception e) {
             logger.error("Exception while update main item", e);
         }
-        return respObject.toString();
+        return "redirect:/editorPannelMainItemAdd";
     }
 
     @ResponseBody
