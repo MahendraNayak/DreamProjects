@@ -464,6 +464,9 @@ public class EditorController {
                 jsonObject.put("mainItemContractorName", mainItemContractor.getContractorName());
                 jsonObject.put("mainItemContractorPriority", mainItemContractor.getContractorPriority());
                 jsonObject.put("mainItemContractorRate", mainItemContractor.getContractorRate());
+                jsonObject.put("cityId", mainItemContractor.getRateCity().getId());
+                jsonObject.put("shortDescription", mainItemContractor.getMainItem().getShortDescription());
+                jsonObject.put("mainItemId", mainItemContractor.getMainItem().getId());
                 list.add(jsonObject);
             }
             return list.toString();

@@ -59,13 +59,16 @@
 				<div class="col-sm-9" style="width:499px;margin-left:482px;margin-top:-51px">
 					<br><input type="text" placeholder="IR" id="contractorPrice" name="contractorPrice" class="form-control" autofocus>
 					<input type="hidden" name="itemType" value="CONTRACTOR"/>
+					<input type="hidden" name="operationType" id="operationType" value=""/>
 					<input type="hidden" name="mainItemId" id="mainItemId" value="0"/>
 				</div>
 
                                 <div class="clearfix" style="height: 10px;clear: both;"></div>
                                 <div class="clearfix" style="height: 10px;clear: both;"></div>
                                 <div class="col-sm-9" style="width:499px;margin-left:480px;margin-top:31px">
-                                    <br><input type="submit" class="btn btn-lg btn-success btn-block" style="margin-top:-56px;width:129px;margin-left:-480px" value="Add">
+                                    <br><input type="submit" class="btn btn-lg btn-success btn-block" style="margin-top:-56px;width:129px;margin-left:-480px" value="Add" onclick="setOperationType('ADD')">
+                                    <br><input type="submit" class="btn btn-lg btn-success btn-block" style="margin-top:-105px;width:129px;margin-left:-340px" value="Update" onclick="enableMIIRFormFields();setOperationType('UPDATE')">
+                                    <br><input type="button" class="btn btn-lg btn-success btn-block" style="margin-top:-105px;width:129px;margin-left:-200px" value="Reset" onclick="resetMainItemIRFormOnReset()">
                                 </div>
                     </div>
                 </div>

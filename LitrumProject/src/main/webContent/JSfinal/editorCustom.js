@@ -149,6 +149,25 @@ function resetMainItemMakerForm(){
 	$("#makerPriority").val('');
 }
 
+function setValuesForUpdateMIIR(contractorName,contractorPrice,contractorPriority){
+	$("#shortDescription").prop('disabled',true);
+    $("#cityId").prop('disabled',true);
+	$("#contractorName").val(contractorName);
+	$("#contractorPrice").val(contractorPrice);
+	$("#contractorPriority").val(contractorPriority);
+}
+
+function resetMainItemIRForm(){
+    $("#contractorName").val('');
+	$("#contractorPrice").val('');
+	$("#contractorPriority").val('');
+}
+
+function enableMIIRFormFields(){
+    $("#shortDescription").prop('disabled',false);
+    $("#cityId").prop('disabled',false);
+}
+
 function resetMainItemMakerFormOnReset(){
     $("#shortDescription").prop('disabled',false);
     $("#cityId").prop('disabled',false);
@@ -163,6 +182,23 @@ function resetMainItemMakerFormOnReset(){
 	$("#MI_MAKER_TABLE").html('');
 }
 
+function resetMainItemIRFormOnReset(){
+    $("#shortDescription").prop('disabled',false);
+    $("#cityId").prop('disabled',false);
+    $("#loadUnitId").prop('disabled',false);
+
+    $("#contractorName").val('');
+	$("#contractorPrice").val('');
+	$("#contractorPriority").val('');
+	$("#cityId").val(0);
+	$("#shortDescription").val(0);
+	$("#loadUnitId").val(0);
+	$("#MI_CONTRACTOR_TABLE").html('');
+}
+
+function setOperationType(opType){
+    $("#setOperationType").val(opType);
+}
 
 function getAvailableMainItemContractor(){
         var cityId = $("#cityId").val();
@@ -185,11 +221,12 @@ function getAvailableMainItemContractor(){
                  HTML_TABLE = HTML_TABLE + "<td style='font-size:16px;color:black'><b>CONTRACTOR RATE</b></td>";
                  HTML_TABLE = HTML_TABLE + "<td style='font-size:16px;color:black'><b>CONTRACTOR PRIORITY</b></td></tr>";
     	for(var i=0;i<response.length;i++){
+        		var mainItemContractorNameQu = JSON.stringify(response[i].mainItemContractorName);
         		var mainItemContractorName = (JSON.stringify(response[i].mainItemContractorName)).replace(/"/g, '');
         		var mainItemContractorRate = JSON.stringify(response[i].mainItemContractorRate);
         		var mainItemContractorPriority = (JSON.stringify(response[i].mainItemContractorPriority)).replace(/"/g, '');
 
-        	    HTML_TABLE = HTML_TABLE + "<tr><td style='font-size:16px;color:black'>"+mainItemContractorName+"</td>";
+                HTML_TABLE = HTML_TABLE + "<tr><td style='font-size:16px;color:black;;cursor:pointer' onclick='setValuesForUpdateMIIR("+mainItemContractorNameQu+","+mainItemContractorRate+","+mainItemContractorPriority+")'><b>"+mainItemContractorName+"</b></td>";
                 HTML_TABLE = HTML_TABLE + "<td style='font-size:16px;color:black'>"+mainItemContractorRate+"</td>";
                 HTML_TABLE = HTML_TABLE + "<td style='font-size:16px;color:black'>"+mainItemContractorPriority+"</td></tr>";
     	}
