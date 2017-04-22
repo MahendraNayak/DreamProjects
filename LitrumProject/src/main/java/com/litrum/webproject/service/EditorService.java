@@ -21,7 +21,7 @@ public interface EditorService {
 
     List<MainItem> getMainItemsBySubSubMainCaegoryId(Long subSubMainCategoryId);
 
-    List<MainItem> getMainItemsBySubSubMainCatAvailSubItems(Long subSubMainCategoryId,boolean isSubMainItemForMainItem);
+    List<MainItem> getMainItemsBySubSubMainCatAvailSubItems(Long subSubMainCategoryId, boolean isSubMainItemForMainItem);
 
     List<RateCity> getAllRateCity();
 

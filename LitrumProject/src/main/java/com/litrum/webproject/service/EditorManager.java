@@ -147,8 +147,9 @@ public class EditorManager implements EditorService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<MainItem> getMainItemsBySubSubMainCatAvailSubItems(Long subSubMainCategoryId, boolean isSubMainItemForMainItem) {
-        return daoFactory.getMainItemDAO().findBySubSubMainCatAvailItem(subSubMainCategoryId,isSubMainItemForMainItem);
+        return daoFactory.getMainItemDAO().findBySubSubMainCatAvailItem(subSubMainCategoryId, isSubMainItemForMainItem);
     }
 
     @Override

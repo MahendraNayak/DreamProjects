@@ -13,7 +13,7 @@ public interface MainItemDAO extends GenericeDAO<MainItem, Long> {
 
     List<MainItem> findBySubSubMainCategoryId(Long subSubMainCategoryId);
 
-    List<MainItem> findBySubSubMainCatAvailItem(Long subSubMainCategoryId,boolean isSubMainItemForMainItem);
+    List<MainItem> findBySubSubMainCatAvailItem(Long subSubMainCategoryId, boolean isSubMainItemForMainItem);
 
     List<MainItem> findBySubSubMainCatIds(List<Long> subSubMainCatIds, String status);
 

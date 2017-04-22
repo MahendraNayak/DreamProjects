@@ -26,6 +26,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import static java.lang.Boolean.TRUE;
+
 /**
  * Created by Vishal on 4/8/2017.
  */
@@ -326,7 +328,7 @@ public class EditorController {
             uiModel.addAttribute("SSMCID", subSubMainCategoryId);
             uiModel.addAttribute("SSMCNM", request.getParameter("SSMCNM"));
 
-            List<MainItem> mainItemList = editorService.getMainItemsBySubSubMainCatAvailSubItems(subSubMainCategoryId,true);
+            List<MainItem> mainItemList = editorService.getMainItemsBySubSubMainCatAvailSubItems(subSubMainCategoryId, true);
             uiModel.addAttribute("mainItemList", mainItemList);
 
             List<LoadUnit> loadUnitList = userService.getAllLoadUnit();

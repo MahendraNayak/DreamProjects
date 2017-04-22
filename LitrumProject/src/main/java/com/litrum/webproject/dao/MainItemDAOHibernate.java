@@ -33,7 +33,7 @@ public class MainItemDAOHibernate extends GenericDAOHibernate<MainItem, Long>
         Criteria criteria = getSession().createCriteria(getPersistentClass());
         criteria.createAlias("subSubMainCategory", "subSubMainCategory");
         criteria.add(Restrictions.eq("subSubMainCategory.id", subSubMainCategoryId));
-        criteria.add(Restrictions.eq("isSubMainItemForMainItem", isSubMainItemForMainItem));
+        criteria.add(Restrictions.eq("subMainItemForMainItem", isSubMainItemForMainItem));
         return criteria.list();
     }
 

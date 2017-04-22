@@ -1,6 +1,5 @@
 package com.litrum.webproject.model;
 
-import com.litrum.webproject.Utils.LitrumProjectConstants;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.persistence.*;
@@ -20,7 +19,7 @@ public class MainItem extends PersistentObject {
     private String imageName;
     private LoadUnit loadUnit;
     private String mainItemStatus;
-    private boolean isSubMainItemForMainItem;
+    private boolean subMainItemForMainItem;
 
     @Column(name = "main_item_name")
     public String getMainItemName() {
@@ -98,11 +97,11 @@ public class MainItem extends PersistentObject {
 
     @Column(name = "issubmainitem", nullable = false)
     public boolean isSubMainItemForMainItem() {
-        return isSubMainItemForMainItem;
+        return subMainItemForMainItem;
     }
 
     public void setSubMainItemForMainItem(boolean subMainItemForMainItem) {
-        isSubMainItemForMainItem = subMainItemForMainItem;
+        this.subMainItemForMainItem = subMainItemForMainItem;
     }
 
     @Override
@@ -115,7 +114,7 @@ public class MainItem extends PersistentObject {
                 .append("imageName", imageName)
                 .append("loadUnit", loadUnit)
                 .append("mainItemStatus", mainItemStatus)
-                .append("isSubMainItemForMainItem", isSubMainItemForMainItem)
+                .append("subMainItemForMainItem", subMainItemForMainItem)
                 .toString();
     }
 }
