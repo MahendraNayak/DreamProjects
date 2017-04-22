@@ -440,6 +440,10 @@ public class EditorController {
                 jsonObject.put("mainItemMakerName", mainItemMaker.getMakerName());
                 jsonObject.put("mainItemMakerPriority", mainItemMaker.getMakerPriority());
                 jsonObject.put("mainItemMakerRate", mainItemMaker.getMakerRate());
+                jsonObject.put("cityId", mainItemMaker.getRateCity().getId());
+                jsonObject.put("shortDescription", mainItemMaker.getMainItem().getShortDescription());
+                jsonObject.put("mainItemId", mainItemMaker.getMainItem().getId());
+
                 list.add(jsonObject);
             }
             return list.toString();

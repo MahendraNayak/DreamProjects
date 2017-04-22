@@ -89,7 +89,9 @@ function getMainItemLoadUnit(mainItemID){
     });
 }
 
+
 function getAvailableMainItemMakers(){
+    resetMainItemMakerForm();
     var cityId = $("#cityId").val();
     var mainItemId = $("#shortDescription").val();
 
@@ -109,11 +111,12 @@ function getAvailableMainItemMakers(){
              HTML_TABLE = HTML_TABLE + "<td style='font-size:16px;color:black'><b>MAKER RATE</b></td>";
              HTML_TABLE = HTML_TABLE + "<td style='font-size:16px;color:black'><b>MAKER PRIORITY</b></td></tr>";
 	for(var i=0;i<response.length;i++){
+    		var mkNameWithQuotes = JSON.stringify(response[i].mainItemMakerName);
     		var makerName = (JSON.stringify(response[i].mainItemMakerName)).replace(/"/g, '');
     		var makerRate = JSON.stringify(response[i].mainItemMakerRate);
     		var makerPriority = (JSON.stringify(response[i].mainItemMakerPriority)).replace(/"/g, '');
 
-    	    HTML_TABLE = HTML_TABLE + "<tr><td style='font-size:16px;color:black'>"+makerName+"</td>";
+    	    HTML_TABLE = HTML_TABLE + "<tr><td style='font-size:16px;color:black;;cursor:pointer' onclick='setValuesForUpdateMISR("+mkNameWithQuotes+","+makerRate+","+makerPriority+")'><b>"+makerName+"</b></td>";
             HTML_TABLE = HTML_TABLE + "<td style='font-size:16px;color:black'>"+makerRate+"</td>";
             HTML_TABLE = HTML_TABLE + "<td style='font-size:16px;color:black'>"+makerPriority+"</td></tr>";
 	}
@@ -126,6 +129,40 @@ function getAvailableMainItemMakers(){
             }
         });
 }
+
+function setValuesForUpdateMISR(makerName,makerRate,makerPriority){
+	$("#shortDescription").prop('disabled',true);
+    $("#cityId").prop('disabled',true);
+	$("#makerName").val(makerName);
+	$("#makerPrice").val(makerRate);
+	$("#makerPriority").val(makerPriority);
+}
+
+function enableMISRFormFields(){
+    $("#shortDescription").prop('disabled',false);
+    $("#cityId").prop('disabled',false);
+}
+
+function resetMainItemMakerForm(){
+    $("#makerName").val('');
+	$("#makerPrice").val('');
+	$("#makerPriority").val('');
+}
+
+function resetMainItemMakerFormOnReset(){
+    $("#shortDescription").prop('disabled',false);
+    $("#cityId").prop('disabled',false);
+    $("#loadUnitId").prop('disabled',false);
+
+    $("#makerName").val('');
+	$("#makerPrice").val('');
+	$("#makerPriority").val('');
+	$("#cityId").val(0);
+	$("#shortDescription").val(0);
+	$("#loadUnitId").val(0);
+	$("#MI_MAKER_TABLE").html('');
+}
+
 
 function getAvailableMainItemContractor(){
         var cityId = $("#cityId").val();

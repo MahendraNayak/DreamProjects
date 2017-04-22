@@ -66,6 +66,8 @@
                                 <div class="clearfix" style="height: 10px;clear: both;"></div>
                                 <div class="col-sm-9" style="width:499px;margin-left:480px;margin-top:31px">
                                     <br><input type="submit" class="btn btn-lg btn-success btn-block" style="margin-top:-56px;width:129px;margin-left:-480px" value="Add">
+                                    <br><input type="submit" class="btn btn-lg btn-success btn-block" style="margin-top:-105px;width:129px;margin-left:-340px" value="Update" onclick="enableMISRFormFields()">
+                                    <br><input type="button" class="btn btn-lg btn-success btn-block" style="margin-top:-105px;width:129px;margin-left:-200px" value="Reset" onclick="resetMainItemMakerFormOnReset()">
                                 </div>
                     </div>
                 </div>
