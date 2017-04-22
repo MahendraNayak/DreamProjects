@@ -1,6 +1,8 @@
 package com.litrum.webproject.model;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 
@@ -33,8 +35,9 @@ public class SubMainItemMaker extends PersistentObject {
         this.subMainItemMakerRate = subMainItemMakerRate;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = SubMainItem.class)
-    @JoinColumn(name = "sub_main_item_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = SubMainItem.class)
+    @JoinColumn(name = "sub_main_item_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     public SubMainItem getSubMainItem() {
         return subMainItem;
     }

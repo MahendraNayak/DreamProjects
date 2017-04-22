@@ -1,6 +1,8 @@
 package com.litrum.webproject.model;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 
@@ -66,8 +68,9 @@ public class MainItem extends PersistentObject {
         this.imageName = imageName;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = LoadUnit.class)
-    @JoinColumn(name = "load_unit_id", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = LoadUnit.class)
+    @JoinColumn(name = "load_unit_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     public LoadUnit getLoadUnit() {
         return loadUnit;
     }
@@ -76,8 +79,9 @@ public class MainItem extends PersistentObject {
         this.loadUnit = loadUnit;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = SubSubMainCategory.class)
-    @JoinColumn(name = "sub_sub_main_categoryId", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = SubSubMainCategory.class)
+    @JoinColumn(name = "sub_sub_main_categoryId")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     public SubSubMainCategory getSubSubMainCategory() {
         return subSubMainCategory;
     }
