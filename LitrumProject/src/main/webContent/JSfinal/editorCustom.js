@@ -197,7 +197,7 @@ function resetMainItemIRFormOnReset(){
 }
 
 function setOperationType(opType){
-    $("#setOperationType").val(opType);
+    $("#operationType").val(opType);
 }
 
 function getAvailableMainItemContractor(){
