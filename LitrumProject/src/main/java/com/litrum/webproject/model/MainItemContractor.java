@@ -1,6 +1,8 @@
 package com.litrum.webproject.model;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 
@@ -44,8 +46,9 @@ public class MainItemContractor extends PersistentObject {
         this.contractorRate = contractorRate;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = RateCity.class)
-    @JoinColumn(name = "rate_city_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = RateCity.class)
+    @JoinColumn(name = "rate_city_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     public RateCity getRateCity() {
         return rateCity;
     }
@@ -54,8 +57,9 @@ public class MainItemContractor extends PersistentObject {
         this.rateCity = rateCity;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = MainItem.class)
-    @JoinColumn(name = "main_item_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = MainItem.class)
+    @JoinColumn(name = "main_item_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     public MainItem getMainItem() {
         return mainItem;
     }
