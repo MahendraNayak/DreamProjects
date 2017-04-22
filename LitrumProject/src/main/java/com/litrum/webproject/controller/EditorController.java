@@ -437,6 +437,8 @@ public class EditorController {
             List<MainItemMaker> mainItemMakerList = editorService.findMainItemMakerByMainItemAndCity(form);
             for (MainItemMaker mainItemMaker : mainItemMakerList) {
                 JSONObject jsonObject = new JSONObject();
+
+                jsonObject.put("mainItemMakerId", mainItemMaker.getId());
                 jsonObject.put("mainItemMakerName", mainItemMaker.getMakerName());
                 jsonObject.put("mainItemMakerPriority", mainItemMaker.getMakerPriority());
                 jsonObject.put("mainItemMakerRate", mainItemMaker.getMakerRate());
@@ -461,6 +463,8 @@ public class EditorController {
             List<MainItemContractor> mainItemContractorList = editorService.findMainItemContractorByMainItemAndCity(form);
             for (MainItemContractor mainItemContractor : mainItemContractorList) {
                 JSONObject jsonObject = new JSONObject();
+
+                jsonObject.put("mainItemContractorId", mainItemContractor.getId());
                 jsonObject.put("mainItemContractorName", mainItemContractor.getContractorName());
                 jsonObject.put("mainItemContractorPriority", mainItemContractor.getContractorPriority());
                 jsonObject.put("mainItemContractorRate", mainItemContractor.getContractorRate());

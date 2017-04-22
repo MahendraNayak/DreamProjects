@@ -115,8 +115,9 @@ function getAvailableMainItemMakers(){
     		var makerName = (JSON.stringify(response[i].mainItemMakerName)).replace(/"/g, '');
     		var makerRate = JSON.stringify(response[i].mainItemMakerRate);
     		var makerPriority = (JSON.stringify(response[i].mainItemMakerPriority)).replace(/"/g, '');
+    		var makerId = JSON.stringify(response[i].mainItemMakerId);
 
-    	    HTML_TABLE = HTML_TABLE + "<tr><td style='font-size:16px;color:black;;cursor:pointer' onclick='setValuesForUpdateMISR("+mkNameWithQuotes+","+makerRate+","+makerPriority+")'><b>"+makerName+"</b></td>";
+    	    HTML_TABLE = HTML_TABLE + "<tr><td style='font-size:16px;color:black;;cursor:pointer' onclick='setValuesForUpdateMISR("+makerId+","+mkNameWithQuotes+","+makerRate+","+makerPriority+")'><b>"+makerName+"</b></td>";
             HTML_TABLE = HTML_TABLE + "<td style='font-size:16px;color:black'>"+makerRate+"</td>";
             HTML_TABLE = HTML_TABLE + "<td style='font-size:16px;color:black'>"+makerPriority+"</td></tr>";
 	}
@@ -130,12 +131,13 @@ function getAvailableMainItemMakers(){
         });
 }
 
-function setValuesForUpdateMISR(makerName,makerRate,makerPriority){
+function setValuesForUpdateMISR(makerId,makerName,makerRate,makerPriority){
 	$("#shortDescription").prop('disabled',true);
     $("#cityId").prop('disabled',true);
 	$("#makerName").val(makerName);
 	$("#makerPrice").val(makerRate);
 	$("#makerPriority").val(makerPriority);
+	$("#makerId").val(makerId);
 }
 
 function enableMISRFormFields(){
@@ -147,20 +149,23 @@ function resetMainItemMakerForm(){
     $("#makerName").val('');
 	$("#makerPrice").val('');
 	$("#makerPriority").val('');
+	$("#makerId").val(0);
 }
 
-function setValuesForUpdateMIIR(contractorName,contractorPrice,contractorPriority){
+function setValuesForUpdateMIIR(contractorId,contractorName,contractorPrice,contractorPriority){
 	$("#shortDescription").prop('disabled',true);
     $("#cityId").prop('disabled',true);
 	$("#contractorName").val(contractorName);
 	$("#contractorPrice").val(contractorPrice);
 	$("#contractorPriority").val(contractorPriority);
+	$("#contractorId").val(contractorId);
 }
 
 function resetMainItemIRForm(){
     $("#contractorName").val('');
 	$("#contractorPrice").val('');
 	$("#contractorPriority").val('');
+	$("#contractorId").val(0);
 }
 
 function enableMIIRFormFields(){
@@ -179,6 +184,7 @@ function resetMainItemMakerFormOnReset(){
 	$("#cityId").val(0);
 	$("#shortDescription").val(0);
 	$("#loadUnitId").val(0);
+	$("#makerId").val(0);
 	$("#MI_MAKER_TABLE").html('');
 }
 
@@ -194,6 +200,7 @@ function resetMainItemIRFormOnReset(){
 	$("#shortDescription").val(0);
 	$("#loadUnitId").val(0);
 	$("#MI_CONTRACTOR_TABLE").html('');
+	$("#contractorId").val(0);
 }
 
 function setOperationType(opType){
@@ -225,8 +232,9 @@ function getAvailableMainItemContractor(){
         		var mainItemContractorName = (JSON.stringify(response[i].mainItemContractorName)).replace(/"/g, '');
         		var mainItemContractorRate = JSON.stringify(response[i].mainItemContractorRate);
         		var mainItemContractorPriority = (JSON.stringify(response[i].mainItemContractorPriority)).replace(/"/g, '');
+                var mainItemContractorId = JSON.stringify(response[i].mainItemContractorId);
 
-                HTML_TABLE = HTML_TABLE + "<tr><td style='font-size:16px;color:black;;cursor:pointer' onclick='setValuesForUpdateMIIR("+mainItemContractorNameQu+","+mainItemContractorRate+","+mainItemContractorPriority+")'><b>"+mainItemContractorName+"</b></td>";
+                HTML_TABLE = HTML_TABLE + "<tr><td style='font-size:16px;color:black;;cursor:pointer' onclick='setValuesForUpdateMIIR("+mainItemContractorId+","+mainItemContractorNameQu+","+mainItemContractorRate+","+mainItemContractorPriority+")'><b>"+mainItemContractorName+"</b></td>";
                 HTML_TABLE = HTML_TABLE + "<td style='font-size:16px;color:black'>"+mainItemContractorRate+"</td>";
                 HTML_TABLE = HTML_TABLE + "<td style='font-size:16px;color:black'>"+mainItemContractorPriority+"</td></tr>";
     	}

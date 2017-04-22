@@ -61,6 +61,7 @@
 					<input type="hidden" name="itemType" value="CONTRACTOR"/>
 					<input type="hidden" name="operationType" id="operationType" value=""/>
 					<input type="hidden" name="mainItemId" id="mainItemId" value="0"/>
+					<input type="hidden" name="contractorId" id="contractorId" value="0"/>
 				</div>
 
                                 <div class="clearfix" style="height: 10px;clear: both;"></div>

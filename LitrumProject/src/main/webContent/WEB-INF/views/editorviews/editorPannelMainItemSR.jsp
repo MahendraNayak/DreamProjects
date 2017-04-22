@@ -49,6 +49,7 @@
 				    <input type="hidden" name="itemType" value="MAKER"/>
 				    <input type="hidden" name="operationType" id="operationType" value=""/>
 				    <input type="hidden" name="mainItemId" id="mainItemId" value="0"/>
+				    <input type="hidden" name="makerId" id="makerId" value="0"/>
 				</div>
 				<div class="col-sm-9" style="width:981px"><h4 style="color:#4d20d8">MAIN ITEM SUPPLY RATE INPUT MODULE</h4></div>
 				<div class="col-sm-9" style="width:499px">
