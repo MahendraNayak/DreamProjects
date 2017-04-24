@@ -44,8 +44,14 @@
                                 <div class="clearfix" style="height: 10px;clear: both;"></div>
                                 <div class="clearfix" style="height: 10px;clear: both;"></div>
                                 <div class="col-sm-9" style="width:499px;margin-left:480px;margin-top:31px">
-                                    <br><input type="submit" class="btn btn-lg btn-success btn-block" style="margin-top:-56px;width:129px;margin-left:-480px" value="Add">
-                                    <input type="submit" class="btn btn-lg btn-success btn-block" style="margin-top:-88px;width:129px;margin-left:-333px" value="Edit">
+                                <input type="hidden" name="itemType" id="itemType" value="CONTRACTOR"/>
+                                <input type="hidden" name="mainItemId" id="mainItemId" value="${mainItemId}"/>
+                                <input type="hidden" name="subMainItemId" id="subMainItemId" value="0"/>
+                                <input type="hidden" name="operationType" id="operationType" value=""/>
+                                <input type="hidden" name="makerId" id="makerId" value="0"/>
+                                    <br><input type="submit" class="btn btn-lg btn-success btn-block" style="margin-top:-56px;width:129px;margin-left:-480px" value="Add" onclick="setOperationType('ADD')">
+                                    <input type="submit" class="btn btn-lg btn-success btn-block" style="margin-top:-88px;width:129px;margin-left:-333px" value="Update" onclick="enableSMIIRFormFields();setOperationType('UPDATE')">
+                                    <br><input type="button" class="btn btn-lg btn-success btn-block" style="margin-top:-105px;width:129px;margin-left:-200px" value="Reset" onclick="resetSubMainItemContractorFormOnReset()">
                                 </div>
                     </div>
                 </div>
