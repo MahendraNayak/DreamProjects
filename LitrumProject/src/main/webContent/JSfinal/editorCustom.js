@@ -404,27 +404,3 @@ function setMainItemDetailsToupdate(mainItemId,shortDescription,longDescription,
 	$("#loadUnitIdUpdate").val(loadUnitId);
 	$("#subItemForMainItemsUpdate").val(mainItemAvail);
 }
-
-/*function updateMainItemDetails(){
-	var itemForm  = {
-		"mainItemId":$("#mainITEMID").val(),
-		"loadUnitId":$("#loadUnitIdUpdate").val(),
-		"shortDescription":$("#shortDescriptionUpdate").val(),
-		"longDescription":$("#longDescriptionUpdate").val(),
-		"subItemForMainItem":$("#subItemForMainItemsUpdate").val()
-	}
-
-	$.ajax({
-		url: '/LitrumWebServer/mainItem/update',
-		type: 'POST',
-		dataType: 'json',
-		data: itemForm,
-		success: function (response) {
-				//getSubMainItemsBasedOnMainItem(mainItemId);
-				alert("updated sucessfully");
-			},
-		error: function (e) {
-		    alert('error'+e);
-		}
-	});
-}*/
