@@ -100,39 +100,63 @@ public class EditorManager implements EditorService {
                 throw new Exception("No Main Item found, hence cant proceed for creating contractor ot maker");
             }
             if (null != form.getItemType() && LitrumProjectConstants.MAKER.equalsIgnoreCase(form.getItemType())) {
-                if (!daoFactory.getMainItemMakerDAO().isExistByMainItemIdAndRateCityAndMakerName(form)) {
-                    MainItemMaker mainItemMaker = new MainItemMaker();
-                    mainItemMaker.setMainItem(mainItem);
-                    mainItemMaker.setMakerName(form.getMakerName());
-                    mainItemMaker.setMakerPriority(form.getMakerPriority());
-                    mainItemMaker.setMakerRate(form.getMakerPrice());
+                MainItemMaker mainItemMaker = daoFactory.getMainItemMakerDAO().findByMainItemAndRateCityAndMakerName(form);
+                if (LitrumProjectConstants.ADD.equalsIgnoreCase(form.getOperationType())) {
+                    if (null == mainItemMaker) {
+                        mainItemMaker = new MainItemMaker();
+                        mainItemMaker.setMainItem(mainItem);
+                        mainItemMaker.setMakerName(form.getMakerName());
+                        mainItemMaker.setMakerPriority(form.getMakerPriority());
+                        mainItemMaker.setMakerRate(form.getMakerPrice());
 
-                    RateCity rateCity = daoFactory.getRateCityDAO().findById(form.getCityId(), false);
-                    if (null == rateCity) {
-                        throw new Exception("rate city not found with id, hence cant create rate city");
+                        RateCity rateCity = daoFactory.getRateCityDAO().findById(form.getCityId(), false);
+                        if (null == rateCity) {
+                            throw new Exception("rate city not found with id, hence cant create rate city");
+                        }
+                        mainItemMaker.setRateCity(rateCity);
+                        daoFactory.getMainItemMakerDAO().makePersistent(mainItemMaker);
+                    } else {
+                        throw new Exception("Maker already exist with name");
                     }
-                    mainItemMaker.setRateCity(rateCity);
-                    daoFactory.getMainItemMakerDAO().makePersistent(mainItemMaker);
-                } else {
-                    throw new Exception("Maker already exist with name");
+                } else if (LitrumProjectConstants.UPDATE.equalsIgnoreCase(form.getOperationType())) {
+                    mainItemMaker = daoFactory.getMainItemMakerDAO().findById(form.getMakerId(), false);
+                    if (null != mainItemMaker) {
+                        mainItemMaker.setMakerName(form.getMakerName());
+                        mainItemMaker.setMakerRate(form.getMakerPrice());
+                        mainItemMaker.setMakerPriority(form.getMakerPriority());
+                    } else {
+                        throw new Exception("Maker not found while update.");
+                    }
                 }
             }
             if (LitrumProjectConstants.CONTRACTOR.equalsIgnoreCase(form.getItemType())) {
-                if (!daoFactory.getMainItemContractorDAO().isExistByMainItemIdAndRateCityAndMakerName(form)) {
-                    MainItemContractor mainItemContractor = new MainItemContractor();
-                    mainItemContractor.setMainItem(mainItem);
-                    mainItemContractor.setContractorName(form.getContractorName());
-                    mainItemContractor.setContractorPriority(form.getContractorPriority());
-                    mainItemContractor.setContractorRate(form.getContractorPrice());
+                MainItemContractor mainItemContractor = daoFactory.getMainItemContractorDAO().findByMainItemAndRateCityAndMakerName(form);
+                if (LitrumProjectConstants.ADD.equalsIgnoreCase(form.getOperationType())) {
+                    if (null == mainItemContractor) {
+                        mainItemContractor = new MainItemContractor();
+                        mainItemContractor.setMainItem(mainItem);
+                        mainItemContractor.setContractorName(form.getContractorName());
+                        mainItemContractor.setContractorPriority(form.getContractorPriority());
+                        mainItemContractor.setContractorRate(form.getContractorPrice());
 
-                    RateCity rateCity = daoFactory.getRateCityDAO().findById(form.getCityId(), false);
-                    if (null == rateCity) {
-                        throw new Exception("rate city not found with id, hence cant create rate city");
+                        RateCity rateCity = daoFactory.getRateCityDAO().findById(form.getCityId(), false);
+                        if (null == rateCity) {
+                            throw new Exception("rate city not found with id, hence cant create rate city");
+                        }
+                        mainItemContractor.setRateCity(rateCity);
+                        daoFactory.getMainItemContractorDAO().makePersistent(mainItemContractor);
+                    } else {
+                        throw new Exception("Contractor already exist with name");
                     }
-                    mainItemContractor.setRateCity(rateCity);
-                    daoFactory.getMainItemContractorDAO().makePersistent(mainItemContractor);
-                } else {
-                    throw new Exception("Contractor already exist with name");
+                } else if (LitrumProjectConstants.UPDATE.equalsIgnoreCase(form.getOperationType())) {
+                    mainItemContractor = daoFactory.getMainItemContractorDAO().findById(form.getContractorId(), false);
+                    if (null != mainItemContractor) {
+                        mainItemContractor.setContractorName(form.getContractorName());
+                        mainItemContractor.setContractorRate(form.getContractorPrice());
+                        mainItemContractor.setContractorPriority(form.getContractorPriority());
+                    } else {
+                        throw new Exception("Contractor not found while update.");
+                    }
                 }
             }
         } else {

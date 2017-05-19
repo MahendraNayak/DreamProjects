@@ -29,6 +29,7 @@ public class ItemsForm {
     private String subItemForMainItem;
     private MultipartFile imageFile;
     private MultipartFile pdfFile;
+    private String operationType;
 
     public Long getSubSubMainCategoryId() {
         return subSubMainCategoryId;
@@ -198,6 +199,14 @@ public class ItemsForm {
         this.contractorId = contractorId;
     }
 
+    public String getOperationType() {
+        return operationType;
+    }
+
+    public void setOperationType(String operationType) {
+        this.operationType = operationType;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -218,6 +227,7 @@ public class ItemsForm {
                 .append("itemType", itemType)
                 .append("subItemForMainItem", subItemForMainItem)
                 .append("mainItemId", mainItemId)
+                .append("operationType", operationType)
                 .toString();
     }
 }

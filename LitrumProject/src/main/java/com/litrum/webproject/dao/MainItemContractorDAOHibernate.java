@@ -33,4 +33,15 @@ public class MainItemContractorDAOHibernate extends GenericDAOHibernate<MainItem
         criteria.add(Restrictions.eq("contractorName", form.getContractorName()));
         return null != criteria.uniqueResult();
     }
+
+    @Override
+    public MainItemContractor findByMainItemAndRateCityAndMakerName(ItemsForm form) {
+        Criteria criteria = getSession().createCriteria(getPersistentClass());
+        criteria.createAlias("rateCity", "rateCity");
+        criteria.createAlias("mainItem", "mainItem");
+        criteria.add(Restrictions.eq("rateCity.id", form.getCityId()));
+        criteria.add(Restrictions.eq("mainItem.id", form.getMainItemId()));
+        criteria.add(Restrictions.eq("contractorName", form.getContractorName()));
+        return (MainItemContractor) criteria.uniqueResult();
+    }
 }
