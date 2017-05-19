@@ -265,10 +265,12 @@ function getAvailableSubMainItemMakers(){
                  HTML_TABLE = HTML_TABLE + "<tr><td style='font-size:16px;color:black'><b>MAKER NAME</b></td>";
                  HTML_TABLE = HTML_TABLE + "<td style='font-size:16px;color:black'><b>MAKER RATE</b></td>";
     	for(var i=0;i<response.length;i++){
+        		var subMainItemMakerNameWithQue = JSON.stringify(response[i].subMainItemMakerName);
         		var subMainItemMakerName = (JSON.stringify(response[i].subMainItemMakerName)).replace(/"/g, '');
         		var subMainItemMakerRate = JSON.stringify(response[i].subMainItemMakerRate);
-
-        	    HTML_TABLE = HTML_TABLE + "<tr><td style='font-size:16px;color:black'>"+subMainItemMakerName+"</td>";
+			    var subMainItemMakerId = JSON.stringify(response[i].subMainItemMakerId);
+			    var subMainItemId = JSON.stringify(response[i].subMainItemId);
+        	    HTML_TABLE = HTML_TABLE + "<tr><td style='font-size:16px;color:black;cursor:pointer' onclick='setValuesForUpdateSMISR("+subMainItemId+","+subMainItemMakerId+","+subMainItemMakerNameWithQue+","+subMainItemMakerRate+")'><b>"+subMainItemMakerName+"</b></td>";
                 HTML_TABLE = HTML_TABLE + "<td style='font-size:16px;color:black'>"+subMainItemMakerRate+"</td>";
     	}
         	    HTML_TABLE = HTML_TABLE + "</tbody></table>";
@@ -279,6 +281,48 @@ function getAvailableSubMainItemMakers(){
                     alert('error'+e);
                 }
             });
+}
+
+function setValuesForUpdateSMISR(subMainItemId,subMainItemMakerId,subMainItemMakerNameWithQue,subMainItemMakerRate){
+	$("#subMainItemMakerName").val(subMainItemMakerNameWithQue);
+	$("#subMainItemMakerRate").val(subMainItemMakerRate);
+	$("#subMainIemId").val(subMainItemId);
+	$("#makerId").val(subMainItemMakerId);
+	$("#subMainIemId").prop('disabled',true);
+}
+
+function setValuesForUpdateSMIIR(subMainItemId,subMainItemContractorId,subMainItemContractorNameWithQue,subMainItemContractorRate){
+	$("#subMainItemContractorName").val(subMainItemContractorNameWithQue);
+	$("#subMainItemContractorRate").val(subMainItemContractorRate);
+	$("#subMainIemId").val(subMainItemId);
+	$("#makerId").val(subMainItemContractorId);
+	$("#subMainIemId").prop('disabled',true);
+}
+
+function enableSMISRFormFields(){
+    $("#subMainIemId").prop('disabled',false);
+}
+
+function enableSMIIRFormFields(){
+    $("#subMainIemId").prop('disabled',false);
+}
+
+function resetSubMainItemMakerFormOnReset(){
+    $("#SMI_MAKER_TABLE").html('');
+    $("#subMainIemId").prop('disabled',false);
+    $("#subMainItemMakerName").val('');
+    $("#subMainItemMakerRate").val('');
+    $("#subMainIemId").val(0);
+    $("#makerId").val(0);
+}
+
+function resetSubMainItemContractorFormOnReset(){
+    $("#SMI_CONTRACTOR_TABLE").html('');
+    $("#subMainIemId").prop('disabled',false);
+    $("#subMainItemContractorName").val('');
+    $("#subMainItemContractorRate").val('');
+    $("#subMainIemId").val(0);
+    $("#makerId").val(0);
 }
 
 function getAvailableSubMainItemContractor(){
@@ -298,10 +342,12 @@ function getAvailableSubMainItemContractor(){
                      HTML_TABLE = HTML_TABLE + "<tr><td style='font-size:16px;color:black'><b>CONTRACTOR NAME</b></td>";
                      HTML_TABLE = HTML_TABLE + "<td style='font-size:16px;color:black'><b>CONTRACTOR RATE</b></td>";
         	for(var i=0;i<response.length;i++){
+            		var subMainItemContractorNameWithQue = JSON.stringify(response[i].subMainItemContractorName);
             		var subMainItemContractorName = (JSON.stringify(response[i].subMainItemContractorName)).replace(/"/g, '');
             		var subMainItemContractorRate = JSON.stringify(response[i].subMainItemContractorRate);
-
-            	    HTML_TABLE = HTML_TABLE + "<tr><td style='font-size:16px;color:black'>"+subMainItemContractorName+"</td>";
+                    var subMainItemContractorId = JSON.stringify(response[i].subMainItemContractorId);
+                    var subMainItemId = JSON.stringify(response[i].subMainItemId);
+            	    HTML_TABLE = HTML_TABLE + "<tr><td style='font-size:16px;color:black;cursor:pointer' onclick='setValuesForUpdateSMIIR("+subMainItemId+","+subMainItemContractorId+","+subMainItemContractorNameWithQue+","+subMainItemContractorRate+")'><b>"+subMainItemContractorName+"</b></td>";
                     HTML_TABLE = HTML_TABLE + "<td style='font-size:16px;color:black'>"+subMainItemContractorRate+"</td>";
         	}
             	    HTML_TABLE = HTML_TABLE + "</tbody></table>";
@@ -358,27 +404,3 @@ function setMainItemDetailsToupdate(mainItemId,shortDescription,longDescription,
 	$("#loadUnitIdUpdate").val(loadUnitId);
 	$("#subItemForMainItemsUpdate").val(mainItemAvail);
 }
-
-/*function updateMainItemDetails(){
-	var itemForm  = {
-		"mainItemId":$("#mainITEMID").val(),
-		"loadUnitId":$("#loadUnitIdUpdate").val(),
-		"shortDescription":$("#shortDescriptionUpdate").val(),
-		"longDescription":$("#longDescriptionUpdate").val(),
-		"subItemForMainItem":$("#subItemForMainItemsUpdate").val()
-	}
-
-	$.ajax({
-		url: '/LitrumWebServer/mainItem/update',
-		type: 'POST',
-		dataType: 'json',
-		data: itemForm,
-		success: function (response) {
-				//getSubMainItemsBasedOnMainItem(mainItemId);
-				alert("updated sucessfully");
-			},
-		error: function (e) {
-		    alert('error'+e);
-		}
-	});
-}*/
