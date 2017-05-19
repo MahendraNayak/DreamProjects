@@ -30,7 +30,7 @@ public class MainItemContractorDAOHibernate extends GenericDAOHibernate<MainItem
         criteria.createAlias("mainItem", "mainItem");
         criteria.add(Restrictions.eq("rateCity.id", form.getCityId()));
         criteria.add(Restrictions.eq("mainItem.id", form.getMainItemId()));
-        criteria.add(Restrictions.eq("contractorName", form.getContractorName()));
+        criteria.add(Restrictions.eq("contractorName", form.getContractorName()).ignoreCase());
         return null != criteria.uniqueResult();
     }
 
@@ -41,7 +41,7 @@ public class MainItemContractorDAOHibernate extends GenericDAOHibernate<MainItem
         criteria.createAlias("mainItem", "mainItem");
         criteria.add(Restrictions.eq("rateCity.id", form.getCityId()));
         criteria.add(Restrictions.eq("mainItem.id", form.getMainItemId()));
-        criteria.add(Restrictions.eq("contractorName", form.getContractorName()));
+        criteria.add(Restrictions.eq("contractorName", form.getContractorName()).ignoreCase());
         return (MainItemContractor) criteria.uniqueResult();
     }
 }

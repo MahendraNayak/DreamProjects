@@ -30,7 +30,7 @@ public class MainItemMakerDAOHibernate extends GenericDAOHibernate<MainItemMaker
         criteria.createAlias("mainItem", "mainItem");
         criteria.add(Restrictions.eq("rateCity.id", form.getCityId()));
         criteria.add(Restrictions.eq("mainItem.id", form.getMainItemId()));
-        criteria.add(Restrictions.eq("makerName", form.getMakerName()));
+        criteria.add(Restrictions.eq("makerName", form.getMakerName()).ignoreCase());
         return null != criteria.uniqueResult();
     }
 
@@ -41,7 +41,7 @@ public class MainItemMakerDAOHibernate extends GenericDAOHibernate<MainItemMaker
         criteria.createAlias("mainItem", "mainItem");
         criteria.add(Restrictions.eq("rateCity.id", form.getCityId()));
         criteria.add(Restrictions.eq("mainItem.id", form.getMainItemId()));
-        criteria.add(Restrictions.eq("makerName", form.getMakerName()));
+        criteria.add(Restrictions.eq("makerName", form.getMakerName()).ignoreCase());
         return (MainItemMaker) criteria.uniqueResult();
     }
 }

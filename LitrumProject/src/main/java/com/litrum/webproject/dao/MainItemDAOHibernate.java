@@ -16,7 +16,7 @@ public class MainItemDAOHibernate extends GenericDAOHibernate<MainItem, Long>
     @Override
     public MainItem findByShortDescription(String shortDescription) {
         Criteria criteria = getSession().createCriteria(getPersistentClass());
-        criteria.add(Restrictions.eq("shortDescription", shortDescription));
+        criteria.add(Restrictions.eq("shortDescription", shortDescription).ignoreCase());
         return (MainItem) criteria.uniqueResult();
     }
 
@@ -63,7 +63,7 @@ public class MainItemDAOHibernate extends GenericDAOHibernate<MainItem, Long>
     @Override
     public boolean isMainItemExistByShortDescripton(String shortDescription) {
         Criteria criteria = getSession().createCriteria(getPersistentClass());
-        criteria.add(Restrictions.eq("shortDescription", shortDescription));
+        criteria.add(Restrictions.eq("shortDescription", shortDescription).ignoreCase());
         return null != criteria.uniqueResult();
     }
 }

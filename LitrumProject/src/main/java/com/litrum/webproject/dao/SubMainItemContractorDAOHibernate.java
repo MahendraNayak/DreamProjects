@@ -26,7 +26,7 @@ public class SubMainItemContractorDAOHibernate extends GenericDAOHibernate<SubMa
         Criteria criteria = getSession().createCriteria(getPersistentClass());
         criteria.createAlias("subMainItem", "subMainItem");
         criteria.add(Restrictions.eq("subMainItem.id", form.getSubMainIemId()));
-        criteria.add(Restrictions.eq("subMainItemContractorName", form.getSubMainItemContractorName()));
+        criteria.add(Restrictions.eq("subMainItemContractorName", form.getSubMainItemContractorName()).ignoreCase());
         return null != criteria.uniqueResult();
     }
 }

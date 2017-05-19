@@ -30,7 +30,7 @@ public class SubMainItemDAOHibernate extends GenericDAOHibernate<SubMainItem, Lo
     @Override
     public boolean isShortDescriptionExistForSubMainItem(String shortDescription) {
         Criteria criteria = getSession().createCriteria(getPersistentClass());
-        criteria.add(Restrictions.eq("shortDescription", shortDescription));
+        criteria.add(Restrictions.eq("shortDescription", shortDescription).ignoreCase());
         return null != criteria.uniqueResult();
     }
 
