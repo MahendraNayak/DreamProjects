@@ -43,7 +43,7 @@
 				    <input type="hidden" name="mainItemId" id="mainItemId" value="${mainItemId}"/>
 				    <input type="hidden" name="subMainItemId" id="subMainItemId" value="0"/>
 				    <input type="hidden" name="operationType" id="operationType" value=""/>
-				    <input type="hidden" name="makerId" id="makerId" value="0"/>
+				    <input type="hidden" name="subMainItemMakerId" id="subMainItemMakerId" value="0"/>
 				</div>
 
                                 <div class="clearfix" style="height: 10px;clear: both;"></div>

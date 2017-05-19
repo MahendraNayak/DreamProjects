@@ -120,7 +120,7 @@ public class EditorManager implements EditorService {
                     }
                 } else if (LitrumProjectConstants.UPDATE.equalsIgnoreCase(form.getOperationType())) {
                     mainItemMaker = daoFactory.getMainItemMakerDAO().findById(form.getMakerId(), false);
-                    if (null != mainItemMaker) {
+                    if (null != mainItemMaker && !daoFactory.getMainItemMakerDAO().isExistByMainItemIdAndRateCityAndMakerName(form)) {
                         mainItemMaker.setMakerName(form.getMakerName());
                         mainItemMaker.setMakerRate(form.getMakerPrice());
                         mainItemMaker.setMakerPriority(form.getMakerPriority());
@@ -150,7 +150,7 @@ public class EditorManager implements EditorService {
                     }
                 } else if (LitrumProjectConstants.UPDATE.equalsIgnoreCase(form.getOperationType())) {
                     mainItemContractor = daoFactory.getMainItemContractorDAO().findById(form.getContractorId(), false);
-                    if (null != mainItemContractor) {
+                    if (null != mainItemContractor && !daoFactory.getMainItemContractorDAO().isExistByMainItemIdAndRateCityAndMakerName(form)) {
                         mainItemContractor.setContractorName(form.getContractorName());
                         mainItemContractor.setContractorRate(form.getContractorPrice());
                         mainItemContractor.setContractorPriority(form.getContractorPriority());
@@ -236,26 +236,46 @@ public class EditorManager implements EditorService {
                 throw new Exception("Sub Main Item Not found while addding SR or CR");
             }
             if (LitrumProjectConstants.MAKER.equalsIgnoreCase(form.getSubItemType())) {
-                if (!daoFactory.getSubMainItemMakerDAO().isExistBySubMainItemAndMakerName(form)) {
-                    SubMainItemMaker subMainItemMaker = new SubMainItemMaker();
-                    subMainItemMaker.setSubMainItem(subMainItem);
-                    subMainItemMaker.setSubMainItemMakerName(form.getSubMainItemMakerName());
-                    subMainItemMaker.setSubMainItemMakerRate(form.getSubMainItemMakerRate());
-                    daoFactory.getSubMainItemMakerDAO().makePersistent(subMainItemMaker);
-                    logger.info("maker for sub main item added successfully");
-                } else {
-                    throw new Exception("Maker already exist with name");
+                if (LitrumProjectConstants.ADD.equalsIgnoreCase(form.getOperationType())) {
+                    if (!daoFactory.getSubMainItemMakerDAO().isExistBySubMainItemAndMakerName(form)) {
+                        SubMainItemMaker subMainItemMaker = new SubMainItemMaker();
+                        subMainItemMaker.setSubMainItem(subMainItem);
+                        subMainItemMaker.setSubMainItemMakerName(form.getSubMainItemMakerName());
+                        subMainItemMaker.setSubMainItemMakerRate(form.getSubMainItemMakerRate());
+                        daoFactory.getSubMainItemMakerDAO().makePersistent(subMainItemMaker);
+                        logger.info("maker for sub main item added successfully");
+                    } else {
+                        throw new Exception("Maker already exist with name");
+                    }
+                } else if (LitrumProjectConstants.UPDATE.equalsIgnoreCase(form.getOperationType())) {
+                    SubMainItemMaker subMainItemMaker = daoFactory.getSubMainItemMakerDAO().findById(form.getSubMainItemMakerId(), false);
+                    if (null != subMainItemMaker && !daoFactory.getSubMainItemMakerDAO().isExistBySubMainItemAndMakerName(form)) {
+                        subMainItemMaker.setSubMainItemMakerName(form.getSubMainItemMakerName());
+                        subMainItemMaker.setSubMainItemMakerRate(form.getSubMainItemMakerRate());
+                    } else {
+                        throw new Exception("Maker Already exist with name hence can't update.");
+                    }
                 }
             } else if (LitrumProjectConstants.CONTRACTOR.equalsIgnoreCase(form.getSubItemType())) {
-                if (!daoFactory.getSubMainItemContractorDAO().isExistBySubMainItemAndContractorName(form)) {
-                    SubMainItemContractor subMainItemContractor = new SubMainItemContractor();
-                    subMainItemContractor.setSubMainItem(subMainItem);
-                    subMainItemContractor.setSubMainItemContractorName(form.getSubMainItemContractorName());
-                    subMainItemContractor.setSubMainItemContractorRate(form.getSubMainItemContractorRate());
-                    daoFactory.getSubMainItemContractorDAO().makePersistent(subMainItemContractor);
-                    logger.info("contractor for sub main item added successfully");
-                } else {
-                    throw new Exception("Contractor already exist with name");
+                if (LitrumProjectConstants.ADD.equalsIgnoreCase(form.getOperationType())) {
+                    if (!daoFactory.getSubMainItemContractorDAO().isExistBySubMainItemAndContractorName(form)) {
+                        SubMainItemContractor subMainItemContractor = new SubMainItemContractor();
+                        subMainItemContractor.setSubMainItem(subMainItem);
+                        subMainItemContractor.setSubMainItemContractorName(form.getSubMainItemContractorName());
+                        subMainItemContractor.setSubMainItemContractorRate(form.getSubMainItemContractorRate());
+                        daoFactory.getSubMainItemContractorDAO().makePersistent(subMainItemContractor);
+                        logger.info("contractor for sub main item added successfully");
+                    } else {
+                        throw new Exception("Contractor already exist with name");
+                    }
+                } else if (LitrumProjectConstants.UPDATE.equalsIgnoreCase(form.getOperationType())) {
+                    SubMainItemContractor subMainItemContractor = daoFactory.getSubMainItemContractorDAO().findById(form.getSubMainItemContractorId(), false);
+                    if (null != subMainItemContractor && !daoFactory.getSubMainItemContractorDAO().isExistBySubMainItemAndContractorName(form)) {
+                        subMainItemContractor.setSubMainItemContractorName(form.getSubMainItemContractorName());
+                        subMainItemContractor.setSubMainItemContractorRate(form.getSubMainItemContractorRate());
+                    } else {
+                        throw new Exception("Contractor already with this name hence cant update.");
+                    }
                 }
             }
         } else {

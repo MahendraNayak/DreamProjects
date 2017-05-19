@@ -287,7 +287,7 @@ function setValuesForUpdateSMISR(subMainItemId,subMainItemMakerId,subMainItemMak
 	$("#subMainItemMakerName").val(subMainItemMakerNameWithQue);
 	$("#subMainItemMakerRate").val(subMainItemMakerRate);
 	$("#subMainIemId").val(subMainItemId);
-	$("#makerId").val(subMainItemMakerId);
+	$("#subMainItemMakerId").val(subMainItemMakerId);
 	$("#subMainIemId").prop('disabled',true);
 }
 
@@ -295,7 +295,7 @@ function setValuesForUpdateSMIIR(subMainItemId,subMainItemContractorId,subMainIt
 	$("#subMainItemContractorName").val(subMainItemContractorNameWithQue);
 	$("#subMainItemContractorRate").val(subMainItemContractorRate);
 	$("#subMainIemId").val(subMainItemId);
-	$("#makerId").val(subMainItemContractorId);
+	$("#subMainItemContractorId").val(subMainItemContractorId);
 	$("#subMainIemId").prop('disabled',true);
 }
 

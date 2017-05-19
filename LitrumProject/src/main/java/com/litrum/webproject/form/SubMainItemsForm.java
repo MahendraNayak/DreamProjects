@@ -19,6 +19,7 @@ public class SubMainItemsForm {
     private String subMainItemContractorName;
     private String subItemType;
     private String formSubmitType;
+    private String operationType;
 
     public Long getMainItemId() {
         return mainItemId;
@@ -114,6 +115,14 @@ public class SubMainItemsForm {
 
     public void setSubMainItemContractorId(Long subMainItemContractorId) {
         this.subMainItemContractorId = subMainItemContractorId;
+    }
+
+    public String getOperationType() {
+        return operationType;
+    }
+
+    public void setOperationType(String operationType) {
+        this.operationType = operationType;
     }
 
     @Override
