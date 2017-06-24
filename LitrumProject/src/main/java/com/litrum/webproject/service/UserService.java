@@ -56,4 +56,6 @@ public interface UserService {
     List<CompanyType> getAllCompanyType();
 
     long countEndUserRoleByCompanyTypeId(Long companyTypeId);
+
+    List<AdminUserRegistration> getAllAdminPannelRegisterUsers();
 }

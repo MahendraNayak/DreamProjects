@@ -145,14 +145,16 @@ public class AdminController {
         logger.info(" adminPannelUserReg : GET ");
         List<AdminUserRole> adminUserRoles = userService.getAllAdminUserRole();
         List<MainCategory> allMainCategoryList = userService.getAllMainCategoryList();
+        List<AdminUserRegistration> adminPannelRegisterUsers = userService.getAllAdminPannelRegisterUsers();
         uiModel.addAttribute("adminUserRoleList", adminUserRoles);
         uiModel.addAttribute("allMainCategoryList", allMainCategoryList);
+        uiModel.addAttribute("adminPannelRegisterUsers", adminPannelRegisterUsers);
         logger.info(" adminPannelUserReg : GET END ");
         return "adminPannelUserReg";
     }
 
     @RequestMapping(value = "/adminPannelUserReg", method = RequestMethod.POST)
-    public String createInternalUser(@ModelAttribute("sdminUserRegistrationForm") AdminUserRegistrationForm adminUserRegistrationForm, Model uiModel) {
+    public String createInternalUser(@ModelAttribute("adminUserRegistrationForm") AdminUserRegistrationForm adminUserRegistrationForm, Model uiModel) {
         logger.info(" adminPannelUserReg : POST ");
         try {
             userService.createAdminUser(adminUserRegistrationForm);

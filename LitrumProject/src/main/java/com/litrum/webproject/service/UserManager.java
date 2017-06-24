@@ -1,5 +1,6 @@
 package com.litrum.webproject.service;
 
+import com.litrum.webproject.Utils.HIbernateUtils;
 import com.litrum.webproject.Utils.LitrumProjectConstants;
 import com.litrum.webproject.dao.DAOFactory;
 import com.litrum.webproject.form.AdminUserRegistrationForm;
@@ -428,5 +429,9 @@ public class UserManager implements UserService {
         return daoFactory.getEndUserRoleDAO().countByCompanyTypeId(companyTypeId);
     }
 
-
+    @Override
+    @Transactional(readOnly = true)
+    public List<AdminUserRegistration> getAllAdminPannelRegisterUsers() {
+        return daoFactory.getAdminUserRegistrationDAO().findAll();
+    }
 }
