@@ -1,6 +1,5 @@
 package com.litrum.webproject.service;
 
-import com.litrum.webproject.Utils.HIbernateUtils;
 import com.litrum.webproject.Utils.LitrumProjectConstants;
 import com.litrum.webproject.dao.DAOFactory;
 import com.litrum.webproject.form.AdminUserRegistrationForm;
@@ -180,7 +179,7 @@ public class UserManager implements UserService {
     public void createSubSubMainCategory(CategoriesForm categoriesForm) throws Exception {
         if (null != categoriesForm && categoriesForm.getSubMainCategoryId() >=0) {
             if (categoriesForm.getSubSubMainCategoryId() <= 0) {
-                SubSubMainCategory subSubMainCategory = daoFactory.getSubSubMainCategoryDAO().findSubSubManinCategoryByName(categoriesForm.getSubSubMainCategoryName());
+                SubSubMainCategory subSubMainCategory = daoFactory.getSubSubMainCategoryDAO().findSubSubManinCategoryByName(categoriesForm);
                 if (null == subSubMainCategory) {
                     subSubMainCategory = new SubSubMainCategory();
                     subSubMainCategory.setSubSubMainCategoryName(categoriesForm.getSubSubMainCategoryName());
@@ -198,7 +197,7 @@ public class UserManager implements UserService {
                 }
             } else {
                 SubSubMainCategory subSubMainCategory = daoFactory.getSubSubMainCategoryDAO().getById(categoriesForm.getSubSubMainCategoryId(), false);
-                if (null != subSubMainCategory && !daoFactory.getSubSubMainCategoryDAO().isExistSubSubMainCatByName(categoriesForm.getSubSubMainCategoryName())) {
+                if (null != subSubMainCategory && !daoFactory.getSubSubMainCategoryDAO().isExistSubSubMainCatByNameAndSubMainItemId(categoriesForm)) {
                     subSubMainCategory.setSubSubMainCategoryName(categoriesForm.getSubSubMainCategoryName());
                 } else {
                     throw new Exception("invalid id passed for sub sub main category, hence we can't update sub sub main category.");

@@ -1,5 +1,6 @@
 package com.litrum.webproject.dao;
 
+import com.litrum.webproject.form.CategoriesForm;
 import com.litrum.webproject.model.SubMainCategory;
 import com.litrum.webproject.model.SubSubMainCategory;
 
@@ -12,9 +13,9 @@ public interface SubSubMainCategoryDAO extends GenericeDAO<SubSubMainCategory, L
 
     List<SubSubMainCategory> findBySubMainCategory(SubMainCategory subMainCategory);
 
-    SubSubMainCategory findSubSubManinCategoryByName(String subSubMainCategoryName);
+    SubSubMainCategory findSubSubManinCategoryByName(CategoriesForm categoriesForm);
 
-    boolean isExistSubSubMainCatByName(String subSubMainCategoryName);
+    boolean isExistSubSubMainCatByNameAndSubMainItemId(CategoriesForm categoriesForm);
 
     List<SubSubMainCategory> findBySubMainCatIds(List<Long> subMainCatIds);
 }

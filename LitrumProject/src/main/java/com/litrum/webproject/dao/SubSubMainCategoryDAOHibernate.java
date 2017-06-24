@@ -1,5 +1,6 @@
 package com.litrum.webproject.dao;
 
+import com.litrum.webproject.form.CategoriesForm;
 import com.litrum.webproject.model.SubMainCategory;
 import com.litrum.webproject.model.SubSubMainCategory;
 import org.hibernate.Criteria;
@@ -21,16 +22,20 @@ public class SubSubMainCategoryDAOHibernate extends GenericDAOHibernate<SubSubMa
     }
 
     @Override
-    public SubSubMainCategory findSubSubManinCategoryByName(String subSubMainCategoryName) {
+    public SubSubMainCategory findSubSubManinCategoryByName(CategoriesForm categoriesForm) {
         Criteria criteria = getSession().createCriteria(getPersistentClass());
-        criteria.add(Restrictions.eq("subSubMainCategoryName", subSubMainCategoryName));
+        criteria.createAlias("subMainCategory", "subMainCategory");
+        criteria.add(Restrictions.eq("subMainCategory.id", categoriesForm.getSubMainCategoryId()));
+        criteria.add(Restrictions.eq("subSubMainCategoryName", categoriesForm.getSubSubMainCategoryName()));
         return (SubSubMainCategory) criteria.uniqueResult();
     }
 
     @Override
-    public boolean isExistSubSubMainCatByName(String subSubMainCategoryName) {
+    public boolean isExistSubSubMainCatByNameAndSubMainItemId(CategoriesForm categoriesForm) {
         Criteria criteria = getSession().createCriteria(getPersistentClass());
-        criteria.add(Restrictions.eq("subSubMainCategoryName", subSubMainCategoryName));
+        criteria.createAlias("subMainCategory", "subMainCategory");
+        criteria.add(Restrictions.eq("subMainCategory.id", categoriesForm.getSubMainCategoryId()));
+        criteria.add(Restrictions.eq("subSubMainCategoryName", categoriesForm.getSubSubMainCategoryName()));
         return criteria.uniqueResult() != null;
     }
 
