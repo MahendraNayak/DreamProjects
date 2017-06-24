@@ -316,3 +316,33 @@ function getCompanyTypeBasedOnSO(SERVICE_OFFERED_ID){
     $('#alert-modal-body').html(body);
     $('#alert-modal').modal('show');
   }
+
+  function addUpdateSubSubMainCatAjaxCall(operationName){
+    if(operationName == "ADD") setZeroIDOnClick('subSubMainCategoryId');
+
+    var subMainCategoryId = $("#subMainCategoryId").val();
+    var subSubMainCategoryId = $("#subSubMainCategoryId").val();
+    var subSubMainCategoryName = $("#subSubMainCategoryName").val();
+
+    var categoryForm = {
+        "subMainCategoryId":subMainCategoryId,
+		"subSubMainCategoryId":subSubMainCategoryId,
+		"subSubMainCategoryName":subSubMainCategoryName
+    }
+
+    $.ajax({
+                    url: '/LitrumWebServer/adminPannelSubSubMainCatAjax',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: categoryForm,
+                    success: function (response) {
+    			        getSSMCBasedOnMC(subMainCategoryId);
+    		        },
+                    error: function (e) {
+                        alert('error'+e);
+                    }
+
+                });
+                return false;
+    //
+  }

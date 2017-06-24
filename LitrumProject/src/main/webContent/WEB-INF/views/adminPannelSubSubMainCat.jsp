@@ -52,8 +52,9 @@
                     <input type="hidden" id="subMainCategoryId" name="subMainCategoryId" value="0">
 		            <input type="hidden" id="subSubMainCategoryId" name="subSubMainCategoryId" value="0">
                     <input type="text" id="subSubMainCategoryName" name="subSubMainCategoryName" placeholder="Add / Update SSMC" class="form-control" autocomplete="off" style="width:355px;height:35px">
-                    <input type="submit" class="btn btn-lg btn-success btn-block" style="margin-top:7px;width:142px" value="Add New SSMC" onclick="setZeroIDOnClick('subSubMainCategoryId')">
-                    <input type="submit" class="btn btn-lg btn-success btn-block" style="margin-top:-89px;width:129px;margin-left:143px" value="Update">
+
+                    <input type="button" class="btn btn-lg btn-success btn-block" style="margin-top:7px;width:142px" value="Add New SSMC" onclick="return addUpdateSubSubMainCatAjaxCall('ADD')">
+                    <input type="button" class="btn btn-lg btn-success btn-block" style="margin-top:-89px;width:129px;margin-left:143px" value="Update" onclick="return addUpdateSubSubMainCatAjaxCall('UPDATE')">
                 </div>
             </form>
             </div>
