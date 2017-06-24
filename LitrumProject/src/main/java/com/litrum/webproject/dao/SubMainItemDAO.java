@@ -1,5 +1,6 @@
 package com.litrum.webproject.dao;
 
+import com.litrum.webproject.form.SubMainItemsForm;
 import com.litrum.webproject.model.SubMainItem;
 
 import java.util.List;
@@ -13,7 +14,7 @@ public interface SubMainItemDAO extends GenericeDAO<SubMainItem, Long> {
 
     List<SubMainItem> findByMainItemId(Long mainItemId);
 
-    boolean isShortDescriptionExistForSubMainItem(String shortDescription);
+    boolean isShortDescriptionExistForSubMainItem(SubMainItemsForm subMainItemsForm);
 
     List<SubMainItem> findByMainItemIds(List<Long> mainItemIds);
 }

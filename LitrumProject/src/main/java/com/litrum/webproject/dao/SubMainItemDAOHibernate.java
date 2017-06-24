@@ -1,5 +1,6 @@
 package com.litrum.webproject.dao;
 
+import com.litrum.webproject.form.SubMainItemsForm;
 import com.litrum.webproject.model.SubMainItem;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
@@ -28,9 +29,11 @@ public class SubMainItemDAOHibernate extends GenericDAOHibernate<SubMainItem, Lo
     }
 
     @Override
-    public boolean isShortDescriptionExistForSubMainItem(String shortDescription) {
+    public boolean isShortDescriptionExistForSubMainItem(SubMainItemsForm subMainItemsForm) {
         Criteria criteria = getSession().createCriteria(getPersistentClass());
-        criteria.add(Restrictions.eq("shortDescription", shortDescription).ignoreCase());
+        criteria.createAlias("mainItem", "mainItem");
+        criteria.add(Restrictions.eq("mainItem.id", subMainItemsForm.getMainItemId()));
+        criteria.add(Restrictions.eq("shortDescription", subMainItemsForm.getShortDecription()).ignoreCase());
         return null != criteria.uniqueResult();
     }
 

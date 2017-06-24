@@ -210,14 +210,14 @@ public class EditorManager implements EditorService {
                     daoFactory.getSubMainItemDAO().makeTransient(subMainItem);
                     logger.info("sub main item deleted successfully.");
                 } else if (LitrumProjectConstants.UPDATE.equalsIgnoreCase(form.getFormSubmitType()) &&
-                        !daoFactory.getSubMainItemDAO().isShortDescriptionExistForSubMainItem(form.getShortDecription())) {
+                        !daoFactory.getSubMainItemDAO().isShortDescriptionExistForSubMainItem(form)) {
                     subMainItem.setShortDescription(form.getShortDecription());
                     subMainItem.setLoadUnit(loadUnit);
                     logger.info("sub main item updated successfully.");
                 }
             } else {
                 if (LitrumProjectConstants.ADD.equalsIgnoreCase(form.getFormSubmitType()) &&
-                        !daoFactory.getSubMainItemDAO().isShortDescriptionExistForSubMainItem(form.getShortDecription())) {
+                        !daoFactory.getSubMainItemDAO().isShortDescriptionExistForSubMainItem(form)) {
                     subMainItem = new SubMainItem();
                     subMainItem.setShortDescription(form.getShortDecription());
                     subMainItem.setMainItem(mainItem);
