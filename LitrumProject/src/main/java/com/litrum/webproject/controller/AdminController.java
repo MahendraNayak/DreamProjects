@@ -98,6 +98,20 @@ public class AdminController {
         return "redirect:adminPannelSubSubMainCat";
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/adminPannelSubSubMainCatAjax")
+    public String addSubMainItemPost(Model uiModel,@ModelAttribute("categories") CategoriesForm categoriesForm) {
+        logger.debug("inside adminPannelSubSubMainCatAjax method");
+        JSONObject jsonObject = new JSONObject();
+        try {
+            userService.createSubSubMainCategory(categoriesForm);
+            jsonObject.put("MSG","Data Saved Successfully");
+        } catch (Exception e) {
+            logger.error("Exception while creating sub sub main category :", e);
+        }
+        return jsonObject.toString();
+    }
+
     @RequestMapping(value = "/adminPannelEndUserRole", method = RequestMethod.GET)
     public String addEndUserRole(Model uiModel) {
         List<ServiceOffered> serviceOfferedList = userService.getAllServiceOffered();
