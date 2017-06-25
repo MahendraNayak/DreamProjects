@@ -372,18 +372,43 @@ public class EditorController {
             uiModel.addAttribute("SSMCNM", request.getParameter("SSMCNM"));
 
             List<MainItem> mainItemList = editorService.getMainItemsBySubSubMainCaegoryId(subSubMainCatId);
-            List<Long> mainItemIds = new ArrayList<>();
+            /*List<Long> mainItemIds = new ArrayList<>();
             for (MainItem mainItem : mainItemList) {
                 mainItemIds.add(mainItem.getId());
             }
             List<SubMainItem> subMainItemList = editorService.findSubMainItemByMainItemIds(mainItemIds);
-            uiModel.addAttribute("subMainItemList", subMainItemList);
+            uiModel.addAttribute("subMainItemList", subMainItemList);*/
+            uiModel.addAttribute("mainItemList", mainItemList);
 
         } catch (Exception e) {
             logger.error("Exception ::: " + e.getMessage());
         }
         return "editorviews/editorPannelSubMainItemSR";
     }
+
+    //
+    @ResponseBody
+    @RequestMapping(value = "/editorPannelSubMainItemSRAjax")
+    public String getSubMainItemSRAjax(Model uiModel,@ModelAttribute("itemsForm") ItemsForm itemsForm) {
+        logger.debug("inside editorPannelSubMainItemSRAjax method itemsForm.getMainItemId() : " + itemsForm.getMainItemId());
+        List<JSONObject> list = new ArrayList<>();
+        try {
+            List<SubMainItem> subMainItemList = editorService.getAllSubMainItemsByMainItemId(itemsForm.getMainItemId());
+            for (SubMainItem subMainItem : subMainItemList) {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("subMainItemId", subMainItem.getId());
+                jsonObject.put("subMainItemDesc", subMainItem.getShortDescription());
+                jsonObject.put("mainItemId", subMainItem.getMainItem().getId());
+                jsonObject.put("mainItemDesc", subMainItem.getMainItem().getShortDescription());
+                list.add(jsonObject);
+            }
+        } catch (Exception e) {
+            logger.error("Exception while getSubMainItem SR Ajax :", e);
+        }
+        return list.toString();
+    }
+
+    //
 
     @RequestMapping(value = "/editorPannelSubMainItemIR", method = RequestMethod.GET)
     public String addSubMainItemIR(Model uiModel, HttpServletRequest request) {
