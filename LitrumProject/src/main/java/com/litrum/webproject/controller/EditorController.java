@@ -390,7 +390,7 @@ public class EditorController {
     @ResponseBody
     @RequestMapping(value = "/editorPannelSubMainItemSRAjax")
     public String getSubMainItemSRAjax(Model uiModel,@ModelAttribute("itemsForm") ItemsForm itemsForm) {
-        logger.debug("inside editorPannelSubMainItemSRAjax method itemsForm.getMainItemId() : " + itemsForm.getMainItemId());
+        logger.debug("inside editorPannelSubMainItemSRAjax method : ");
         List<JSONObject> list = new ArrayList<>();
         try {
             List<SubMainItem> subMainItemList = editorService.getAllSubMainItemsByMainItemId(itemsForm.getMainItemId());
@@ -404,6 +404,26 @@ public class EditorController {
             }
         } catch (Exception e) {
             logger.error("Exception while getSubMainItem SR Ajax :", e);
+        }
+        return list.toString();
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/editorPannelMakerListByMainItemAjax")
+    public String getMakerListByMainItemAjax(Model uiModel,@ModelAttribute("itemsForm") ItemsForm itemsForm) {
+        logger.debug("inside getMakerListByMainItemAjax method ");
+        List<JSONObject> list = new ArrayList<>();
+        try {
+            List<MainItemMaker> makerList = editorService.getMainItemMakersByMainItemId(itemsForm);
+            for (MainItemMaker makerObj : makerList) {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("makerName", makerObj.getMakerName());
+                jsonObject.put("makerCity","NERUL");//makerObj.getRateCity().getCity()
+                jsonObject.put("id", makerObj.getId());
+                list.add(jsonObject);
+            }
+        } catch (Exception e) {
+            logger.error("Exception while getMakerListByMainItem Ajax :", e);
         }
         return list.toString();
     }
