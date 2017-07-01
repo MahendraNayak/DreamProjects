@@ -60,5 +60,7 @@ public interface EditorService {
     void updateSubMainItemIR(SubMainItemsForm form) throws Exception;
 
     List<MainItemMaker> getMainItemMakersByMainItemId(ItemsForm itemsForm) throws Exception;
+
+    List<MainItemContractor> getMainItemContractorsByMainItemId(ItemsForm itemsForm) throws Exception;
 }
 

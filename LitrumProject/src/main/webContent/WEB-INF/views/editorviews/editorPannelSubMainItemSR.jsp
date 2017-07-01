@@ -27,7 +27,7 @@
 				    <div class="panel-body" style="padding:0;border:0px;height:333px;overflow-y:auto;margin-top:6px">
                         		<div class="col-sm-9" style="width:981px"><h4 style="color:#4d20d8">SUB MAIN ITEM SUPPLY RATE MODULE</h4></div>
                                 <div class="col-sm-9" style="width:981px"><br>
-                                    <select class="form-control" name="mainIemId" id="mainIemId"  onChange="getAvailableSubMainItemsAjax();getMakerListByMainItemAjax()">
+                                    <select class="form-control" name="mainIemId" id="mainIemId"  onChange="getAvailableSubMainItemsAjax('SR');getMakerListByMainItemAjax()">
                                         <option value="0">SELECT MAIN ITEM</option>
                                         <c:forEach var="mainItemListObj" items="${mainItemList}" varStatus="mainItemStatus">
                                             <option value="${mainItemListObj.id}">${mainItemListObj.shortDescription}</option>

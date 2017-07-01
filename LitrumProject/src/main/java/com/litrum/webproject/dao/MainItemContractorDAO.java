@@ -15,4 +15,6 @@ public interface MainItemContractorDAO extends GenericeDAO<MainItemContractor, L
     boolean isExistByMainItemIdAndRateCityAndMakerName(ItemsForm form);
 
     MainItemContractor findByMainItemAndRateCityAndMakerName(ItemsForm form);
+
+    List<MainItemContractor> findContractorListByMainItemId(ItemsForm form);
 }
