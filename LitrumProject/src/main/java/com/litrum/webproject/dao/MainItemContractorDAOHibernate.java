@@ -4,12 +4,12 @@ import com.litrum.webproject.form.ItemsForm;
 import com.litrum.webproject.model.MainItemContractor;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
-
 import java.util.List;
 
 /**
  * Created by Pc on 13/04/2017.
  */
+
 public class MainItemContractorDAOHibernate extends GenericDAOHibernate<MainItemContractor, Long>
         implements MainItemContractorDAO {
 
@@ -43,5 +43,13 @@ public class MainItemContractorDAOHibernate extends GenericDAOHibernate<MainItem
         criteria.add(Restrictions.eq("mainItem.id", form.getMainItemId()));
         criteria.add(Restrictions.eq("contractorName", form.getContractorName()).ignoreCase());
         return (MainItemContractor) criteria.uniqueResult();
+    }
+
+    @Override
+    public List<MainItemContractor> findContractorListByMainItemId(ItemsForm form) {
+        Criteria criteria = getSession().createCriteria(getPersistentClass());
+        criteria.createAlias("mainItem", "mainItem");
+        criteria.add(Restrictions.eq("mainItem.id",form.getMainItemId()));
+        return (List<MainItemContractor>) criteria.list();
     }
 }

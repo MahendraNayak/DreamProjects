@@ -15,4 +15,6 @@ public interface MainItemMakerDAO extends GenericeDAO<MainItemMaker, Long> {
     boolean isExistByMainItemIdAndRateCityAndMakerName(ItemsForm form);
 
     MainItemMaker findByMainItemAndRateCityAndMakerName(ItemsForm form);
+
+    List<MainItemMaker> findMakerListByMainItemId(ItemsForm form);
 }

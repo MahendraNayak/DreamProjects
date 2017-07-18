@@ -372,18 +372,63 @@ public class EditorController {
             uiModel.addAttribute("SSMCNM", request.getParameter("SSMCNM"));
 
             List<MainItem> mainItemList = editorService.getMainItemsBySubSubMainCaegoryId(subSubMainCatId);
-            List<Long> mainItemIds = new ArrayList<>();
+            /*List<Long> mainItemIds = new ArrayList<>();
             for (MainItem mainItem : mainItemList) {
                 mainItemIds.add(mainItem.getId());
             }
             List<SubMainItem> subMainItemList = editorService.findSubMainItemByMainItemIds(mainItemIds);
-            uiModel.addAttribute("subMainItemList", subMainItemList);
+            uiModel.addAttribute("subMainItemList", subMainItemList);*/
+            uiModel.addAttribute("mainItemList", mainItemList);
 
         } catch (Exception e) {
             logger.error("Exception ::: " + e.getMessage());
         }
         return "editorviews/editorPannelSubMainItemSR";
     }
+
+    //
+    @ResponseBody
+    @RequestMapping(value = "/editorPannelSubMainItemSRAjax")
+    public String getSubMainItemSRAjax(Model uiModel,@ModelAttribute("itemsForm") ItemsForm itemsForm) {
+        logger.debug("inside editorPannelSubMainItemSRAjax method : ");
+        List<JSONObject> list = new ArrayList<>();
+        try {
+            List<SubMainItem> subMainItemList = editorService.getAllSubMainItemsByMainItemId(itemsForm.getMainItemId());
+            for (SubMainItem subMainItem : subMainItemList) {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("subMainItemId", subMainItem.getId());
+                jsonObject.put("subMainItemDesc", subMainItem.getShortDescription());
+                jsonObject.put("mainItemId", subMainItem.getMainItem().getId());
+                jsonObject.put("mainItemDesc", subMainItem.getMainItem().getShortDescription());
+                list.add(jsonObject);
+            }
+        } catch (Exception e) {
+            logger.error("Exception while getSubMainItem SR Ajax :", e);
+        }
+        return list.toString();
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/editorPannelMakerListByMainItemAjax")
+    public String getMakerListByMainItemAjax(Model uiModel,@ModelAttribute("itemsForm") ItemsForm itemsForm) {
+        logger.debug("inside getMakerListByMainItemAjax method ");
+        List<JSONObject> list = new ArrayList<>();
+        try {
+            List<MainItemMaker> makerList = editorService.getMainItemMakersByMainItemId(itemsForm);
+            for (MainItemMaker makerObj : makerList) {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("makerName", makerObj.getMakerName());
+                jsonObject.put("makerCity","NERUL");//makerObj.getRateCity().getCity()
+                jsonObject.put("id", makerObj.getId());
+                list.add(jsonObject);
+            }
+        } catch (Exception e) {
+            logger.error("Exception while getMakerListByMainItem Ajax :", e);
+        }
+        return list.toString();
+    }
+
+    //
 
     @RequestMapping(value = "/editorPannelSubMainItemIR", method = RequestMethod.GET)
     public String addSubMainItemIR(Model uiModel, HttpServletRequest request) {
@@ -394,14 +439,16 @@ public class EditorController {
             uiModel.addAttribute("SSMCID", subSubMainCatId);
             uiModel.addAttribute("SSMCNM", request.getParameter("SSMCNM"));
 
-            List<MainItem> mainItemList = editorService.getMainItemsBySubSubMainCaegoryId(subSubMainCatId);
+            /*List<MainItem> mainItemList = editorService.getMainItemsBySubSubMainCaegoryId(subSubMainCatId);
             List<Long> mainItemIds = new ArrayList<>();
             for (MainItem mainItem : mainItemList) {
                 mainItemIds.add(mainItem.getId());
             }
             List<SubMainItem> subMainItemList = editorService.findSubMainItemByMainItemIds(mainItemIds);
-            uiModel.addAttribute("subMainItemList", subMainItemList);
+            uiModel.addAttribute("subMainItemList", subMainItemList);*/
 
+            List<MainItem> mainItemList = editorService.getMainItemsBySubSubMainCaegoryId(subSubMainCatId);
+            uiModel.addAttribute("mainItemList", mainItemList);
         } catch (Exception e) {
             logger.error("Exception ::: " + e.getMessage());
         }
@@ -653,6 +700,26 @@ public class EditorController {
             logger.error("Exception while update sub main item IR", e);
         }
         return respObject.toString();
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/editorPannelContractorListByMainItemAjax")
+    public String getContractorListByMainItemAjax(Model uiModel,@ModelAttribute("itemsForm") ItemsForm itemsForm) {
+        logger.debug("inside getContractorListByMainItemAjax method ");
+        List<JSONObject> list = new ArrayList<>();
+        try {
+            List<MainItemContractor> contractorList = editorService.getMainItemContractorsByMainItemId(itemsForm);
+            for (MainItemContractor contractorObj : contractorList) {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("contractorName", contractorObj.getContractorName());
+                jsonObject.put("contractorCity","NERUL");//contractorObj.getRateCity().getCity()
+                jsonObject.put("id", contractorObj.getId());
+                list.add(jsonObject);
+            }
+        } catch (Exception e) {
+            logger.error("Exception while editorPannelContractorListByMainItemAjax :", e);
+        }
+        return list.toString();
     }
 
 }

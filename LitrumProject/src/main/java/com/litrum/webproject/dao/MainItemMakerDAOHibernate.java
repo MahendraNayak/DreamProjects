@@ -44,4 +44,12 @@ public class MainItemMakerDAOHibernate extends GenericDAOHibernate<MainItemMaker
         criteria.add(Restrictions.eq("makerName", form.getMakerName()).ignoreCase());
         return (MainItemMaker) criteria.uniqueResult();
     }
+
+    @Override
+    public List<MainItemMaker> findMakerListByMainItemId(ItemsForm form) {
+        Criteria criteria = getSession().createCriteria(getPersistentClass());
+        criteria.createAlias("mainItem", "mainItem");
+        criteria.add(Restrictions.eq("mainItem.id",form.getMainItemId()));
+        return (List<MainItemMaker>) criteria.list();
+    }
 }

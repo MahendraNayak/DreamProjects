@@ -26,20 +26,28 @@
 				    <div class="panel-heading"><h3 class="panel-title">SUB ITEM DETAILS - IR</h3></div>
 				    <div class="panel-body" style="padding:0;border:0px;height:300px;overflow-y:auto;margin-top:6px">
                         		<div class="col-sm-9" style="width:981px"><h4 style="color:#4d20d8">SUB MAIN ITEM INSTALLATION RATE MODULE</h4></div>
-                                <div class="col-sm-9" style="width:981px"><br>
-                                    <select class="form-control" name="subMainIemId" id="subMainIemId" onChange="getAvailableSubMainItemContractor()">
-                                        <option value="0">SELECT SUB MAIN ITEM SIZE</option>
-                                        <c:forEach var="subMainItemObj" items="${subMainItemList}" varStatus="subMainItemStatus">
-                                            <option value="${subMainItemObj.id}">${subMainItemObj.mainItem.shortDescription} - ${subMainItemObj.shortDescription}</option>
+                        		<div class="col-sm-9" style="width:981px"><br>
+                                    <select class="form-control" name="mainIemId" id="mainIemId"  onChange="getAvailableSubMainItemsAjax('IR');getContractorListByMainItemAjax()">
+                                        <option value="0">SELECT MAIN ITEM</option>
+                                        <c:forEach var="mainItemListObj" items="${mainItemList}" varStatus="mainItemStatus">
+                                            <option value="${mainItemListObj.id}">${mainItemListObj.shortDescription}</option>
                                         </c:forEach>
                                     </select>
                                 </div>
-                                <div class="col-sm-9" style="width:499px">
-					<br><input type="text" placeholder="CT" id="subMainItemContractorName" name="subMainItemContractorName" class="form-control" autofocus>
-				</div>
-				<div class="col-sm-9" style="width:499px;margin-left:482px;margin-top:-51px">
-					<br><input type="text" placeholder="CR" id="subMainItemContractorRate" name="subMainItemContractorRate" class="form-control" autofocus>
-				</div>
+                                <div class="col-sm-9" style="width:981px" id="SUB_MAIN_ITEMS_LIST"><br>
+                                    <select class="form-control" name="subMainIemId" id="subMainIemId"  onChange="getAvailableSubMainItemContractor()">
+                                        <option value="0">SELECT SUB MAIN ITEM SIZE</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-9" style="width:499px" id="CONTRACTOR_LIST">
+                                <br>
+                                    <select class="form-control" name="subMainItemContractorName" id="subMainItemContractorName">
+                                        <option value="0">SELECT CONTRACTOR</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-9" style="width:499px;margin-left:482px;margin-top:-51px">
+                                    <br><input type="text" placeholder="CR" id="subMainItemContractorRate" name="subMainItemContractorRate" class="form-control" autofocus>
+                                </div>
 
                                 <div class="clearfix" style="height: 10px;clear: both;"></div>
                                 <div class="clearfix" style="height: 10px;clear: both;"></div>

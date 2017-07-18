@@ -478,4 +478,16 @@ public class EditorManager implements EditorService {
             throw new Exception("Sub Main item contractor id not found while update sub main item contractor");
         }
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<MainItemMaker> getMainItemMakersByMainItemId(ItemsForm itemsForm) throws Exception {
+        return daoFactory.getMainItemMakerDAO().findMakerListByMainItemId(itemsForm);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<MainItemContractor> getMainItemContractorsByMainItemId(ItemsForm itemsForm) throws Exception {
+        return daoFactory.getMainItemContractorDAO().findContractorListByMainItemId(itemsForm);
+    }
 }

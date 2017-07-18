@@ -251,7 +251,14 @@ function getAvailableMainItemContractor(){
 function getAvailableSubMainItemMakers(){
         var subMainIemId = $("#subMainIemId").val();
 
-        if(subMainIemId ==0) return false;
+        if(subMainIemId ==0){
+                    var HTML_TABLE = "<table class='table'><tbody>";
+                 HTML_TABLE = HTML_TABLE + "<tr><td style='font-size:16px;color:black'><b>MAKER NAME</b></td>";
+                 HTML_TABLE = HTML_TABLE + "<td style='font-size:16px;color:black'><b>MAKER RATE</b></td>";
+                HTML_TABLE = HTML_TABLE + "</tbody></table>";
+        	    $("#SMI_MAKER_TABLE").html(HTML_TABLE);
+            return false;
+        }
             var subItemForm  = {
             	"subMainIemId":subMainIemId,
             }
@@ -310,8 +317,9 @@ function enableSMIIRFormFields(){
 function resetSubMainItemMakerFormOnReset(){
     $("#SMI_MAKER_TABLE").html('');
     $("#subMainIemId").prop('disabled',false);
-    $("#subMainItemMakerName").val('');
+    $("#subMainItemMakerName").val(0);
     $("#subMainItemMakerRate").val('');
+    $("#mainIemId").val(0);
     $("#subMainIemId").val(0);
     $("#makerId").val(0);
 }
@@ -319,8 +327,9 @@ function resetSubMainItemMakerFormOnReset(){
 function resetSubMainItemContractorFormOnReset(){
     $("#SMI_CONTRACTOR_TABLE").html('');
     $("#subMainIemId").prop('disabled',false);
-    $("#subMainItemContractorName").val('');
+    $("#subMainItemContractorName").val(0);
     $("#subMainItemContractorRate").val('');
+    $("#mainIemId").val(0);
     $("#subMainIemId").val(0);
     $("#makerId").val(0);
 }
@@ -404,3 +413,159 @@ function setMainItemDetailsToupdate(mainItemId,shortDescription,longDescription,
 	$("#loadUnitIdUpdate").val(loadUnitId);
 	$("#subItemForMainItemsUpdate").val(mainItemAvail);
 }
+
+//
+
+function getAvailableSubMainItemsAjax(TYPE){
+    var TYPE_NAME = "MAKER";
+    var FUNCTION_NAME = "getAvailableSubMainItemMakers()";
+    if(TYPE == 'IR') {
+        TYPE_NAME = "CONTRACTOR";
+        FUNCTION_NAME = "getAvailableSubMainItemContractor()";
+    }
+
+    var HTML_TABLE = "<table class='table'><tbody>";
+                     HTML_TABLE = HTML_TABLE + "<tr><td style='font-size:16px;color:black'><b>" +TYPE_NAME+ "NAME</b></td>";
+                     HTML_TABLE = HTML_TABLE + "<td style='font-size:16px;color:black'><b>" +TYPE_NAME+ "RATE</b></td>";
+                    HTML_TABLE = HTML_TABLE + "</tbody></table>";
+            	    $("#SMI_" +TYPE_NAME+ "_TABLE").html(HTML_TABLE);
+    var mainIemId = $("#mainIemId").val();
+
+            if(mainIemId ==0){
+             var HTML_TABLE = "<br><select class='form-control' name='subMainIemId' id='subMainIemId' onChange='"+FUNCTION_NAME+"'>";
+                HTML_TABLE = HTML_TABLE  + "<option value='0'>SELECT SUB MAIN ITEM SIZE</option>";
+                HTML_TABLE = HTML_TABLE  + "</select>";
+              	$("#SUB_MAIN_ITEMS_LIST").html(HTML_TABLE);
+                return false;
+            }
+                var subItemForm  = {
+                	"mainItemId":mainIemId,
+                }
+                $.ajax({
+                    url: '/LitrumWebServer/editorPannelSubMainItemSRAjax',
+                    type: 'GET',
+                    dataType: 'json',
+                    data: subItemForm,
+                    success: function (response) {
+
+			if(response.length == 0) {
+			        var HTML_TABLE = "<br><select class='form-control' name='subMainIemId' id='subMainIemId' onChange='"+FUNCTION_NAME+"'>";
+                                    HTML_TABLE = HTML_TABLE  + "<option value='0'>SELECT SUB MAIN ITEM SIZE</option>";
+                                    HTML_TABLE = HTML_TABLE  + "</select>";
+                                  	$("#SUB_MAIN_ITEMS_LIST").html(HTML_TABLE);
+
+			        return;
+			}
+ 			var HTML_TABLE = "<br><select class='form-control' name='subMainIemId' id='subMainIemId' onChange='"+FUNCTION_NAME+"'>";
+ 			 HTML_TABLE = HTML_TABLE  + "<option value='0'>SELECT SUB MAIN ITEM SIZE</option>";
+ 			for(var i=0;i<response.length;i++){
+ 			var shortDescriptionWithQuote = (JSON.stringify(response[i].subMainItemDesc))
+ 			var shortDescription = (shortDescriptionWithQuote).replace(/"/g, '');
+ 			var subMainItemId = JSON.stringify(response[i].subMainItemId);
+ 				HTML_TABLE = HTML_TABLE  + "<option value='"+subMainItemId+"'>"+shortDescription+"</option>";
+ 			     }
+ 		 	HTML_TABLE = HTML_TABLE  + "</select>";
+ 			$("#SUB_MAIN_ITEMS_LIST").html(HTML_TABLE);
+                    },
+                    error: function (e) {
+                        alert('error'+e);
+                    }
+                });
+}
+
+
+function getMakerListByMainItemAjax(){
+    var mainIemId = $("#mainIemId").val();
+
+            if(mainIemId ==0){
+             var HTML_TABLE = "<br><select class='form-control' name='subMainItemMakerName' id='subMainItemMakerName'>";
+                HTML_TABLE = HTML_TABLE  + "<option value='0'>SELECT MAKER</option>";
+                HTML_TABLE = HTML_TABLE  + "</select>";
+              	$("#MAKER_LIST").html(HTML_TABLE);
+                return false;
+            }
+                var subItemForm  = {
+                	"mainItemId":mainIemId,
+                }
+                $.ajax({
+                    url: '/LitrumWebServer/editorPannelMakerListByMainItemAjax',
+                    type: 'GET',
+                    dataType: 'json',
+                    data: subItemForm,
+                    success: function (response) {
+
+			if(response.length == 0) {
+			       var HTML_TABLE = "<br><select class='form-control' name='subMainItemMakerName' id='subMainItemMakerName'>";
+                                   HTML_TABLE = HTML_TABLE  + "<option value='0'>SELECT MAKER</option>";
+                                   HTML_TABLE = HTML_TABLE  + "</select>";
+                                 	$("#MAKER_LIST").html(HTML_TABLE);
+			         return;
+			}
+ 			var HTML_TABLE = "<br><select class='form-control' name='subMainItemMakerName' id='subMainItemMakerName'>";
+ 			 HTML_TABLE = HTML_TABLE  + "<option value='0'>SELECT MAKER</option>";
+ 			for(var i=0;i<response.length;i++){
+ 			var makerNameWithQuote = (JSON.stringify(response[i].makerName))
+ 			var makerName = (makerNameWithQuote).replace(/"/g, '');
+ 			var makerCity = (JSON.stringify(response[i].makerCity)).replace(/"/g, '');
+ 			var id = JSON.stringify(response[i].id);
+ 				HTML_TABLE = HTML_TABLE  + "<option value='"+makerName+"'>"+makerCity +" : "+ makerName+"</option>";
+ 			     }
+ 		 	HTML_TABLE = HTML_TABLE  + "</select>";
+ 			$("#MAKER_LIST").html(HTML_TABLE);
+                    },
+                    error: function (e) {
+                        alert('error'+e);
+                    }
+                });
+}
+//
+
+//
+
+function getContractorListByMainItemAjax(){
+    var mainIemId = $("#mainIemId").val();
+
+            if(mainIemId ==0){
+             var HTML_TABLE = "<br><select class='form-control' name='subMainItemContractorName' id='subMainItemContractorName'>";
+                HTML_TABLE = HTML_TABLE  + "<option value='0'>SELECT CONTRACTOR</option>";
+                HTML_TABLE = HTML_TABLE  + "</select>";
+              	$("#CONTRACTOR_LIST").html(HTML_TABLE);
+                return false;
+            }
+                var subItemForm  = {
+                	"mainItemId":mainIemId,
+                }
+                $.ajax({
+                    url: '/LitrumWebServer/editorPannelContractorListByMainItemAjax',
+                    type: 'GET',
+                    dataType: 'json',
+                    data: subItemForm,
+                    success: function (response) {
+
+			if(response.length == 0) {
+			       var HTML_TABLE = "<br><select class='form-control' name='subMainItemContractorName' id='subMainItemContractorName'>";
+                                   HTML_TABLE = HTML_TABLE  + "<option value='0'>SELECT CONTRACTOR</option>";
+                                   HTML_TABLE = HTML_TABLE  + "</select>";
+                                 	$("#CONTRACTOR_LIST").html(HTML_TABLE);
+			         return;
+			}
+ 			var HTML_TABLE = "<br><select class='form-control' name='subMainItemContractorName' id='subMainItemContractorName'>";
+ 			 HTML_TABLE = HTML_TABLE  + "<option value='0'>SELECT CONTRACTOR</option>";
+ 			for(var i=0;i<response.length;i++){
+ 			var contractorNameWithQuote = (JSON.stringify(response[i].contractorName))
+ 			var contractorName = (contractorNameWithQuote).replace(/"/g, '');
+ 			var contractorCity = (JSON.stringify(response[i].contractorCity)).replace(/"/g, '');
+ 			var id = JSON.stringify(response[i].id);
+ 				HTML_TABLE = HTML_TABLE  + "<option value='"+contractorName+"'>"+contractorCity +" : "+ contractorName+"</option>";
+ 			     }
+ 		 	HTML_TABLE = HTML_TABLE  + "</select>";
+ 			$("#CONTRACTOR_LIST").html(HTML_TABLE);
+                    },
+                    error: function (e) {
+                        alert('error'+e);
+                    }
+                });
+}
+
+
+//
