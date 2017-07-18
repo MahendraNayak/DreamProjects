@@ -46,7 +46,7 @@ public class MainItemMaker extends PersistentObject {
         this.makerRate = makerRate;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = RateCity.class)
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = RateCity.class)
     @JoinColumn(name = "rate_city_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     public RateCity getRateCity() {

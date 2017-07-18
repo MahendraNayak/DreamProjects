@@ -418,7 +418,7 @@ public class EditorController {
             for (MainItemMaker makerObj : makerList) {
                 JSONObject jsonObject = new JSONObject();
                 jsonObject.put("makerName", makerObj.getMakerName());
-                jsonObject.put("makerCity","NERUL");//makerObj.getRateCity().getCity()
+                jsonObject.put("makerCity", makerObj.getRateCity().getCity());
                 jsonObject.put("id", makerObj.getId());
                 list.add(jsonObject);
             }
@@ -712,7 +712,7 @@ public class EditorController {
             for (MainItemContractor contractorObj : contractorList) {
                 JSONObject jsonObject = new JSONObject();
                 jsonObject.put("contractorName", contractorObj.getContractorName());
-                jsonObject.put("contractorCity","NERUL");//contractorObj.getRateCity().getCity()
+                jsonObject.put("contractorCity", contractorObj.getRateCity().getCity());
                 jsonObject.put("id", contractorObj.getId());
                 list.add(jsonObject);
             }
