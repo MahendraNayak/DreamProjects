@@ -2,6 +2,7 @@ package com.litrum.webproject.dao;
 
 import com.litrum.webproject.model.ServiceOffered;
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 /**

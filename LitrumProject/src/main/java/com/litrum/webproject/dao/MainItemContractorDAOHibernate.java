@@ -3,6 +3,7 @@ package com.litrum.webproject.dao;
 import com.litrum.webproject.form.ItemsForm;
 import com.litrum.webproject.model.MainItemContractor;
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import java.util.List;
 
@@ -20,6 +21,7 @@ public class MainItemContractorDAOHibernate extends GenericDAOHibernate<MainItem
         criteria.createAlias("rateCity", "rateCity");
         criteria.add(Restrictions.eq("mainItem.id", form.getMainItemId()));
         criteria.add(Restrictions.eq("rateCity.id", form.getCityId()));
+        criteria.addOrder(Order.asc("contractorName"));
         return criteria.list();
     }
 
@@ -50,6 +52,7 @@ public class MainItemContractorDAOHibernate extends GenericDAOHibernate<MainItem
         Criteria criteria = getSession().createCriteria(getPersistentClass());
         criteria.createAlias("mainItem", "mainItem");
         criteria.add(Restrictions.eq("mainItem.id",form.getMainItemId()));
+        criteria.addOrder(Order.asc("contractorName"));
         return (List<MainItemContractor>) criteria.list();
     }
 }

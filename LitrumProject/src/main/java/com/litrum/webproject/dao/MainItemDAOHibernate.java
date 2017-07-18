@@ -2,6 +2,7 @@ package com.litrum.webproject.dao;
 
 import com.litrum.webproject.model.MainItem;
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
@@ -25,6 +26,7 @@ public class MainItemDAOHibernate extends GenericDAOHibernate<MainItem, Long>
         Criteria criteria = getSession().createCriteria(getPersistentClass());
         criteria.createAlias("subSubMainCategory", "subSubMainCategory");
         criteria.add(Restrictions.eq("subSubMainCategory.id", subSubMainCategoryId));
+        criteria.addOrder(Order.asc("shortDescription"));
         return criteria.list();
     }
 
@@ -34,6 +36,7 @@ public class MainItemDAOHibernate extends GenericDAOHibernate<MainItem, Long>
         criteria.createAlias("subSubMainCategory", "subSubMainCategory");
         criteria.add(Restrictions.eq("subSubMainCategory.id", subSubMainCategoryId));
         criteria.add(Restrictions.eq("subMainItemForMainItem", isSubMainItemForMainItem));
+        criteria.addOrder(Order.asc("shortDescription"));
         return criteria.list();
     }
 
@@ -45,6 +48,7 @@ public class MainItemDAOHibernate extends GenericDAOHibernate<MainItem, Long>
         if (null != status) {
             criteria.add(Restrictions.eq("mainItemStatus", status));
         }
+        criteria.addOrder(Order.asc("shortDescription"));
         return criteria.list();
     }
 

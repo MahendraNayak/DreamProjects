@@ -2,6 +2,7 @@ package com.litrum.webproject.dao;
 
 import com.litrum.webproject.model.AdminUserRegistration;
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import java.util.List;
@@ -24,6 +25,7 @@ public class AdminUserRegistrationDAOHibernate extends GenericDAOHibernate<Admin
         Criteria criteria = getSession().createCriteria(getPersistentClass());
         criteria.createAlias("mainCategory", "mainCategory");
         criteria.add(Restrictions.eq("mainCategory.id", mainCategoryId));
+        criteria.addOrder(Order.asc("userName"));
         return criteria.list();
     }
 }

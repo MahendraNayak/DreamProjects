@@ -2,6 +2,7 @@ package com.litrum.webproject.dao;
 
 import com.litrum.webproject.model.EndUserRole;
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
@@ -27,6 +28,7 @@ public class EndUserRoleDAOHibernate extends GenericDAOHibernate<EndUserRole, Lo
         Criteria criteria = getSession().createCriteria(getPersistentClass());
         criteria.createAlias("companyType", "companyType");
         criteria.add(Restrictions.eq("companyType.id", companyTypeId));
+        criteria.addOrder(Order.asc("roleName"));
         return criteria.list();
     }
 

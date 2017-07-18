@@ -2,6 +2,7 @@ package com.litrum.webproject.dao;
 
 import com.litrum.webproject.model.CompanyType;
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import java.util.List;
@@ -24,6 +25,7 @@ public class CompanyTypeDAOHibernate extends GenericDAOHibernate<CompanyType, Lo
         Criteria criteria = getSession().createCriteria(getPersistentClass());
         criteria.createAlias("serviceOffered", "serviceOffered");
         criteria.add(Restrictions.eq("serviceOffered.id", serviceOffereId));
+        criteria.addOrder(Order.asc("type"));
         return criteria.list();
     }
 

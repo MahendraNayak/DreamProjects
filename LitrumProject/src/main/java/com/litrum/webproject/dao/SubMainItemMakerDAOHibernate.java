@@ -3,6 +3,7 @@ package com.litrum.webproject.dao;
 import com.litrum.webproject.form.SubMainItemsForm;
 import com.litrum.webproject.model.SubMainItemMaker;
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import java.util.List;
@@ -18,6 +19,7 @@ public class SubMainItemMakerDAOHibernate extends GenericDAOHibernate<SubMainIte
         Criteria criteria = getSession().createCriteria(getPersistentClass());
         criteria.createAlias("subMainItem", "subMainItem");
         criteria.add(Restrictions.eq("subMainItem.id", form.getSubMainIemId()));
+        criteria.addOrder(Order.asc("subMainItemMakerName"));
         return criteria.list();
     }
 

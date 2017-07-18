@@ -4,6 +4,7 @@ import com.litrum.webproject.form.CategoriesForm;
 import com.litrum.webproject.model.SubMainCategory;
 import com.litrum.webproject.model.SubSubMainCategory;
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import java.util.List;
@@ -18,6 +19,7 @@ public class SubSubMainCategoryDAOHibernate extends GenericDAOHibernate<SubSubMa
     public List<SubSubMainCategory> findBySubMainCategory(SubMainCategory subMainCategory) {
         Criteria criteria = getSession().createCriteria(getPersistentClass());
         criteria.add(Restrictions.eq("subMainCategory", subMainCategory));
+        criteria.addOrder(Order.asc("subSubMainCategoryName"));
         return criteria.list();
     }
 
@@ -44,6 +46,7 @@ public class SubSubMainCategoryDAOHibernate extends GenericDAOHibernate<SubSubMa
         Criteria criteria = getSession().createCriteria(getPersistentClass());
         criteria.createAlias("subMainCategory", "subMainCategory");
         criteria.add(Restrictions.in("subMainCategory.id", subMainCatIds));
+        criteria.addOrder(Order.asc("subSubMainCategoryName"));
         return criteria.list();
     }
 }
