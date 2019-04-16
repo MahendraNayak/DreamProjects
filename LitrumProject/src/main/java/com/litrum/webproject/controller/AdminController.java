@@ -37,15 +37,6 @@ public class AdminController {
     }
 
     
-    @RequestMapping(value = "/test", method = RequestMethod.GET)
-    public String test(Model uiModel) {
-        uiModel.addAttribute("AllEndUsersCount", userService.getAllEndUserCounts());
-        List<EndUserRegistration> endUserList = userService.getAllEndUsers();
-        uiModel.addAttribute("AllEndUserList", endUserList);
-        logger.debug(" adminPannelHome : GET ");
-        return "adminPannelHome";
-    }
-    
     @RequestMapping(value = "/adminPannelMainCat", method = RequestMethod.GET)
     public String mainCategory(Model uiModel) {
         logger.debug(" adminPannelMainCat : GET ");
